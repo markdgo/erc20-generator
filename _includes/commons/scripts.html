@@ -1,0 +1,25 @@
+<script>
+    var page = "{{ page.permalink }}";
+    var abiPath = "{{ 'abi/' | absolute_url }}";
+
+    var web3Provider = "{{ site.web3_provider }}";
+    var etherscanLink = "{{ site.etherscan_link }}";
+    var networkId = "{{ site.network_id }}";
+    var networkName = "{{ site.network_name }}";
+</script>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ 'vendor/jquery/jquery.min.js' | absolute_url }}"></script>
+<script src="{{ 'vendor/bootstrap/js/bootstrap.bundle.min.js' | absolute_url }}"></script>
+
+<!-- ETH utilities -->
+<script src="{{ 'vendor/web3/web3.min.js' | absolute_url }}"></script>
+<script src="{{ 'vendor/truffle-contract/truffle-contract.js' | absolute_url }}"></script>
+
+<!-- Vue.js -->
+<script src="{{ 'vendor/vue/vue.min.js' | absolute_url }}"></script>
+<script src="{{ 'vendor/vee-validate/vee-validate.min.js' | absolute_url }}"></script>
+
+<!-- Custom scripts -->
+<script src="{{ 'js/main.min.js' | absolute_url }}"></script>
+<script src="{{ 'js/app.js' | absolute_url }}"></script>

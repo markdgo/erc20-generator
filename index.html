@@ -1,0 +1,91 @@
+---
+layout: default
+---
+
+<section id="token-generator">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3 p-3 card bg-info">
+            <div class="text-white">
+                <h4>{{ site.name }}</h4>
+                <h6>{{ site.description }}</h6>
+            </div>
+
+            <div class="alert alert-success mt-3" role="alert" v-if="makingTransaction">
+                <div>Making transaction. Do not refresh the page. Please wait...</div>
+                <div v-if="trxHash !== ''">
+                    <b>Well! Transaction done!</b><br>
+                    Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span> <i class="fa fa-external-link"></i></a><br>
+
+                    Retrieving Token. Please wait...<br>
+                    <div v-if="token.address !== ''">
+                        Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span> <i class="fa fa-external-link"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <form v-on:submit.prevent="generateToken" class="mt-3" v-if="!makingTransaction">
+                <fieldset :disabled="formDisabled">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="tokenName">Token name *</label>
+                                        <input type="text" class="form-control"
+                                               v-validate="'required'"
+                                               :class="{'is-invalid': errors.has('tokenName')}"
+                                               v-model="token.name"
+                                               id="tokenName"
+                                               name="tokenName"
+                                               maxlength="20"
+                                               placeholder="Your token name">
+                                        <small class="form-text text-muted">
+                                            Choose a name for your token
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="tokenSymbol">Token symbol *</label>
+                                        <input type="text" class="form-control"
+                                               v-validate="'required'"
+                                               :class="{'is-invalid': errors.has('tokenSymbol')}"
+                                               v-model="token.symbol"
+                                               id="tokenSymbol"
+                                               name="tokenSymbol"
+                                               maxlength="4"
+                                               placeholder="Your token symbol">
+                                        <small class="form-text text-muted">
+                                            Choose a 3 or 4 chars symbol for your token
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="tokenDecimals">Token decimals *</label>
+                                        <input type="number" class="form-control"
+                                               v-validate="'required|numeric'"
+                                               :class="{'is-invalid': errors.has('tokenDecimals')}"
+                                               v-model="token.decimals"
+                                               id="tokenDecimals"
+                                               name="tokenDecimals"
+                                               min="0"
+                                               max="18"
+                                               step="1"
+                                               placeholder="Your token decimals">
+                                        <small class="form-text text-muted">
+                                            Insert the decimal precision of your token. If you don't know what to insert, use 18
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body text-right">
+                            <input type="submit" value="Create Token" class="btn btn-success btn-xl">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
