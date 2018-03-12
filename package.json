@@ -1,0 +1,44 @@
+{
+  "name": "erc20-generator",
+  "version": "1.0.0",
+  "description": "Base contract for a Standard, Mintable, Burnable ERC20 Token",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vittominacori/erc20-generator.git"
+  },
+  "homepage": "https://github.com/vittominacori/erc20-generator/",
+  "bugs": {
+    "url": "https://github.com/vittominacori/erc20-generator/issues"
+  },
+  "author": "@vittominacori",
+  "authors": [
+    {
+      "name": "Vittorio Minacori",
+      "url": "https://github.com/vittominacori"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "truffle-contract": "^3.0.4",
+    "zeppelin-solidity": "1.7.0"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "ethereumjs-util": "^5.1.5",
+    "lite-server": "^2.3.0",
+    "yargs": "^11.0.0"
+  }
+}
