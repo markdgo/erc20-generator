@@ -4,6 +4,9 @@
 Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
 
 
+DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
+
+
 Code created using [Open Zeppelin (zeppelin-solidity)](https://github.com/OpenZeppelin/zeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
 
  
