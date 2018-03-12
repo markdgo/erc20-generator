@@ -73,17 +73,6 @@ test
 
 
 
-## Run server
-
-
-Run the `liteserver` development server for front-end hot reloading.
-
-```bash
-npm run dev
-```
-
-
-
 ## Security Tool
 
 
