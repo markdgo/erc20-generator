@@ -9,18 +9,19 @@ require('chai')
 
 const ERC20Token = artifacts.require('ERC20Token');
 
-contract('ERC20Token', function ([_, owner, recipient, anotherAccount]) {
+contract('ERC20Token', function ([_, owner, tester, recipient, anotherAccount]) {
 
     const _name = 'TestToken';
     const _symbol = 'TEST';
     const _decimals = 18;
+    const _initialAmount = 0;
 
     const amount = 100;
 
     const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
     beforeEach(async function () {
-        this.token = await ERC20Token.new(_name, _symbol, _decimals, { from: owner });
+        this.token = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
     });
 
     describe('has details', async function () {
@@ -37,6 +38,81 @@ contract('ERC20Token', function ([_, owner, recipient, anotherAccount]) {
         it('has an amount of decimals', async function () {
             const decimals = await this.token.decimals();
             decimals.should.be.bignumber.equal(_decimals);
+        });
+    });
+
+    describe('setting the initial amount', function () {
+        describe('when initial amount is set', function () {
+            let initialAmount = 1000000;
+
+            beforeEach(async function () {
+                this.token = await ERC20Token.new(_name, _symbol, _decimals, initialAmount, { from: owner });
+            });
+
+            it('total supply should be the initial amount', async function () {
+                const totalSupply = await this.token.totalSupply();
+
+                assert.equal(totalSupply, initialAmount * Math.pow(10, _decimals));
+            });
+
+            it('balance of owner should be the initial amount', async function () {
+                const balance = await this.token.balanceOf(owner);
+
+                assert.equal(balance, initialAmount * Math.pow(10, _decimals));
+            });
+        });
+
+        describe('when initial amount is zero', function () {
+            beforeEach(async function () {
+                this.token = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
+            });
+
+            it('total supply should be zero', async function () {
+                const totalSupply = await this.token.totalSupply();
+
+                assert.equal(totalSupply, 0);
+            });
+
+            it('balance of owner should be zero', async function () {
+                const balance = await this.token.balanceOf(owner);
+
+                assert.equal(balance, 0);
+            });
+        });
+    });
+
+    describe('total supply', function () {
+        beforeEach(async function () {
+            this.token = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
+            await this.token.mint(owner, amount, { from: owner });
+        });
+
+        it('returns the total amount of tokens', async function () {
+            const totalSupply = await this.token.totalSupply();
+
+            assert.equal(totalSupply, amount);
+        });
+    });
+
+    describe('balanceOf', function () {
+        beforeEach(async function () {
+            await this.token.mint(owner, amount, { from: owner });
+        });
+
+        describe('when the requested account has no tokens', function () {
+            it('returns zero', async function () {
+                const balance = await this.token.balanceOf(anotherAccount);
+
+                assert.equal(balance, 0);
+            });
+        });
+
+        describe('when the requested account has some tokens', function () {
+            it('returns the total amount of tokens', async function () {
+                const balance = await this.token.balanceOf(owner);
+
+                assert.equal(balance, 100);
+            });
         });
     });
 
@@ -163,41 +239,6 @@ contract('ERC20Token', function ([_, owner, recipient, anotherAccount]) {
                 it('reverts', async function () {
                     await assertRevert(this.token.mint(owner, amount, { from }));
                 });
-            });
-        });
-    });
-
-    describe('total supply', function () {
-        beforeEach(async function () {
-            this.token = await ERC20Token.new(_name, _symbol, _decimals, { from: owner });
-            await this.token.mint(owner, amount, { from: owner });
-        });
-
-        it('returns the total amount of tokens', async function () {
-            const totalSupply = await this.token.totalSupply();
-
-            assert.equal(totalSupply, amount);
-        });
-    });
-
-    describe('balanceOf', function () {
-        beforeEach(async function () {
-            await this.token.mint(owner, amount, { from: owner });
-        });
-
-        describe('when the requested account has no tokens', function () {
-            it('returns zero', async function () {
-                const balance = await this.token.balanceOf(anotherAccount);
-
-                assert.equal(balance, 0);
-            });
-        });
-
-        describe('when the requested account has some tokens', function () {
-            it('returns the total amount of tokens', async function () {
-                const balance = await this.token.balanceOf(owner);
-
-                assert.equal(balance, 100);
             });
         });
     });
