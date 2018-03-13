@@ -6027,4 +6027,6 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #ddd !important; } }
 
 body {
-  background: #6f42c1; }
+  background: #6f42c1;
+  background: -webkit-linear-gradient(to right, #6f42c1, #dc3545);
+  background: linear-gradient(to right, #6f42c1, #dc3545); }
