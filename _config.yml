@@ -20,7 +20,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "erc20-generator" # the subpath of your site, e.g. /blog
 url: "https://vittominacori.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 environment: "prod"
-social_image: ""
+social_image: "img/erc20-token-generator.png"
 web3_provider: "https://mainnet.infura.io"
 etherscan_link: "https://etherscan.io"
 network_id: "1"

@@ -4,21 +4,19 @@ layout: default
 
 <section id="token-generator">
     <div class="row">
-        <div class="col-lg-6 offset-lg-3 p-3 card bg-info">
-            <div class="text-white">
-                <h4>{{ site.name }}</h4>
-                <h6>{{ site.description }}</h6>
-            </div>
+        <div class="col-lg-10 offset-lg-1 p-3 card bg-light">
+            <h4>{{ site.name }}</h4>
+            <h6>{{ site.description }}</h6>
 
             <div class="alert alert-success mt-3" role="alert" v-if="makingTransaction">
                 <div>Making transaction. Do not refresh the page. Please wait...</div>
                 <div v-if="trxHash !== ''">
                     <b>Well! Transaction done!</b><br>
-                    Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span> <i class="fa fa-external-link"></i></a><br>
+                    Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span></a><br>
 
                     Retrieving Token. Please wait...<br>
                     <div v-if="token.address !== ''">
-                        Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span> <i class="fa fa-external-link"></i></a>
+                        Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span></a>
                     </div>
                 </div>
             </div>
@@ -28,7 +26,7 @@ layout: default
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="col-form-label" for="tokenName">Token name *</label>
                                         <input type="text" class="form-control"
@@ -44,7 +42,7 @@ layout: default
                                         </small>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="col-form-label" for="tokenSymbol">Token symbol *</label>
                                         <input type="text" class="form-control"
@@ -60,7 +58,7 @@ layout: default
                                         </small>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="col-form-label" for="tokenDecimals">Token decimals *</label>
                                         <input type="number" class="form-control"
@@ -75,6 +73,23 @@ layout: default
                                                placeholder="Your token decimals">
                                         <small class="form-text text-muted">
                                             Insert the decimal precision of your token. If you don't know what to insert, use 18
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="tokenInitialAmount">Initial amount *</label>
+                                        <input type="number" class="form-control"
+                                               v-validate="'required|numeric'"
+                                               :class="{'is-invalid': errors.has('tokenInitialAmount')}"
+                                               v-model="token.initialAmount"
+                                               id="tokenInitialAmount"
+                                               name="tokenInitialAmount"
+                                               min="0"
+                                               step="1"
+                                               placeholder="Your initial token amount">
+                                        <small class="form-text text-muted">
+                                            Select the amount of tokens you want to reserve for you
                                         </small>
                                     </div>
                                 </div>
