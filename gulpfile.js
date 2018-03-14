@@ -28,7 +28,7 @@ gulp.task('minify-css', ['sass'], function() {
 
 // Minify custom JS
 gulp.task('minify-js', function() {
-    return gulp.src(['js/main.js', 'js/app.js'])
+    return gulp.src(['js/app.js'])
         .pipe(babel())
         .pipe(minify())
         .pipe(rename({
@@ -86,5 +86,5 @@ gulp.task('default', ['sass', 'minify-css', 'minify-js', 'copy']);
 gulp.task('watch', ['sass', 'minify-css', 'minify-js'], function() {
     gulp.watch('scss/**/*.scss', ['sass']);
     gulp.watch('css/main.css', ['minify-css']);
-    gulp.watch(['js/main.js', 'js/app.js'], ['minify-js']);
+    gulp.watch(['js/app.js'], ['minify-js']);
 });

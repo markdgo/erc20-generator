@@ -6,6 +6,11 @@
     var etherscanLink = "{{ site.etherscan_link }}";
     var networkId = "{{ site.network_id }}";
     var networkName = "{{ site.network_name }}";
+
+    var rinkeby_web3Provider = "{{ site.rinkeby_web3_provider }}";
+    var rinkeby_etherscanLink = "{{ site.rinkeby_etherscan_link }}";
+    var rinkeby_networkId = "{{ site.rinkeby_network_id }}";
+    var rinkeby_networkName = "{{ site.rinkeby_network_name }}";
 </script>
 
 <!-- Bootstrap core JavaScript -->
@@ -21,5 +26,4 @@
 <script src="{{ 'vendor/vee-validate/vee-validate.min.js' | absolute_url }}"></script>
 
 <!-- Custom scripts -->
-<script src="{{ 'js/main.min.js' | absolute_url }}"></script>
 <script src="{{ 'js/app.min.js' | absolute_url }}"></script>

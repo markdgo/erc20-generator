@@ -21,10 +21,16 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://localhost:4000" # the base hostname & protocol for your site, e.g. http://example.com
 environment: "dev"
 social_image: "img/erc20-token-generator.png"
+
 web3_provider: "https://rinkeby.infura.io"
 etherscan_link: "https://rinkeby.etherscan.io"
 network_id: "4"
 network_name: "Rinkeby Test Network"
+
+rinkeby_web3_provider: "https://rinkeby.infura.io"
+rinkeby_etherscan_link: "https://rinkeby.etherscan.io"
+rinkeby_network_id: "4"
+rinkeby_network_name: "Rinkeby Test Network"
 
 # Build settings
 markdown: kramdown

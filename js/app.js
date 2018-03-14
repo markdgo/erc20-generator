@@ -8,6 +8,13 @@ const App = {
     },
     contracts: {},
 
+    setTestnet: function () {
+        web3Provider = rinkeby_web3Provider;
+        etherscanLink = rinkeby_etherscanLink;
+        networkId = rinkeby_networkId;
+        networkName = rinkeby_networkName;
+    },
+
     init: function () {
         App.initWeb3(true);
     },
@@ -38,7 +45,7 @@ const App = {
         });
     },
 
-    home: async function () {
+    builder: async function () {
         App.init();
 
         Vue.use(VeeValidate);
@@ -47,6 +54,8 @@ const App = {
         new Vue({
             el: '#token-generator',
             data: {
+                testnet: networkId !== "1",
+                networkName: networkName,
                 trxHash: '',
                 makingTransaction: false,
                 formDisabled: false,
@@ -112,8 +121,12 @@ const App = {
     "use strict";
 
     switch (page) {
+        case "rinkeby":
+            App.setTestnet();
+            App.builder();
+            break;
         case "": //home
-            App.home();
+            App.builder();
             break;
     }
 
