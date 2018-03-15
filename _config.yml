@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 name: "ERC20 Token Generator"
-title: "ERC20 Token Generator"
+title: "ERC20 Token Generator | Build your token for free"
 description: >- # this means to ignore newlines until "baseurl:"
   Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
 baseurl: "erc20-generator" # the subpath of your site, e.g. /blog
@@ -31,6 +31,8 @@ rinkeby_web3_provider: "https://rinkeby.infura.io"
 rinkeby_etherscan_link: "https://rinkeby.etherscan.io"
 rinkeby_network_id: "4"
 rinkeby_network_name: "Rinkeby Test Network"
+
+google_analytics: "UA-115756440-1"
 
 # Build settings
 markdown: kramdown
