@@ -56,6 +56,7 @@ const App = {
             data: {
                 testnet: networkId !== "1",
                 networkName: networkName,
+                hasMetaMask: App.metamask.installed,
                 trxHash: '',
                 makingTransaction: false,
                 formDisabled: false,
