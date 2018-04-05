@@ -28,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "truffle-contract": "^3.0.4",
-    "zeppelin-solidity": "1.7.0"
+    "zeppelin-solidity": "1.8.0"
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",

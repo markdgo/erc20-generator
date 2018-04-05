@@ -17,8 +17,8 @@ Code created using [Open Zeppelin (zeppelin-solidity)](https://github.com/OpenZe
 Install truffle, compiler and linter.
 
 ```bash
-npm install -g truffle      // Version 4.1.3+ required.
-npm install -g solc         // Version 0.4.19+ required.
+npm install -g truffle      // Version 4.1.5+ required.
+npm install -g solc         // Version 0.4.21+ required.
 npm install -g solium
 ```
 

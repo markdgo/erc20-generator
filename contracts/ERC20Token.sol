@@ -7,6 +7,8 @@ import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 
 contract ERC20Token is DetailedERC20, MintableToken, BurnableToken {
 
+    string public builtOn = "https://vittominacori.github.io/erc20-generator";
+
     function ERC20Token(
         string _name,
         string _symbol,
