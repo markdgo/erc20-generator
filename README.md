@@ -4,6 +4,9 @@
 Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
 
 
+Token also has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
+
+
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
 

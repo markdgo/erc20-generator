@@ -1,3 +1,5 @@
+import expectThrow from './helpers/expectThrow';
+import expectEvent from './helpers/expectEvent';
 import assertRevert from './helpers/assertRevert';
 
 const BigNumber = web3.BigNumber;
@@ -9,7 +11,9 @@ require('chai')
 
 const ERC20Token = artifacts.require('ERC20Token');
 
-contract('ERC20Token', function ([_, owner, tester, recipient, anotherAccount]) {
+const ROLE_MINTER = 'minter';
+
+contract('ERC20Token', function ([_, owner, minter, futureMinter, recipient, anyone, anotherAccount]) {
 
     const _name = 'TestToken';
     const _symbol = 'TEST';
@@ -222,7 +226,44 @@ contract('ERC20Token', function ([_, owner, tester, recipient, anotherAccount]) 
             });
         });
 
-        describe('when the sender is not the token owner', function () {
+        describe('when the sender has the minter role', function () {
+            const from = minter;
+
+            beforeEach(async function () {
+                await this.token.adminAddRole(minter, ROLE_MINTER, { from: owner });
+            });
+
+            describe('when the token was not finished', function () {
+                it('mints the requested amount', async function () {
+                    await this.token.mint(owner, amount, { from });
+
+                    const balance = await this.token.balanceOf(owner);
+                    assert.equal(balance, amount);
+                });
+
+                it('emits a mint finished event', async function () {
+                    const { logs } = await this.token.mint(owner, amount, { from });
+
+                    assert.equal(logs.length, 2);
+                    assert.equal(logs[0].event, 'Mint');
+                    assert.equal(logs[0].args.to, owner);
+                    assert.equal(logs[0].args.amount, amount);
+                    assert.equal(logs[1].event, 'Transfer');
+                });
+            });
+
+            describe('when the token minting is finished', function () {
+                beforeEach(async function () {
+                    await this.token.finishMinting({ from: owner });
+                });
+
+                it('reverts', async function () {
+                    await assertRevert(this.token.mint(owner, amount, { from }));
+                });
+            });
+        });
+
+        describe('when the sender is not the token owner or has no minter role', function () {
             const from = anotherAccount;
 
             describe('when the token was not finished', function () {
@@ -718,6 +759,87 @@ contract('ERC20Token', function ([_, owner, tester, recipient, anotherAccount]) 
             it('reverts', async function () {
                 await assertRevert(this.token.burn(initialAmount + 1, { from }));
             });
+        });
+    });
+
+    describe('RBAC functions', function () {
+        describe('in normal conditions', function () {
+            beforeEach(async function () {
+                await this.token.adminAddRole(minter, ROLE_MINTER, {from: owner});
+            });
+
+            it('allows admins to add a minter', async function () {
+                await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+            });
+
+            it('allows admins to remove a minter', async function () {
+                await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+                await this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+            });
+
+            it('announces a RoleAdded event on addRole', async function () {
+                await expectEvent.inTransaction(
+                    this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }),
+                    'RoleAdded'
+                );
+            });
+
+            it('announces a RoleRemoved event on removeRole', async function () {
+                await expectEvent.inTransaction(
+                    this.token.adminRemoveRole(minter, ROLE_MINTER, { from: owner }),
+                    'RoleRemoved'
+                );
+            });
+        });
+
+        describe('in adversarial conditions', function () {
+            beforeEach(async function () {
+                await this.token.adminAddRole(minter, ROLE_MINTER, {from: owner}).should.be.fulfilled;
+            });
+
+            it('does not allow "anyone" except admins to add a minter', async function () {
+                await expectThrow(
+                    this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: minter })
+                );
+                await expectThrow(
+                    this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: anyone })
+                );
+            });
+
+            it('does not allow "anyone" except admins to remove a minter', async function () {
+                await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+                await expectThrow(
+                    this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: minter })
+                );
+                await expectThrow(
+                    this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: anyone })
+                );
+            });
+        });
+    });
+
+    describe('safe functions', function () {
+        it('should safe transfer any ERC20 sent for error into the contract', async function () {
+            const receiverTokenContract = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
+
+            const tokenAmount = 1000;
+
+            await this.token.mint(receiverTokenContract.address, tokenAmount, { from: owner });
+            await this.token.finishMinting({ from: owner });
+
+            const tokenOwner = await receiverTokenContract.owner();
+
+            const contractPre = await this.token.balanceOf(receiverTokenContract.address);
+            assert.equal(contractPre, tokenAmount);
+            const ownerPre = await this.token.balanceOf(tokenOwner);
+            assert.equal(ownerPre, 0);
+
+            await receiverTokenContract.transferAnyERC20Token(this.token.address, tokenAmount, { from: owner });
+
+            const contractPost = await this.token.balanceOf(receiverTokenContract.address);
+            assert.equal(contractPost, 0);
+            const ownerPost = await this.token.balanceOf(tokenOwner);
+            assert.equal(ownerPost, tokenAmount);
         });
     });
 });

@@ -1,13 +1,21 @@
 pragma solidity ^0.4.21;
 
+import "zeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
 import "zeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "zeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "zeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 
 
-contract ERC20Token is DetailedERC20, MintableToken, BurnableToken {
+contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBAC {
 
     string public builtOn = "https://vittominacori.github.io/erc20-generator";
+
+    string public constant ROLE_MINTER = "minter";
+
+    modifier onlyMinter () {
+        require(hasRole(msg.sender, ROLE_ADMIN) || hasRole(msg.sender, ROLE_MINTER));
+        _;
+    }
 
     function ERC20Token(
         string _name,
@@ -21,5 +29,17 @@ contract ERC20Token is DetailedERC20, MintableToken, BurnableToken {
         if (_initialAmount > 0) {
             mint(owner, _initialAmount * (10 ** uint256(decimals)));
         }
+    }
+
+    function mint(address _to, uint256 _amount) onlyMinter canMint public returns (bool) {
+        totalSupply_ = totalSupply_.add(_amount);
+        balances[_to] = balances[_to].add(_amount);
+        emit Mint(_to, _amount);
+        emit Transfer(address(0), _to, _amount);
+        return true;
+    }
+
+    function transferAnyERC20Token(address _tokenAddress, uint256 _tokens) onlyOwner public returns (bool success) {
+        return ERC20Basic(_tokenAddress).transfer(owner, _tokens);
     }
 }
