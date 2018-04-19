@@ -14,7 +14,13 @@
 
                         Retrieving Token. Please wait...<br>
                         <div v-if="token.address !== ''">
-                            Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span></a>
+                            Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span></a><br><br>
+                            <div class="form-group">
+                                <label>ABI</label>
+                                <textarea class="form-control"
+                                          readonly="readonly" rows="5"
+                                          v-model="token.stringifiedAbi"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

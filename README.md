@@ -4,6 +4,9 @@
 The source code for ERC20 Token Generator DApp. 
 
 
+Token also has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
+
+
 Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
 
 
@@ -17,7 +20,8 @@ Live here [https://vittominacori.github.io/erc20-generator](https://vittominacor
 git clone https://github.com/vittominacori/erc20-generator.git
 cd erc20-generator
 git checkout gh-pages
-gem install jekyll
+gem install jekyll bundler
+bundle install
 npm install
 gulp
 ```

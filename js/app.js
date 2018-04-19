@@ -60,7 +60,9 @@ const App = {
                 trxHash: '',
                 makingTransaction: false,
                 formDisabled: false,
-                token: {}
+                token: {
+                    stringifiedAbi: JSON.stringify(App.contracts.ERC20Token.abi)
+                }
             },
             created: function () {
                 this.$validator.extend('eth_address', {
