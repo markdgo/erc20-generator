@@ -10,7 +10,7 @@ Token also has a Role Based Access Control so you can add the "minter" permissio
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
 
-Code created using [Open Zeppelin (zeppelin-solidity)](https://github.com/OpenZeppelin/zeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
+Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/OpenZeppelin/openzeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
 
  
  
@@ -20,9 +20,8 @@ Code created using [Open Zeppelin (zeppelin-solidity)](https://github.com/OpenZe
 Install truffle, compiler and linter.
 
 ```bash
-npm install -g truffle      // Version 4.1.5+ required.
-npm install -g solc         // Version 0.4.21+ required.
-npm install -g solium
+npm install -g truffle      // Version 4.1.7+ required.
+npm install -g solium       // Version 1.1.7+ required.
 ```
 
 
@@ -122,4 +121,3 @@ OpenZeppelin [Doc](http://zeppelin-solidity.readthedocs.io) [Github](https://git
 Truffle [Doc](http://truffleframework.com/docs) [Github](https://github.com/trufflesuite/truffle)
 
 Web3.js [Doc 0.20.4](https://github.com/ethereum/wiki/wiki/JavaScript-API) [Doc 1.0](http://web3js.readthedocs.io/en/1.0) [Github](https://github.com/ethereum/web3.js)
- 

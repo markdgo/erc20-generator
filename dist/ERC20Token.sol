@@ -1,6 +1,6 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.23;
 
-// File: zeppelin-solidity/contracts/ownership/rbac/Roles.sol
+// File: openzeppelin-solidity/contracts/ownership/rbac/Roles.sol
 
 /**
  * @title Roles
@@ -55,14 +55,14 @@ library Roles {
   }
 }
 
-// File: zeppelin-solidity/contracts/ownership/rbac/RBAC.sol
+// File: openzeppelin-solidity/contracts/ownership/rbac/RBAC.sol
 
 /**
  * @title RBAC (Role-Based Access Control)
  * @author Matt Condon (@Shrugs)
  * @dev Stores and provides setters and getters for roles and addresses.
- *      Supports unlimited numbers of roles and addresses.
- *      See //contracts/mocks/RBACMock.sol for an example of usage.
+ * @dev Supports unlimited numbers of roles and addresses.
+ * @dev See //contracts/mocks/RBACMock.sol for an example of usage.
  * This RBAC method uses strings to key roles. It may be beneficial
  *  for you to write your own implementation of this interface using Enums or similar.
  * It's also recommended that you define constants in the contract, like ROLE_ADMIN below,
@@ -75,20 +75,6 @@ contract RBAC {
 
   event RoleAdded(address addr, string roleName);
   event RoleRemoved(address addr, string roleName);
-
-  /**
-   * A constant role name for indicating admins.
-   */
-  string public constant ROLE_ADMIN = "admin";
-
-  /**
-   * @dev constructor. Sets msg.sender as admin by default
-   */
-  function RBAC()
-    public
-  {
-    addRole(msg.sender, ROLE_ADMIN);
-  }
 
   /**
    * @dev reverts if addr does not have role
@@ -122,35 +108,11 @@ contract RBAC {
    * @param addr address
    * @param roleName the name of the role
    */
-  function adminAddRole(address addr, string roleName)
-    onlyAdmin
-    public
-  {
-    addRole(addr, roleName);
-  }
-
-  /**
-   * @dev remove a role from an address
-   * @param addr address
-   * @param roleName the name of the role
-   */
-  function adminRemoveRole(address addr, string roleName)
-    onlyAdmin
-    public
-  {
-    removeRole(addr, roleName);
-  }
-
-  /**
-   * @dev add a role to an address
-   * @param addr address
-   * @param roleName the name of the role
-   */
   function addRole(address addr, string roleName)
     internal
   {
     roles[roleName].add(addr);
-    RoleAdded(addr, roleName);
+    emit RoleAdded(addr, roleName);
   }
 
   /**
@@ -162,7 +124,7 @@ contract RBAC {
     internal
   {
     roles[roleName].remove(addr);
-    RoleRemoved(addr, roleName);
+    emit RoleRemoved(addr, roleName);
   }
 
   /**
@@ -173,16 +135,6 @@ contract RBAC {
   modifier onlyRole(string roleName)
   {
     checkRole(msg.sender, roleName);
-    _;
-  }
-
-  /**
-   * @dev modifier to scope access to admins
-   * // reverts
-   */
-  modifier onlyAdmin()
-  {
-    checkRole(msg.sender, ROLE_ADMIN);
     _;
   }
 
@@ -209,7 +161,65 @@ contract RBAC {
   // }
 }
 
-// File: zeppelin-solidity/contracts/math/SafeMath.sol
+// File: openzeppelin-solidity/contracts/ownership/rbac/RBACWithAdmin.sol
+
+/**
+ * @title RBACWithAdmin
+ * @author Matt Condon (@Shrugs)
+ * @dev It's recommended that you define constants in the contract,
+ * @dev like ROLE_ADMIN below, to avoid typos.
+ */
+contract RBACWithAdmin is RBAC {
+  /**
+   * A constant role name for indicating admins.
+   */
+  string public constant ROLE_ADMIN = "admin";
+
+  /**
+   * @dev modifier to scope access to admins
+   * // reverts
+   */
+  modifier onlyAdmin()
+  {
+    checkRole(msg.sender, ROLE_ADMIN);
+    _;
+  }
+
+  /**
+   * @dev constructor. Sets msg.sender as admin by default
+   */
+  function RBACWithAdmin()
+    public
+  {
+    addRole(msg.sender, ROLE_ADMIN);
+  }
+
+  /**
+   * @dev add a role to an address
+   * @param addr address
+   * @param roleName the name of the role
+   */
+  function adminAddRole(address addr, string roleName)
+    onlyAdmin
+    public
+  {
+    addRole(addr, roleName);
+  }
+
+  /**
+   * @dev remove a role from an address
+   * @param addr address
+   * @param roleName the name of the role
+   */
+  function adminRemoveRole(address addr, string roleName)
+    onlyAdmin
+    public
+  {
+    removeRole(addr, roleName);
+  }
+}
+
+// File: openzeppelin-solidity/contracts/math/SafeMath.sol
 
 /**
  * @title SafeMath
@@ -220,11 +230,11 @@ library SafeMath {
   /**
   * @dev Multiplies two numbers, throws on overflow.
   */
-  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+  function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
     if (a == 0) {
       return 0;
     }
-    uint256 c = a * b;
+    c = a * b;
     assert(c / a == b);
     return c;
   }
@@ -234,9 +244,9 @@ library SafeMath {
   */
   function div(uint256 a, uint256 b) internal pure returns (uint256) {
     // assert(b > 0); // Solidity automatically throws when dividing by 0
-    uint256 c = a / b;
+    // uint256 c = a / b;
     // assert(a == b * c + a % b); // There is no case in which this doesn't hold
-    return c;
+    return a / b;
   }
 
   /**
@@ -250,14 +260,14 @@ library SafeMath {
   /**
   * @dev Adds two numbers, throws on overflow.
   */
-  function add(uint256 a, uint256 b) internal pure returns (uint256) {
-    uint256 c = a + b;
+  function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    c = a + b;
     assert(c >= a);
     return c;
   }
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/ERC20Basic.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Basic.sol
 
 /**
  * @title ERC20Basic
@@ -271,7 +281,7 @@ contract ERC20Basic {
   event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/BasicToken.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/BasicToken.sol
 
 /**
  * @title Basic token
@@ -300,10 +310,9 @@ contract BasicToken is ERC20Basic {
     require(_to != address(0));
     require(_value <= balances[msg.sender]);
 
-    // SafeMath.sub will throw if there is not enough balance.
     balances[msg.sender] = balances[msg.sender].sub(_value);
     balances[_to] = balances[_to].add(_value);
-    Transfer(msg.sender, _to, _value);
+    emit Transfer(msg.sender, _to, _value);
     return true;
   }
 
@@ -312,13 +321,13 @@ contract BasicToken is ERC20Basic {
   * @param _owner The address to query the the balance of.
   * @return An uint256 representing the amount owned by the passed address.
   */
-  function balanceOf(address _owner) public view returns (uint256 balance) {
+  function balanceOf(address _owner) public view returns (uint256) {
     return balances[_owner];
   }
 
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/BurnableToken.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol
 
 /**
  * @title Burnable Token
@@ -333,19 +342,22 @@ contract BurnableToken is BasicToken {
    * @param _value The amount of token to be burned.
    */
   function burn(uint256 _value) public {
-    require(_value <= balances[msg.sender]);
+    _burn(msg.sender, _value);
+  }
+
+  function _burn(address _who, uint256 _value) internal {
+    require(_value <= balances[_who]);
     // no need to require value <= totalSupply, since that would imply the
     // sender's balance is greater than the totalSupply, which *should* be an assertion failure
 
-    address burner = msg.sender;
-    balances[burner] = balances[burner].sub(_value);
+    balances[_who] = balances[_who].sub(_value);
     totalSupply_ = totalSupply_.sub(_value);
-    Burn(burner, _value);
-    Transfer(burner, address(0), _value);
+    emit Burn(_who, _value);
+    emit Transfer(_who, address(0), _value);
   }
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/ERC20.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/ERC20.sol
 
 /**
  * @title ERC20 interface
@@ -358,7 +370,7 @@ contract ERC20 is ERC20Basic {
   event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol
 
 contract DetailedERC20 is ERC20 {
   string public name;
@@ -372,7 +384,7 @@ contract DetailedERC20 is ERC20 {
   }
 }
 
-// File: zeppelin-solidity/contracts/ownership/Ownable.sol
+// File: openzeppelin-solidity/contracts/ownership/Ownable.sol
 
 /**
  * @title Ownable
@@ -408,13 +420,13 @@ contract Ownable {
    */
   function transferOwnership(address newOwner) public onlyOwner {
     require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
+    emit OwnershipTransferred(owner, newOwner);
     owner = newOwner;
   }
 
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/StandardToken.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol
 
 /**
  * @title Standard ERC20 token
@@ -442,7 +454,7 @@ contract StandardToken is ERC20, BasicToken {
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-    Transfer(_from, _to, _value);
+    emit Transfer(_from, _to, _value);
     return true;
   }
 
@@ -458,7 +470,7 @@ contract StandardToken is ERC20, BasicToken {
    */
   function approve(address _spender, uint256 _value) public returns (bool) {
     allowed[msg.sender][_spender] = _value;
-    Approval(msg.sender, _spender, _value);
+    emit Approval(msg.sender, _spender, _value);
     return true;
   }
 
@@ -484,7 +496,7 @@ contract StandardToken is ERC20, BasicToken {
    */
   function increaseApproval(address _spender, uint _addedValue) public returns (bool) {
     allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
 
@@ -505,18 +517,18 @@ contract StandardToken is ERC20, BasicToken {
     } else {
       allowed[msg.sender][_spender] = oldValue.sub(_subtractedValue);
     }
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
 
 }
 
-// File: zeppelin-solidity/contracts/token/ERC20/MintableToken.sol
+// File: openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol
 
 /**
  * @title Mintable token
  * @dev Simple ERC20 Token example, with mintable token creation
- * @dev Issue: * https://github.com/OpenZeppelin/zeppelin-solidity/issues/120
+ * @dev Issue: * https://github.com/OpenZeppelin/openzeppelin-solidity/issues/120
  * Based on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol
  */
 contract MintableToken is StandardToken, Ownable {
@@ -540,8 +552,8 @@ contract MintableToken is StandardToken, Ownable {
   function mint(address _to, uint256 _amount) onlyOwner canMint public returns (bool) {
     totalSupply_ = totalSupply_.add(_amount);
     balances[_to] = balances[_to].add(_amount);
-    Mint(_to, _amount);
-    Transfer(address(0), _to, _amount);
+    emit Mint(_to, _amount);
+    emit Transfer(address(0), _to, _amount);
     return true;
   }
 
@@ -551,14 +563,14 @@ contract MintableToken is StandardToken, Ownable {
    */
   function finishMinting() onlyOwner canMint public returns (bool) {
     mintingFinished = true;
-    MintFinished();
+    emit MintFinished();
     return true;
   }
 }
 
 // File: contracts/ERC20Token.sol
 
-contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBAC {
+contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBACWithAdmin {
 
     string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
@@ -569,7 +581,7 @@ contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBAC {
         _;
     }
 
-    function ERC20Token(
+    constructor(
         string _name,
         string _symbol,
         uint8 _decimals,

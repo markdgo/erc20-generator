@@ -1,12 +1,12 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.23;
 
-import "zeppelin-solidity/contracts/ownership/rbac/RBAC.sol";
-import "zeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
-import "zeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
+import "openzeppelin-solidity/contracts/ownership/rbac/RBACWithAdmin.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 
 
-contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBAC {
+contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBACWithAdmin {
 
     string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
@@ -17,7 +17,7 @@ contract ERC20Token is DetailedERC20, MintableToken, BurnableToken, RBAC {
         _;
     }
 
-    function ERC20Token(
+    constructor(
         string _name,
         string _symbol,
         uint8 _decimals,
