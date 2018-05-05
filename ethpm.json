@@ -1,0 +1,19 @@
+{
+  "package_name": "erc20-generator",
+  "version": "0.0.1",
+  "description": "Simply Smart Contract for a Standard, Mintable, Burnable ERC20 Token.",
+  "authors": [
+    "Vittorio Minacori (@vittominacori)"
+  ],
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "token",
+    "mintable",
+    "burnable",
+    "erc20"
+  ],
+  "license": "MIT"
+}
