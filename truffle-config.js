@@ -9,13 +9,6 @@ module.exports = {
       network_id: '*', // Match any network id
       gas: 6000000, // Gas limit used for deploys
     },
-    coverage: {
-      host: 'localhost',
-      network_id: '*', // eslint-disable-line camelcase
-      port: 8555,
-      gas: 0xfffffffffff,
-      gasPrice: 0x01,
-    },
     ganache: {
       host: 'localhost',
       port: 8545,
