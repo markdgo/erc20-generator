@@ -1,5 +1,7 @@
 # ERC20 Token Generator
 
+[![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator)
+
 
 Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
 
