@@ -13,6 +13,8 @@ coverage
 coverage.json
 coverageEnv
 
+package-lock.json
+
 # Dependency directory
 node_modules
 
