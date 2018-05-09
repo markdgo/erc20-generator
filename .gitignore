@@ -1,5 +1,29 @@
-.DS_Store
+# Project settings
 .idea/
-node_modules/
+
+# Runtime data
+pids
+*.pid
+*.seed
+allFiredEvents
+scTopics
+
+# Coverage directory used by tools like istanbul
+coverage
+coverage.json
+coverageEnv
+
+# Dependency directory
+node_modules
+
+# Debug log from npm
+npm-debug.log
+
+# local env variables
+.env
+
+# truffle build directory
 build/
-package-lock.json
+
+# lol macs
+.DS_Store/
