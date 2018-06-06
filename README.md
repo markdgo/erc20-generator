@@ -11,6 +11,7 @@ Token also has a Role Based Access Control so you can add the "minter" permissio
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
+DApp source here [https://github.com/vittominacori/erc20-generator/tree/gh-pages](https://github.com/vittominacori/erc20-generator/tree/gh-pages)
 
 Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/OpenZeppelin/openzeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
 
@@ -22,7 +23,7 @@ Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/Op
 Install truffle, compiler and linter.
 
 ```bash
-npm install -g truffle      // Version 4.1.8+ required.
+npm install -g truffle      // Version 4.1.11+ required.
 npm install -g solium       // Version 1.1.7+ required.
 ```
 
@@ -112,6 +113,15 @@ Usage
 truffle-flattener contracts/ERC20Token.sol >> dist/ERC20Token.sol
 ```
  
+
+
+## Token verification on Etherscan
+
+
+Use the dist smart contracts [dist/ERC20Token.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.sol)
+
+Solc version is 0.4.24
+
  
  
 ## Links
