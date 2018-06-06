@@ -11,8 +11,6 @@ require('chai')
 
 const ERC20Token = artifacts.require('ERC20Token');
 
-const ROLE_MINTER = 'minter';
-
 contract('ERC20Token', function ([_, owner, minter, futureMinter, recipient, anyone, anotherAccount]) {
   const _name = 'TestToken';
   const _symbol = 'TEST';
@@ -229,7 +227,7 @@ contract('ERC20Token', function ([_, owner, minter, futureMinter, recipient, any
       const from = minter;
 
       beforeEach(async function () {
-        await this.token.adminAddRole(minter, ROLE_MINTER, { from: owner });
+        await this.token.addMinter(minter, { from: owner });
       });
 
       describe('when the token was not finished', function () {
@@ -764,28 +762,28 @@ contract('ERC20Token', function ([_, owner, minter, futureMinter, recipient, any
   describe('RBAC functions', function () {
     describe('in normal conditions', function () {
       beforeEach(async function () {
-        await this.token.adminAddRole(minter, ROLE_MINTER, { from: owner });
+        await this.token.addMinter(minter, { from: owner });
       });
 
       it('allows admins to add a minter', async function () {
-        await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+        await this.token.addMinter(futureMinter, { from: owner }).should.be.fulfilled;
       });
 
       it('allows admins to remove a minter', async function () {
-        await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
-        await this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+        await this.token.addMinter(futureMinter, { from: owner }).should.be.fulfilled;
+        await this.token.removeMinter(futureMinter, { from: owner }).should.be.fulfilled;
       });
 
       it('announces a RoleAdded event on addRole', async function () {
         await expectEvent.inTransaction(
-          this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }),
+          this.token.addMinter(futureMinter, { from: owner }),
           'RoleAdded'
         );
       });
 
       it('announces a RoleRemoved event on removeRole', async function () {
         await expectEvent.inTransaction(
-          this.token.adminRemoveRole(minter, ROLE_MINTER, { from: owner }),
+          this.token.removeMinter(minter, { from: owner }),
           'RoleRemoved'
         );
       });
@@ -793,25 +791,25 @@ contract('ERC20Token', function ([_, owner, minter, futureMinter, recipient, any
 
     describe('in adversarial conditions', function () {
       beforeEach(async function () {
-        await this.token.adminAddRole(minter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+        await this.token.addMinter(minter, { from: owner }).should.be.fulfilled;
       });
 
       it('does not allow "anyone" except admins to add a minter', async function () {
         await expectThrow(
-          this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: minter })
+          this.token.addMinter(futureMinter, { from: minter })
         );
         await expectThrow(
-          this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: anyone })
+          this.token.addMinter(futureMinter, { from: anyone })
         );
       });
 
       it('does not allow "anyone" except admins to remove a minter', async function () {
-        await this.token.adminAddRole(futureMinter, ROLE_MINTER, { from: owner }).should.be.fulfilled;
+        await this.token.addMinter(futureMinter, { from: owner }).should.be.fulfilled;
         await expectThrow(
-          this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: minter })
+          this.token.removeMinter(futureMinter, { from: minter })
         );
         await expectThrow(
-          this.token.adminRemoveRole(futureMinter, ROLE_MINTER, { from: anyone })
+          this.token.removeMinter(futureMinter, { from: anyone })
         );
       });
     });
