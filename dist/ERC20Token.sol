@@ -851,17 +851,11 @@ contract ERC20Token is DetailedERC20, ERC827Token, RBACMintableToken, BurnableTo
   constructor(
     string _name,
     string _symbol,
-    uint8 _decimals,
-    uint256 _initialAmount
+    uint8 _decimals
   )
   DetailedERC20 (_name, _symbol, _decimals)
   public
   {
-    if (_initialAmount > 0) {
-      balances[owner] = _initialAmount * (10 ** uint256(decimals));
-      totalSupply_ = balances[owner];
-    }
-
     addMinter(owner);
   }
 

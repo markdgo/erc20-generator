@@ -1,7 +1,7 @@
 {
   "package_name": "erc20-generator",
   "version": "0.0.1",
-  "description": "Simply Smart Contract for a Standard, Mintable, Burnable ERC20 Token.",
+  "description": "A simple Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Roles.",
   "authors": [
     "Vittorio Minacori (@vittominacori)"
   ],

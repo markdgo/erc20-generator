@@ -1,4 +1,4 @@
-import assertRevert from './helpers/assertRevert';
+import assertRevert from '../helpers/assertRevert';
 
 export default function ([owner, recipient, anotherAccount], initialBalance) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';

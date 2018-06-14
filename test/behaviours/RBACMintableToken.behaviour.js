@@ -1,4 +1,4 @@
-import expectThrow from './helpers/expectThrow';
+import expectThrow from '../helpers/expectThrow';
 
 const ROLE_MINTER = 'minter';
 

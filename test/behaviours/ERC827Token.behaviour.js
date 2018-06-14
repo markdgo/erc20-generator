@@ -1,4 +1,4 @@
-import EVMRevert from './helpers/EVMRevert';
+import EVMRevert from '../helpers/EVMRevert';
 const Message = artifacts.require('MessageHelper');
 
 const BigNumber = web3.BigNumber;

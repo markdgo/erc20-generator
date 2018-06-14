@@ -1,9 +1,9 @@
-import shouldBehaveLikeDetailedERC20Token from './DetailedERC20.behaviour';
-import shouldBehaveLikeMintableToken from './MintableToken.behaviour';
-import shouldBehaveLikeRBACMintableToken from './RBACMintableToken.behaviour';
-import shouldBehaveLikeBurnableToken from './BurnableToken.behaviour';
-import shouldBehaveLikeStandardToken from './StandardToken.behaviour';
-import shouldBehaveERC827Token from './ERC827Token.behaviour';
+import shouldBehaveLikeDetailedERC20Token from './behaviours/DetailedERC20.behaviour';
+import shouldBehaveLikeMintableToken from './behaviours/MintableToken.behaviour';
+import shouldBehaveLikeRBACMintableToken from './behaviours/RBACMintableToken.behaviour';
+import shouldBehaveLikeBurnableToken from './behaviours/BurnableToken.behaviour';
+import shouldBehaveLikeStandardToken from './behaviours/StandardToken.behaviour';
+import shouldBehaveERC827Token from './behaviours/ERC827Token.behaviour';
 
 const BigNumber = web3.BigNumber;
 
@@ -18,46 +18,9 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, recipient]) {
   const _name = 'ERC20Token';
   const _symbol = 'ERC20';
   const _decimals = 18;
-  const _initialAmount = 0;
 
   beforeEach(async function () {
-    this.token = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
-  });
-
-  context('setting the initial amount', function () {
-    describe('when initial amount is set', function () {
-      let initialAmount = 1000000;
-
-      beforeEach(async function () {
-        this.token = await ERC20Token.new(_name, _symbol, _decimals, initialAmount, { from: owner });
-      });
-
-      it('total supply should be the initial amount', async function () {
-        const totalSupply = await this.token.totalSupply();
-        assert.equal(totalSupply, initialAmount * Math.pow(10, _decimals));
-      });
-
-      it('balance of owner should be the initial amount', async function () {
-        const balance = await this.token.balanceOf(owner);
-        assert.equal(balance, initialAmount * Math.pow(10, _decimals));
-      });
-    });
-
-    describe('when initial amount is zero', function () {
-      beforeEach(async function () {
-        this.token = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
-      });
-
-      it('total supply should be zero', async function () {
-        const totalSupply = await this.token.totalSupply();
-        assert.equal(totalSupply, 0);
-      });
-
-      it('owner\'s balance should be zero', async function () {
-        const balance = await this.token.balanceOf(owner);
-        assert.equal(balance, 0);
-      });
-    });
+    this.token = await ERC20Token.new(_name, _symbol, _decimals, { from: owner });
   });
 
   context('like a DetailedERC20 token', function () {
@@ -110,9 +73,16 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, recipient]) {
     shouldBehaveERC827Token([owner, anotherAccount, minter, recipient]);
   });
 
+  context('like a deployed ERC20Token', function () {
+    it('owner should have the "minter" role', async function () {
+      let hasRole = await this.token.hasRole(owner, 'minter');
+      assert.equal(hasRole, true);
+    });
+  });
+
   describe('safe functions', function () {
     it('should safe transfer any ERC20 sent for error into the contract', async function () {
-      const anotherERC20 = await ERC20Token.new(_name, _symbol, _decimals, _initialAmount, { from: owner });
+      const anotherERC20 = await ERC20Token.new(_name, _symbol, _decimals, { from: owner });
 
       const tokenAmount = 1000;
 

@@ -3,10 +3,9 @@
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 
-Simply deploy Smart Contract for a Standard, Mintable, Burnable ERC20 Token.
+A simple Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Roles.
 
-
-Token also has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
+Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
 
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
