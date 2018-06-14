@@ -87,7 +87,6 @@ const App = {
               const name = this.token.name;
               const symbol = this.token.symbol.toUpperCase();
               const decimals = new App.web3.BigNumber(this.token.decimals);
-              const initialAmount = new App.web3.BigNumber(this.token.initialAmount);
 
               try {
                 this.trxHash = '';
@@ -97,8 +96,7 @@ const App = {
                 const log = await App.contracts.ERC20Token.new(
                   name,
                   symbol,
-                  decimals,
-                  initialAmount
+                  decimals
                 );
 
                 this.token.address = log.address;
