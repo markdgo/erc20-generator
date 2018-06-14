@@ -1,11 +1,12 @@
 pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC827/ERC827Token.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/RBACMintableToken.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 
 
-contract ERC20Token is DetailedERC20, RBACMintableToken, BurnableToken {
+contract ERC20Token is DetailedERC20, ERC827Token, RBACMintableToken, BurnableToken {
 
   string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
