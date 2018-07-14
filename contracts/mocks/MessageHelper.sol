@@ -20,8 +20,8 @@ contract MessageHelper {
     return true;
   }
 
-  function fail() pure public {
-    require(false);
+  function fail() public pure {
+    require(false, "it's always false, only for test.");
   }
 
   function call(address to, bytes data) public returns (bool) {

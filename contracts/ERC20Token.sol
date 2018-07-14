@@ -21,7 +21,7 @@ contract ERC20Token is DetailedERC20, ERC827Token, RBACMintableToken, BurnableTo
     addMinter(owner);
   }
 
-  function transferAnyERC20Token(address _tokenAddress, uint256 _tokens) onlyOwner public returns (bool success) {
+  function transferAnyERC20Token(address _tokenAddress, uint256 _tokens) public onlyOwner returns (bool success) {
     return ERC20Basic(_tokenAddress).transfer(owner, _tokens);
   }
 }
