@@ -1,7 +1,7 @@
 {
   "name": "erc20-generator",
   "version": "1.0.0",
-  "description": "A simple Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Roles.",
+  "description": "A simple Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Role.",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
