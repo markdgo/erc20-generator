@@ -7,14 +7,16 @@
                 <small v-if="!hasMetaMask">You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.</small>
 
                 <div class="alert alert-success mt-3" role="alert" v-if="makingTransaction">
-                    <div>Making transaction. Do not refresh the page. Please wait...</div>
-                    <div v-if="trxHash !== ''">
+                    <div>Making transaction.</div>
+                    <div v-if="!trxHash">Please wait...</div>
+                    <div v-else>
                         <b>Well! Transaction done!</b><br>
                         Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span></a><br>
 
-                        Retrieving Token. Please wait...<br>
-                        <div v-if="token.address !== ''">
-                            Your Token <a :href="token.link" target="_blank"><span v-html="token.address"></span></a><br><br>
+                        Retrieving Token.
+                        <div v-if="!token.address">Please wait...</div>
+                        <div v-else>
+                            <b>Your Token</b> <a :href="token.link" target="_blank"><span v-html="token.address"></span></a><br><br>
                             <div class="form-group">
                                 <label>ABI</label>
                                 <textarea class="form-control"

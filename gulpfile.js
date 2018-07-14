@@ -60,9 +60,6 @@ gulp.task('copy', function() {
     gulp.src(['node_modules/web3/dist/*.js'])
         .pipe(gulp.dest('vendor/web3'));
 
-    gulp.src(['node_modules/truffle-contract/dist/*.js'])
-        .pipe(gulp.dest('vendor/truffle-contract'));
-
     gulp.src(['node_modules/simple-line-icons/*/*'])
         .pipe(gulp.dest('vendor/simple-line-icons'));
 

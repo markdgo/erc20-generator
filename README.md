@@ -3,13 +3,13 @@
 
 The source code for ERC20 Token Generator DApp. 
 
-Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Roles.
+Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Role.
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts.
 
 Smart Contract code here [https://github.com/vittominacori/erc20-generator](https://github.com/vittominacori/erc20-generator)
 
-Live here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
+Live Demo here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
 
 
@@ -57,8 +57,6 @@ Go to [http://localhost:4000](http://localhost:4000)
 ## Helpful Links
  
 Web3.js [Doc](http://web3js.readthedocs.io/en/1.0/index.html) [GitHub](https://github.com/ethereum/web3.js/)
-   
-Truffle Contract [GitHub](https://github.com/trufflesuite/truffle-contract)
  
 Jekyll [Doc](https://jekyllrb.com/docs/home/) [GitHub](https://github.com/jekyll/jekyll)
 

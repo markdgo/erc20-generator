@@ -2,7 +2,7 @@
   "title": "ERC20 Token Generator",
   "name": "erc20-generator",
   "version": "1.0.0",
-  "description": "Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Roles.",
+  "description": "Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Role.",
   "keywords": [
     "HTML, SCSS, JS, web3.js, truffle, bootstrap, jekyll"
   ],
@@ -30,10 +30,9 @@
     "gulp-babel": "^7.0.0",
     "jquery": "^3.2.1",
     "popper.js": "^1.12.9",
-    "truffle-contract": "^3.0.1",
     "vee-validate": "^2.0.0-rc.27",
     "vue": "^2.5.9",
-    "web3": "^0.20.4"
+    "web3": "^0.20.6"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

@@ -6,20 +6,19 @@ const App = {
     installed: false,
     netId: null
   },
+  artifacts: {},
   contracts: {},
 
-  setTestnet: function () {
+  setTestnet () {
     web3Provider = rinkeby_web3Provider;
     etherscanLink = rinkeby_etherscanLink;
     networkId = rinkeby_networkId;
     networkName = rinkeby_networkName;
   },
-
-  init: function () {
+  init () {
     App.initWeb3(true);
   },
-
-  initWeb3: function (checkWeb3) {
+  initWeb3 (checkWeb3) {
     App.etherscanLink = etherscanLink;
     if (checkWeb3 && typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider;
@@ -37,15 +36,13 @@ const App = {
       App.web3 = new Web3(App.web3Provider);
     }
   },
-
-  initToken: async function () {
+  async initToken () {
     return $.getJSON(abiPath + 'ERC20Token.json', function (data) {
-      App.contracts.ERC20Token = TruffleContract(data);
-      App.contracts.ERC20Token.setProvider(App.web3Provider);
+      App.artifacts.ERC20Token = data;
+      App.contracts.ERC20Token = App.web3.eth.contract(App.artifacts.ERC20Token.abi);
     });
   },
-
-  builder: async function () {
+  async builder () {
     App.init();
 
     Vue.use(VeeValidate);
@@ -64,14 +61,14 @@ const App = {
           stringifiedAbi: JSON.stringify(App.contracts.ERC20Token.abi)
         }
       },
-      created: function () {
+      created () {
         this.$validator.extend('eth_address', {
           getMessage: field => 'Insert a valid Ethereum wallet address.',
           validate: value => App.web3.isAddress(value)
         });
       },
       methods: {
-        generateToken: function () {
+        generateToken () {
           if (!App.metamask.installed) {
             alert("To create a Token please install the MetaMask extension!");
             return;
@@ -93,16 +90,27 @@ const App = {
                 this.formDisabled = true;
                 this.makingTransaction = true;
 
-                const log = await App.contracts.ERC20Token.new(
+                App.contracts.ERC20Token.new(
                   name,
                   symbol,
-                  decimals
+                  decimals,
+                  {
+                    from: App.web3.eth.coinbase,
+                    data: App.artifacts.ERC20Token.bytecode,
+                  }, (e, tokenContract) => {
+                    // NOTE: The callback will fire twice!
+                    // Once the contract has the transactionHash property
+                    // set and once its deployed on an address.
+                    if (!tokenContract.address) {
+                      this.trxHash = tokenContract.transactionHash;
+                      this.trxLink = App.etherscanLink + "/tx/" + this.trxHash;
+                    } else {
+                      this.token.address = tokenContract.address;
+                      this.token.link = App.etherscanLink + "/token/" + this.token.address;
+                      this.$forceUpdate();
+                    }
+                  }
                 );
-
-                this.token.address = log.address;
-                this.trxHash = log.contract.transactionHash;
-                this.trxLink = App.etherscanLink + "/tx/" + this.trxHash;
-                this.token.link = App.etherscanLink + "/token/" + this.token.address;
               } catch (e) {
                 this.makingTransaction = false;
                 this.formDisabled = false;
@@ -119,8 +127,6 @@ const App = {
 };
 
 (function($) {
-  "use strict";
-
   switch (page) {
     case "rinkeby":
       App.setTestnet();
@@ -131,4 +137,4 @@ const App = {
       break;
   }
 
-})(jQuery); // End of use strict
+})(jQuery);
