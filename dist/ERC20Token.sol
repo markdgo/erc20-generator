@@ -57,7 +57,7 @@ library SafeMath {
 /**
  * @title ERC20Basic
  * @dev Simpler version of ERC20 interface
- * @dev see https://github.com/ethereum/EIPs/issues/179
+ * See https://github.com/ethereum/EIPs/issues/179
  */
 contract ERC20Basic {
   function totalSupply() public view returns (uint256);
@@ -80,14 +80,14 @@ contract BasicToken is ERC20Basic {
   uint256 totalSupply_;
 
   /**
-  * @dev total number of tokens in existence
+  * @dev Total number of tokens in existence
   */
   function totalSupply() public view returns (uint256) {
     return totalSupply_;
   }
 
   /**
-  * @dev transfer token for a specified address
+  * @dev Transfer token for a specified address
   * @param _to The address to transfer to.
   * @param _value The amount to be transferred.
   */
@@ -189,7 +189,7 @@ contract DetailedERC20 is ERC20 {
  * @title Roles
  * @author Francisco Giordano (@frangio)
  * @dev Library for managing addresses assigned to a Role.
- *      See RBAC.sol for example usage.
+ * See RBAC.sol for example usage.
  */
 library Roles {
   struct Role {
@@ -244,95 +244,95 @@ library Roles {
  * @title RBAC (Role-Based Access Control)
  * @author Matt Condon (@Shrugs)
  * @dev Stores and provides setters and getters for roles and addresses.
- * @dev Supports unlimited numbers of roles and addresses.
- * @dev See //contracts/mocks/RBACMock.sol for an example of usage.
+ * Supports unlimited numbers of roles and addresses.
+ * See //contracts/mocks/RBACMock.sol for an example of usage.
  * This RBAC method uses strings to key roles. It may be beneficial
- *  for you to write your own implementation of this interface using Enums or similar.
+ * for you to write your own implementation of this interface using Enums or similar.
  * It's also recommended that you define constants in the contract, like ROLE_ADMIN below,
- *  to avoid typos.
+ * to avoid typos.
  */
 contract RBAC {
   using Roles for Roles.Role;
 
   mapping (string => Roles.Role) private roles;
 
-  event RoleAdded(address addr, string roleName);
-  event RoleRemoved(address addr, string roleName);
+  event RoleAdded(address indexed operator, string role);
+  event RoleRemoved(address indexed operator, string role);
 
   /**
    * @dev reverts if addr does not have role
-   * @param addr address
-   * @param roleName the name of the role
+   * @param _operator address
+   * @param _role the name of the role
    * // reverts
    */
-  function checkRole(address addr, string roleName)
+  function checkRole(address _operator, string _role)
     view
     public
   {
-    roles[roleName].check(addr);
+    roles[_role].check(_operator);
   }
 
   /**
    * @dev determine if addr has role
-   * @param addr address
-   * @param roleName the name of the role
+   * @param _operator address
+   * @param _role the name of the role
    * @return bool
    */
-  function hasRole(address addr, string roleName)
+  function hasRole(address _operator, string _role)
     view
     public
     returns (bool)
   {
-    return roles[roleName].has(addr);
+    return roles[_role].has(_operator);
   }
 
   /**
    * @dev add a role to an address
-   * @param addr address
-   * @param roleName the name of the role
+   * @param _operator address
+   * @param _role the name of the role
    */
-  function addRole(address addr, string roleName)
+  function addRole(address _operator, string _role)
     internal
   {
-    roles[roleName].add(addr);
-    emit RoleAdded(addr, roleName);
+    roles[_role].add(_operator);
+    emit RoleAdded(_operator, _role);
   }
 
   /**
    * @dev remove a role from an address
-   * @param addr address
-   * @param roleName the name of the role
+   * @param _operator address
+   * @param _role the name of the role
    */
-  function removeRole(address addr, string roleName)
+  function removeRole(address _operator, string _role)
     internal
   {
-    roles[roleName].remove(addr);
-    emit RoleRemoved(addr, roleName);
+    roles[_role].remove(_operator);
+    emit RoleRemoved(_operator, _role);
   }
 
   /**
    * @dev modifier to scope access to a single role (uses msg.sender as addr)
-   * @param roleName the name of the role
+   * @param _role the name of the role
    * // reverts
    */
-  modifier onlyRole(string roleName)
+  modifier onlyRole(string _role)
   {
-    checkRole(msg.sender, roleName);
+    checkRole(msg.sender, _role);
     _;
   }
 
   /**
    * @dev modifier to scope access to a set of roles (uses msg.sender as addr)
-   * @param roleNames the names of the roles to scope access to
+   * @param _roles the names of the roles to scope access to
    * // reverts
    *
    * @TODO - when solidity supports dynamic arrays as arguments to modifiers, provide this
    *  see: https://github.com/ethereum/solidity/issues/2467
    */
-  // modifier onlyRoles(string[] roleNames) {
+  // modifier onlyRoles(string[] _roles) {
   //     bool hasAnyRole = false;
-  //     for (uint8 i = 0; i < roleNames.length; i++) {
-  //         if (hasRole(msg.sender, roleNames[i])) {
+  //     for (uint8 i = 0; i < _roles.length; i++) {
+  //         if (hasRole(msg.sender, _roles[i])) {
   //             hasAnyRole = true;
   //             break;
   //         }
@@ -380,6 +380,9 @@ contract Ownable {
 
   /**
    * @dev Allows the current owner to relinquish control of the contract.
+   * @notice Renouncing to ownership will leave the contract without an owner.
+   * It will not be possible to call the functions with the `onlyOwner`
+   * modifier anymore.
    */
   function renounceOwnership() public onlyOwner {
     emit OwnershipRenounced(owner);
@@ -411,8 +414,8 @@ contract Ownable {
  * @title Standard ERC20 token
  *
  * @dev Implementation of the basic standard token.
- * @dev https://github.com/ethereum/EIPs/issues/20
- * @dev Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
+ * https://github.com/ethereum/EIPs/issues/20
+ * Based on code by FirstBlood: https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  */
 contract StandardToken is ERC20, BasicToken {
 
@@ -446,7 +449,6 @@ contract StandardToken is ERC20, BasicToken {
 
   /**
    * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
-   *
    * Beware that changing an allowance with this method brings the risk that someone may use both the old
    * and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this
    * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
@@ -479,7 +481,6 @@ contract StandardToken is ERC20, BasicToken {
 
   /**
    * @dev Increase the amount of tokens that an owner allowed to a spender.
-   *
    * approve should be called when allowed[_spender] == 0. To increment
    * allowed value is better to use this function to avoid 2 calls (and wait until
    * the first transaction is mined)
@@ -489,7 +490,7 @@ contract StandardToken is ERC20, BasicToken {
    */
   function increaseApproval(
     address _spender,
-    uint _addedValue
+    uint256 _addedValue
   )
     public
     returns (bool)
@@ -502,7 +503,6 @@ contract StandardToken is ERC20, BasicToken {
 
   /**
    * @dev Decrease the amount of tokens that an owner allowed to a spender.
-   *
    * approve should be called when allowed[_spender] == 0. To decrement
    * allowed value is better to use this function to avoid 2 calls (and wait until
    * the first transaction is mined)
@@ -512,12 +512,12 @@ contract StandardToken is ERC20, BasicToken {
    */
   function decreaseApproval(
     address _spender,
-    uint _subtractedValue
+    uint256 _subtractedValue
   )
     public
     returns (bool)
   {
-    uint oldValue = allowed[msg.sender][_spender];
+    uint256 oldValue = allowed[msg.sender][_spender];
     if (_subtractedValue > oldValue) {
       allowed[msg.sender][_spender] = 0;
     } else {
@@ -534,7 +534,6 @@ contract StandardToken is ERC20, BasicToken {
 /**
  * @title Mintable token
  * @dev Simple ERC20 Token example, with mintable token creation
- * @dev Issue: * https://github.com/OpenZeppelin/openzeppelin-solidity/issues/120
  * Based on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol
  */
 contract MintableToken is StandardToken, Ownable {
@@ -625,226 +624,9 @@ contract RBACMintableToken is MintableToken, RBAC {
   }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC827/ERC827.sol
-
-/**
- * @title ERC827 interface, an extension of ERC20 token standard
- *
- * @dev Interface of a ERC827 token, following the ERC20 standard with extra
- * @dev methods to transfer value and data and execute calls in transfers and
- * @dev approvals.
- */
-contract ERC827 is ERC20 {
-  function approveAndCall(
-    address _spender,
-    uint256 _value,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool);
-
-  function transferAndCall(
-    address _to,
-    uint256 _value,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool);
-
-  function transferFromAndCall(
-    address _from,
-    address _to,
-    uint256 _value,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool);
-}
-
-// File: openzeppelin-solidity/contracts/token/ERC827/ERC827Token.sol
-
-/* solium-disable security/no-low-level-calls */
-
-pragma solidity ^0.4.23;
-
-
-
-
-/**
- * @title ERC827, an extension of ERC20 token standard
- *
- * @dev Implementation the ERC827, following the ERC20 standard with extra
- * @dev methods to transfer value and data and execute calls in transfers and
- * @dev approvals.
- *
- * @dev Uses OpenZeppelin StandardToken.
- */
-contract ERC827Token is ERC827, StandardToken {
-
-  /**
-   * @dev Addition to ERC20 token methods. It allows to
-   * @dev approve the transfer of value and execute a call with the sent data.
-   *
-   * @dev Beware that changing an allowance with this method brings the risk that
-   * @dev someone may use both the old and the new allowance by unfortunate
-   * @dev transaction ordering. One possible solution to mitigate this race condition
-   * @dev is to first reduce the spender's allowance to 0 and set the desired value
-   * @dev afterwards:
-   * @dev https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-   *
-   * @param _spender The address that will spend the funds.
-   * @param _value The amount of tokens to be spent.
-   * @param _data ABI-encoded contract call to call `_to` address.
-   *
-   * @return true if the call function was executed successfully
-   */
-  function approveAndCall(
-    address _spender,
-    uint256 _value,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool)
-  {
-    require(_spender != address(this));
-
-    super.approve(_spender, _value);
-
-    // solium-disable-next-line security/no-call-value
-    require(_spender.call.value(msg.value)(_data));
-
-    return true;
-  }
-
-  /**
-   * @dev Addition to ERC20 token methods. Transfer tokens to a specified
-   * @dev address and execute a call with the sent data on the same transaction
-   *
-   * @param _to address The address which you want to transfer to
-   * @param _value uint256 the amout of tokens to be transfered
-   * @param _data ABI-encoded contract call to call `_to` address.
-   *
-   * @return true if the call function was executed successfully
-   */
-  function transferAndCall(
-    address _to,
-    uint256 _value,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool)
-  {
-    require(_to != address(this));
-
-    super.transfer(_to, _value);
-
-    // solium-disable-next-line security/no-call-value
-    require(_to.call.value(msg.value)(_data));
-    return true;
-  }
-
-  /**
-   * @dev Addition to ERC20 token methods. Transfer tokens from one address to
-   * @dev another and make a contract call on the same transaction
-   *
-   * @param _from The address which you want to send tokens from
-   * @param _to The address which you want to transfer to
-   * @param _value The amout of tokens to be transferred
-   * @param _data ABI-encoded contract call to call `_to` address.
-   *
-   * @return true if the call function was executed successfully
-   */
-  function transferFromAndCall(
-    address _from,
-    address _to,
-    uint256 _value,
-    bytes _data
-  )
-    public payable returns (bool)
-  {
-    require(_to != address(this));
-
-    super.transferFrom(_from, _to, _value);
-
-    // solium-disable-next-line security/no-call-value
-    require(_to.call.value(msg.value)(_data));
-    return true;
-  }
-
-  /**
-   * @dev Addition to StandardToken methods. Increase the amount of tokens that
-   * @dev an owner allowed to a spender and execute a call with the sent data.
-   *
-   * @dev approve should be called when allowed[_spender] == 0. To increment
-   * @dev allowed value is better to use this function to avoid 2 calls (and wait until
-   * @dev the first transaction is mined)
-   * @dev From MonolithDAO Token.sol
-   *
-   * @param _spender The address which will spend the funds.
-   * @param _addedValue The amount of tokens to increase the allowance by.
-   * @param _data ABI-encoded contract call to call `_spender` address.
-   */
-  function increaseApprovalAndCall(
-    address _spender,
-    uint _addedValue,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool)
-  {
-    require(_spender != address(this));
-
-    super.increaseApproval(_spender, _addedValue);
-
-    // solium-disable-next-line security/no-call-value
-    require(_spender.call.value(msg.value)(_data));
-
-    return true;
-  }
-
-  /**
-   * @dev Addition to StandardToken methods. Decrease the amount of tokens that
-   * @dev an owner allowed to a spender and execute a call with the sent data.
-   *
-   * @dev approve should be called when allowed[_spender] == 0. To decrement
-   * @dev allowed value is better to use this function to avoid 2 calls (and wait until
-   * @dev the first transaction is mined)
-   * @dev From MonolithDAO Token.sol
-   *
-   * @param _spender The address which will spend the funds.
-   * @param _subtractedValue The amount of tokens to decrease the allowance by.
-   * @param _data ABI-encoded contract call to call `_spender` address.
-   */
-  function decreaseApprovalAndCall(
-    address _spender,
-    uint _subtractedValue,
-    bytes _data
-  )
-    public
-    payable
-    returns (bool)
-  {
-    require(_spender != address(this));
-
-    super.decreaseApproval(_spender, _subtractedValue);
-
-    // solium-disable-next-line security/no-call-value
-    require(_spender.call.value(msg.value)(_data));
-
-    return true;
-  }
-
-}
-
 // File: contracts/ERC20Token.sol
 
-contract ERC20Token is DetailedERC20, ERC827Token, RBACMintableToken, BurnableToken {
+contract ERC20Token is DetailedERC20, RBACMintableToken, BurnableToken {
 
   string public builtOn = "https://vittominacori.github.io/erc20-generator";
 

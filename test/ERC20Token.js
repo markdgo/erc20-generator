@@ -3,7 +3,6 @@ import shouldBehaveLikeMintableToken from './behaviours/MintableToken.behaviour'
 import shouldBehaveLikeRBACMintableToken from './behaviours/RBACMintableToken.behaviour';
 import shouldBehaveLikeBurnableToken from './behaviours/BurnableToken.behaviour';
 import shouldBehaveLikeStandardToken from './behaviours/StandardToken.behaviour';
-import shouldBehaveERC827Token from './behaviours/ERC827Token.behaviour';
 
 const BigNumber = web3.BigNumber;
 
@@ -60,17 +59,6 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, recipient]) {
       await this.token.finishMinting({ from: owner });
     });
     shouldBehaveLikeStandardToken([owner, anotherAccount, recipient], initialBalance);
-  });
-
-  context('like a ERC827Token', function () {
-    const initialBalance = 100;
-
-    beforeEach(async function () {
-      await this.token.addMinter(minter, { from: owner });
-      await this.token.mint(owner, initialBalance, { from: minter });
-      await this.token.finishMinting({ from: owner });
-    });
-    shouldBehaveERC827Token([owner, anotherAccount, minter, recipient]);
   });
 
   context('like a deployed ERC20Token', function () {
