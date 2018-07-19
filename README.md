@@ -3,7 +3,7 @@
 
 The source code for ERC20 Token Generator DApp. 
 
-Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Role.
+Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20 Token with Minter Role.
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts.
 

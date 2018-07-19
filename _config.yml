@@ -16,7 +16,7 @@
 name: "ERC20 Token Generator"
 title: "ERC20 Token Generator | Build your token for free"
 description: >- # this means to ignore newlines until "baseurl:"
-  Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20, ERC827 Token with Minter Role.
+  Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20 Token with Minter Role.
 baseurl: "erc20-generator" # the subpath of your site, e.g. /blog
 url: "https://vittominacori.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 environment: "prod"
