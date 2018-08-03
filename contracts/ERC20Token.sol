@@ -14,13 +14,20 @@ contract ERC20Token is DetailedERC20, RBACMintableToken, BurnableToken {
     string _symbol,
     uint8 _decimals
   )
-  DetailedERC20 (_name, _symbol, _decimals)
-  public
+    DetailedERC20 (_name, _symbol, _decimals)
+    public
   {
     addMinter(owner);
   }
 
-  function transferAnyERC20Token(address _tokenAddress, uint256 _tokens) public onlyOwner returns (bool success) {
+  function transferAnyERC20Token(
+    address _tokenAddress,
+    uint256 _tokens
+  )
+    public
+    onlyOwner
+    returns (bool success)
+  {
     return ERC20Basic(_tokenAddress).transfer(owner, _tokens);
   }
 }
