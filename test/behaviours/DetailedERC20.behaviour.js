@@ -5,7 +5,7 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-export default function (_name, _symbol, _decimals) {
+function shouldBehaveLikeDetailedERC20Token (_name, _symbol, _decimals) {
   it('has a name', async function () {
     const name = await this.token.name();
     name.should.be.equal(_name);
@@ -21,3 +21,7 @@ export default function (_name, _symbol, _decimals) {
     decimals.should.be.bignumber.equal(_decimals);
   });
 }
+
+module.exports = {
+  shouldBehaveLikeDetailedERC20Token,
+};

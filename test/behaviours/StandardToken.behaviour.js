@@ -1,6 +1,6 @@
-import assertRevert from '../helpers/assertRevert';
+const { assertRevert } = require('../helpers/assertRevert');
 
-export default function ([owner, recipient, anotherAccount], initialBalance) {
+function shouldBehaveLikeStandardToken ([owner, recipient, anotherAccount], initialBalance) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
   describe('total supply', function () {
@@ -462,3 +462,7 @@ export default function ([owner, recipient, anotherAccount], initialBalance) {
     });
   });
 }
+
+module.exports = {
+  shouldBehaveLikeStandardToken,
+};

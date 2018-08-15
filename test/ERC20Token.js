@@ -1,8 +1,8 @@
-import shouldBehaveLikeDetailedERC20Token from './behaviours/DetailedERC20.behaviour';
-import shouldBehaveLikeMintableToken from './behaviours/MintableToken.behaviour';
-import shouldBehaveLikeRBACMintableToken from './behaviours/RBACMintableToken.behaviour';
-import shouldBehaveLikeBurnableToken from './behaviours/BurnableToken.behaviour';
-import shouldBehaveLikeStandardToken from './behaviours/StandardToken.behaviour';
+const { shouldBehaveLikeDetailedERC20Token } = require('./behaviours/DetailedERC20.behaviour');
+const { shouldBehaveLikeMintableToken } = require('./behaviours/MintableToken.behaviour');
+const { shouldBehaveLikeRBACMintableToken } = require('./behaviours/RBACMintableToken.behaviour');
+const { shouldBehaveLikeBurnableToken } = require('./behaviours/BurnableToken.behaviour');
+const { shouldBehaveLikeStandardToken } = require('./behaviours/StandardToken.behaviour');
 
 const BigNumber = web3.BigNumber;
 
