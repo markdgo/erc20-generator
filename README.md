@@ -19,11 +19,10 @@ Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/Op
 ## Installation
 
 
-Install truffle, compiler and linter.
+Install truffle.
 
 ```bash
 npm install -g truffle      // Version 4.1.13+ required.
-npm install -g solium       // Version 1.1.8+ required.
 ```
 
 
@@ -43,12 +42,18 @@ npm install
 Use Solium
 
 ```bash
-solium -d contracts
+npm run lint:sol
+```
+
+Lint and fix all
+
+```bash
+npm run lint:all:fix
 ```
 
 
 
-## Compile, migrate and test the contracts.
+## Compile and test the contracts.
  
 
 Open the Truffle console
@@ -63,35 +68,10 @@ Compile
 compile 
 ```
 
-Migrate
-
-```bash
-migrate
-```
-
 Test
 
 ```bash
 test
-```
-
-
-
-## Security Tool
-
-
-Install [Mythril](https://github.com/ConsenSys/mythril)
-
-```bash
-pip3 install mythril
-```
-
-
-Usage 
-
-```bash
-truffle compile
-myth --truffle
 ```
 
 
