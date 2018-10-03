@@ -37,9 +37,9 @@ const App = {
     }
   },
   async initToken () {
-    return $.getJSON(abiPath + 'ERC20Token.json', function (data) {
-      App.artifacts.ERC20Token = data;
-      App.contracts.ERC20Token = App.web3.eth.contract(App.artifacts.ERC20Token.abi);
+    return $.getJSON(abiPath + 'BaseToken.json', function (data) {
+      App.artifacts.BaseToken = data;
+      App.contracts.BaseToken = App.web3.eth.contract(App.artifacts.BaseToken.abi);
     });
   },
   async builder () {
@@ -58,7 +58,7 @@ const App = {
         makingTransaction: false,
         formDisabled: false,
         token: {
-          stringifiedAbi: JSON.stringify(App.contracts.ERC20Token.abi)
+          stringifiedAbi: JSON.stringify(App.contracts.BaseToken.abi)
         }
       },
       created () {
@@ -90,13 +90,13 @@ const App = {
                 this.formDisabled = true;
                 this.makingTransaction = true;
 
-                App.contracts.ERC20Token.new(
+                App.contracts.BaseToken.new(
                   name,
                   symbol,
                   decimals,
                   {
                     from: App.web3.eth.coinbase,
-                    data: App.artifacts.ERC20Token.bytecode,
+                    data: App.artifacts.BaseToken.bytecode,
                   }, (e, tokenContract) => {
                     // NOTE: The callback will fire twice!
                     // Once the contract has the transactionHash property

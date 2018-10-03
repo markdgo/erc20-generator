@@ -2,7 +2,7 @@
   "title": "ERC20 Token Generator",
   "name": "erc20-generator",
   "version": "1.0.0",
-  "description": "Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20 Token with Minter Role.",
+  "description": "Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20 Payable Token with Minter Role.",
   "keywords": [
     "HTML, SCSS, JS, web3.js, truffle, bootstrap, jekyll"
   ],
