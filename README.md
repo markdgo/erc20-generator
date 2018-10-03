@@ -7,6 +7,8 @@ A simple Smart Contract for a Standard, Mintable, Burnable, ERC20 Token with Min
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
 
+Token also has [ERC1363](https://github.com/ethereum/EIPs/issues/1363) Behaviours to work like a Payable Token.
+
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
@@ -14,30 +16,21 @@ DApp source here [https://github.com/vittominacori/erc20-generator/tree/gh-pages
 
 Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/OpenZeppelin/openzeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
 
- 
- 
 ## Installation
-
 
 Install truffle.
 
 ```bash
-npm install -g truffle      // Version 4.1.13+ required.
+npm install -g truffle      // Version 4.1.14+ required.
 ```
 
-
-
 ## Install dependencies
-
 
 ```bash
 npm install
 ```
 
-
-
 ## Linter
-
 
 Use Solium
 
@@ -45,17 +38,22 @@ Use Solium
 npm run lint:sol
 ```
 
-Lint and fix all
+Use ESLint
 
 ```bash
-npm run lint:all:fix
+npm run lint:js
 ```
 
+#### Note
 
+IMPORTANT: Before commit run the lint and fix command:
+
+```bash
+npm run lint:fix
+```
 
 ## Compile and test the contracts.
  
-
 Open the Truffle console
 
 ```bash
@@ -74,35 +72,27 @@ Test
 test
 ```
 
-
-
 ## Optional
-
 
 Install the [truffle-flattener](https://github.com/alcuadrado/truffle-flattener)
 
 ```bash
 npm install -g truffle-flattener
 ```
- 
- 
-Usage 
+
+Usage
 
 ```bash
-truffle-flattener contracts/ERC20Token.sol >> dist/ERC20Token.sol
+truffle-flattener contracts/BaseToken.sol >> dist/BaseToken.sol
 ```
- 
-
 
 ## Token verification on Etherscan
 
-
-Use the dist smart contracts [dist/ERC20Token.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.sol)
+Use the dist smart contracts [dist/BaseToken.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.sol)
 
 Solc version is 0.4.24
 
- 
- 
+
 ## Links
 
 Solidity [Doc](https://solidity.readthedocs.io) [Github](https://solidity.readthedocs.io)
@@ -111,4 +101,4 @@ OpenZeppelin [Doc](http://zeppelin-solidity.readthedocs.io) [Github](https://git
 
 Truffle [Doc](http://truffleframework.com/docs) [Github](https://github.com/trufflesuite/truffle)
 
-Web3.js [Doc 0.20.4](https://github.com/ethereum/wiki/wiki/JavaScript-API) [Doc 1.0](http://web3js.readthedocs.io/en/1.0) [Github](https://github.com/ethereum/web3.js)
+Web3.js [Doc 0.20.6](https://github.com/ethereum/wiki/wiki/JavaScript-API) [Doc 1.0](http://web3js.readthedocs.io/en/1.0) [Github](https://github.com/ethereum/web3.js)

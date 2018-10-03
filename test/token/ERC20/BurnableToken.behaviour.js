@@ -1,5 +1,5 @@
-const { assertRevert } = require('../helpers/assertRevert');
-const { inLogs } = require('../helpers/expectEvent');
+const { assertRevert } = require('../../helpers/assertRevert');
+const { inLogs } = require('../../helpers/expectEvent');
 
 const BigNumber = web3.BigNumber;
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
