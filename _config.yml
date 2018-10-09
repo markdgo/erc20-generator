@@ -32,7 +32,7 @@ rinkeby_etherscan_link: "https://rinkeby.etherscan.io"
 rinkeby_network_id: "4"
 rinkeby_network_name: "Rinkeby Test Network"
 
-google_analytics: "UA-115756440-1"
+google_analytics: "UA-115756440-2"
 
 # Build settings
 markdown: kramdown
