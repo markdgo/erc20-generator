@@ -3,48 +3,29 @@
   "name": "erc20-generator",
   "version": "1.0.0",
   "description": "Simply deploy Smart Contract for a Standard, Mintable, Burnable, ERC20 Payable Token with Minter Role.",
-  "keywords": [
-    "HTML, SCSS, JS, web3.js, truffle, bootstrap, jekyll"
-  ],
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build",
+    "deploy": "vuepress build && sh scripts/deploy.sh"
+  },
+  "keywords": [],
   "bugs": {
     "url": "https://github.com/vittominacori/erc20-generator/issues"
   },
   "license": "MIT",
-  "author": "@vittominacori",
-  "authors": [
-    {
-      "name": "Vittorio Minacori",
-      "url": "https://github.com/vittominacori"
-    }
-  ],
+  "author": "Vittorio Minacori (https://github.com/vittominacori)",
   "repository": {
     "type": "git",
     "url": "https://github.com/vittominacori/erc20-generator.git"
   },
   "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-runtime": "^6.26.0",
-    "bootstrap": "^4.0.0",
-    "fast-async": "^6.3.0",
-    "font-awesome": "4.7.0",
-    "gulp-babel": "^7.0.0",
-    "jquery": "^3.2.1",
-    "popper.js": "^1.12.9",
-    "vee-validate": "^2.0.0-rc.27",
-    "vue": "^2.5.9",
     "web3": "^0.20.6"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "gulp": "^3.9.1",
-    "gulp-babel-minify": "^0.3.0",
-    "gulp-clean-css": "3.9.0",
-    "gulp-header": "1.8.9",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0"
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "node-sass": "^4.9.4",
+    "sass-loader": "^7.1.0",
+    "vee-validate": "^2.1.0-beta.11",
+    "vuepress": "^0.14.4"
   }
 }
