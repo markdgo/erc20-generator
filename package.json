@@ -33,7 +33,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0",
-    "vee-validate": "^2.1.0-beta.11",
     "vuepress": "^0.14.4"
   }
 }
