@@ -13,6 +13,7 @@
     "jest"    : true
   },
   "globals" : {
+    "ethereum": false,
     "web3": false,
     "Web3": false
   },

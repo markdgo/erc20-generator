@@ -142,7 +142,7 @@
           document.location.href = this.$withBase('/');
         }
       },
-      generateToken () {
+      async generateToken () {
         if (!this.metamask.installed) {
           alert("To create a Token please install MetaMask!");
           return;
@@ -162,32 +162,38 @@
           this.formDisabled = true;
           this.makingTransaction = true;
 
-          this.contracts.token.new(
-            name,
-            symbol,
-            decimals,
-            {
-              from: this.web3.eth.coinbase,
-              data: this.contracts.token.bytecode,
-            }, (e, tokenContract) => {
-              if (e) {
-                this.makingTransaction = false;
-                this.formDisabled = false;
-              } else {
-                // NOTE: The callback will fire twice!
-                // Once the contract has the transactionHash property
-                // set and once its deployed on an address.
-                if (!tokenContract.address) {
-                  this.trxHash = tokenContract.transactionHash;
-                  this.trxLink = this.network.current.etherscanLink + "/tx/" + this.trxHash;
+          if (!this.legacy) {
+            await this.web3Provider.enable();
+          }
+
+          setTimeout(() => {
+            this.contracts.token.new(
+              name,
+              symbol,
+              decimals,
+              {
+                from: this.web3.eth.coinbase,
+                data: this.contracts.token.bytecode,
+              }, (e, tokenContract) => {
+                if (e) {
+                  this.makingTransaction = false;
+                  this.formDisabled = false;
                 } else {
-                  this.token.address = tokenContract.address;
-                  this.token.link = this.network.current.etherscanLink + "/token/" + this.token.address;
-                  this.$forceUpdate();
+                  // NOTE: The callback will fire twice!
+                  // Once the contract has the transactionHash property
+                  // set and once its deployed on an address.
+                  if (!tokenContract.address) {
+                    this.trxHash = tokenContract.transactionHash;
+                    this.trxLink = this.network.current.etherscanLink + "/tx/" + this.trxHash;
+                  } else {
+                    this.token.address = tokenContract.address;
+                    this.token.link = this.network.current.etherscanLink + "/token/" + this.token.address;
+                    this.$forceUpdate();
+                  }
                 }
               }
-            }
-          );
+            );
+          }, 500);
         } catch (e) {
           this.makingTransaction = false;
           this.formDisabled = false;
