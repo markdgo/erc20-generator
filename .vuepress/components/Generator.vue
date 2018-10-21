@@ -39,9 +39,9 @@
 
                 <b-form v-on:submit.prevent="generateToken" class="mt-3" v-if="!makingTransaction">
                     <fieldset :disabled="formDisabled">
-                        <b-card class="mb-3">
+                        <b-card>
                             <b-row>
-                                <b-col lg="12">
+                                <b-col lg="6">
                                     <b-form-group
                                             description="Choose a name for your token."
                                             label="Token name *"
@@ -55,7 +55,7 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="12">
+                                <b-col lg="6">
                                     <b-form-group
                                             description="Choose a symbol for your token."
                                             label="Token symbol *"
@@ -69,7 +69,7 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="12">
+                                <b-col lg="6">
                                     <b-form-group
                                             description="Insert the decimal precision of your token. If you don't know what to insert, use 18."
                                             label="Token decimals *"
@@ -86,12 +86,23 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
+                                <b-col lg="6">
+                                    <b-form-group
+                                            description="Choose your Network."
+                                            label="Network *"
+                                            label-for="network">
+                                        <b-form-select id="network" v-model="currentNetwork" @input="initDapp">
+                                            <option v-for="(n, k) in network.list" :value="k">{{ n.name }}</option>
+                                        </b-form-select>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col lg="6">
+                                    <b-button variant="success" size="lg" type="submit">Create Token</b-button>
+                                </b-col>
                             </b-row>
                         </b-card>
-                        <b-button variant="success" size="lg" type="submit">Create Token</b-button>
                     </fieldset>
                 </b-form>
-                <b-badge variant="light" v-html="network.current && network.current.name || ''"></b-badge>
             </b-card>
         </b-col>
     </b-row>
@@ -108,29 +119,29 @@
     data() {
       return {
         loading: true,
+        currentNetwork: null,
         trxHash: '',
         makingTransaction: false,
         formDisabled: false,
         token: {}
       };
     },
-    computed: {
-      currentNetwork() {
-        return this.getParam('network') || this.network.default;
-      }
-    },
-    async mounted() {
-      this.network.current = this.network.list[this.currentNetwork];
-      try {
-        await this.initWeb3(this.currentNetwork, true);
-        this.initToken();
-        this.loading = false;
-      } catch (e) {
-        alert(e);
-        document.location.href = this.$withBase('/');
-      }
+    mounted() {
+      this.currentNetwork = this.getParam('network') || this.network.default;
+      this.initDapp();
     },
     methods: {
+      async initDapp () {
+        this.network.current = this.network.list[this.currentNetwork];
+        try {
+          await this.initWeb3(this.currentNetwork, true);
+          this.initToken();
+          this.loading = false;
+        } catch (e) {
+          alert(e);
+          document.location.href = this.$withBase('/');
+        }
+      },
       generateToken () {
         if (!this.metamask.installed) {
           alert("To create a Token please install MetaMask!");
