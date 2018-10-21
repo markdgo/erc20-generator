@@ -8,13 +8,13 @@
         <b-col lg="8" offset-lg="2" class="text-center text-white p-0">
             <ul class="list-inline mt-2">
                 <li class="list-inline-item">
-                    <small>created by <a class="text-light" href="https://github.com/vittominacori" target="_blank">@vittominacori</a></small>
+                    <small>created by <b-link class="text-light" href="https://github.com/vittominacori" target="_blank">@vittominacori</b-link></small>
                 </li>
                 <li class="list-inline-item">
                     <small>
                         GitHub:
-                        <a class="text-light" href="https://github.com/vittominacori/erc20-generator" target="_blank">Smart Contract</a> -
-                        <a class="text-light" href="https://github.com/vittominacori/erc20-generator/tree/dapp" target="_blank">DApp</a>
+                        <b-link class="text-light" href="https://github.com/vittominacori/erc20-generator" target="_blank">Smart Contracts</b-link> -
+                        <b-link class="text-light" href="https://github.com/vittominacori/erc20-generator/tree/dapp" target="_blank">DApp</b-link>
                     </small>
                 </li>
             </ul>
