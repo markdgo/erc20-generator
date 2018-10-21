@@ -101,12 +101,13 @@
   import dapp from '../mixins/dapp';
 
   export default {
+    name: "Generator",
     mixins: [
       dapp
     ],
     data() {
       return {
-        loading: false,
+        loading: true,
         trxHash: '',
         makingTransaction: false,
         formDisabled: false,
@@ -120,18 +121,23 @@
     },
     async mounted() {
       this.network.current = this.network.list[this.currentNetwork];
-      await this.initWeb3(this.currentNetwork, true);
-      this.initToken();
-      this.loading = false;
+      try {
+        await this.initWeb3(this.currentNetwork, true);
+        this.initToken();
+        this.loading = false;
+      } catch (e) {
+        alert(e);
+        document.location.href = this.$withBase('/');
+      }
     },
     methods: {
       generateToken () {
         if (!this.metamask.installed) {
-          alert("To create a Token please install the MetaMask extension!");
+          alert("To create a Token please install MetaMask!");
           return;
         } else {
           if (this.metamask.netId !== this.network.current.id) {
-            alert("Your MetaMask extension in on the wrong network. Please switch on " + this.network.current.name + " and try again!");
+            alert("Your MetaMask in on the wrong network. Please switch on " + this.network.current.name + " and try again!");
             return;
           }
         }
@@ -153,16 +159,21 @@
               from: this.web3.eth.coinbase,
               data: this.contracts.token.bytecode,
             }, (e, tokenContract) => {
-              // NOTE: The callback will fire twice!
-              // Once the contract has the transactionHash property
-              // set and once its deployed on an address.
-              if (!tokenContract.address) {
-                this.trxHash = tokenContract.transactionHash;
-                this.trxLink = this.network.current.etherscanLink + "/tx/" + this.trxHash;
+              if (e) {
+                this.makingTransaction = false;
+                this.formDisabled = false;
               } else {
-                this.token.address = tokenContract.address;
-                this.token.link = this.network.current.etherscanLink + "/token/" + this.token.address;
-                this.$forceUpdate();
+                // NOTE: The callback will fire twice!
+                // Once the contract has the transactionHash property
+                // set and once its deployed on an address.
+                if (!tokenContract.address) {
+                  this.trxHash = tokenContract.transactionHash;
+                  this.trxLink = this.network.current.etherscanLink + "/tx/" + this.trxHash;
+                } else {
+                  this.token.address = tokenContract.address;
+                  this.token.link = this.network.current.etherscanLink + "/token/" + this.token.address;
+                  this.$forceUpdate();
+                }
               }
             }
           );

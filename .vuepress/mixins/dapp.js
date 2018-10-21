@@ -44,6 +44,10 @@ export default {
   },
   methods: {
     initWeb3 (network, checkWeb3) {
+      if (!this.network.list.hasOwnProperty(network)) {
+        throw new Error(`Failed initializing network ${network}. Allowed values are mainnet, ropsten and rinkeby.`);
+      }
+
       return new Promise((resolve) => {
         if (checkWeb3 && typeof web3 !== 'undefined') {
           console.log('injected web3');
