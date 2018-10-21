@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 
-A simple Smart Contract for a Standard, Mintable, Burnable, ERC20 Token with Minter Role.
+A simple Smart Contract for a Standard, Mintable, Burnable, Payable ERC20 Token with Minter Role.
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
 
@@ -12,9 +12,7 @@ Token also has [ERC1363](https://github.com/ethereum/EIPs/issues/1363) Behaviour
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
-DApp source here [https://github.com/vittominacori/erc20-generator/tree/gh-pages](https://github.com/vittominacori/erc20-generator/tree/gh-pages)
-
-Code created using [Open Zeppelin (openzeppelin-solidity)](https://github.com/OpenZeppelin/openzeppelin-solidity) and [Truffle Framework](https://github.com/trufflesuite/truffle).
+DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp)
 
 ## Installation
 
