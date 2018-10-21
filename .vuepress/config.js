@@ -13,4 +13,5 @@ module.exports = {
     ['meta', { property: 'twitter:title', content: 'ERC20 Token Generator | Build your Token for FREE' }],
     ['script', { src: 'assets/js/web3.min.js' }],
   ],
+  defaultNetwork: 'mainnet',
 };

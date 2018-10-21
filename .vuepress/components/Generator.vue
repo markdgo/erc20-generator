@@ -116,7 +116,7 @@
     },
     computed: {
       currentNetwork() {
-        return this.getParam('network') || 'rinkeby';
+        return this.getParam('network') || this.network.default;
       }
     },
     async mounted() {

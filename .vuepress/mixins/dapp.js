@@ -1,3 +1,4 @@
+import config from '../config';
 import TokenArtifact from '../abi/BaseToken.json';
 
 export default {
@@ -10,6 +11,7 @@ export default {
         netId: null,
       },
       network: {
+        default: config.defaultNetwork,
         current: null,
         map: {
           1: 'mainnet',
