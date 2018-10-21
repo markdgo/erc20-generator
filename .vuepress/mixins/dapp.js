@@ -18,6 +18,7 @@ export default {
           1: 'mainnet',
           3: 'ropsten',
           4: 'rinkeby',
+          42: 'kovan',
         },
         list: {
           mainnet: {
@@ -37,6 +38,12 @@ export default {
             etherscanLink: 'https://rinkeby.etherscan.io',
             id: '4',
             name: 'Rinkeby Test Network',
+          },
+          kovan: {
+            web3Provider: 'https://kovan.infura.io',
+            etherscanLink: 'https://kovan.etherscan.io',
+            id: '42',
+            name: 'Kovan Test Network',
           },
         },
       },
