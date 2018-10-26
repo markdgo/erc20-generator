@@ -1,6 +1,6 @@
 <template>
     <b-row>
-        <b-col lg="8" offset-lg="2" class="mt-4 p-0">
+        <b-col lg="10" offset-lg="1" class="mt-4 p-0">
             <b-card bg-variant="light" v-if="!loading" :title="$site.title">
                 <p class="card-text">{{ $site.description }}</p>
                 <small v-if="!metamask.installed">You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.</small>
