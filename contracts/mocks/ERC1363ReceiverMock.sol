@@ -1,12 +1,12 @@
 pragma solidity ^0.4.24;
 
-import "erc-payable-token/contracts/token/ERC1363/ERC1363Receiver.sol";
+import "erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol";
 
 
-// mock class using ERC1363Receiver
-contract ERC1363ReceiverMock is ERC1363Receiver {
-  bytes4 retval;
-  bool reverts;
+// mock class using IERC1363Receiver
+contract ERC1363ReceiverMock is IERC1363Receiver {
+  bytes4 private _retval;
+  bool private _reverts;
 
   event Received(
     address operator,
@@ -16,29 +16,28 @@ contract ERC1363ReceiverMock is ERC1363Receiver {
     uint256 gas
   );
 
-  constructor(bytes4 _retval, bool _reverts) public {
-    retval = _retval;
-    reverts = _reverts;
+  constructor(bytes4 retval, bool reverts) public {
+    _retval = retval;
+    _reverts = reverts;
   }
 
   function onTransferReceived(
-    address _operator,
-    address _from,
-    uint256 _value,
-    bytes _data
+    address operator,
+    address from,
+    uint256 value,
+    bytes data
   )
     external
     returns (bytes4)
   {
-    // solium-disable-next-line error-reason
-    require(!reverts);
+    require(!_reverts);
     emit Received(
-      _operator,
-      _from,
-      _value,
-      _data,
+      operator,
+      from,
+      value,
+      data,
       gasleft() // msg.gas was deprecated in solidityv0.4.21
     );
-    return retval;
+    return _retval;
   }
 }

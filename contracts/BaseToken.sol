@@ -1,14 +1,17 @@
 pragma solidity ^0.4.24;
 
-import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/RBACMintableToken.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
-import "erc-payable-token/contracts/token/ERC1363/ERC1363BasicToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
+import "erc-payable-token/contracts/token/ERC1363/ERC1363.sol";
 import "eth-token-recover/contracts/TokenRecover.sol";
 
-
-// solium-disable-next-line max-len
-contract BaseToken is DetailedERC20, RBACMintableToken, BurnableToken, ERC1363BasicToken, TokenRecover {
+/**
+ * @title BaseToken
+ * @author Vittorio Minacori (https://github.com/vittominacori)
+ * @dev Implementation of a BaseToken
+ */
+contract BaseToken is ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover { // solium-disable-line max-len
 
   string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
@@ -17,9 +20,7 @@ contract BaseToken is DetailedERC20, RBACMintableToken, BurnableToken, ERC1363Ba
     string _symbol,
     uint8 _decimals
   )
-    DetailedERC20 (_name, _symbol, _decimals)
+    ERC20Detailed (_name, _symbol, _decimals)
     public
-  {
-    addMinter(owner);
-  }
+  {}
 }

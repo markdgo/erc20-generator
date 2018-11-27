@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 
-A simple Smart Contract for a Standard, Mintable, Burnable, Payable ERC20 Token with Minter Role.
+A simple Smart Contract for a Standard, Mintable, Burnable, Payable ERC20 Token.
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
 
@@ -81,22 +81,16 @@ npm install -g truffle-flattener
 Usage
 
 ```bash
-truffle-flattener contracts/BaseToken.sol >> dist/BaseToken.sol
+truffle-flattener contracts/BaseToken.sol > dist/BaseToken.dist.sol
 ```
 
 ## Token verification on Etherscan
 
-Use the dist smart contracts [dist/BaseToken.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.sol)
+Use the dist smart contracts [dist/BaseToken.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol)
 
 Solc version is 0.4.24
 
 
-## Links
+## License
 
-Solidity [Doc](https://solidity.readthedocs.io) [Github](https://solidity.readthedocs.io)
-
-OpenZeppelin [Doc](http://zeppelin-solidity.readthedocs.io) [Github](https://github.com/OpenZeppelin)
-
-Truffle [Doc](http://truffleframework.com/docs) [Github](https://github.com/trufflesuite/truffle)
-
-Web3.js [Doc 0.20.6](https://github.com/ethereum/wiki/wiki/JavaScript-API) [Doc 1.0](http://web3js.readthedocs.io/en/1.0) [Github](https://github.com/ethereum/web3.js)
+Code released under the [MIT License](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE).
