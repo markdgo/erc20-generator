@@ -1233,6 +1233,8 @@ contract BaseToken is ERC20Detailed, ERC20Capped, ERC20Burnable, ERC1363, TokenR
     ERC20Capped(cap)
     public
   {
-    _mint(owner(), initialBalance);
+    if (initialBalance > 0) {
+      _mint(owner(), initialBalance);
+    }
   }
 }

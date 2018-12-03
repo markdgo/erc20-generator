@@ -43,17 +43,29 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
   });
 
   context('like a BaseToken', function () {
-    beforeEach(async function () {
-      this.token = await BaseToken.new(_name, _symbol, _decimals, _cap, _initialBalance, { from: owner });
-    });
-
     describe('once deployed', function () {
-      it('total supply should be initial balance', async function () {
-        (await this.token.totalSupply()).should.be.bignumber.equal(_initialBalance);
+      describe('if initial amount greater than zero', function () {
+        beforeEach(async function () {
+          this.token = await BaseToken.new(_name, _symbol, _decimals, _cap, _initialBalance, { from: owner });
+        });
+
+        it('total supply should be initial balance', async function () {
+          (await this.token.totalSupply()).should.be.bignumber.equal(_initialBalance);
+        });
+
+        it('should mint initial balance of tokens to owner', async function () {
+          (await this.token.balanceOf(owner)).should.be.bignumber.equal(_initialBalance);
+        });
       });
 
-      it('should mint initial balance of tokens to owner', async function () {
-        (await this.token.balanceOf(owner)).should.be.bignumber.equal(_initialBalance);
+      describe('if initial amount is equal to zero', function () {
+        beforeEach(async function () {
+          this.token = await BaseToken.new(_name, _symbol, _decimals, _cap, 0, { from: owner });
+        });
+
+        it('total supply should be zero', async function () {
+          (await this.token.totalSupply()).should.be.bignumber.equal(0);
+        });
       });
     });
   });
