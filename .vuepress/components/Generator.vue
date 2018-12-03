@@ -25,7 +25,7 @@
                             <div>
                                 <b>Note: To Verify your Token on Etherscan use:</b>
                                 <ul>
-                                    <li>Source Code: <a href="https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.sol" target="_blank"><b>BaseToken.sol</b></a></li>
+                                    <li>Source Code: <a href="https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol" target="_blank"><b>BaseToken.dist.sol</b></a></li>
                                     <li>Contract Name: <b>BaseToken</b></li>
                                     <li>Compiler: <b>v0.4.24+commit.e67f0147</b></li>
                                     <li>Optimization: <b>Yes</b></li>
@@ -41,7 +41,7 @@
                     <fieldset :disabled="formDisabled">
                         <b-card>
                             <b-row>
-                                <b-col lg="6">
+                                <b-col lg="4">
                                     <b-form-group
                                             description="Choose a name for your token."
                                             label="Token name *"
@@ -55,9 +55,9 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="6">
+                                <b-col lg="4">
                                     <b-form-group
-                                            description="Choose a symbol for your token."
+                                            description="Choose a symbol for your token (usually 3-4 chars)."
                                             label="Token symbol *"
                                             label-for="tokenSymbol">
                                         <b-form-input
@@ -69,7 +69,7 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="6">
+                                <b-col lg="4">
                                     <b-form-group
                                             description="Insert the decimal precision of your token. If you don't know what to insert, use 18."
                                             label="Token decimals *"
@@ -86,7 +86,45 @@
                                         </b-form-input>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="6">
+                            </b-row>
+                        </b-card>
+                        <b-card class="mt-3">
+                            <b-row>
+                                <b-col lg="4">
+                                    <b-form-group
+                                            description="Insert the maximum number of tokens available."
+                                            label="Token cap *"
+                                            label-for="tokenCap">
+                                        <b-form-input
+                                                id="tokenCap"
+                                                placeholder="Your token cap"
+                                                v-model.trim="token.cap"
+                                                :required="true"
+                                                type="number"
+                                                min="1"
+                                                max="1000000000000"
+                                                step="1">
+                                        </b-form-input>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col lg="4">
+                                    <b-form-group
+                                            description="Insert the initial number of tokens available. Will be put in your account."
+                                            label="Token initial balance *"
+                                            label-for="tokenInitialBalance">
+                                        <b-form-input
+                                                id="tokenInitialBalance"
+                                                placeholder="Your token initial balance"
+                                                v-model.trim="token.initialBalance"
+                                                :required="true"
+                                                type="number"
+                                                min="0"
+                                                :max="token.cap"
+                                                step="1">
+                                        </b-form-input>
+                                    </b-form-group>
+                                </b-col>
+                                <b-col lg="4">
                                     <b-form-group
                                             description="Choose your Network."
                                             label="Network *"
@@ -96,11 +134,13 @@
                                         </b-form-select>
                                     </b-form-group>
                                 </b-col>
-                                <b-col lg="6">
-                                    <b-button variant="success" size="lg" type="submit">Create Token</b-button>
-                                </b-col>
                             </b-row>
                         </b-card>
+                        <b-row class="mt-3">
+                            <b-col lg="6">
+                                <b-button variant="success" size="lg" type="submit">Create Token</b-button>
+                            </b-col>
+                        </b-row>
                     </fieldset>
                 </b-form>
             </b-card>
@@ -156,6 +196,8 @@
         const name = this.token.name;
         const symbol = this.token.symbol.toUpperCase();
         const decimals = new this.web3.BigNumber(this.token.decimals);
+        const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
+        const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals));
 
         try {
           this.trxHash = '';
@@ -171,6 +213,8 @@
               name,
               symbol,
               decimals,
+              cap,
+              initialBalance,
               {
                 from: this.web3.eth.coinbase,
                 data: this.contracts.token.bytecode,
