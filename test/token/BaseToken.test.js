@@ -21,6 +21,14 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
         );
       });
     });
+
+    describe('as a BaseToken', function () {
+      it('requires cap greater than initial balance', async function () {
+        await shouldFail.reverting(
+          BaseToken.new(_name, _symbol, _decimals, _cap, _cap.add(1), { from: owner })
+        );
+      });
+    });
   });
 
   context('testing behaviours', function () {
