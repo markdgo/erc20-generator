@@ -464,6 +464,36 @@ contract ERC20Mintable is ERC20, MinterRole {
   }
 }
 
+// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Capped.sol
+
+/**
+ * @title Capped token
+ * @dev Mintable token with a token cap.
+ */
+contract ERC20Capped is ERC20Mintable {
+
+  uint256 private _cap;
+
+  constructor(uint256 cap)
+    public
+  {
+    require(cap > 0);
+    _cap = cap;
+  }
+
+  /**
+   * @return the cap for the token minting.
+   */
+  function cap() public view returns(uint256) {
+    return _cap;
+  }
+
+  function _mint(address account, uint256 value) internal {
+    require(totalSupply().add(value) <= _cap);
+    super._mint(account, value);
+  }
+}
+
 // File: openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol
 
 /**
@@ -1188,7 +1218,7 @@ contract TokenRecover is Ownable {
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Implementation of a BaseToken
  */
-contract BaseToken is ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover { // solium-disable-line max-len
+contract BaseToken is ERC20Detailed, ERC20Capped, ERC20Burnable, ERC1363, TokenRecover { // solium-disable-line max-len
 
   string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
@@ -1196,9 +1226,11 @@ contract BaseToken is ERC20Detailed, ERC20Mintable, ERC20Burnable, ERC1363, Toke
     string name,
     string symbol,
     uint8 decimals,
+    uint256 cap,
     uint256 initialBalance
   )
     ERC20Detailed(name, symbol, decimals)
+    ERC20Capped(cap)
     public
   {
     _mint(owner(), initialBalance);

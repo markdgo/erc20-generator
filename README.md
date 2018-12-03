@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 
-A simple Smart Contract for a Standard, Mintable, Burnable, Payable ERC20 Token.
+A simple Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
 
 Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
 
