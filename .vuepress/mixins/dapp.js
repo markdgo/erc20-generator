@@ -22,25 +22,25 @@ export default {
         },
         list: {
           mainnet: {
-            web3Provider: 'https://mainnet.infura.io',
+            web3Provider: 'https://mainnet.infura.io/v3/12ca5f4d25964a428951747cf4cd5660',
             etherscanLink: 'https://etherscan.io',
             id: '1',
             name: 'Main Ethereum Network',
           },
           ropsten: {
-            web3Provider: 'https://ropsten.infura.io',
+            web3Provider: 'https://ropsten.infura.io/v3/12ca5f4d25964a428951747cf4cd5660',
             etherscanLink: 'https://ropsten.etherscan.io',
             id: '3',
             name: 'Ropsten Test Network',
           },
           rinkeby: {
-            web3Provider: 'https://rinkeby.infura.io',
+            web3Provider: 'https://rinkeby.infura.io/v3/12ca5f4d25964a428951747cf4cd5660',
             etherscanLink: 'https://rinkeby.etherscan.io',
             id: '4',
             name: 'Rinkeby Test Network',
           },
           kovan: {
-            web3Provider: 'https://kovan.infura.io',
+            web3Provider: 'https://kovan.infura.io/v3/12ca5f4d25964a428951747cf4cd5660',
             etherscanLink: 'https://kovan.etherscan.io',
             id: '42',
             name: 'Kovan Test Network',
