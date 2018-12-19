@@ -2,7 +2,10 @@
     <b-row>
         <b-col lg="10" offset-lg="1" class="mt-4 p-0">
             <b-card bg-variant="light" v-if="!loading" :title="$site.title">
-                <p class="card-text">{{ $site.description }}</p>
+                <p class="card-text">
+                    {{ $site.description }}
+                    <b-link target="_blank" href="https://medium.com/@vittominacori/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4">Read more</b-link>.
+                </p>
                 <small v-if="!metamask.installed">You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.</small>
 
                 <b-alert variant="success" :show="makingTransaction" class="mt-3">
