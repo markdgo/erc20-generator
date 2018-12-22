@@ -1,5 +1,6 @@
 ---
 component: Home
+title: Build a Token
 ---
 
 # ERC20 Token Generator - DAPP
