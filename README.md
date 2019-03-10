@@ -4,12 +4,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 [![MIT licensed](https://img.shields.io/github/license/vittominacori/erc20-generator.svg)](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE)
 
-A simple Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
+A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.
 
-Token has a Role Based Access Control so you can add the "minter" permission to users or Smart Contracts. 
+Token has a Role Based Access Control so you can add the `minter` permission to users or Smart Contracts. 
 
-Token also has [ERC1363](https://github.com/ethereum/EIPs/issues/1363) Behaviours to work like a Payable Token.
-
+Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `operator` allowed to transfer also if not enabled.
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
