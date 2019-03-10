@@ -1,6 +1,6 @@
 module.exports = {
   title: 'ERC20 Token Generator | Create your Token for FREE',
-  description: 'Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.',
+  description: 'Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.',
   base: '/erc20-generator/',
   ga: 'UA-115756440-2',
   head: [

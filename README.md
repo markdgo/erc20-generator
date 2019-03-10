@@ -5,7 +5,7 @@ title: Build a Token
 
 # ERC20 Token Generator - DAPP
 
-Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
+Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.
 
 
 Code created using [VuePress](https://vuepress.vuejs.org/).

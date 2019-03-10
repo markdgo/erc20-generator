@@ -2,7 +2,7 @@
   "title": "ERC20 Token Generator",
   "name": "erc20-generator",
   "version": "1.0.0",
-  "description": "Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.",
+  "description": "Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "scripts": {
     "lint": "eslint .vuepress",
     "lint:fix": "eslint .vuepress --fix",
@@ -24,15 +24,16 @@
     "web3": "0.20.6"
   },
   "devDependencies": {
-    "bootstrap-vue": "^2.0.0-rc.11",
-    "eslint": "^5.10.0",
+    "bootstrap-vue": "^2.0.0-rc.14",
+    "eslint": "^5.15.1",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vuepress": "^0.14.8"
+    "vuepress": "^0.14.10",
+    "webpack-dev-middleware": "^3.6.0"
   }
 }

@@ -28,9 +28,9 @@
                             <div>
                                 <b>Note: To Verify your Token on Etherscan use:</b>
                                 <ul>
-                                    <li>Source Code: <a href="https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol" target="_blank"><b>BaseToken.dist.sol</b></a></li>
-                                    <li>Contract Name: <b>BaseToken</b></li>
-                                    <li>Compiler: <b>v0.4.24+commit.e67f0147</b></li>
+                                    <li>Source Code: <a href="https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol" target="_blank"><b>ERC20Token.dist.sol</b></a></li>
+                                    <li>Contract Name: <b>ERC20Token</b></li>
+                                    <li>Compiler: <b>v0.5.5+commit.47a71e8f</b></li>
                                     <li>Optimization: <b>Yes</b></li>
                                     <li>Runs (Optimizer): <b>200</b></li>
                                     <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
