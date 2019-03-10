@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
+[![MIT licensed](https://img.shields.io/github/license/vittominacori/erc20-generator.svg)](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE)
 
 A simple Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
 
@@ -14,23 +15,43 @@ DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacor
 
 DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp)
 
-## Installation
+## Development
 
-Install truffle.
-
-```bash
-npm install -g truffle      // Version 4.1.14+ required.
-```
-
-## Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
+## Usage
+
+Open the Truffle console
+
+```bash
+npm run console
+```
+
+### Compile
+
+```bash
+npm run compile
+```
+
+### Test 
+
+```bash
+npm run test 
+```
+
+### Code Coverage
+
+```bash
+npm run coverage
+```
+
 ## Linter
 
-Use Solium
+Use Solhint
 
 ```bash
 npm run lint:sol
@@ -42,53 +63,27 @@ Use ESLint
 npm run lint:js
 ```
 
-#### Note
-
-IMPORTANT: Before commit run the lint and fix command:
+Use ESLint and fix
 
 ```bash
 npm run lint:fix
 ```
 
-## Compile and test the contracts.
- 
-Open the Truffle console
+## Flattener
+
+This allow to flatten the code into a single file
+
+Edit `scripts/flat.sh` to add your contracts
 
 ```bash
-truffle develop
-```
-
-Compile 
-
-```bash
-compile 
-```
-
-Test
-
-```bash
-test
-```
-
-## Optional
-
-Install the [truffle-flattener](https://github.com/alcuadrado/truffle-flattener)
-
-```bash
-npm install -g truffle-flattener
-```
-
-Usage
-
-```bash
-truffle-flattener contracts/BaseToken.sol > dist/BaseToken.dist.sol
+npm run flat
 ```
 
 ## Token verification on Etherscan
 
-Use the dist smart contracts [dist/BaseToken.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol)
+Use the dist smart contracts [dist/ERC20Token.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol)
 
-Solc version is 0.4.24
+Solc version is 0.5.5
 
 
 ## License
