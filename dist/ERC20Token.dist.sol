@@ -1,4 +1,4 @@
-pragma solidity ^0.5.5;
+pragma solidity ^0.5.6;
 
 // File: openzeppelin-solidity/contracts/token/ERC20/IERC20.sol
 
