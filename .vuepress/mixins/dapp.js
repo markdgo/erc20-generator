@@ -95,6 +95,7 @@ export default {
     initToken () {
       this.contracts.token = this.web3.eth.contract(TokenArtifact.abi);
       this.contracts.token.bytecode = TokenArtifact.bytecode;
+      this.contracts.token.devdoc = TokenArtifact.devdoc;
       this.contracts.token.stringifiedAbi = JSON.stringify(TokenArtifact.abi);
     },
   },

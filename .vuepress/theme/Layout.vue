@@ -1,11 +1,11 @@
 <template>
     <div class="page-wrapper">
-        <site-header />
+        <site-header/>
         <b-container>
             <transition name="fade" mode="out-in">
                 <component v-if="page" :is="page" :key="page"></component>
             </transition>
-            <site-footer />
+            <site-footer/>
         </b-container>
     </div>
 </template>
@@ -19,7 +19,7 @@
       SiteFooter,
     },
     computed: {
-      page () {
+      page() {
         return this.$page.frontmatter.component === 'Home' ? 'Generator' : this.$page.frontmatter.component || null;
       },
     },

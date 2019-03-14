@@ -155,44 +155,12 @@
             </b-card>
         </b-col>
         <b-col lg="10" offset-lg="1" class="mt-4 p-0">
-            <b-card bg-variant="light" v-if="!loading" title="Token details">
-                <p class="card-text">
-                    Your token will have the following properties:
-                </p>
-                <ul>
-                    <li><b>Detailed ERC20 Token</b>: your token will be fully compliant with ERC20 definition and
-                        compatible with any ERC20 wallet all around the world. It will have a name, a symbol and a
-                        decimals amount.
-                    </li>
-                    <li><b>Mintable Token</b>: you will be able to generate tokens by minting them. Only people (or smart contract) with
-                        <i>Minter</i> role will be able to do that, and you can also add or remove the Minter role to
-                        addresses.
-                    </li>
-                    <li><b>Capped Token</b>: you can’t be able to mint more than the defined token cap. This ensure
-                        people that you will not generate more tokens than declared.
-                    </li>
-                    <li><b>Burnable Token</b>: your token can be burnt. It means that you can choose to reduce the
-                        circulating supply by destroying some of your tokens.
-                    </li>
-                    <li><b>Token Recover</b>: it allows the contract owner to recover any ERC20 token sent into the
-                        contract for error.
-                    </li>
-                </ul>
-                <p class="card-text">
-                    Tokens won't be transferable until you call the <i>enableTransfer</i> function. Only people (or smart contract) with
-                    <i>Operator</i> role will be able to transfer tokens. You can also add or remove the Operator role to
-                    addresses.
-                </p>
-                <p class="card-text">
-                    <b-link target="_blank"
-                            href="https://medium.com/@vittominacori/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4">
-                        Read more
-                    </b-link>
-                </p>
-                <hr class="mt-4">
-                <p class="card-text">
+            <b-card bg-variant="light" v-if="!loading">
+                <b-card-text>
+                    <b-link to="/docs.html">View documentation</b-link>
+                    <hr class="mt-4">
                     <b>Note: To Verify your Token on Etherscan use:</b>
-                </p>
+                </b-card-text>
                 <ul>
                     <li>
                         Source Code:
@@ -226,7 +194,7 @@
     mixins: [
       dapp,
     ],
-    data () {
+    data() {
       return {
         loading: true,
         currentNetwork: null,
@@ -236,12 +204,12 @@
         token: {},
       };
     },
-    mounted () {
+    mounted() {
       this.currentNetwork = this.getParam('network') || this.network.default;
       this.initDapp();
     },
     methods: {
-      async initDapp () {
+      async initDapp() {
         this.network.current = this.network.list[this.currentNetwork];
         try {
           await this.initWeb3(this.currentNetwork, true);
@@ -252,7 +220,7 @@
           document.location.href = this.$withBase('/');
         }
       },
-      async generateToken () {
+      async generateToken() {
         this.$validator.validateAll().then(async (result) => {
           if (result) {
             if (!this.metamask.installed) {
@@ -322,7 +290,7 @@
           alert('Some error occurred.');
         });
       },
-      getParam (param) {
+      getParam(param) {
         const vars = {};
         window.location.href.replace(location.hash, '').replace(
           /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
