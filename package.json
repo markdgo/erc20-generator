@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "description": "Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "scripts": {
+    "lint:vue": "eslint .vuepress --ext .vue,.js",
+    "lint:vue:fix": "eslint .vuepress --ext .vue,.js --fix",
     "lint": "eslint .vuepress",
     "lint:fix": "eslint .vuepress --fix",
     "dev": "vuepress dev",
@@ -24,6 +26,7 @@
     "web3": "0.20.6"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "bootstrap-vue": "^2.0.0-rc.14",
     "eslint": "^5.15.1",
     "eslint-config-standard": "^12.0.0",
@@ -33,7 +36,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vuepress": "^0.14.10",
-    "webpack-dev-middleware": "^3.6.0"
+    "vee-validate": "^2.2.0",
+    "vue-eslint-parser": "^6.0.3",
+    "vuepress": "^0.14.10"
   }
 }

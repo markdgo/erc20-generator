@@ -4,9 +4,10 @@
             <b-card bg-variant="light" v-if="!loading" :title="$site.title">
                 <p class="card-text">
                     {{ $site.description }}
-                    <b-link target="_blank" href="https://medium.com/@vittominacori/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4">Read more</b-link>.
                 </p>
-                <small v-if="!metamask.installed">You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.</small>
+                <small v-if="!metamask.installed">
+                    You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.
+                </small>
 
                 <b-alert variant="success" :show="makingTransaction" class="mt-3">
                     <div>Making transaction.</div>
@@ -18,24 +19,8 @@
                         Retrieving Token.
                         <div v-if="!token.address">Please wait...</div>
                         <div v-else>
-                            <b>Your Token</b> <a :href="token.link" target="_blank"><span v-html="token.address"></span></a><br><br>
-                            <div class="form-group">
-                                <label>ABI</label>
-                                <textarea class="form-control"
-                                          readonly="readonly" rows="5"
-                                          v-model="contracts.token.stringifiedAbi"></textarea>
-                            </div>
-                            <div>
-                                <b>Note: To Verify your Token on Etherscan use:</b>
-                                <ul>
-                                    <li>Source Code: <a href="https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol" target="_blank"><b>ERC20Token.dist.sol</b></a></li>
-                                    <li>Contract Name: <b>ERC20Token</b></li>
-                                    <li>Compiler: <b>v0.5.5+commit.47a71e8f</b></li>
-                                    <li>Optimization: <b>Yes</b></li>
-                                    <li>Runs (Optimizer): <b>200</b></li>
-                                    <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
-                                </ul>
-                            </div>
+                            <b>Your Token</b>
+                            <b-link :href="token.link" target="_blank"><span v-html="token.address"></span></b-link>
                         </div>
                     </div>
                 </b-alert>
@@ -51,11 +36,17 @@
                                             label-for="tokenName">
                                         <b-form-input
                                                 id="tokenName"
+                                                name="tokenName"
                                                 placeholder="Your token name"
                                                 v-model.trim="token.name"
-                                                :required="true"
+                                                v-validate="{ required: true }"
+                                                data-vv-as="token name"
+                                                :class="{'is-invalid': errors.has('tokenName')}"
                                                 maxlength="20">
                                         </b-form-input>
+                                        <small v-show="errors.has('tokenName')" class="text-danger">
+                                            {{ errors.first('tokenName') }}
+                                        </small>
                                     </b-form-group>
                                 </b-col>
                                 <b-col lg="4">
@@ -65,11 +56,17 @@
                                             label-for="tokenSymbol">
                                         <b-form-input
                                                 id="tokenSymbol"
+                                                name="tokenSymbol"
                                                 placeholder="Your token symbol"
                                                 v-model.trim="token.symbol"
-                                                :required="true"
+                                                v-validate="{ required: true }"
+                                                data-vv-as="token symbol"
+                                                :class="{'is-invalid': errors.has('tokenSymbol')}"
                                                 maxlength="5">
                                         </b-form-input>
+                                        <small v-show="errors.has('tokenSymbol')" class="text-danger">
+                                            {{ errors.first('tokenSymbol') }}
+                                        </small>
                                     </b-form-group>
                                 </b-col>
                                 <b-col lg="4">
@@ -79,14 +76,17 @@
                                             label-for="tokenDecimals">
                                         <b-form-input
                                                 id="tokenDecimals"
+                                                name="tokenDecimals"
                                                 placeholder="Your token decimals"
                                                 v-model.trim="token.decimals"
-                                                :required="true"
-                                                type="number"
-                                                min="0"
-                                                max="36"
+                                                v-validate="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
+                                                data-vv-as="token decimals"
+                                                :class="{'is-invalid': errors.has('tokenDecimals')}"
                                                 step="1">
                                         </b-form-input>
+                                        <small v-show="errors.has('tokenDecimals')" class="text-danger">
+                                            {{ errors.first('tokenDecimals') }}
+                                        </small>
                                     </b-form-group>
                                 </b-col>
                             </b-row>
@@ -100,14 +100,17 @@
                                             label-for="tokenCap">
                                         <b-form-input
                                                 id="tokenCap"
+                                                name="tokenCap"
                                                 placeholder="Your token cap"
                                                 v-model.trim="token.cap"
-                                                :required="true"
-                                                type="number"
-                                                min="1"
-                                                max="1000000000000"
+                                                v-validate="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
+                                                data-vv-as="token cap"
+                                                :class="{'is-invalid': errors.has('tokenCap')}"
                                                 step="1">
                                         </b-form-input>
+                                        <small v-show="errors.has('tokenCap')" class="text-danger">
+                                            {{ errors.first('tokenCap') }}
+                                        </small>
                                     </b-form-group>
                                 </b-col>
                                 <b-col lg="4">
@@ -117,14 +120,17 @@
                                             label-for="tokenInitialBalance">
                                         <b-form-input
                                                 id="tokenInitialBalance"
+                                                name="tokenInitialBalance"
                                                 placeholder="Your token initial balance"
                                                 v-model.trim="token.initialBalance"
-                                                :required="true"
-                                                type="number"
-                                                min="0"
-                                                :max="token.cap"
+                                                v-validate="{ required: true, numeric: true, min_value: 0, max_value: token.cap }"
+                                                data-vv-as="token initial balance"
+                                                :class="{'is-invalid': errors.has('tokenInitialBalance')}"
                                                 step="1">
                                         </b-form-input>
+                                        <small v-show="errors.has('tokenInitialBalance')" class="text-danger">
+                                            {{ errors.first('tokenInitialBalance') }}
+                                        </small>
                                     </b-form-group>
                                 </b-col>
                                 <b-col lg="4">
@@ -148,6 +154,67 @@
                 </b-form>
             </b-card>
         </b-col>
+        <b-col lg="10" offset-lg="1" class="mt-4 p-0">
+            <b-card bg-variant="light" v-if="!loading" title="Token details">
+                <p class="card-text">
+                    Your token will have the following properties:
+                </p>
+                <ul>
+                    <li><b>Detailed ERC20 Token</b>: your token will be fully compliant with ERC20 definition and
+                        compatible with any ERC20 wallet all around the world. It will have a name, a symbol and a
+                        decimals amount.
+                    </li>
+                    <li><b>Mintable Token</b>: you will be able to generate tokens by minting them. Only people (or smart contract) with
+                        <i>Minter</i> role will be able to do that, and you can also add or remove the Minter role to
+                        addresses.
+                    </li>
+                    <li><b>Capped Token</b>: you can’t be able to mint more than the defined token cap. This ensure
+                        people that you will not generate more tokens than declared.
+                    </li>
+                    <li><b>Burnable Token</b>: your token can be burnt. It means that you can choose to reduce the
+                        circulating supply by destroying some of your tokens.
+                    </li>
+                    <li><b>Token Recover</b>: it allows the contract owner to recover any ERC20 token sent into the
+                        contract for error.
+                    </li>
+                </ul>
+                <p class="card-text">
+                    Tokens won't be transferable until you call the <i>enableTransfer</i> function. Only people (or smart contract) with
+                    <i>Operator</i> role will be able to transfer tokens. You can also add or remove the Operator role to
+                    addresses.
+                </p>
+                <p class="card-text">
+                    <b-link target="_blank"
+                            href="https://medium.com/@vittominacori/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4">
+                        Read more
+                    </b-link>
+                </p>
+                <hr class="mt-4">
+                <p class="card-text">
+                    <b>Note: To Verify your Token on Etherscan use:</b>
+                </p>
+                <ul>
+                    <li>
+                        Source Code:
+                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol"
+                                target="_blank">
+                            <b>ERC20Token.dist.sol</b>
+                        </b-link>
+                    </li>
+                    <li>Contract Name: <b>ERC20Token</b></li>
+                    <li>Compiler: <b>v0.5.6+commit.b259423e</b></li>
+                    <li>Optimization: <b>Yes</b></li>
+                    <li>Runs (Optimizer): <b>200</b></li>
+                    <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
+                </ul>
+                <div class="form-group">
+                    <label><b>ABI</b></label>
+                    <textarea class="form-control"
+                              readonly="readonly" rows="5"
+                              v-model="contracts.token.stringifiedAbi"></textarea>
+                </div>
+            </b-card>
+        </b-col>
     </b-row>
 </template>
 
@@ -155,21 +222,21 @@
   import dapp from '../mixins/dapp';
 
   export default {
-    name: "Generator",
+    name: 'Generator',
     mixins: [
-      dapp
+      dapp,
     ],
-    data() {
+    data () {
       return {
         loading: true,
         currentNetwork: null,
         trxHash: '',
         makingTransaction: false,
         formDisabled: false,
-        token: {}
+        token: {},
       };
     },
-    mounted() {
+    mounted () {
       this.currentNetwork = this.getParam('network') || this.network.default;
       this.initDapp();
     },
@@ -186,72 +253,80 @@
         }
       },
       async generateToken () {
-        if (!this.metamask.installed) {
-          alert("To create a Token please install MetaMask!");
-          return;
-        } else {
-          if (this.metamask.netId !== this.network.current.id) {
-            alert("Your MetaMask in on the wrong network. Please switch on " + this.network.current.name + " and try again!");
-            return;
-          }
-        }
-
-        const name = this.token.name;
-        const symbol = this.token.symbol.toUpperCase();
-        const decimals = new this.web3.BigNumber(this.token.decimals);
-        const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
-        const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals));
-
-        try {
-          this.trxHash = '';
-          this.formDisabled = true;
-          this.makingTransaction = true;
-
-          if (!this.legacy) {
-            await this.web3Provider.enable();
-          }
-
-          setTimeout(() => {
-            this.contracts.token.new(
-              name,
-              symbol,
-              decimals,
-              cap,
-              initialBalance,
-              {
-                from: this.web3.eth.coinbase,
-                data: this.contracts.token.bytecode,
-              }, (e, tokenContract) => {
-                if (e) {
-                  this.makingTransaction = false;
-                  this.formDisabled = false;
-                } else {
-                  // NOTE: The callback will fire twice!
-                  // Once the contract has the transactionHash property
-                  // set and once its deployed on an address.
-                  if (!tokenContract.address) {
-                    this.trxHash = tokenContract.transactionHash;
-                    this.trxLink = this.network.current.etherscanLink + "/tx/" + this.trxHash;
-                  } else {
-                    this.token.address = tokenContract.address;
-                    this.token.link = this.network.current.etherscanLink + "/token/" + this.token.address;
-                    this.$forceUpdate();
-                  }
-                }
+        this.$validator.validateAll().then(async (result) => {
+          if (result) {
+            if (!this.metamask.installed) {
+              alert('To create a Token please install MetaMask!');
+              return;
+            } else {
+              if (this.metamask.netId !== this.network.current.id) {
+                alert('Your MetaMask in on the wrong network. Please switch on ' + this.network.current.name + ' and try again!');
+                return;
               }
-            );
-          }, 500);
-        } catch (e) {
+            }
+
+            const name = this.token.name;
+            const symbol = this.token.symbol.toUpperCase();
+            const decimals = new this.web3.BigNumber(this.token.decimals);
+            const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
+            const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals));
+
+            try {
+              this.trxHash = '';
+              this.formDisabled = true;
+              this.makingTransaction = true;
+
+              if (!this.legacy) {
+                await this.web3Provider.enable();
+              }
+
+              setTimeout(() => {
+                this.contracts.token.new(
+                  name,
+                  symbol,
+                  decimals,
+                  cap,
+                  initialBalance,
+                  {
+                    from: this.web3.eth.coinbase,
+                    data: this.contracts.token.bytecode,
+                  }, (e, tokenContract) => {
+                    if (e) {
+                      this.makingTransaction = false;
+                      this.formDisabled = false;
+                    } else {
+                      // NOTE: The callback will fire twice!
+                      // Once the contract has the transactionHash property
+                      // set and once its deployed on an address.
+                      if (!tokenContract.address) {
+                        this.trxHash = tokenContract.transactionHash;
+                        this.trxLink = this.network.current.etherscanLink + '/tx/' + this.trxHash;
+                      } else {
+                        this.token.address = tokenContract.address;
+                        this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
+                        this.$forceUpdate();
+                      }
+                    }
+                  }
+                );
+              }, 500);
+            } catch (e) {
+              this.makingTransaction = false;
+              this.formDisabled = false;
+              alert('Some error occurred. Maybe you rejected the transaction or you have MetaMask locked!');
+            }
+          }
+        }).catch((e) => {
+          console.log(e);
           this.makingTransaction = false;
-          this.formDisabled = false;
-          alert("Some error occurred. Maybe you rejected the transaction or you have MetaMask locked!");
-        }
+          alert('Some error occurred.');
+        });
       },
-      getParam(param) {
+      getParam (param) {
         const vars = {};
         window.location.href.replace(location.hash, '').replace(
           /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-          function( m, key, value ) { // callback
+          function (m, key, value) { // callback
             vars[key] = value !== undefined ? value : '';
           }
         );
@@ -262,5 +337,5 @@
         return vars;
       },
     },
-  }
+  };
 </script>
