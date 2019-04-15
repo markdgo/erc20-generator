@@ -43,6 +43,3 @@ package-lock.json
 
 # IntelliJ IDE
 .idea
-
-# vuepress
-docs/.vuepress/dist/
