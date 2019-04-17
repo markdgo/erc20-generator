@@ -1,10 +1,10 @@
-pragma solidity ^0.5.6;
+pragma solidity ^0.5.7;
 
 // File: openzeppelin-solidity/contracts/token/ERC20/IERC20.sol
 
 /**
  * @title ERC20 interface
- * @dev see https://github.com/ethereum/EIPs/issues/20
+ * @dev see https://eips.ethereum.org/EIPS/eip-20
  */
 interface IERC20 {
     function transfer(address to, uint256 value) external returns (bool);
@@ -73,8 +73,8 @@ contract ERC20Detailed is IERC20 {
  */
 library SafeMath {
     /**
-    * @dev Multiplies two unsigned integers, reverts on overflow.
-    */
+     * @dev Multiplies two unsigned integers, reverts on overflow.
+     */
     function mul(uint256 a, uint256 b) internal pure returns (uint256) {
         // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
         // benefit is lost if 'b' is also tested.
@@ -90,8 +90,8 @@ library SafeMath {
     }
 
     /**
-    * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
-    */
+     * @dev Integer division of two unsigned integers truncating the quotient, reverts on division by zero.
+     */
     function div(uint256 a, uint256 b) internal pure returns (uint256) {
         // Solidity only automatically asserts when dividing by 0
         require(b > 0);
@@ -102,8 +102,8 @@ library SafeMath {
     }
 
     /**
-    * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
-    */
+     * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+     */
     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
         require(b <= a);
         uint256 c = a - b;
@@ -112,8 +112,8 @@ library SafeMath {
     }
 
     /**
-    * @dev Adds two unsigned integers, reverts on overflow.
-    */
+     * @dev Adds two unsigned integers, reverts on overflow.
+     */
     function add(uint256 a, uint256 b) internal pure returns (uint256) {
         uint256 c = a + b;
         require(c >= a);
@@ -122,9 +122,9 @@ library SafeMath {
     }
 
     /**
-    * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
-    * reverts when dividing by zero.
-    */
+     * @dev Divides two unsigned integers and returns the remainder (unsigned integer modulo),
+     * reverts when dividing by zero.
+     */
     function mod(uint256 a, uint256 b) internal pure returns (uint256) {
         require(b != 0);
         return a % b;
@@ -137,7 +137,7 @@ library SafeMath {
  * @title Standard ERC20 token
  *
  * @dev Implementation of the basic standard token.
- * https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
+ * https://eips.ethereum.org/EIPS/eip-20
  * Originally based on code by FirstBlood:
  * https://github.com/Firstbloodio/token/blob/master/smart_contract/FirstBloodToken.sol
  *
@@ -155,17 +155,17 @@ contract ERC20 is IERC20 {
     uint256 private _totalSupply;
 
     /**
-    * @dev Total number of tokens in existence
-    */
+     * @dev Total number of tokens in existence
+     */
     function totalSupply() public view returns (uint256) {
         return _totalSupply;
     }
 
     /**
-    * @dev Gets the balance of the specified address.
-    * @param owner The address to query the balance of.
-    * @return An uint256 representing the amount owned by the passed address.
-    */
+     * @dev Gets the balance of the specified address.
+     * @param owner The address to query the balance of.
+     * @return A uint256 representing the amount owned by the passed address.
+     */
     function balanceOf(address owner) public view returns (uint256) {
         return _balances[owner];
     }
@@ -181,10 +181,10 @@ contract ERC20 is IERC20 {
     }
 
     /**
-    * @dev Transfer token for a specified address
-    * @param to The address to transfer to.
-    * @param value The amount to be transferred.
-    */
+     * @dev Transfer token to a specified address
+     * @param to The address to transfer to.
+     * @param value The amount to be transferred.
+     */
     function transfer(address to, uint256 value) public returns (bool) {
         _transfer(msg.sender, to, value);
         return true;
@@ -200,10 +200,7 @@ contract ERC20 is IERC20 {
      * @param value The amount of tokens to be spent.
      */
     function approve(address spender, uint256 value) public returns (bool) {
-        require(spender != address(0));
-
-        _allowed[msg.sender][spender] = value;
-        emit Approval(msg.sender, spender, value);
+        _approve(msg.sender, spender, value);
         return true;
     }
 
@@ -216,15 +213,14 @@ contract ERC20 is IERC20 {
      * @param value uint256 the amount of tokens to be transferred
      */
     function transferFrom(address from, address to, uint256 value) public returns (bool) {
-        _allowed[from][msg.sender] = _allowed[from][msg.sender].sub(value);
         _transfer(from, to, value);
-        emit Approval(from, msg.sender, _allowed[from][msg.sender]);
+        _approve(from, msg.sender, _allowed[from][msg.sender].sub(value));
         return true;
     }
 
     /**
      * @dev Increase the amount of tokens that an owner allowed to a spender.
-     * approve should be called when allowed_[_spender] == 0. To increment
+     * approve should be called when _allowed[msg.sender][spender] == 0. To increment
      * allowed value is better to use this function to avoid 2 calls (and wait until
      * the first transaction is mined)
      * From MonolithDAO Token.sol
@@ -233,16 +229,13 @@ contract ERC20 is IERC20 {
      * @param addedValue The amount of tokens to increase the allowance by.
      */
     function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
-        require(spender != address(0));
-
-        _allowed[msg.sender][spender] = _allowed[msg.sender][spender].add(addedValue);
-        emit Approval(msg.sender, spender, _allowed[msg.sender][spender]);
+        _approve(msg.sender, spender, _allowed[msg.sender][spender].add(addedValue));
         return true;
     }
 
     /**
      * @dev Decrease the amount of tokens that an owner allowed to a spender.
-     * approve should be called when allowed_[_spender] == 0. To decrement
+     * approve should be called when _allowed[msg.sender][spender] == 0. To decrement
      * allowed value is better to use this function to avoid 2 calls (and wait until
      * the first transaction is mined)
      * From MonolithDAO Token.sol
@@ -251,19 +244,16 @@ contract ERC20 is IERC20 {
      * @param subtractedValue The amount of tokens to decrease the allowance by.
      */
     function decreaseAllowance(address spender, uint256 subtractedValue) public returns (bool) {
-        require(spender != address(0));
-
-        _allowed[msg.sender][spender] = _allowed[msg.sender][spender].sub(subtractedValue);
-        emit Approval(msg.sender, spender, _allowed[msg.sender][spender]);
+        _approve(msg.sender, spender, _allowed[msg.sender][spender].sub(subtractedValue));
         return true;
     }
 
     /**
-    * @dev Transfer token for a specified addresses
-    * @param from The address to transfer from.
-    * @param to The address to transfer to.
-    * @param value The amount to be transferred.
-    */
+     * @dev Transfer token for a specified addresses
+     * @param from The address to transfer from.
+     * @param to The address to transfer to.
+     * @param value The amount to be transferred.
+     */
     function _transfer(address from, address to, uint256 value) internal {
         require(to != address(0));
 
@@ -302,6 +292,20 @@ contract ERC20 is IERC20 {
     }
 
     /**
+     * @dev Approve an address to spend another addresses' tokens.
+     * @param owner The address that owns the tokens.
+     * @param spender The address that will spend the tokens.
+     * @param value The number of tokens that can be spent.
+     */
+    function _approve(address owner, address spender, uint256 value) internal {
+        require(spender != address(0));
+        require(owner != address(0));
+
+        _allowed[owner][spender] = value;
+        emit Approval(owner, spender, value);
+    }
+
+    /**
      * @dev Internal function that burns an amount of the token of a given
      * account, deducting from the sender's allowance for said account. Uses the
      * internal burn function.
@@ -310,9 +314,8 @@ contract ERC20 is IERC20 {
      * @param value The amount that will be burnt.
      */
     function _burnFrom(address account, uint256 value) internal {
-        _allowed[account][msg.sender] = _allowed[account][msg.sender].sub(value);
         _burn(account, value);
-        emit Approval(account, msg.sender, _allowed[account][msg.sender]);
+        _approve(account, msg.sender, _allowed[account][msg.sender].sub(value));
     }
 }
 
@@ -462,8 +465,8 @@ contract ERC20Burnable is ERC20 {
 
     /**
      * @dev Burns a specific amount of tokens from the target address and decrements allowance
-     * @param from address The address which you want to send tokens from
-     * @param value uint256 The amount of token to be burned
+     * @param from address The account whose tokens will be burned.
+     * @param value uint256 The amount of token to be burned.
      */
     function burnFrom(address from, uint256 value) public {
         _burnFrom(from, value);
@@ -515,9 +518,10 @@ contract Ownable {
 
     /**
      * @dev Allows the current owner to relinquish control of the contract.
-     * @notice Renouncing to ownership will leave the contract without an owner.
      * It will not be possible to call the functions with the `onlyOwner`
      * modifier anymore.
+     * @notice Renouncing ownership will leave the contract without an owner,
+     * thereby removing any functionality that is only available to the owner.
      */
     function renounceOwnership() public onlyOwner {
         emit OwnershipTransferred(_owner, address(0));
@@ -623,7 +627,7 @@ contract BaseERC20Token is ERC20Detailed, ERC20Capped, ERC20Burnable, OperatorRo
     bool private _transferEnabled = false;
 
     /**
-     * @dev Tokens can be minted only before minting finished
+     * @dev Tokens can be minted only before minting finished.
      */
     modifier canMint() {
         require(!_mintingFinished);
@@ -631,7 +635,7 @@ contract BaseERC20Token is ERC20Detailed, ERC20Capped, ERC20Burnable, OperatorRo
     }
 
     /**
-     * @dev Tokens can be moved only after if transfer enabled or if you are an approved operator
+     * @dev Tokens can be moved only after if transfer enabled or if you are an approved operator.
      */
     modifier canTransfer(address from) {
         require(_transferEnabled || isOperator(from));
@@ -662,33 +666,52 @@ contract BaseERC20Token is ERC20Detailed, ERC20Capped, ERC20Burnable, OperatorRo
     }
 
     /**
-     * @return if minting is finished or not
+     * @return if minting is finished or not.
      */
     function mintingFinished() public view returns (bool) {
         return _mintingFinished;
     }
 
     /**
-     * @return if transfer is enabled or not
+     * @return if transfer is enabled or not.
      */
     function transferEnabled() public view returns (bool) {
         return _transferEnabled;
     }
 
+    /**
+     * @dev Function to mint tokens
+     * @param to The address that will receive the minted tokens.
+     * @param value The amount of tokens to mint.
+     * @return A boolean that indicates if the operation was successful.
+     */
     function mint(address to, uint256 value) public canMint returns (bool) {
         return super.mint(to, value);
     }
 
+    /**
+     * @dev Transfer token to a specified address
+     * @param to The address to transfer to.
+     * @param value The amount to be transferred.
+     * @return A boolean that indicates if the operation was successful.
+     */
     function transfer(address to, uint256 value) public canTransfer(msg.sender) returns (bool) {
         return super.transfer(to, value);
     }
 
+    /**
+     * @dev Transfer tokens from one address to another.
+     * @param from address The address which you want to send tokens from
+     * @param to address The address which you want to transfer to
+     * @param value uint256 the amount of tokens to be transferred
+     * @return A boolean that indicates if the operation was successful.
+     */
     function transferFrom(address from, address to, uint256 value) public canTransfer(from) returns (bool) {
         return super.transferFrom(from, to, value);
     }
 
     /**
-     * @dev Function to stop minting new tokens
+     * @dev Function to stop minting new tokens and enable transfer.
      */
     function finishMinting() public onlyOwner canMint {
         _mintingFinished = true;
