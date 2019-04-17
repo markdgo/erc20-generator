@@ -170,7 +170,7 @@
                         </b-link>
                     </li>
                     <li>Contract Name: <b>ERC20Token</b></li>
-                    <li>Compiler: <b>v0.5.6+commit.b259423e</b></li>
+                    <li>Compiler: <b>v0.5.7+commit.6da8b019</b></li>
                     <li>Optimization: <b>Yes</b></li>
                     <li>Runs (Optimizer): <b>200</b></li>
                     <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>

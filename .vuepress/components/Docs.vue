@@ -24,10 +24,12 @@
                             contract for error.
                         </li>
                     </ul>
-                    Tokens won't be transferable until you call the <i>enableTransfer</i> function. Only people (or
-                    smart contract) with
-                    <i>Operator</i> role will be able to transfer tokens. You can also add or remove the Operator role
-                    to addresses.<br><br>
+                    <b-alert show variant="warning">
+                        Tokens won't be transferable until you call the <i>enableTransfer</i> function. Only people (or
+                        smart contract) with
+                        <i>Operator</i> role will be able to transfer tokens. You can also add or remove the Operator role
+                        to addresses.
+                    </b-alert>
                     <b-link to="/">Create your token</b-link>
                 </b-card-text>
                 <h4>Methods</h4>
