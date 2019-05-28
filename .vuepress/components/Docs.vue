@@ -60,18 +60,18 @@
     mixins: [
       dapp,
     ],
-    data() {
+    data () {
       return {
         loading: true,
         currentNetwork: null,
       };
     },
-    mounted() {
+    mounted () {
       this.currentNetwork = this.network.default;
       this.initDapp();
     },
     methods: {
-      async initDapp() {
+      async initDapp () {
         this.network.current = this.network.list[this.currentNetwork];
         try {
           await this.initWeb3(this.currentNetwork, true);

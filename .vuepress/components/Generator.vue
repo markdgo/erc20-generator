@@ -170,7 +170,7 @@
                         </b-link>
                     </li>
                     <li>Contract Name: <b>ERC20Token</b></li>
-                    <li>Compiler: <b>v0.5.7+commit.6da8b019</b></li>
+                    <li>Compiler: <b>v0.5.8+commit.23d335f2</b></li>
                     <li>Optimization: <b>Yes</b></li>
                     <li>Runs (Optimizer): <b>200</b></li>
                     <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
@@ -194,7 +194,7 @@
     mixins: [
       dapp,
     ],
-    data() {
+    data () {
       return {
         loading: true,
         currentNetwork: null,
@@ -204,12 +204,12 @@
         token: {},
       };
     },
-    mounted() {
+    mounted () {
       this.currentNetwork = this.getParam('network') || this.network.default;
       this.initDapp();
     },
     methods: {
-      async initDapp() {
+      async initDapp () {
         this.network.current = this.network.list[this.currentNetwork];
         try {
           await this.initWeb3(this.currentNetwork, true);
@@ -220,7 +220,7 @@
           document.location.href = this.$withBase('/');
         }
       },
-      async generateToken() {
+      async generateToken () {
         this.$validator.validateAll().then(async (result) => {
           if (result) {
             if (!this.metamask.installed) {
@@ -285,12 +285,12 @@
             }
           }
         }).catch((e) => {
-          console.log(e);
+          console.log(e); // eslint-disable-line no-console
           this.makingTransaction = false;
           alert('Some error occurred.');
         });
       },
-      getParam(param) {
+      getParam (param) {
         const vars = {};
         window.location.href.replace(location.hash, '').replace(
           /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp

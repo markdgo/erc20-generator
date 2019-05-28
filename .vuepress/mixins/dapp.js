@@ -61,10 +61,10 @@ export default {
       return new Promise((resolve) => {
         if (checkWeb3 && (typeof window.ethereum !== 'undefined' || typeof window.web3 !== 'undefined')) {
           if (window.ethereum) {
-            console.log('injected web3');
+            console.log('injected web3'); // eslint-disable-line no-console
             this.web3Provider = window.ethereum;
           } else {
-            console.log('injected web3 (legacy)');
+            console.log('injected web3 (legacy)'); // eslint-disable-line no-console
             this.web3Provider = window.web3.currentProvider;
             this.legacy = true;
           }
@@ -73,7 +73,7 @@ export default {
           this.metamask.installed = true;
           this.web3.version.getNetwork(async (err, netId) => {
             if (err) {
-              console.log(err);
+              console.log(err); // eslint-disable-line no-console
             }
             this.metamask.netId = netId;
             if (netId !== this.network.list[network].id) {
@@ -83,7 +83,7 @@ export default {
             resolve();
           });
         } else {
-          console.log('provided web3');
+          console.log('provided web3'); // eslint-disable-line no-console
           this.network.current = this.network.list[network];
           this.web3Provider = new Web3.providers.HttpProvider(this.network.list[network].web3Provider);
           this.web3 = new Web3(this.web3Provider);
