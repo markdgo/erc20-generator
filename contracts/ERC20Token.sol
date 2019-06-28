@@ -16,9 +16,14 @@ contract ERC20Token is BaseERC20Token {
         string memory symbol,
         uint8 decimals,
         uint256 cap,
-        uint256 initialSupply
+        uint256 initialSupply,
+        bool transferEnabled
     )
         public
         BaseERC20Token(name, symbol, decimals, cap, initialSupply)
-    {} // solhint-disable-line no-empty-blocks
+    {
+        if (transferEnabled) {
+            enableTransfer();
+        }
+    }
 }
