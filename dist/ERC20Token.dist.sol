@@ -1,4 +1,4 @@
-pragma solidity ^0.5.8;
+pragma solidity ^0.5.10;
 
 // File: openzeppelin-solidity/contracts/token/ERC20/IERC20.sol
 
@@ -867,7 +867,7 @@ contract BaseERC20Token is ERC20Detailed, ERC20Capped, ERC20Burnable, OperatorRo
     }
 
     /**
-     * @dev Function to stop minting new tokens and enable transfer.
+     * @dev Function to stop minting new tokens.
      */
     function finishMinting() public onlyOwner canMint {
         _mintingFinished = true;

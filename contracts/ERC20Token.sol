@@ -1,4 +1,4 @@
-pragma solidity ^0.5.7;
+pragma solidity ^0.5.10;
 
 import "ico-maker/contracts/token/ERC20/BaseERC20Token.sol";
 

@@ -82,7 +82,7 @@ npm run flat
 
 Use the dist smart contracts [dist/ERC20Token.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol)
 
-Solc version is 0.5.8
+Solc version is 0.5.10
 
 
 ## License
