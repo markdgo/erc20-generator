@@ -1,13 +1,13 @@
 pragma solidity ^0.5.10;
 
-import "ico-maker/contracts/token/ERC20/BaseERC20Token.sol";
+import "ico-maker/contracts/token/ERC1363/BaseERC1363Token.sol";
 
 /**
  * @title ERC20Token
  * @author Vittorio Minacori (https://github.com/vittominacori)
- * @dev Implementation of a BaseERC20Token
+ * @dev Implementation of a BaseERC1363Token
  */
-contract ERC20Token is BaseERC20Token {
+contract ERC20Token is BaseERC1363Token {
 
     string public builtOn = "https://vittominacori.github.io/erc20-generator";
 
@@ -20,7 +20,7 @@ contract ERC20Token is BaseERC20Token {
         bool transferEnabled
     )
         public
-        BaseERC20Token(name, symbol, decimals, cap, initialSupply)
+        BaseERC1363Token(name, symbol, decimals, cap, initialSupply)
     {
         if (transferEnabled) {
             enableTransfer();

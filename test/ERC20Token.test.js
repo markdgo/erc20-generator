@@ -1,6 +1,7 @@
 const { BN, expectRevert } = require('openzeppelin-test-helpers');
 
 const { shouldBehaveLikeBaseERC20Token } = require('ico-maker/test/token/ERC20/behaviours/BaseERC20Token.behaviour');
+const { shouldBehaveLikeERC1363 } = require('erc-payable-token/test/token/ERC1363/ERC1363.behaviour');
 
 const ERC20Token = artifacts.require('ERC20Token');
 
@@ -57,7 +58,7 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, operator, recip
     });
   });
 
-  context('like a BaseERC20Token', function () {
+  context('like a BaseERC1363Token', function () {
     beforeEach(async function () {
       this.token = await ERC20Token.new(_name, _symbol, _decimals, _cap, _initialSupply, false, { from: owner });
     });
@@ -66,6 +67,14 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, operator, recip
       [owner, anotherAccount, minter, operator, recipient, thirdParty],
       [_name, _symbol, _decimals, _cap, _initialSupply]
     );
+  });
+
+  context('like a ERC1363', function () {
+    beforeEach(async function () {
+      this.token = await ERC20Token.new(_name, _symbol, _decimals, _cap, _initialSupply, false, { from: owner });
+    });
+
+    shouldBehaveLikeERC1363([owner, anotherAccount, recipient], _initialSupply);
   });
 
   context('like a ERC20Token', function () {
