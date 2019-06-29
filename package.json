@@ -26,18 +26,18 @@
     "web3": "0.20.6"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "bootstrap-vue": "^2.0.0-rc.21",
-    "eslint": "^5.16.0",
+    "babel-eslint": "^10.0.2",
+    "bootstrap-vue": "^2.0.0-rc.24",
+    "eslint": "^6.0.1",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.2.2",
+    "eslint-plugin-vue": "^5.2.3",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
-    "vee-validate": "^2.2.8",
+    "vee-validate": "^2.2.11",
     "vue-eslint-parser": "^6.0.4",
     "vuepress": "^0.14.11"
   }

@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     initWeb3 (network, checkWeb3) {
-      if (!this.network.list.hasOwnProperty(network)) {
+      if (!this.network.list.hasOwnProperty(network)) { // eslint-disable-line no-prototype-builtins
         throw new Error(`Failed initializing network ${network}. Allowed values are mainnet, ropsten and rinkeby.`);
       }
 
@@ -94,6 +94,8 @@ export default {
     },
     initToken () {
       this.contracts.token = this.web3.eth.contract(TokenArtifact.abi);
+      this.contracts.token.contractName = TokenArtifact.contractName;
+      this.contracts.token.compiler = TokenArtifact.compiler;
       this.contracts.token.bytecode = TokenArtifact.bytecode;
       this.contracts.token.devdoc = TokenArtifact.devdoc;
       this.contracts.token.stringifiedAbi = JSON.stringify(TokenArtifact.abi);

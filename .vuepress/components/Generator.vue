@@ -145,8 +145,36 @@
                                 </b-col>
                             </b-row>
                         </b-card>
+                        <b-card class="mt-3">
+                            <b-row>
+                                <b-col lg="12">
+                                    <b-form-group
+                                            description="Choose to enable transfer during deploy or enable manually later."
+                                            label="Enable transfer"
+                                            label-for="enableTransfer">
+                                        <b-form-select id="network" v-model="enableTransfer">
+                                            <option :value="true">Enable transfer during deploy</option>
+                                            <option :value="false">Enable transfer manually later</option>
+                                        </b-form-select>
+                                    </b-form-group>
+
+                                    <b-alert show variant="warning" v-if="enableTransfer === false">
+                                        <strong>
+                                            NOTE: If you don't enable transfer during deploy, tokens won't be transferable
+                                            until you call the <i>enableTransfer</i> function.
+                                        </strong><br>
+                                        Only people (or smart contract) with <i>Operator</i> role will be able to transfer tokens.<br>
+                                        Contract creator will be Operator by default, so he can transfer tokens also when transfer is
+                                        not enabled.<br>
+                                        You can also add or remove the Operator role to addresses.<br>
+                                        This is because, by business choices, you may decide not to enable transfer until a specific
+                                        time.
+                                    </b-alert>
+                                </b-col>
+                            </b-row>
+                        </b-card>
                         <b-row class="mt-3">
-                            <b-col lg="6">
+                            <b-col lg="12">
                                 <b-button variant="success" size="lg" type="submit">Create Token</b-button>
                             </b-col>
                         </b-row>
@@ -169,8 +197,8 @@
                             <b>ERC20Token.dist.sol</b>
                         </b-link>
                     </li>
-                    <li>Contract Name: <b>ERC20Token</b></li>
-                    <li>Compiler: <b>v0.5.8+commit.23d335f2</b></li>
+                    <li>Contract Name: <b>{{ contracts.token.contractName }}</b></li>
+                    <li>Compiler: <b>{{ contracts.token.compiler.version }}</b></li>
                     <li>Optimization: <b>Yes</b></li>
                     <li>Runs (Optimizer): <b>200</b></li>
                     <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
@@ -202,6 +230,7 @@
         makingTransaction: false,
         formDisabled: false,
         token: {},
+        enableTransfer: true,
       };
     },
     mounted () {
@@ -228,7 +257,7 @@
               return;
             } else {
               if (this.metamask.netId !== this.network.current.id) {
-                alert('Your MetaMask in on the wrong network. Please switch on ' + this.network.current.name + ' and try again!');
+                alert(`Your MetaMask in on the wrong network. Please switch on ${this.network.current.name} and try again!`);
                 return;
               }
             }
@@ -237,7 +266,8 @@
             const symbol = this.token.symbol.toUpperCase();
             const decimals = new this.web3.BigNumber(this.token.decimals);
             const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
-            const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals));
+            const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals)); // eslint-disable-line max-len
+            const enableTransfer = this.enableTransfer;
 
             try {
               this.trxHash = '';
@@ -255,6 +285,7 @@
                   decimals,
                   cap,
                   initialBalance,
+                  enableTransfer,
                   {
                     from: this.web3.eth.coinbase,
                     data: this.contracts.token.bytecode,

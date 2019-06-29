@@ -6,11 +6,11 @@
                 <b-img fluid :src="$withBase('/assets/images/friends-fingers-banner.png')" alt="FriendsFingers"></b-img>
             </b-link>
         </b-col>
-        <b-col lg="10" offset-lg="1" class="text-center text-white p-0">
+        <b-col lg="10" offset-lg="1" class="text-center text-dark p-0">
             <ul class="list-inline mt-2">
                 <li class="list-inline-item">
                     <small>created by
-                        <b-link class="text-light" href="https://github.com/vittominacori" target="_blank">
+                        <b-link class="text-dark" href="https://github.com/vittominacori" target="_blank">
                             @vittominacori
                         </b-link>
                     </small>
@@ -25,7 +25,3 @@
     name: 'Footer',
   };
 </script>
-
-<style scoped>
-
-</style>
