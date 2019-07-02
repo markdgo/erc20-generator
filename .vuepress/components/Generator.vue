@@ -182,35 +182,6 @@
                 </b-form>
             </b-card>
         </b-col>
-        <b-col lg="10" offset-lg="1" class="mt-4 p-0">
-            <b-card bg-variant="light" v-if="!loading">
-                <b-card-text>
-                    <b-link to="/docs.html">View documentation</b-link>
-                    <hr class="mt-4">
-                    <b>Note: To Verify your Token on Etherscan use:</b>
-                </b-card-text>
-                <ul>
-                    <li>
-                        Source Code:
-                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol"
-                                target="_blank">
-                            <b>ERC20Token.dist.sol</b>
-                        </b-link>
-                    </li>
-                    <li>Contract Name: <b>{{ contracts.token.contractName }}</b></li>
-                    <li>Compiler: <b>{{ contracts.token.compiler.version }}</b></li>
-                    <li>Optimization: <b>Yes</b></li>
-                    <li>Runs (Optimizer): <b>200</b></li>
-                    <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
-                </ul>
-                <div class="form-group">
-                    <label><b>ABI</b></label>
-                    <textarea class="form-control"
-                              readonly="readonly" rows="5"
-                              v-model="contracts.token.stringifiedAbi"></textarea>
-                </div>
-            </b-card>
-        </b-col>
     </b-row>
 </template>
 
