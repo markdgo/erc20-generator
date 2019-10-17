@@ -22,7 +22,7 @@ DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](ht
 npm install
 ```
 
-## Usage
+### Usage (using Truffle)
 
 Open the Truffle console
 
@@ -30,16 +30,36 @@ Open the Truffle console
 npm run console
 ```
 
-### Compile
+#### Compile
 
 ```bash
 npm run compile
 ```
 
-### Test 
+#### Test 
 
 ```bash
 npm run test 
+```
+
+### Usage (using Buidler)
+
+Open the Buidler console
+
+```bash
+npm run buidler:console
+```
+
+#### Compile
+
+```bash
+npm run buidler:compile
+```
+
+#### Test 
+
+```bash
+npm run buidler:test 
 ```
 
 ### Code Coverage
@@ -82,7 +102,7 @@ npm run flat
 
 Use the dist smart contracts [dist/ERC20Token.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol)
 
-Solc version is 0.5.10
+Solc version is 0.5.12
 
 
 ## License

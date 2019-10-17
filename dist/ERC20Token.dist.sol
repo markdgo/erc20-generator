@@ -1,6 +1,6 @@
-pragma solidity ^0.5.10;
+pragma solidity ^0.5.12;
 
-// File: openzeppelin-solidity/contracts/utils/Address.sol
+// File: @openzeppelin/contracts/utils/Address.sol
 
 /**
  * @dev Collection of functions related to the address type,
@@ -28,7 +28,7 @@ library Address {
     }
 }
 
-// File: openzeppelin-solidity/contracts/introspection/ERC165Checker.sol
+// File: @openzeppelin/contracts/introspection/ERC165Checker.sol
 
 /**
  * @dev Library used to query support of an interface declared via `IERC165`.
@@ -150,7 +150,7 @@ library ERC165Checker {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/IERC20.sol
+// File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP. Does not include
@@ -227,7 +227,7 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// File: openzeppelin-solidity/contracts/math/SafeMath.sol
+// File: @openzeppelin/contracts/math/SafeMath.sol
 
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
@@ -287,7 +287,7 @@ library SafeMath {
     function mul(uint256 a, uint256 b) internal pure returns (uint256) {
         // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
         // benefit is lost if 'b' is also tested.
-        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
         if (a == 0) {
             return 0;
         }
@@ -335,7 +335,7 @@ library SafeMath {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/ERC20.sol
+// File: @openzeppelin/contracts/token/ERC20/ERC20.sol
 
 /**
  * @dev Implementation of the `IERC20` interface.
@@ -561,7 +561,7 @@ contract ERC20 is IERC20 {
     }
 }
 
-// File: openzeppelin-solidity/contracts/introspection/IERC165.sol
+// File: @openzeppelin/contracts/introspection/IERC165.sol
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -584,7 +584,7 @@ interface IERC165 {
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
 
-// File: openzeppelin-solidity/contracts/introspection/ERC165.sol
+// File: @openzeppelin/contracts/introspection/ERC165.sol
 
 /**
  * @dev Implementation of the `IERC165` interface.
@@ -896,7 +896,7 @@ contract ERC1363 is ERC20, IERC1363 {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol
+// File: @openzeppelin/contracts/token/ERC20/ERC20Detailed.sol
 
 /**
  * @dev Optional functions from the ERC20 standard.
@@ -949,7 +949,7 @@ contract ERC20Detailed is IERC20 {
     }
 }
 
-// File: openzeppelin-solidity/contracts/access/Roles.sol
+// File: @openzeppelin/contracts/access/Roles.sol
 
 /**
  * @title Roles
@@ -986,7 +986,7 @@ library Roles {
     }
 }
 
-// File: openzeppelin-solidity/contracts/access/roles/MinterRole.sol
+// File: @openzeppelin/contracts/access/roles/MinterRole.sol
 
 contract MinterRole {
     using Roles for Roles.Role;
@@ -1028,7 +1028,7 @@ contract MinterRole {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol
+// File: @openzeppelin/contracts/token/ERC20/ERC20Mintable.sol
 
 /**
  * @dev Extension of `ERC20` that adds a set of accounts with the `MinterRole`,
@@ -1050,7 +1050,7 @@ contract ERC20Mintable is ERC20, MinterRole {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Capped.sol
+// File: @openzeppelin/contracts/token/ERC20/ERC20Capped.sol
 
 /**
  * @dev Extension of `ERC20Mintable` that adds a cap to the supply of tokens.
@@ -1087,7 +1087,7 @@ contract ERC20Capped is ERC20Mintable {
     }
 }
 
-// File: openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol
+// File: @openzeppelin/contracts/token/ERC20/ERC20Burnable.sol
 
 /**
  * @dev Extension of `ERC20` that allows token holders to destroy both their own
@@ -1112,7 +1112,7 @@ contract ERC20Burnable is ERC20 {
     }
 }
 
-// File: openzeppelin-solidity/contracts/ownership/Ownable.sol
+// File: @openzeppelin/contracts/ownership/Ownable.sol
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
