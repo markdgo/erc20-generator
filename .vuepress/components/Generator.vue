@@ -160,15 +160,16 @@
 
                                     <b-alert show variant="warning" v-if="enableTransfer === false">
                                         <strong>
-                                            NOTE: If you don't enable transfer during deploy, tokens won't be transferable
-                                            until you call the <i>enableTransfer</i> function.
+                                            NOTE: If you don't enable transfer during deploy, tokens won't be
+                                            transferable until you call the <i>enableTransfer</i> function.
                                         </strong><br>
-                                        Only people (or smart contract) with <i>Operator</i> role will be able to transfer tokens.<br>
-                                        Contract creator will be Operator by default, so he can transfer tokens also when transfer is
-                                        not enabled.<br>
+                                        Only people (or smart contract) with <i>Operator</i> role will be able to
+                                        transfer tokens.<br>
+                                        Contract creator will be Operator by default, so he can transfer tokens also
+                                        when transfer is not enabled.<br>
                                         You can also add or remove the Operator role to addresses.<br>
-                                        This is because, by business choices, you may decide not to enable transfer until a specific
-                                        time.
+                                        This is because, by business choices, you may decide not to enable transfer
+                                        until a specific time.
                                     </b-alert>
                                 </b-col>
                             </b-row>

@@ -59,5 +59,13 @@
     "vue/script-indent": ["warn", 2, {
       "baseIndent": 1
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ]
 }

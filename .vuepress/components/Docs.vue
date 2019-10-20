@@ -27,29 +27,28 @@
                 <b-card-text>
                     Your token will have the following properties: <br><br>
                     <ul>
-                        <li><b>Detailed ERC20 Token</b>: <br>your token will be fully compliant with ERC20 definition and
-                            compatible with any ERC20 wallet all around the world. It will have a name, a symbol and a
-                            decimals amount.
+                        <li><b>Detailed ERC20 Token</b>: <br>your token will be fully compliant with ERC20
+                            definition and compatible with any ERC20 wallet all around the world.
+                            It will have a name, a symbol and a decimals amount.
                         </li>
-                        <li><b>ERC1363 Payable Token</b>: <br>the ERC1363 is an ERC20 compatible token that can make a callback
-                            on the receiver contract to notify token transfers or token approvals.
+                        <li><b>ERC1363 Payable Token</b>: <br>the ERC1363 is an ERC20 compatible token that
+                            can make a callback on the receiver contract to notify token transfers or token approvals.
                             <b-link target="_blank" href="https://vittominacori.github.io/erc1363-payable-token">
                                 Discover more
                             </b-link>
                         </li>
-                        <li><b>Mintable Token</b>: <br>you will be able to generate tokens by minting them. Only people (or
-                            smart contract) with
-                            <i>Minter</i> role will be able to do that, and you can also add or remove the Minter role
-                            to addresses.
+                        <li><b>Mintable Token</b>: <br>you will be able to generate tokens by minting them.
+                            Only people (or smart contract) with <i>Minter</i> role will be able to do that,
+                            and you can also add or remove the Minter role to addresses.
                         </li>
-                        <li><b>Capped Token</b>: <br>you can’t be able to mint more than the defined token cap. This ensure
-                            people that you will not generate more tokens than declared.
+                        <li><b>Capped Token</b>: <br>you can’t be able to mint more than the defined token cap.
+                            This ensure people that you will not generate more tokens than declared.
                         </li>
-                        <li><b>Burnable Token</b>: <br>your token can be burnt. It means that you can choose to reduce the
-                            circulating supply by destroying some of your tokens.
+                        <li><b>Burnable Token</b>: <br>your token can be burnt. It means that you can choose to
+                            reduce the circulating supply by destroying some of your tokens.
                         </li>
-                        <li><b>Token Recover</b>: <br>it allows the contract owner to recover any ERC20 token sent into the
-                            contract for error.
+                        <li><b>Token Recover</b>: <br>it allows the contract owner to recover any ERC20 token
+                            sent into the contract for error.
                         </li>
                     </ul>
                     <b-alert show variant="warning">
@@ -58,9 +57,10 @@
                             until you call the <i>enableTransfer</i> function.
                         </strong><br>
                         Only people (or smart contract) with <i>Operator</i> role will be able to transfer tokens.<br>
-                        Contract creator will be Operator by default, so he can transfer tokens also when transfer is not enabled.<br>
-                        You can also add or remove the Operator role to addresses.<br>
-                        This is because, by business choices, you may decide not to enable transfer until a specific time.
+                        Contract creator will be Operator by default, so he can transfer tokens also when transfer
+                        is not enabled.<br>You can also add or remove the Operator role to addresses.<br>
+                        This is because, by business choices, you may decide not to enable transfer until a
+                        specific time.
                     </b-alert>
                 </b-card-text>
             </b-card>
