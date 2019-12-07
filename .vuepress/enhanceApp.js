@@ -1,7 +1,8 @@
 import BootstrapVue from 'bootstrap-vue';
-import VeeValidate from 'vee-validate';
+import { ValidationProvider, ValidationObserver } from 'vee-validate/dist/vee-validate.full';
 
 export default ({ Vue }) => {
   Vue.use(BootstrapVue);
-  Vue.use(VeeValidate);
+  Vue.component('ValidationProvider', ValidationProvider);
+  Vue.component('ValidationObserver', ValidationObserver);
 };

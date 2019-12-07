@@ -25,113 +25,133 @@
                     </div>
                 </b-alert>
 
-                <b-form v-on:submit.prevent="generateToken" class="mt-3" v-if="!makingTransaction">
+                <ValidationObserver
+                        ref="observer"
+                        v-if="!makingTransaction"
+                        tag="form"
+                        @submit.prevent="generateToken()"
+                        class="mt-3">
                     <fieldset :disabled="formDisabled">
                         <b-card>
                             <b-row>
                                 <b-col lg="4">
-                                    <b-form-group
-                                            description="Choose a name for your token."
-                                            label="Token name *"
-                                            label-for="tokenName">
-                                        <b-form-input
-                                                id="tokenName"
-                                                name="tokenName"
-                                                placeholder="Your token name"
-                                                v-model.trim="token.name"
-                                                v-validate="{ required: true }"
-                                                data-vv-as="token name"
-                                                :class="{'is-invalid': errors.has('tokenName')}"
-                                                maxlength="20">
-                                        </b-form-input>
-                                        <small v-show="errors.has('tokenName')" class="text-danger">
-                                            {{ errors.first('tokenName') }}
-                                        </small>
-                                    </b-form-group>
+                                    <ValidationProvider
+                                            name="token name"
+                                            :rules="{ required: true }"
+                                            v-slot="{ errors }">
+                                        <b-form-group
+                                                description="Choose a name for your token."
+                                                label="Token name *"
+                                                label-for="tokenName">
+                                            <b-form-input
+                                                    id="tokenName"
+                                                    name="tokenName"
+                                                    placeholder="Your token name"
+                                                    v-model.trim="token.name"
+                                                    :class="{'is-invalid': errors.length > 0}"
+                                                    maxlength="20">
+                                            </b-form-input>
+                                            <small v-show="errors.length > 0" class="text-danger">
+                                                {{ errors[0] }}
+                                            </small>
+                                        </b-form-group>
+                                    </ValidationProvider>
                                 </b-col>
                                 <b-col lg="4">
-                                    <b-form-group
-                                            description="Choose a symbol for your token (usually 3-4 chars)."
-                                            label="Token symbol *"
-                                            label-for="tokenSymbol">
-                                        <b-form-input
-                                                id="tokenSymbol"
-                                                name="tokenSymbol"
-                                                placeholder="Your token symbol"
-                                                v-model.trim="token.symbol"
-                                                v-validate="{ required: true }"
-                                                data-vv-as="token symbol"
-                                                :class="{'is-invalid': errors.has('tokenSymbol')}"
-                                                maxlength="5">
-                                        </b-form-input>
-                                        <small v-show="errors.has('tokenSymbol')" class="text-danger">
-                                            {{ errors.first('tokenSymbol') }}
-                                        </small>
-                                    </b-form-group>
+                                    <ValidationProvider
+                                            name="token symbol"
+                                            :rules="{ required: true }"
+                                            v-slot="{ errors }">
+                                        <b-form-group
+                                                description="Choose a symbol for your token (usually 3-4 chars)."
+                                                label="Token symbol *"
+                                                label-for="tokenSymbol">
+                                            <b-form-input
+                                                    id="tokenSymbol"
+                                                    name="tokenSymbol"
+                                                    placeholder="Your token symbol"
+                                                    v-model.trim="token.symbol"
+                                                    :class="{'is-invalid': errors.length > 0}"
+                                                    maxlength="5">
+                                            </b-form-input>
+                                            <small v-show="errors.length > 0" class="text-danger">
+                                                {{ errors[0] }}
+                                            </small>
+                                        </b-form-group>
+                                    </ValidationProvider>
                                 </b-col>
                                 <b-col lg="4">
-                                    <b-form-group
-                                            description="Insert the decimal precision of your token. If you don't know what to insert, use 18."
-                                            label="Token decimals *"
-                                            label-for="tokenDecimals">
-                                        <b-form-input
-                                                id="tokenDecimals"
-                                                name="tokenDecimals"
-                                                placeholder="Your token decimals"
-                                                v-model.trim="token.decimals"
-                                                v-validate="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
-                                                data-vv-as="token decimals"
-                                                :class="{'is-invalid': errors.has('tokenDecimals')}"
-                                                step="1">
-                                        </b-form-input>
-                                        <small v-show="errors.has('tokenDecimals')" class="text-danger">
-                                            {{ errors.first('tokenDecimals') }}
-                                        </small>
-                                    </b-form-group>
+                                    <ValidationProvider
+                                            name="token decimals"
+                                            :rules="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
+                                            v-slot="{ errors }">
+                                        <b-form-group
+                                                description="Insert the decimal precision of your token. If you don't know what to insert, use 18."
+                                                label="Token decimals *"
+                                                label-for="tokenDecimals">
+                                            <b-form-input
+                                                    id="tokenDecimals"
+                                                    name="tokenDecimals"
+                                                    placeholder="Your token decimals"
+                                                    v-model.trim="token.decimals"
+                                                    :class="{'is-invalid': errors.length > 0}"
+                                                    step="1">
+                                            </b-form-input>
+                                            <small v-show="errors.length > 0" class="text-danger">
+                                                {{ errors[0] }}
+                                            </small>
+                                        </b-form-group>
+                                    </ValidationProvider>
                                 </b-col>
                             </b-row>
                         </b-card>
                         <b-card class="mt-3">
                             <b-row>
                                 <b-col lg="4">
-                                    <b-form-group
-                                            description="Insert the maximum number of tokens available."
-                                            label="Token cap *"
-                                            label-for="tokenCap">
-                                        <b-form-input
-                                                id="tokenCap"
-                                                name="tokenCap"
-                                                placeholder="Your token cap"
-                                                v-model.trim="token.cap"
-                                                v-validate="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
-                                                data-vv-as="token cap"
-                                                :class="{'is-invalid': errors.has('tokenCap')}"
-                                                step="1">
-                                        </b-form-input>
-                                        <small v-show="errors.has('tokenCap')" class="text-danger">
-                                            {{ errors.first('tokenCap') }}
-                                        </small>
-                                    </b-form-group>
+                                    <ValidationProvider
+                                            name="token cap"
+                                            :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
+                                            v-slot="{ errors }">
+                                        <b-form-group
+                                                description="Insert the maximum number of tokens available."
+                                                label="Token cap *"
+                                                label-for="tokenCap">
+                                            <b-form-input
+                                                    id="tokenCap"
+                                                    name="tokenCap"
+                                                    placeholder="Your token cap"
+                                                    v-model.trim="token.cap"
+                                                    :class="{'is-invalid': errors.length > 0}"
+                                                    step="1">
+                                            </b-form-input>
+                                            <small v-show="errors.length > 0" class="text-danger">
+                                                {{ errors[0] }}
+                                            </small>
+                                        </b-form-group>
+                                    </ValidationProvider>
                                 </b-col>
                                 <b-col lg="4">
-                                    <b-form-group
-                                            description="Insert the initial number of tokens available. Will be put in your account."
-                                            label="Token initial balance *"
-                                            label-for="tokenInitialBalance">
-                                        <b-form-input
-                                                id="tokenInitialBalance"
-                                                name="tokenInitialBalance"
-                                                placeholder="Your token initial balance"
-                                                v-model.trim="token.initialBalance"
-                                                v-validate="{ required: true, numeric: true, min_value: 0, max_value: token.cap }"
-                                                data-vv-as="token initial balance"
-                                                :class="{'is-invalid': errors.has('tokenInitialBalance')}"
-                                                step="1">
-                                        </b-form-input>
-                                        <small v-show="errors.has('tokenInitialBalance')" class="text-danger">
-                                            {{ errors.first('tokenInitialBalance') }}
-                                        </small>
-                                    </b-form-group>
+                                    <ValidationProvider
+                                            name="token initial balance"
+                                            :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
+                                            v-slot="{ errors }">
+                                        <b-form-group
+                                                description="Insert the initial number of tokens available. Will be put in your account."
+                                                label="Token initial balance *"
+                                                label-for="tokenInitialBalance">
+                                            <b-form-input
+                                                    id="tokenInitialBalance"
+                                                    name="tokenInitialBalance"
+                                                    placeholder="Your token initial balance"
+                                                    v-model.trim="token.initialBalance"
+                                                    :class="{'is-invalid': errors.length > 0}"
+                                                    step="1">
+                                            </b-form-input>
+                                            <small v-show="errors.length > 0" class="text-danger">
+                                                {{ errors[0] }}
+                                            </small>
+                                        </b-form-group>
+                                    </ValidationProvider>
                                 </b-col>
                                 <b-col lg="4">
                                     <b-form-group
@@ -180,7 +200,7 @@
                             </b-col>
                         </b-row>
                     </fieldset>
-                </b-form>
+                </ValidationObserver>
             </b-card>
         </b-col>
     </b-row>
@@ -222,7 +242,7 @@
         }
       },
       async generateToken () {
-        this.$validator.validateAll().then(async (result) => {
+        this.$refs.observer.validate().then(async (result) => {
           if (result) {
             if (!this.metamask.installed) {
               alert('To create a Token please install MetaMask!');
@@ -278,7 +298,7 @@
                         this.$forceUpdate();
                       }
                     }
-                  }
+                  },
                 );
               }, 500);
             } catch (e) {
@@ -299,7 +319,7 @@
           /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
           function (m, key, value) { // callback
             vars[key] = value !== undefined ? value : '';
-          }
+          },
         );
 
         if (param) {
