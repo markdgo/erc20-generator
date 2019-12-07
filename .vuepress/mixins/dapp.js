@@ -19,6 +19,7 @@ export default {
           3: 'ropsten',
           4: 'rinkeby',
           42: 'kovan',
+          5: 'goerli',
         },
         list: {
           mainnet: {
@@ -45,6 +46,12 @@ export default {
             id: '42',
             name: 'Kovan Test Network',
           },
+          goerli: {
+            web3Provider: 'https://goerli.infura.io/v3/12ca5f4d25964a428951747cf4cd5660',
+            etherscanLink: 'https://goerli.etherscan.io',
+            id: '5',
+            name: 'Goerli Test Network',
+          },
         },
       },
       contracts: {
@@ -55,7 +62,9 @@ export default {
   methods: {
     initWeb3 (network, checkWeb3) {
       if (!this.network.list.hasOwnProperty(network)) { // eslint-disable-line no-prototype-builtins
-        throw new Error(`Failed initializing network ${network}. Allowed values are mainnet, ropsten and rinkeby.`);
+        throw new Error(
+          `Failed initializing network ${network}. Allowed values are ${Object.keys(this.network.list)}.`
+        );
       }
 
       return new Promise((resolve) => {
