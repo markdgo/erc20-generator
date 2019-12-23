@@ -1,4 +1,4 @@
-pragma solidity ^0.5.12;
+pragma solidity ^0.5.15;
 
 import "ico-maker/contracts/token/ERC1363/BaseERC1363Token.sol";
 

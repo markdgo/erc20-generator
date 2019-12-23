@@ -1,12 +1,12 @@
 # ERC20 Token Generator
 
-[![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator) 
+[![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator)
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 [![MIT licensed](https://img.shields.io/github/license/vittominacori/erc20-generator.svg)](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE)
 
 A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.
 
-Token has a Role Based Access Control so you can add the `minter` permission to users or Smart Contracts. 
+Token has a Role Based Access Control so you can add the `minter` permission to users or Smart Contracts.
 
 Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `operator` allowed to transfer also if not enabled.
 
@@ -36,10 +36,10 @@ npm run console
 npm run compile
 ```
 
-#### Test 
+#### Test
 
 ```bash
-npm run test 
+npm run test
 ```
 
 ### Usage (using Buidler)
@@ -56,10 +56,10 @@ npm run buidler:console
 npm run buidler:compile
 ```
 
-#### Test 
+#### Test
 
 ```bash
-npm run buidler:test 
+npm run buidler:test
 ```
 
 ### Code Coverage
@@ -102,7 +102,7 @@ npm run flat
 
 Use the dist smart contracts [dist/ERC20Token.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol)
 
-Solc version is 0.5.12
+Solc version is 0.5.15
 
 
 ## License
