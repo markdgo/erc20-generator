@@ -5,7 +5,7 @@
                 <ul>
                     <li>
                         Source Code:
-                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/dist/ERC20Token.dist.sol"
+                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/v2.4.2/dist/ERC20Token.dist.sol"
                                 target="_blank">
                             <b>ERC20Token.dist.sol</b>
                         </b-link>
