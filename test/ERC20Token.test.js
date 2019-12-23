@@ -18,7 +18,7 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, operator, recip
     describe('as a ERC20Capped', function () {
       it('requires a non-zero cap', async function () {
         await expectRevert.unspecified(
-          ERC20Token.new(_name, _symbol, _decimals, 0, _initialSupply, false, { from: owner })
+          ERC20Token.new(_name, _symbol, _decimals, 0, _initialSupply, false, { from: owner }),
         );
       });
     });
@@ -65,7 +65,7 @@ contract('ERC20Token', function ([owner, anotherAccount, minter, operator, recip
 
     shouldBehaveLikeBaseERC20Token(
       [owner, anotherAccount, minter, operator, recipient, thirdParty],
-      [_name, _symbol, _decimals, _cap, _initialSupply]
+      [_name, _symbol, _decimals, _cap, _initialSupply],
     );
   });
 
