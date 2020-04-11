@@ -109,17 +109,17 @@
                             <b-row>
                                 <b-col lg="4">
                                     <ValidationProvider
-                                            name="token cap"
+                                            name="token max supply"
                                             :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
                                             v-slot="{ errors }">
                                         <b-form-group
                                                 description="Insert the maximum number of tokens available."
-                                                label="Token cap *"
+                                                label="Max supply *"
                                                 label-for="tokenCap">
                                             <b-form-input
                                                     id="tokenCap"
                                                     name="tokenCap"
-                                                    placeholder="Your token cap"
+                                                    placeholder="Your token max supply"
                                                     v-model.trim="token.cap"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
@@ -132,17 +132,17 @@
                                 </b-col>
                                 <b-col lg="4">
                                     <ValidationProvider
-                                            name="token initial balance"
+                                            name="token initial supply"
                                             :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
                                             v-slot="{ errors }">
                                         <b-form-group
                                                 description="Insert the initial number of tokens available. Will be put in your account."
-                                                label="Token initial balance *"
+                                                label="Initial supply *"
                                                 label-for="tokenInitialBalance">
                                             <b-form-input
                                                     id="tokenInitialBalance"
                                                     name="tokenInitialBalance"
-                                                    placeholder="Your token initial balance"
+                                                    placeholder="Your token initial supply"
                                                     v-model.trim="token.initialBalance"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
