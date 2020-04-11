@@ -26,20 +26,20 @@
     "web3": "0.20.6"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.2.0",
-    "babel-eslint": "^10.0.3",
-    "bootstrap-vue": "^2.1.0",
+    "@vuepress/plugin-google-analytics": "^1.4.0",
+    "babel-eslint": "^10.1.0",
+    "bootstrap-vue": "^2.11.0",
     "eslint": "^6.8.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^6.0.1",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "vee-validate": "^3.2.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2",
+    "vee-validate": "^3.2.5",
     "vue-eslint-parser": "^7.0.0",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.4.0"
   }
 }

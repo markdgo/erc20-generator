@@ -20,8 +20,8 @@
                     Donate
                 </b-nav-item>
                 <b-nav-item-dropdown text="GitHub" right>
-                    <b-dropdown-item target="_blank" href="https://github.com/vittominacori/erc20-generator">Smart
-                        Contracts
+                    <b-dropdown-item target="_blank" href="https://github.com/vittominacori/erc20-generator">
+                        Smart Contracts
                     </b-dropdown-item>
                     <b-dropdown-item target="_blank" href="https://github.com/vittominacori/erc20-generator/tree/dapp">
                         DApp

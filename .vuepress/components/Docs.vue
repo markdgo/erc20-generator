@@ -5,7 +5,7 @@
                 <ul>
                     <li>
                         Source Code:
-                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/v2.4.3/dist/ERC20Token.dist.sol"
+                        <b-link :href="sourceCode"
                                 target="_blank">
                             <b>ERC20Token.dist.sol</b>
                         </b-link>
@@ -94,6 +94,7 @@
     ],
     data () {
       return {
+        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v2.4.3/dist/ERC20Token.dist.sol',
         loading: true,
         currentNetwork: null,
       };
