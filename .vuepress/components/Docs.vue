@@ -7,7 +7,7 @@
                         Source Code:
                         <b-link :href="sourceCode"
                                 target="_blank">
-                            <b>ERC20Token.dist.sol</b>
+                            <b>BaseToken.dist.sol</b>
                         </b-link>
                     </li>
                     <li>Contract Name: <b>{{ contracts.token.contractName }}</b></li>
@@ -51,30 +51,28 @@
                             sent into the contract for error.
                         </li>
                     </ul>
-                    <b-alert show variant="warning">
-                        <strong>
-                            NOTE: If you don't enable transfer during  deploy, tokens won't be transferable
-                            until you call the <i>enableTransfer</i> function.
-                        </strong><br>
-                        Only people (or smart contract) with <i>Operator</i> role will be able to transfer tokens.<br>
-                        Contract creator will be Operator by default, so he can transfer tokens also when transfer
-                        is not enabled.<br>You can also add or remove the Operator role to addresses.<br>
-                        This is because, by business choices, you may decide not to enable transfer until a
-                        specific time.
-                    </b-alert>
                 </b-card-text>
             </b-card>
             <b-card bg-variant="light" title="Methods" class="mt-4">
-                <b-card v-for="(method, methodName) in contracts.token.devdoc.methods" :title="methodName"
-                        :sub-title="method.details" :key="methodName" class="mt-4">
-                    <b-card-text v-if="method.return">
-                        <b>Returns:</b> {{ method.return }}
-                    </b-card-text>
+                <b-card v-for="(method, methodName) in contracts.token.devdoc.methods"
+                        v-if="methodName !== 'constructor'"
+                        :title="methodName"
+                        :sub-title="method.details"
+                        :key="methodName"
+                        class="mt-4">
                     <b-card-text v-if="method.params">
                         <b>Params:</b>
                         <ul>
                             <li v-for="(param, paramName) in method.params" :key="paramName">
                                 <b>{{ paramName }}:</b> {{ param }}
+                            </li>
+                        </ul>
+                    </b-card-text>
+                    <b-card-text v-if="method.returns">
+                        <b>Returns:</b>
+                        <ul>
+                            <li v-for="(pName, pKey) in method.returns" :key="pKey">
+                                {{ pName }}
                             </li>
                         </ul>
                     </b-card-text>
@@ -94,7 +92,7 @@
     ],
     data () {
       return {
-        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v2.4.3/dist/ERC20Token.dist.sol',
+        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.0.1/dist/BaseToken.dist.sol',
         loading: true,
         currentNetwork: null,
       };

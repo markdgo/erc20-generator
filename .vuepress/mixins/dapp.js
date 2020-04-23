@@ -1,5 +1,5 @@
 import config from '../config';
-import TokenArtifact from '../abi/ERC20Token.json';
+import TokenArtifact from '../abi/BaseToken.json';
 
 export default {
   data () {

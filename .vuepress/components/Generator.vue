@@ -121,6 +121,7 @@
                                                     name="tokenCap"
                                                     placeholder="Your token max supply"
                                                     v-model.trim="token.cap"
+                                                    v-on:update="updateInitialBalance"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
                                             </b-form-input>
@@ -143,6 +144,7 @@
                                                     id="tokenInitialBalance"
                                                     name="tokenInitialBalance"
                                                     placeholder="Your token initial supply"
+                                                    :disabled="finishMinting"
                                                     v-model.trim="token.initialBalance"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
@@ -183,13 +185,37 @@
                                             NOTE: If you don't enable transfer during deploy, tokens won't be
                                             transferable until you call the <i>enableTransfer</i> function.
                                         </strong><br>
-                                        Only people (or smart contract) with <i>Operator</i> role will be able to
+                                        Only people (or smart contract) with <i>OPERATOR</i> role will be able to
                                         transfer tokens.<br>
-                                        Contract creator will be Operator by default, so he can transfer tokens also
+                                        Contract creator will be OPERATOR by default, so he can transfer tokens also
                                         when transfer is not enabled.<br>
-                                        You can also add or remove the Operator role to addresses.<br>
+                                        You can also add or remove the OPERATOR role to addresses.<br>
                                         This is because, by business choices, you may decide not to enable transfer
                                         until a specific time.
+                                    </b-alert>
+                                </b-col>
+                            </b-row>
+                            <b-row>
+                                <b-col lg="12">
+                                    <b-form-group
+                                            description="Choose to disable minting during deploy or disable manually later."
+                                            label="Disable minting"
+                                            label-for="finishMinting">
+                                        <b-form-select id="network"
+                                                       v-model="finishMinting"
+                                                       v-on:change="updateInitialBalance">
+                                            <option :value="false">Disable minting manually later</option>
+                                            <option :value="true">Disable minting during deploy</option>
+                                        </b-form-select>
+                                    </b-form-group>
+
+                                    <b-alert show variant="warning" v-if="finishMinting === true">
+                                        <strong>
+                                            NOTE: If you disable minting during deploy, you can't generate
+                                            other tokens. Your initial supply will be equal to total supply.
+                                        </strong><br>
+                                        When you decide to disable minting you must call the <i>finishMinting</i>
+                                        function. Until you disable you can generate tokens up to your total supply.
                                     </b-alert>
                                 </b-col>
                             </b-row>
@@ -221,8 +247,15 @@
         trxHash: '',
         makingTransaction: false,
         formDisabled: false,
-        token: {},
+        token: {
+          name: '',
+          symbol: '',
+          decimals: 18,
+          cap: '',
+          initialBalance: '',
+        },
         enableTransfer: true,
+        finishMinting: false,
       };
     },
     mounted () {
@@ -260,6 +293,7 @@
             const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
             const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals)); // eslint-disable-line max-len
             const enableTransfer = this.enableTransfer;
+            const finishMinting = this.finishMinting;
 
             try {
               this.trxHash = '';
@@ -278,11 +312,13 @@
                   cap,
                   initialBalance,
                   enableTransfer,
+                  finishMinting,
                   {
                     from: this.web3.eth.coinbase,
                     data: this.contracts.token.bytecode,
                   }, (e, tokenContract) => {
                     if (e) {
+                      console.log(e); // eslint-disable-line no-console
                       this.makingTransaction = false;
                       this.formDisabled = false;
                     } else {
@@ -312,6 +348,9 @@
           this.makingTransaction = false;
           alert('Some error occurred.');
         });
+      },
+      updateInitialBalance () {
+        this.token.initialBalance = this.finishMinting ? this.token.cap : this.token.initialBalance;
       },
       getParam (param) {
         const vars = {};
