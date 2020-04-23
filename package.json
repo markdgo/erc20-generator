@@ -1,6 +1,6 @@
 {
   "name": "erc20-generator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "main": "truffle-config.js",
   "directories": {
@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "3.0.0",
-    "erc-payable-token": "3.0.1",
+    "erc-payable-token": "3.0.2",
     "eth-token-recover": "3.0.1"
   }
 }

@@ -21,7 +21,14 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
     string public constant BUILT_ON = "https://vittominacori.github.io/erc20-generator";
 
+    /**
+     * @dev Emitted during finish minting
+     */
     event MintFinished();
+
+    /**
+     * @dev Emitted during transfer enabling
+     */
     event TransferEnabled();
 
     /**
@@ -100,18 +107,18 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
     }
 
     /**
-     * @dev Function to mint tokens
-     * @param to The address that will receive the minted tokens.
-     * @param value The amount of tokens to mint.
+     * @dev Function to mint tokens.
+     * @param to The address that will receive the minted tokens
+     * @param value The amount of tokens to mint
      */
     function mint(address to, uint256 value) public canMint onlyMinter {
         _mint(to, value);
     }
 
     /**
-     * @dev Transfer token to a specified address
-     * @param to The address to transfer to.
-     * @param value The amount to be transferred.
+     * @dev Transfer tokens to a specified address.
+     * @param to The address to transfer to
+     * @param value The amount to be transferred
      * @return A boolean that indicates if the operation was successful.
      */
     function transfer(address to, uint256 value) public virtual override(ERC20) canTransfer(_msgSender()) returns (bool) {
@@ -120,9 +127,9 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
     /**
      * @dev Transfer tokens from one address to another.
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     * @param value uint256 the amount of tokens to be transferred
+     * @param from The address which you want to send tokens from
+     * @param to The address which you want to transfer to
+     * @param value the amount of tokens to be transferred
      * @return A boolean that indicates if the operation was successful.
      */
     function transferFrom(address from, address to, uint256 value) public virtual override(ERC20) canTransfer(from) returns (bool) {
@@ -139,8 +146,8 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
     }
 
     /**
-   * @dev Function to enable transfers.
-   */
+     * @dev Function to enable transfers.
+     */
     function enableTransfer() public onlyOwner {
         _transferEnabled = true;
 
