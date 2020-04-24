@@ -1,7 +1,7 @@
 <template>
     <b-row>
         <b-col lg="10" offset-lg="1" class="mt-4 p-0" v-if="!loading">
-            <b-card bg-variant="light" title="Token Details">
+            <b-card bg-variant="light" header="Token Details" header-bg-variant="dark" header-text-variant="white">
                 <ul>
                     <li>
                         Source Code:
@@ -23,7 +23,7 @@
                               v-model="contracts.token.stringifiedAbi"></textarea>
                 </div>
             </b-card>
-            <b-card bg-variant="light" title="Token documentation" class="mt-4">
+            <b-card bg-variant="light" header="Token documentation" header-bg-variant="dark" header-text-variant="white" class="mt-3">
                 <b-card-text>
                     Your token will have the following properties: <br><br>
                     <ul>
@@ -53,10 +53,10 @@
                     </ul>
                 </b-card-text>
             </b-card>
-            <b-card bg-variant="light" title="Methods" class="mt-4">
+            <b-card bg-variant="light" header="Methods" header-bg-variant="dark" header-text-variant="white" class="mt-3">
                 <b-card v-for="(method, methodName) in contracts.token.devdoc.methods"
                         v-if="methodName !== 'constructor'"
-                        :title="methodName"
+                        :header="methodName"
                         :sub-title="method.details"
                         :key="methodName"
                         class="mt-4">

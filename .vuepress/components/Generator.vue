@@ -1,38 +1,23 @@
 <template>
     <b-row>
         <b-col lg="10" offset-lg="1" class="mt-4 p-0">
-            <b-card bg-variant="light" v-if="!loading" :title="$site.title">
+            <b-card v-if="!loading" :title="$site.title" bg-variant="transparent" border-variant="0">
                 <p class="card-text">
                     {{ $site.description }}
                 </p>
+
                 <small v-if="!metamask.installed">
-                    You need the <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.
+                    You need <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.
                 </small>
-
-                <b-alert variant="success" :show="makingTransaction" class="mt-3">
-                    <div>Making transaction.</div>
-                    <div v-if="!trxHash">Please wait...</div>
-                    <div v-else>
-                        <b>Well! Transaction done!</b><br>
-                        Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span></a><br>
-
-                        Retrieving Token.
-                        <div v-if="!token.address">Please wait...</div>
-                        <div v-else>
-                            <b>Your Token</b>
-                            <b-link :href="token.link" target="_blank"><span v-html="token.address"></span></b-link>
-                        </div>
-                    </div>
-                </b-alert>
 
                 <ValidationObserver
                         ref="observer"
-                        v-if="!makingTransaction"
                         tag="form"
                         @submit.prevent="generateToken()"
+                        v-if="!makingTransaction"
                         class="mt-3">
                     <fieldset :disabled="formDisabled">
-                        <b-card>
+                        <b-card header="Token Attributes" header-bg-variant="dark" header-text-variant="white">
                             <b-row>
                                 <b-col lg="4">
                                     <ValidationProvider
@@ -48,6 +33,7 @@
                                                     name="tokenName"
                                                     placeholder="Your token name"
                                                     v-model.trim="token.name"
+                                                    size="lg"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     maxlength="20">
                                             </b-form-input>
@@ -63,7 +49,7 @@
                                             :rules="{ required: true }"
                                             v-slot="{ errors }">
                                         <b-form-group
-                                                description="Choose a symbol for your token (usually 3-4 chars)."
+                                                description="Choose a symbol for your token (usually 3-5 chars)."
                                                 label="Token symbol *"
                                                 label-for="tokenSymbol">
                                             <b-form-input
@@ -71,6 +57,7 @@
                                                     name="tokenSymbol"
                                                     placeholder="Your token symbol"
                                                     v-model.trim="token.symbol"
+                                                    size="lg"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     maxlength="5">
                                             </b-form-input>
@@ -94,6 +81,7 @@
                                                     name="tokenDecimals"
                                                     placeholder="Your token decimals"
                                                     v-model.trim="token.decimals"
+                                                    size="lg"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
                                             </b-form-input>
@@ -105,22 +93,23 @@
                                 </b-col>
                             </b-row>
                         </b-card>
-                        <b-card class="mt-3">
+                        <b-card class="mt-3" header="Token Supply" header-bg-variant="dark" header-text-variant="white">
                             <b-row>
-                                <b-col lg="4">
+                                <b-col lg="6">
                                     <ValidationProvider
                                             name="token max supply"
                                             :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
                                             v-slot="{ errors }">
                                         <b-form-group
                                                 description="Insert the maximum number of tokens available."
-                                                label="Max supply *"
+                                                label="Total supply *"
                                                 label-for="tokenCap">
                                             <b-form-input
                                                     id="tokenCap"
                                                     name="tokenCap"
                                                     placeholder="Your token max supply"
                                                     v-model.trim="token.cap"
+                                                    size="lg"
                                                     v-on:update="updateInitialBalance"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
@@ -131,7 +120,7 @@
                                         </b-form-group>
                                     </ValidationProvider>
                                 </b-col>
-                                <b-col lg="4">
+                                <b-col lg="6">
                                     <ValidationProvider
                                             name="token initial supply"
                                             :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
@@ -146,6 +135,7 @@
                                                     placeholder="Your token initial supply"
                                                     :disabled="finishMinting"
                                                     v-model.trim="token.initialBalance"
+                                                    size="lg"
                                                     :class="{'is-invalid': errors.length > 0}"
                                                     step="1">
                                             </b-form-input>
@@ -155,36 +145,48 @@
                                         </b-form-group>
                                     </ValidationProvider>
                                 </b-col>
-                                <b-col lg="4">
+                            </b-row>
+                        </b-card>
+                        <b-card class="mt-3" header="Advanced" header-bg-variant="dark" header-text-variant="white">
+                            <b-row>
+                                <b-col lg="12">
                                     <b-form-group
                                             description="Choose your Network."
                                             label="Network *"
                                             label-for="network">
-                                        <b-form-select id="network" v-model="currentNetwork" @input="initDapp">
+                                        <b-form-select id="network"
+                                                       v-model="currentNetwork"
+                                                       size="lg"
+                                                       @input="initDapp">
                                             <option v-for="(n, k) in network.list" :value="k">{{ n.name }}</option>
                                         </b-form-select>
                                     </b-form-group>
+
+                                    <b-alert show variant="warning" v-if="currentNetwork !== 'mainnet'">
+                                        <strong>
+                                            You selected a TEST Network.
+                                        </strong>
+                                    </b-alert>
                                 </b-col>
                             </b-row>
-                        </b-card>
-                        <b-card class="mt-3">
                             <b-row>
                                 <b-col lg="12">
                                     <b-form-group
                                             description="Choose to enable transfer during deploy or enable manually later."
-                                            label="Enable transfer"
                                             label-for="enableTransfer">
-                                        <b-form-select id="network" v-model="enableTransfer">
-                                            <option :value="true">Enable transfer during deploy</option>
-                                            <option :value="false">Enable transfer manually later</option>
-                                        </b-form-select>
+                                        <b-form-checkbox v-model="enableTransfer"
+                                                         size="lg"
+                                                         switch>
+                                            Enable transfer
+                                        </b-form-checkbox>
                                     </b-form-group>
 
                                     <b-alert show variant="warning" v-if="enableTransfer === false">
                                         <strong>
-                                            NOTE: If you don't enable transfer during deploy, tokens won't be
+                                            If you don't enable transfer during deploy, tokens won't be
                                             transferable until you call the <i>enableTransfer</i> function.
-                                        </strong><br>
+                                        </strong>
+                                        <hr>
                                         Only people (or smart contract) with <i>OPERATOR</i> role will be able to
                                         transfer tokens.<br>
                                         Contract creator will be OPERATOR by default, so he can transfer tokens also
@@ -199,21 +201,21 @@
                                 <b-col lg="12">
                                     <b-form-group
                                             description="Choose to disable minting during deploy or disable manually later."
-                                            label="Disable minting"
                                             label-for="finishMinting">
-                                        <b-form-select id="network"
-                                                       v-model="finishMinting"
-                                                       v-on:change="updateInitialBalance">
-                                            <option :value="false">Disable minting manually later</option>
-                                            <option :value="true">Disable minting during deploy</option>
-                                        </b-form-select>
+                                        <b-form-checkbox v-model="finishMinting"
+                                                         size="lg"
+                                                         v-on:input="updateInitialBalance"
+                                                         switch>
+                                            Disable minting
+                                        </b-form-checkbox>
                                     </b-form-group>
 
                                     <b-alert show variant="warning" v-if="finishMinting === true">
                                         <strong>
-                                            NOTE: If you disable minting during deploy, you can't generate
+                                            If you disable minting during deploy, you can't generate
                                             other tokens. Your initial supply will be equal to total supply.
-                                        </strong><br>
+                                        </strong>
+                                        <hr>
                                         When you decide to disable minting you must call the <i>finishMinting</i>
                                         function. Until you disable you can generate tokens up to your total supply.
                                     </b-alert>
@@ -222,11 +224,30 @@
                         </b-card>
                         <b-row class="mt-3">
                             <b-col lg="12">
-                                <b-button variant="success" size="lg" type="submit">Create Token</b-button>
+                                <b-button variant="dark" size="lg" type="submit">Create Token</b-button>
                             </b-col>
                         </b-row>
                     </fieldset>
                 </ValidationObserver>
+
+                <b-card header="Making transaction..."
+                        header-bg-variant="info"
+                        header-text-variant="white"
+                        v-if="makingTransaction"
+                        class="mt-3">
+                    <div v-if="!trxHash">Please wait...</div>
+                    <div v-else>
+                        <b>Well! Transaction done!</b><br>
+                        Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span></a><br>
+
+                        Retrieving Token.
+                        <div v-if="!token.address">Please wait...</div>
+                        <div v-else>
+                            <b>Your Token</b>
+                            <b-link :href="token.link" target="_blank"><span v-html="token.address"></span></b-link>
+                        </div>
+                    </div>
+                </b-card>
             </b-card>
         </b-col>
     </b-row>
@@ -321,6 +342,7 @@
                       console.log(e); // eslint-disable-line no-console
                       this.makingTransaction = false;
                       this.formDisabled = false;
+                      alert('Some error occurred. Inspect console and report.');
                     } else {
                       // NOTE: The callback will fire twice!
                       // Once the contract has the transactionHash property
