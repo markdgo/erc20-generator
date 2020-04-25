@@ -29,7 +29,7 @@
             </b-button>
         </b-jumbotron>
         <b-row>
-            <b-col lg="10" offset-lg="1" class="mt-4 p-0">
+            <b-col lg="10" offset-lg="1" class="my-3 p-0">
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
                     <b-alert show variant="warning" v-if="!metamask.installed">
                         You need <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.
@@ -59,12 +59,14 @@
                             ref="observer"
                             tag="form"
                             @submit.prevent="generateToken()"
-                            v-if="!makingTransaction"
-                            class="mt-3">
+                            v-if="!makingTransaction">
                         <fieldset :disabled="formDisabled">
-                            <b-card header="Token Attributes" header-bg-variant="dark" header-text-variant="white">
-                                <b-row>
-                                    <b-col lg="4">
+                            <b-row>
+                                <b-col lg="4">
+                                    <b-card header="Token Details"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            class="mt-3">
                                         <ValidationProvider
                                                 name="token name"
                                                 :rules="{ required: true }"
@@ -87,8 +89,7 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-                                    </b-col>
-                                    <b-col lg="4">
+
                                         <ValidationProvider
                                                 name="token symbol"
                                                 :rules="{ required: true }"
@@ -111,8 +112,7 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-                                    </b-col>
-                                    <b-col lg="4">
+
                                         <ValidationProvider
                                                 name="token decimals"
                                                 :rules="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
@@ -135,13 +135,7 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-                                    </b-col>
-                                </b-row>
-                            </b-card>
-                            <b-card class="mt-3" header="Token Supply" header-bg-variant="dark"
-                                    header-text-variant="white">
-                                <b-row>
-                                    <b-col lg="6">
+
                                         <ValidationProvider
                                                 name="token max supply"
                                                 :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
@@ -165,8 +159,7 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-                                    </b-col>
-                                    <b-col lg="6">
+
                                         <ValidationProvider
                                                 name="token initial supply"
                                                 :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
@@ -190,89 +183,112 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-                                    </b-col>
-                                </b-row>
-                            </b-card>
-                            <b-card class="mt-3" header="Advanced" header-bg-variant="dark" header-text-variant="white">
-                                <b-row>
-                                    <b-col lg="12">
-                                        <b-form-group
-                                                description="Choose your Network."
-                                                label="Network *"
-                                                label-for="network">
-                                            <b-form-select id="network"
-                                                           v-model="currentNetwork"
-                                                           size="lg"
-                                                           @input="initDapp">
-                                                <option v-for="(n, k) in network.list" :value="k">{{ n.name }}</option>
-                                            </b-form-select>
-                                        </b-form-group>
+                                    </b-card>
+                                </b-col>
+                                <b-col lg="8">
+                                    <b-card header="Advanced"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            class="mt-3">
+                                        <b-row>
+                                            <b-col lg="12">
+                                                <b-form-group
+                                                        description="Choose your Network."
+                                                        label="Network *"
+                                                        label-for="network">
+                                                    <b-form-select id="network"
+                                                                   v-model="currentNetwork"
+                                                                   size="lg"
+                                                                   @input="initDapp">
+                                                        <option v-for="(n, k) in network.list" :value="k">{{ n.name }}
+                                                        </option>
+                                                    </b-form-select>
+                                                </b-form-group>
 
-                                        <b-alert show variant="info" v-if="currentNetwork !== 'mainnet'">
-                                            <strong>
-                                                You selected a TEST Network.
-                                            </strong>
-                                            <hr>
-                                            To deploy on Main Network you must select Main Ethereum Network.
-                                        </b-alert>
-                                    </b-col>
-                                </b-row>
-                                <b-row>
-                                    <b-col lg="12">
-                                        <b-form-group
-                                                description="Choose to enable transfer during deploy or enable manually later."
-                                                label-for="enableTransfer">
-                                            <b-form-checkbox v-model="enableTransfer"
-                                                             size="lg"
-                                                             switch>
-                                                Enable transfer
-                                            </b-form-checkbox>
-                                        </b-form-group>
+                                                <b-alert show variant="warning" v-if="currentNetwork !== 'mainnet'">
+                                                    <strong>
+                                                        You selected a TEST Network.
+                                                    </strong>
+                                                    <hr>
+                                                    To deploy on Main Network you must select Main Ethereum Network.
+                                                </b-alert>
+                                            </b-col>
+                                        </b-row>
+                                        <b-row>
+                                            <b-col lg="12">
+                                                <b-form-group
+                                                        description="Choose to enable transfer during deploy or enable manually later."
+                                                        label-for="enableTransfer">
+                                                    <b-form-checkbox v-model="enableTransfer"
+                                                                     size="lg"
+                                                                     switch>
+                                                        Enable transfer
+                                                    </b-form-checkbox>
+                                                </b-form-group>
 
-                                        <b-alert show variant="warning" v-if="enableTransfer === false">
-                                            <strong>
-                                                If you don't enable transfer during deploy, tokens won't be
-                                                transferable until you call the <i>enableTransfer</i> function.
-                                            </strong>
-                                            <hr>
-                                            Only people (or smart contract) with <i>OPERATOR</i> role will be able to
-                                            transfer tokens.<br>
-                                            Contract creator will be OPERATOR by default, so he can transfer tokens also
-                                            when transfer is not enabled.<br>
-                                            You can also add or remove the OPERATOR role to addresses.<br>
-                                            This is because, by business choices, you may decide not to enable transfer
-                                            until a specific time.
-                                        </b-alert>
-                                    </b-col>
-                                </b-row>
-                                <b-row>
-                                    <b-col lg="12">
-                                        <b-form-group
-                                                description="Choose to disable minting during deploy or disable manually later."
-                                                label-for="finishMinting">
-                                            <b-form-checkbox v-model="finishMinting"
-                                                             size="lg"
-                                                             v-on:input="updateInitialBalance"
-                                                             switch>
-                                                Disable minting
-                                            </b-form-checkbox>
-                                        </b-form-group>
+                                                <b-alert show variant="warning" v-if="!enableTransfer">
+                                                    <strong>
+                                                        Tokens won't be transferable until you call the
+                                                        <i>enableTransfer</i> function.
+                                                    </strong>
+                                                    <hr>
+                                                    Only people (or smart contracts) with <i>OPERATOR</i> role will be
+                                                    able to transfer tokens.<br>
+                                                    Contract creator will be OPERATOR by default, so he can transfer
+                                                    tokens also when transfer is not enabled.<br>
+                                                    You can also add or remove the OPERATOR role to addresses.<br>
+                                                    This is because, by business choices, you may decide not to enable
+                                                    transfer until a specific time.
+                                                </b-alert>
+                                                <b-alert show variant="info" v-if="enableTransfer">
+                                                    <strong>
+                                                        Everyone will be able to transfer tokens after deploy.
+                                                    </strong>
+                                                    <hr>
+                                                    If you decide not to enable transfer until a specific time,
+                                                    disable this option and call the
+                                                    <i>enableTransfer</i> function manually later.
+                                                </b-alert>
+                                            </b-col>
+                                        </b-row>
+                                        <b-row>
+                                            <b-col lg="12">
+                                                <b-form-group
+                                                        description="Choose to disable minting during deploy or disable manually later."
+                                                        label-for="finishMinting">
+                                                    <b-form-checkbox v-model="finishMinting"
+                                                                     size="lg"
+                                                                     v-on:input="updateInitialBalance"
+                                                                     switch>
+                                                        Disable minting
+                                                    </b-form-checkbox>
+                                                </b-form-group>
 
-                                        <b-alert show variant="warning" v-if="finishMinting === true">
-                                            <strong>
-                                                If you disable minting during deploy, you can't generate
-                                                other tokens. Your initial supply will be equal to total supply.
-                                            </strong>
-                                            <hr>
-                                            When you decide to disable minting you must call the <i>finishMinting</i>
-                                            function. Until you disable you can generate tokens up to your total supply.
-                                        </b-alert>
-                                    </b-col>
-                                </b-row>
-                            </b-card>
-                            <b-row class="mt-3">
-                                <b-col lg="12">
-                                    <b-button variant="warning" size="lg" type="submit">Create Token</b-button>
+                                                <b-alert show variant="warning" v-if="finishMinting">
+                                                    <strong>
+                                                        You won't be able to generate other tokens.
+                                                    </strong>
+                                                    <hr>
+                                                    Your initial supply will be equal to total supply.
+                                                </b-alert>
+                                                <b-alert show variant="info" v-if="!finishMinting">
+                                                    <strong>
+                                                        You will be able to generate tokens up to your total supply.
+                                                    </strong>
+                                                    <hr>
+                                                    You can add or remove the MINTER role to addresses.<br>
+                                                    When you decide to disable minting you must call the
+                                                    <i>finishMinting</i> function manually.
+                                                </b-alert>
+                                            </b-col>
+                                        </b-row>
+                                    </b-card>
+
+                                    <b-row class="mt-3">
+                                        <b-col lg="12" class="text-right">
+                                            <b-button variant="warning" size="lg" type="submit">Create Token</b-button>
+                                        </b-col>
+                                    </b-row>
                                 </b-col>
                             </b-row>
                         </fieldset>
