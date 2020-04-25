@@ -45,7 +45,7 @@
                                 </li>
                                 <li><b>ERC1363 Payable Token</b>: <br>the ERC1363 is an ERC20 compatible token that
                                     can make a callback on the receiver contract to notify token transfers or token
-                                    approvals.
+                                    approvals.<br>
                                     <b-link target="_blank" href="https://vittominacori.github.io/erc1363-payable-token">
                                         Discover more
                                     </b-link>
@@ -71,25 +71,27 @@
                             header-bg-variant="dark"
                             header-text-variant="white"
                             class="mt-3">
-                        <b-card v-for="(method, methodName) in contracts.token.devdoc.methods"
-                                v-if="methodName !== 'constructor'"
-                                :header="methodName"
-                                :sub-title="method.details"
-                                :key="methodName"
+                        <b-card v-for="(method, key) in contracts.token.abi"
+                                :header="method.name || 'constructor'"
+                                :sub-title="`Type: ${method.type}`"
+                                :key="key"
                                 class="mt-4">
-                            <b-card-text v-if="method.params">
-                                <b>Params:</b>
+                            <b-card-text v-if="method.stateMutability">
+                                State Mutability: {{ method.stateMutability }}
+                            </b-card-text>
+                            <b-card-text v-if="method.inputs && method.inputs.length > 0">
+                                <p>Inputs:</p>
                                 <ul>
-                                    <li v-for="(param, paramName) in method.params" :key="paramName">
-                                        <b>{{ paramName }}:</b> {{ param }}
+                                    <li v-for="(param, key) in method.inputs" :key="key">
+                                        <b>{{ param.type }}</b> {{ param.name }}
                                     </li>
                                 </ul>
                             </b-card-text>
-                            <b-card-text v-if="method.returns">
-                                <b>Returns:</b>
+                            <b-card-text v-if="method.outputs && method.outputs.length > 0">
+                                <p>Outputs:</p>
                                 <ul>
-                                    <li v-for="(pName, pKey) in method.returns" :key="pKey">
-                                        {{ pName }}
+                                    <li v-for="(param, key) in method.outputs" :key="key">
+                                        <b>{{ param.type }}</b> {{ param.name }}
                                     </li>
                                 </ul>
                             </b-card-text>

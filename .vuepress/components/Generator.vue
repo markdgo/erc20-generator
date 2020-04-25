@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </b-card>
-                    
+
                     <ValidationObserver
                             id="token-generator"
                             ref="observer"
