@@ -1,7 +1,7 @@
 {
   "name": "erc20-generator",
-  "version": "3.0.2",
-  "description": "A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
+  "version": "3.0.3",
+  "description": "A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "main": "truffle-config.js",
   "files": [
     "contracts",
@@ -28,11 +28,20 @@
     "buidler:console": "buidler console",
     "buidler:test": "buidler test"
   },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "token",
+    "erc20",
+    "erc1363"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/vittominacori/erc20-generator.git"
   },
-  "homepage": "https://github.com/vittominacori/erc20-generator/",
+  "homepage": "https://vittominacori.github.io/erc20-generator",
   "bugs": {
     "url": "https://github.com/vittominacori/erc20-generator/issues"
   },
