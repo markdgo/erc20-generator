@@ -745,7 +745,7 @@ pragma solidity ^0.6.0;
  * @title IERC1363 Interface
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for a Payable Token contract as defined in
- *  https://github.com/ethereum/EIPs/issues/1363
+ *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
  */
 interface IERC1363 is IERC20, IERC165 {
     /*
@@ -835,7 +835,7 @@ pragma solidity ^0.6.0;
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support transferAndCall or transferFromAndCall
  *  from ERC1363 token contracts as defined in
- *  https://github.com/ethereum/EIPs/issues/1363
+ *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
  */
 interface IERC1363Receiver {
     /*
@@ -869,7 +869,7 @@ pragma solidity ^0.6.0;
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support approveAndCall
  *  from ERC1363 token contracts as defined in
- *  https://github.com/ethereum/EIPs/issues/1363
+ *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
  */
 interface IERC1363Spender {
     /*
