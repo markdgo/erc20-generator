@@ -1,11 +1,12 @@
 {
   "name": "erc20-generator",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "contracts",
+    "test"
+  ],
   "scripts": {
     "dev": "lite-server",
     "console": "truffle develop",

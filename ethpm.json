@@ -1,6 +1,6 @@
 {
   "package_name": "erc20-generator",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "authors": [
     "Vittorio Minacori (https://github.com/vittominacori)"

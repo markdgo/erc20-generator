@@ -6,14 +6,44 @@
 
 A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.
 
-Token has a Role Based Access Control so you can add the `minter` permission to users or Smart Contracts.
+Try it: [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
-Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `operator` allowed to transfer also if not enabled.
+Token has a Role Based Access Control so you can add the `MINTER` permission to users or Smart Contracts.
+
+Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `OPERATOR` allowed to transfer also if not enabled.
 
 DApp here [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
 DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp)
 
+## Install
+
+```bash
+npm install erc20-generator
+```
+
+## Usage
+
+```solidity
+pragma solidity ^0.6.0;
+
+import "erc20-generator/contracts/BaseToken.sol";
+
+contract MyToken is BaseToken {
+
+    constructor (
+        string memory name,
+        string memory symbol,
+        uint8 decimals,
+        uint256 cap,
+        uint256 initialSupply,
+        bool transferEnabled,
+        bool mintingFinished
+    ) public payable BaseToken(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
+
+  // your stuff
+}
+```
 
 ## Development
 
