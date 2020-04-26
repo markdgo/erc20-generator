@@ -7,6 +7,9 @@
                      class="mb-0"
                      fluid>
             <p>
+                <b-link href="https://www.npmjs.org/package/erc20-generator" target="_blank">
+                    <b-img src="https://img.shields.io/npm/v/erc20-generator.svg?style=flat-square"></b-img>
+                </b-link>
                 <b-link href="https://travis-ci.org/github/vittominacori/erc20-generator" target="_blank">
                     <b-img src="https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master"></b-img>
                 </b-link>

@@ -113,7 +113,7 @@
     ],
     data () {
       return {
-        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.0.1/dist/BaseToken.dist.sol',
+        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.0.4/dist/BaseToken.dist.sol',
         loading: true,
         currentNetwork: null,
       };
