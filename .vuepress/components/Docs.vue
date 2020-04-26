@@ -130,8 +130,13 @@
           this.initToken();
           this.loading = false;
         } catch (e) {
-          alert(e);
-          document.location.href = this.$withBase('/');
+          console.log(e);
+          this.makeToast(
+            'Some error occurred',
+            e,
+            'danger',
+          );
+          // document.location.href = this.$withBase('/');
         }
       },
     },

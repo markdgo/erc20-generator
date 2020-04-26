@@ -1,4 +1,4 @@
 ---
 component: Docs
-title: Documentation 
+title: Documentation | ERC20 Token Generator
 ---

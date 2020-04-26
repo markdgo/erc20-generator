@@ -1,6 +1,6 @@
 ---
 component: Home
-title: Build a Token
+title: ERC20 Token Generator | Create your Token for FREE
 ---
 
 # ERC20 Token Generator - DAPP

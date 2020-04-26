@@ -304,11 +304,13 @@
 
 <script>
   import dapp from '../mixins/dapp';
+  import utils from '../mixins/utils';
 
   export default {
     name: 'Generator',
     mixins: [
       dapp,
+      utils,
     ],
     data () {
       return {
@@ -341,19 +343,32 @@
           this.initToken();
           this.loading = false;
         } catch (e) {
-          alert(e);
-          document.location.href = this.$withBase('/');
+          console.log(e); // eslint-disable-line no-console
+          this.makeToast(
+            'Some errors occurred',
+            e,
+            'danger',
+          );
+          // document.location.href = this.$withBase('/');
         }
       },
       async generateToken () {
         this.$refs.observer.validate().then(async (result) => {
           if (result) {
             if (!this.metamask.installed) {
-              alert('To create a Token please install MetaMask!');
+              this.makeToast(
+                'Warning',
+                'To create a Token please install MetaMask!',
+                'danger',
+              );
               return;
             } else {
               if (this.metamask.netId !== this.network.current.id) {
-                alert(`Your MetaMask in on the wrong network. Please switch on ${this.network.current.name} and try again!`);
+                this.makeToast(
+                  'Warning',
+                  `Your MetaMask in on the wrong network. Please switch on ${this.network.current.name} and try again!`,
+                  'warning',
+                );
                 return;
               }
             }
@@ -392,7 +407,11 @@
                       console.log(e); // eslint-disable-line no-console
                       this.makingTransaction = false;
                       this.formDisabled = false;
-                      alert('Some error occurred. Inspect console and report.');
+                      this.makeToast(
+                        'Some error occurred',
+                        e.message,
+                        'danger',
+                      );
                     } else {
                       // NOTE: The callback will fire twice!
                       // Once the contract has the transactionHash property
@@ -405,6 +424,11 @@
                         this.token.address = tokenContract.address;
                         this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
                         this.$forceUpdate();
+                        this.makeToast(
+                          'Well done!',
+                          `Your token has been deployed at ${this.token.address}`,
+                          'success',
+                        );
                       }
                     }
                   },
@@ -413,13 +437,21 @@
             } catch (e) {
               this.makingTransaction = false;
               this.formDisabled = false;
-              alert('Some error occurred. Maybe you rejected the transaction or you have MetaMask locked!');
+              this.makeToast(
+                'Some error occurred',
+                e.message,
+                'danger',
+              );
             }
           }
         }).catch((e) => {
           console.log(e); // eslint-disable-line no-console
           this.makingTransaction = false;
-          alert('Some error occurred.');
+          this.makeToast(
+            'Some error occurred',
+            e.message,
+            'danger',
+          );
         });
       },
       updateInitialBalance () {
