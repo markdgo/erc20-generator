@@ -8,7 +8,7 @@ const { shouldBehaveLikeERC20 } = require('./ERC20.behaviour');
 const { shouldBehaveLikeERC20Capped } = require('./ERC20Capped.behaviour');
 const { shouldBehaveLikeERC20Burnable } = require('./ERC20Burnable.behaviour');
 
-function shouldBehaveLikeBaseToken (
+function shouldBehaveLikeERC20Base (
   [owner, anotherAccount, minter, operator, recipient, thirdParty],
   [_name, _symbol, _decimals, _cap, _initialSupply],
 ) {
@@ -37,7 +37,7 @@ function shouldBehaveLikeBaseToken (
     shouldBehaveLikeERC1363([owner, anotherAccount, recipient], _initialSupply);
   });
 
-  context('BaseToken token behaviours', function () {
+  context('ERC20Base token behaviours', function () {
     beforeEach(async function () {
       await this.token.grantRole((await this.token.MINTER_ROLE()), minter, { from: owner });
       await this.token.grantRole((await this.token.OPERATOR_ROLE()), operator, { from: owner });
@@ -108,7 +108,7 @@ function shouldBehaveLikeBaseToken (
           it('should fail transfer', async function () {
             await expectRevert(
               this.token.transfer(recipient, _initialSupply, { from: thirdParty }),
-              'BaseToken: transfer is not enabled or from does not have the OPERATOR role',
+              'ERC20Base: transfer is not enabled or from does not have the OPERATOR role',
             );
           });
 
@@ -116,7 +116,7 @@ function shouldBehaveLikeBaseToken (
             await this.token.approve(anotherAccount, _initialSupply, { from: thirdParty });
             await expectRevert(
               this.token.transferFrom(thirdParty, recipient, _initialSupply, { from: anotherAccount }),
-              'BaseToken: transfer is not enabled or from does not have the OPERATOR role',
+              'ERC20Base: transfer is not enabled or from does not have the OPERATOR role',
             );
           });
         });
@@ -194,7 +194,7 @@ function shouldBehaveLikeBaseToken (
       it('shouldn\'t mint more tokens', async function () {
         await expectRevert(
           this.token.mint(thirdParty, 1, { from: minter }),
-          'BaseToken: minting is finished',
+          'ERC20Base: minting is finished',
         );
       });
     });
@@ -210,5 +210,5 @@ function shouldBehaveLikeBaseToken (
 }
 
 module.exports = {
-  shouldBehaveLikeBaseToken,
+  shouldBehaveLikeERC20Base,
 };

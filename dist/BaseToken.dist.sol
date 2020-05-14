@@ -745,7 +745,7 @@ pragma solidity ^0.6.0;
  * @title IERC1363 Interface
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for a Payable Token contract as defined in
- *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
+ *  https://eips.ethereum.org/EIPS/eip-1363
  */
 interface IERC1363 is IERC20, IERC165 {
     /*
@@ -835,7 +835,7 @@ pragma solidity ^0.6.0;
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support transferAndCall or transferFromAndCall
  *  from ERC1363 token contracts as defined in
- *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
+ *  https://eips.ethereum.org/EIPS/eip-1363
  */
 interface IERC1363Receiver {
     /*
@@ -869,7 +869,7 @@ pragma solidity ^0.6.0;
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support approveAndCall
  *  from ERC1363 token contracts as defined in
- *  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md
+ *  https://eips.ethereum.org/EIPS/eip-1363
  */
 interface IERC1363Spender {
     /*
@@ -1580,7 +1580,7 @@ pragma solidity ^0.6.0;
  *
  * ```
  * function foo() public {
- *     require(hasRole(MY_ROLE, _msgSender()));
+ *     require(hasRole(MY_ROLE, msg.sender));
  *     ...
  * }
  * ```
@@ -1593,6 +1593,10 @@ pragma solidity ^0.6.0;
  * that only accounts with this role will be able to grant or revoke other
  * roles. More complex role relationships can be created by using
  * {_setRoleAdmin}.
+ *
+ * WARNING: The `DEFAULT_ADMIN_ROLE` is also its own admin: it has permission to
+ * grant and revoke this role. Extra precautions should be taken to secure
+ * accounts that have been granted it.
  */
 abstract contract AccessControl is Context {
     using EnumerableSet for EnumerableSet.AddressSet;
@@ -1783,7 +1787,7 @@ contract Roles is AccessControl {
     }
 }
 
-// File: contracts/BaseToken.sol
+// File: contracts/token/ERC20Base.sol
 
 pragma solidity ^0.6.0;
 
@@ -1793,19 +1797,17 @@ pragma solidity ^0.6.0;
 
 
 /**
- * @title BaseToken
+ * @title ERC20Base
  * @author Vittorio Minacori (https://github.com/vittominacori)
- * @dev Implementation of the BaseToken
+ * @dev Implementation of the ERC20Base
  */
-contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
+contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
     // indicates if minting is finished
     bool private _mintingFinished = false;
 
     // indicates if transfer is enabled
     bool private _transferEnabled = false;
-
-    string public constant BUILT_ON = "https://vittominacori.github.io/erc20-generator";
 
     /**
      * @dev Emitted during finish minting
@@ -1821,7 +1823,7 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
      * @dev Tokens can be minted only before minting finished.
      */
     modifier canMint() {
-        require(!_mintingFinished, "BaseToken: minting is finished");
+        require(!_mintingFinished, "ERC20Base: minting is finished");
         _;
     }
 
@@ -1831,7 +1833,7 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
     modifier canTransfer(address from) {
         require(
             _transferEnabled || hasRole(OPERATOR_ROLE, from),
-            "BaseToken: transfer is not enabled or from does not have the OPERATOR role"
+            "ERC20Base: transfer is not enabled or from does not have the OPERATOR role"
         );
         _;
     }
@@ -1860,7 +1862,7 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
     {
         require(
             mintingFinished == false || cap == initialSupply,
-            "BaseToken: if finish minting, cap must be equal to initialSupply"
+            "ERC20Base: if finish minting, cap must be equal to initialSupply"
         );
 
         _setupDecimals(decimals);
@@ -1946,4 +1948,29 @@ contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Capped) {
         super._beforeTokenTransfer(from, to, amount);
     }
+}
+
+// File: contracts/BaseToken.sol
+
+pragma solidity ^0.6.0;
+
+
+/**
+ * @title BaseToken
+ * @author Vittorio Minacori (https://github.com/vittominacori)
+ * @dev Implementation of the BaseToken
+ */
+contract BaseToken is ERC20Base {
+
+  string public constant BUILT_ON = "https://vittominacori.github.io/erc20-generator";
+
+  constructor (
+    string memory name,
+    string memory symbol,
+    uint8 decimals,
+    uint256 cap,
+    uint256 initialSupply,
+    bool transferEnabled,
+    bool mintingFinished
+  ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
 }

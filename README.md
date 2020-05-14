@@ -29,9 +29,9 @@ npm install erc20-generator
 ```solidity
 pragma solidity ^0.6.0;
 
-import "erc20-generator/contracts/BaseToken.sol";
+import "erc20-generator/contracts/token/ERC20Base.sol";
 
-contract MyToken is BaseToken {
+contract MyToken is ERC20Base {
 
     constructor (
         string memory name,
@@ -41,7 +41,7 @@ contract MyToken is BaseToken {
         uint256 initialSupply,
         bool transferEnabled,
         bool mintingFinished
-    ) public payable BaseToken(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
+    ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
 
   // your stuff
 }

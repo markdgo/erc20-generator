@@ -1,6 +1,6 @@
 const { BN, expectRevert } = require('@openzeppelin/test-helpers');
 
-const { shouldBehaveLikeBaseToken } = require('./token/ERC20/behaviours/BaseToken.behaviour');
+const { shouldBehaveLikeERC20Base } = require('./token/ERC20/behaviours/ERC20Base.behaviour');
 
 const BaseToken = artifacts.require('BaseToken');
 
@@ -31,7 +31,7 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
       });
     });
 
-    describe('as a BaseToken', function () {
+    describe('as a ERC20Base', function () {
       describe('without initial supply', function () {
         beforeEach(async function () {
           this.token = await BaseToken.new(
@@ -133,7 +133,7 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
               true,
               { from: owner },
             ),
-            'BaseToken: if finish minting, cap must be equal to initialSupply',
+            'ERC20Base: if finish minting, cap must be equal to initialSupply',
           );
         });
 
@@ -196,7 +196,7 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
       (await this.token.BUILT_ON()).should.be.equal(_builtOn);
     });
 
-    shouldBehaveLikeBaseToken(
+    shouldBehaveLikeERC20Base(
       [owner, anotherAccount, minter, operator, recipient, thirdParty],
       [_name, _symbol, _decimals, _cap, _initialSupply],
     );
