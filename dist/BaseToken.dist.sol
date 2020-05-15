@@ -737,6 +737,8 @@ interface IERC165 {
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363.sol
 
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.6.0;
 
 
@@ -828,6 +830,8 @@ interface IERC1363 is IERC20, IERC165 {
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol
 
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.6.0;
 
 /**
@@ -861,6 +865,8 @@ interface IERC1363Receiver {
 }
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
@@ -1055,6 +1061,8 @@ contract ERC165 is IERC165 {
 }
 
 // File: erc-payable-token/contracts/token/ERC1363/ERC1363.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
@@ -1290,6 +1298,8 @@ contract Ownable is Context {
 }
 
 // File: eth-token-recover/contracts/TokenRecover.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
@@ -1762,6 +1772,8 @@ abstract contract AccessControl is Context {
 
 // File: contracts/access/Roles.sol
 
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.6.0;
 
 
@@ -1788,6 +1800,8 @@ contract Roles is AccessControl {
 }
 
 // File: contracts/token/ERC20Base.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
@@ -1951,6 +1965,8 @@ contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 }
 
 // File: contracts/BaseToken.sol
+
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
