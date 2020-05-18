@@ -18,10 +18,6 @@
                 </b-link>
             </p>
             <p>Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</p>
-            <b-alert show variant="dark">
-                NOTE: to use this app we suggest to install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
-                Use any other wallet at your own risk.
-            </b-alert>
             <hr class="my-4">
             <a class="btn btn-lg btn-outline-warning"
                href="#token-generator"
@@ -35,6 +31,11 @@
         <b-row>
             <b-col lg="10" offset-lg="1" class="my-3 p-0">
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
+                    <b-alert show variant="info">
+                        NOTE: to use this app we suggest to install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
+                        Use any other wallet at your own risk.
+                    </b-alert>
+
                     <b-card header="Making transaction..."
                             header-bg-variant="info"
                             header-text-variant="white"
