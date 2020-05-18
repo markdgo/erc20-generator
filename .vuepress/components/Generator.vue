@@ -16,11 +16,12 @@
                 <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
                     <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
                 </b-link>
-                <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/LICENSE" target="_blank">
-                    <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
-                </b-link>
             </p>
             <p>Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</p>
+            <b-alert show variant="dark">
+                NOTE: to use this app we suggest to install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
+                Use any other wallet at your own risk.
+            </b-alert>
             <hr class="my-4">
             <a class="btn btn-lg btn-outline-warning"
                href="#token-generator"
@@ -34,10 +35,6 @@
         <b-row>
             <b-col lg="10" offset-lg="1" class="my-3 p-0">
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
-                    <b-alert show variant="warning" v-if="!metamask.installed">
-                        You need <a href="https://metamask.io/" target="_blank">MetaMask</a> extension.
-                    </b-alert>
-
                     <b-card header="Making transaction..."
                             header-bg-variant="info"
                             header-text-variant="white"
@@ -128,6 +125,7 @@
                                                         id="tokenDecimals"
                                                         name="tokenDecimals"
                                                         placeholder="Your token decimals"
+                                                        type="number"
                                                         v-model.trim="token.decimals"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
@@ -151,6 +149,7 @@
                                                         id="tokenCap"
                                                         name="tokenCap"
                                                         placeholder="Your token max supply"
+                                                        type="number"
                                                         v-model.trim="token.cap"
                                                         size="lg"
                                                         v-on:update="updateInitialBalance"
@@ -175,6 +174,7 @@
                                                         id="tokenInitialBalance"
                                                         name="tokenInitialBalance"
                                                         placeholder="Your token initial supply"
+                                                        type="number"
                                                         :disabled="finishMinting"
                                                         v-model.trim="token.initialBalance"
                                                         size="lg"
