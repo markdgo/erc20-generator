@@ -29,9 +29,9 @@
             </b-button>
         </b-jumbotron>
         <b-row>
-            <b-col lg="10" offset-lg="1" class="my-3 p-0">
+            <b-col lg="10" offset-lg="1" class="mb-3 p-0">
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
-                    <b-alert show variant="info">
+                    <b-alert show variant="primary">
                         NOTE: to use this app we suggest to install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
                         Use any other wallet at your own risk.
                     </b-alert>
