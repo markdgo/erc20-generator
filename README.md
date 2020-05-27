@@ -1,51 +1,26 @@
 # ERC20 Token Generator
 
-[![NPM Package](https://img.shields.io/npm/v/erc20-generator.svg?style=flat-square)](https://www.npmjs.org/package/erc20-generator)
 [![Build Status](https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master)](https://travis-ci.org/vittominacori/erc20-generator)
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 [![MIT licensed](https://img.shields.io/github/license/vittominacori/erc20-generator.svg)](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE)
 
-A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable ERC20 Token.
+A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
 
 Token has a Role Based Access Control so you can add the `MINTER` permission to users or Smart Contracts.
 
 Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `OPERATOR` allowed to transfer also if not enabled.
 
-Token has the ERC1363 behaviors. [ERC1363](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1363.md) is an ERC20 compatible token that can make a callback on the receiver contract to notify token transfers or token approvals.
+Token has the ERC1363 behaviors. [ERC1363](https://eips.ethereum.org/EIPS/eip-1363) is an ERC20 compatible token that can make a callback on the receiver contract to notify token transfers or token approvals.
+
+Token extends from [ERC20Base](https://github.com/vittominacori/erc20-token).
+
+DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp).
 
 
-Try it: [https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
+## Try it
 
-DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp)
+[https://vittominacori.github.io/erc20-generator](https://vittominacori.github.io/erc20-generator)
 
-## Install
-
-```bash
-npm install erc20-generator
-```
-
-## Usage
-
-```solidity
-pragma solidity ^0.6.0;
-
-import "erc20-generator/contracts/token/ERC20Base.sol";
-
-contract MyToken is ERC20Base {
-
-    constructor (
-        string memory name,
-        string memory symbol,
-        uint8 decimals,
-        uint256 cap,
-        uint256 initialSupply,
-        bool transferEnabled,
-        bool mintingFinished
-    ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
-
-  // your stuff
-}
-```
 
 ## Development
 
@@ -182,7 +157,7 @@ The `sol2uml` generates UML class diagram from Solidity contracts.
 
 Use the dist smart contracts [dist/BaseToken.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol)
 
-Solc version is 0.6.6
+Solc version is 0.6.8
 
 
 ## License

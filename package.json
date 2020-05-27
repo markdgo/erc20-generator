@@ -1,8 +1,7 @@
 {
   "name": "erc20-generator",
   "version": "3.0.5-rc",
-  "description": "A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable ERC20 Token.",
-  "main": "truffle-config.js",
+  "description": "A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.",
   "files": [
     "contracts",
     "test"
@@ -61,14 +60,14 @@
     "@openzeppelin/test-helpers": "^0.5.5",
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
-    "eslint": "^7.0.0",
+    "eslint": "^7.1.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-mocha-no-only": "^1.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "ethereumjs-util": "^7.0.0",
+    "ethereumjs-util": "^7.0.2",
     "ethjs-abi": "^0.2.1",
     "ganache-cli": "^6.9.1",
     "lite-server": "^2.5.4",
@@ -77,13 +76,11 @@
     "solhint": "^3.0.0",
     "solidity-coverage": "^0.7.5",
     "surya": "^0.3.6-dev.11",
-    "truffle": "^5.1.26",
+    "truffle": "^5.1.27",
     "truffle-flattener": "^1.4.4",
-    "web3": "^1.2.7"
+    "web3": "^1.2.8"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "3.0.1",
-    "erc-payable-token": "3.0.5",
-    "eth-token-recover": "3.0.3"
+    "@vittominacori/erc20-token": "1.0.1"
   }
 }

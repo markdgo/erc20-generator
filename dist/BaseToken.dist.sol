@@ -1770,7 +1770,7 @@ abstract contract AccessControl is Context {
     }
 }
 
-// File: contracts/access/Roles.sol
+// File: @vittominacori/erc20-token/contracts/access/Roles.sol
 
 // SPDX-License-Identifier: MIT
 
@@ -1799,7 +1799,7 @@ contract Roles is AccessControl {
     }
 }
 
-// File: contracts/token/ERC20Base.sol
+// File: @vittominacori/erc20-token/contracts/ERC20Base.sol
 
 // SPDX-License-Identifier: MIT
 

@@ -1,6 +1,6 @@
 const { BN, expectRevert } = require('@openzeppelin/test-helpers');
 
-const { shouldBehaveLikeERC20Base } = require('./token/ERC20/behaviours/ERC20Base.behaviour');
+const { shouldBehaveLikeERC20Base } = require('@vittominacori/erc20-token/test/token/ERC20/behaviours/ERC20Base.behaviour'); // eslint-disable-line max-len
 
 const BaseToken = artifacts.require('BaseToken');
 

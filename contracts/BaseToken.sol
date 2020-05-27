@@ -2,7 +2,7 @@
 
 pragma solidity ^0.6.0;
 
-import "./token/ERC20Base.sol";
+import "@vittominacori/erc20-token/contracts/ERC20Base.sol";
 
 /**
  * @title BaseToken
