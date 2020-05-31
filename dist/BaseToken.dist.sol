@@ -1968,7 +1968,7 @@ contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.6.8;
 
 
 /**
@@ -1978,7 +1978,7 @@ pragma solidity ^0.6.0;
  */
 contract BaseToken is ERC20Base {
 
-  string public constant BUILT_ON = "https://vittominacori.github.io/erc20-generator";
+  string private constant _BUILT_ON = "https://vittominacori.github.io/erc20-generator/#v3.1.0";
 
   constructor (
     string memory name,
@@ -1989,4 +1989,11 @@ contract BaseToken is ERC20Base {
     bool transferEnabled,
     bool mintingFinished
   ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
+
+  /**
+   * @dev Returns the token generator tool.
+   */
+  function builtOn() public view returns (string memory) {
+    return _BUILT_ON;
+  }
 }
