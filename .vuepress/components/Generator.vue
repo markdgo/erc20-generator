@@ -11,6 +11,9 @@
                 <b-link href="https://travis-ci.org/github/vittominacori/erc20-generator" target="_blank">
                     <b-img src="https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master"></b-img>
                 </b-link>
+                <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
+                    <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
+                </b-link>
             </p>
             <p>Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</p>
             <hr class="my-4">
