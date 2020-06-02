@@ -11,7 +11,10 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
   const _cap = new BN(200000000);
   const _initialSupply = new BN(100000000);
 
-  const _builtOn = 'https://vittominacori.github.io/erc20-generator/#v3.1.0';
+  const _builtOn = {
+    generator: 'https://vittominacori.github.io/erc20-generator',
+    version: 'v3.1.0',
+  };
 
   context('creating valid token', function () {
     describe('as a ERC20Capped', function () {
@@ -192,8 +195,12 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
       );
     });
 
-    it('should have a builtOn value', async function () {
-      (await this.token.builtOn()).should.be.equal(_builtOn);
+    it('should have a generator value', async function () {
+      _builtOn.generator.should.be.equal(await this.token.generator());
+    });
+
+    it('should have a version value', async function () {
+      _builtOn.version.should.be.equal(await this.token.version());
     });
 
     shouldBehaveLikeERC20Base(

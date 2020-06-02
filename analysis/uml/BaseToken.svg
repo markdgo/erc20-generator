@@ -610,21 +610,23 @@
 <!-- 20 -->
 <g id="node25" class="node">
 <title>20</title>
-<polygon fill="#f2f2f2" stroke="#000000" points="2103.707,-50.9 2103.707,-175.7 2921.116,-175.7 2921.116,-50.9 2103.707,-50.9"/>
-<text text-anchor="middle" x="2512.4115" y="-159.1" font-family="Times,serif" font-size="14.00" fill="#000000">BaseToken</text>
-<polyline fill="none" stroke="#000000" points="2103.707,-150.9 2921.116,-150.9 "/>
-<text text-anchor="start" x="2111.707" y="-134.3" font-family="Times,serif" font-size="14.00" fill="#000000">Private:</text>
-<text text-anchor="start" x="2111.707" y="-117.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_BUILT_ON: string</text>
+<polygon fill="#f2f2f2" stroke="#000000" points="2103.707,-34.1 2103.707,-192.5 2921.116,-192.5 2921.116,-34.1 2103.707,-34.1"/>
+<text text-anchor="middle" x="2512.4115" y="-175.9" font-family="Times,serif" font-size="14.00" fill="#000000">BaseToken</text>
+<polyline fill="none" stroke="#000000" points="2103.707,-167.7 2921.116,-167.7 "/>
+<text text-anchor="start" x="2111.707" y="-151.1" font-family="Times,serif" font-size="14.00" fill="#000000">Private:</text>
+<text text-anchor="start" x="2111.707" y="-134.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_GENERATOR: string</text>
+<text text-anchor="start" x="2111.707" y="-117.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_VERSION: string</text>
 <polyline fill="none" stroke="#000000" points="2103.707,-109.3 2921.116,-109.3 "/>
 <text text-anchor="start" x="2111.707" y="-92.7" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
 <text text-anchor="start" x="2111.707" y="-75.9" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(name: string, symbol: string, decimals: uint8, cap: uint256, initialSupply: uint256, transferEnabled: bool, mintingFinished: bool)</text>
-<text text-anchor="start" x="2111.707" y="-59.1" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;builtOn(): string</text>
+<text text-anchor="start" x="2111.707" y="-59.1" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;generator(): string</text>
+<text text-anchor="start" x="2111.707" y="-42.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;version(): string</text>
 </g>
 <!-- 20&#45;&gt;19 -->
 <g id="edge33" class="edge">
 <title>20&#45;&gt;19</title>
-<path fill="none" stroke="#000000" d="M2512.4115,-176.0321C2512.4115,-193.0316 2512.4115,-212.3961 2512.4115,-232.7046"/>
-<polygon fill="none" stroke="#000000" points="2501.9116,-232.9687 2512.4115,-262.9687 2522.9116,-232.9688 2501.9116,-232.9687"/>
+<path fill="none" stroke="#000000" d="M2512.4115,-192.7472C2512.4115,-205.3819 2512.4115,-218.926 2512.4115,-232.9154"/>
+<polygon fill="none" stroke="#000000" points="2501.9116,-233.0761 2512.4115,-263.0761 2522.9116,-233.0761 2501.9116,-233.0761"/>
 </g>
 </g>
 </svg>

@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BaseToken.dist.sol | f4dc18ef91660f2bec076cc52f7ba66b9b1e5ccb |
+| dist/BaseToken.dist.sol | 02817b954737232d8f8d4e359931e2fbb63222af |
 
 
 ### Contracts Description Table
@@ -166,7 +166,8 @@
 ||||||
 | **BaseToken** | Implementation | ERC20Base |||
 | └ | <Constructor> | Public ❗️ |  💵 | ERC20Base |
-| └ | builtOn | Public ❗️ |   |NO❗️ |
+| └ | generator | Public ❗️ |   |NO❗️ |
+| └ | version | Public ❗️ |   |NO❗️ |
 
 
 ### Legend

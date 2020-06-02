@@ -1934,7 +1934,8 @@ pragma solidity ^0.6.8;
  */
 contract BaseToken is ERC20Base {
 
-  string private constant _BUILT_ON = "https://vittominacori.github.io/erc20-generator/#v3.1.0";
+  string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
+  string private constant _VERSION = "v3.1.0";
 
   constructor (
     string memory name,
@@ -1949,7 +1950,14 @@ contract BaseToken is ERC20Base {
   /**
    * @dev Returns the token generator tool.
    */
-  function builtOn() public view returns (string memory) {
-    return _BUILT_ON;
+  function generator() public pure returns (string memory) {
+    return _GENERATOR;
+  }
+
+  /**
+   * @dev Returns the token generator version.
+   */
+  function version() public pure returns (string memory) {
+    return _VERSION;
   }
 }
