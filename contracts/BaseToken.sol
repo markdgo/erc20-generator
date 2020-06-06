@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.8;
+pragma solidity ^0.6.9;
 
 import "@vittominacori/erc20-token/contracts/ERC20Base.sol";
 
