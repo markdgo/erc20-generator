@@ -78,9 +78,9 @@
     "surya": "^0.4.0",
     "truffle": "^5.1.29",
     "truffle-flattener": "^1.4.4",
-    "web3": "^1.2.8"
+    "web3": "^1.2.9"
   },
   "dependencies": {
-    "@vittominacori/erc20-token": "1.0.1"
+    "@vittominacori/erc20-token": "1.0.2"
   }
 }
