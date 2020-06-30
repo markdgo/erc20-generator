@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BaseToken.dist.sol | bfcb23a43a0e045e8d982b0ba6605527f88b2276 |
+| dist/BaseToken.dist.sol | 4b147fc0198fbcf51cd0781e78cab07c793a114f |
 
 
 ### Contracts Description Table
@@ -16,7 +16,6 @@
 |     └      |  **Function Name**  |  **Visibility**  |  **Mutability**  |  **Modifiers**  |
 ||||||
 | **Context** | Implementation |  |||
-| └ | <Constructor> | Internal 🔒 | 🛑  | |
 | └ | _msgSender | Internal 🔒 |   | |
 | └ | _msgData | Internal 🔒 |   | |
 ||||||
@@ -41,6 +40,11 @@
 | **Address** | Library |  |||
 | └ | isContract | Internal 🔒 |   | |
 | └ | sendValue | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | _functionCallWithValue | Private 🔐 | 🛑  | |
 ||||||
 | **ERC20** | Implementation | Context, IERC20 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
