@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BaseToken.dist.sol | 4b147fc0198fbcf51cd0781e78cab07c793a114f |
+| dist/BaseToken.dist.sol | 16249922769053dbbe948b6694a59c01c8124a69 |
 
 
 ### Contracts Description Table

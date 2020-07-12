@@ -2022,7 +2022,7 @@ contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
 // File: contracts/BaseToken.sol
 
-pragma solidity ^0.6.10;
+pragma solidity ^0.6.11;
 
 /**
  * @title BaseToken
