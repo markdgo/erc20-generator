@@ -157,7 +157,7 @@ The `sol2uml` generates UML class diagram from Solidity contracts.
 
 Use the dist smart contracts [dist/BaseToken.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol)
 
-Solc version is 0.6.11
+Solc version is 0.6.12
 
 
 ## License
