@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BaseToken.dist.sol | 7853d5b7fde2c947d0a26a06b2fb142023c52347 |
+| dist/BaseToken.dist.sol | 5cc312b4bd592bd86f201a8a60e13a56ee450659 |
 
 
 ### Contracts Description Table
@@ -100,12 +100,12 @@
 | └ | _callERC165SupportsInterface | Private 🔐 |   | |
 ||||||
 | **ERC165** | Implementation | IERC165 |||
-| └ | <Constructor> | Internal 🔒 | 🛑  | |
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 | └ | supportsInterface | Public ❗️ |   |NO❗️ |
 | └ | _registerInterface | Internal 🔒 | 🛑  | |
 ||||||
 | **ERC1363** | Implementation | ERC20, IERC1363, ERC165 |||
-| └ | <Constructor> | Public ❗️ |  💵 | ERC20 |
+| └ | <Constructor> | Public ❗️ | 🛑  | ERC20 |
 | └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
 | └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
 | └ | transferFromAndCall | Public ❗️ | 🛑  |NO❗️ |
@@ -116,7 +116,7 @@
 | └ | _checkAndCallApprove | Internal 🔒 | 🛑  | |
 ||||||
 | **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Internal 🔒 | 🛑  | |
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 | └ | owner | Public ❗️ |   |NO❗️ |
 | └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
 | └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
@@ -169,7 +169,7 @@
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
 | **BaseToken** | Implementation | ERC20Base |||
-| └ | <Constructor> | Public ❗️ |  💵 | ERC20Base |
+| └ | <Constructor> | Public ❗️ | 🛑  | ERC20Base |
 | └ | generator | Public ❗️ |   |NO❗️ |
 | └ | version | Public ❗️ |   |NO❗️ |
 

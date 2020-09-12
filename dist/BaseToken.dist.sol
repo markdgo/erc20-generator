@@ -2,7 +2,7 @@
 
 // File: @openzeppelin/contracts/GSN/Context.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -27,7 +27,7 @@ abstract contract Context {
 
 // File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
@@ -105,7 +105,7 @@ interface IERC20 {
 
 // File: @openzeppelin/contracts/math/SafeMath.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
@@ -265,7 +265,7 @@ library SafeMath {
 
 // File: @openzeppelin/contracts/utils/Address.sol
 
-pragma solidity ^0.6.2;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Collection of functions related to the address type
@@ -407,7 +407,7 @@ library Address {
 
 // File: @openzeppelin/contracts/token/ERC20/ERC20.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -456,7 +456,7 @@ contract ERC20 is Context, IERC20 {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor (string memory name, string memory symbol) public {
+    constructor (string memory name, string memory symbol) {
         _name = name;
         _symbol = symbol;
         _decimals = 18;
@@ -660,9 +660,9 @@ contract ERC20 is Context, IERC20 {
     }
 
     /**
-     * @dev Sets `amount` as the allowance of `spender` over the `owner`s tokens.
+     * @dev Sets `amount` as the allowance of `spender` over the `owner` s tokens.
      *
-     * This is internal function is equivalent to `approve`, and can be used to
+     * This internal function is equivalent to `approve`, and can be used to
      * e.g. set automatic allowances for certain subsystems, etc.
      *
      * Emits an {Approval} event.
@@ -710,19 +710,21 @@ contract ERC20 is Context, IERC20 {
 
 // File: @openzeppelin/contracts/token/ERC20/ERC20Capped.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Extension of {ERC20} that adds a cap to the supply of tokens.
  */
 abstract contract ERC20Capped is ERC20 {
+    using SafeMath for uint256;
+
     uint256 private _cap;
 
     /**
      * @dev Sets the value of the `cap`. This value is immutable, it can only be
      * set once during construction.
      */
-    constructor (uint256 cap) public {
+    constructor (uint256 cap) {
         require(cap > 0, "ERC20Capped: cap is 0");
         _cap = cap;
     }
@@ -752,7 +754,7 @@ abstract contract ERC20Capped is ERC20 {
 
 // File: @openzeppelin/contracts/token/ERC20/ERC20Burnable.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Extension of {ERC20} that allows token holders to destroy both their own
@@ -760,6 +762,8 @@ pragma solidity ^0.6.0;
  * recognized off-chain (via event analysis).
  */
 abstract contract ERC20Burnable is Context, ERC20 {
+    using SafeMath for uint256;
+
     /**
      * @dev Destroys `amount` tokens from the caller.
      *
@@ -790,7 +794,7 @@ abstract contract ERC20Burnable is Context, ERC20 {
 
 // File: @openzeppelin/contracts/introspection/IERC165.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -815,7 +819,7 @@ interface IERC165 {
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363 Interface
@@ -904,7 +908,7 @@ interface IERC1363 is IERC20, IERC165 {
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363Receiver Interface
@@ -938,7 +942,7 @@ interface IERC1363Receiver {
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363Spender Interface
@@ -971,7 +975,7 @@ interface IERC1363Spender {
 
 // File: @openzeppelin/contracts/introspection/ERC165Checker.sol
 
-pragma solidity ^0.6.2;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Library used to query support of an interface declared via {IERC165}.
@@ -1078,7 +1082,7 @@ library ERC165Checker {
 
 // File: @openzeppelin/contracts/introspection/ERC165.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Implementation of the {IERC165} interface.
@@ -1097,7 +1101,7 @@ contract ERC165 is IERC165 {
      */
     mapping(bytes4 => bool) private _supportedInterfaces;
 
-    constructor () internal {
+    constructor () {
         // Derived contracts need only register support for their own interfaces,
         // we register support for ERC165 itself here
         _registerInterface(_INTERFACE_ID_ERC165);
@@ -1131,7 +1135,7 @@ contract ERC165 is IERC165 {
 
 // File: erc-payable-token/contracts/token/ERC1363/ERC1363.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title ERC1363
@@ -1171,10 +1175,7 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
      * @param name Name of the token
      * @param symbol A symbol to be used as ticker
      */
-    constructor (
-        string memory name,
-        string memory symbol
-    ) public payable ERC20(name, symbol) {
+    constructor (string memory name, string memory symbol) ERC20(name, symbol) {
         // register the supported interfaces to conform to ERC1363 via ERC165
         _registerInterface(_INTERFACE_ID_ERC1363_TRANSFER);
         _registerInterface(_INTERFACE_ID_ERC1363_APPROVE);
@@ -1291,7 +1292,7 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
 
 // File: @openzeppelin/contracts/access/Ownable.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -1313,7 +1314,7 @@ contract Ownable is Context {
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    constructor () internal {
+    constructor () {
         address msgSender = _msgSender();
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);
@@ -1359,7 +1360,7 @@ contract Ownable is Context {
 
 // File: eth-token-recover/contracts/TokenRecover.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title TokenRecover
@@ -1380,7 +1381,7 @@ contract TokenRecover is Ownable {
 
 // File: @openzeppelin/contracts/utils/EnumerableSet.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Library for managing
@@ -1624,7 +1625,7 @@ library EnumerableSet {
 
 // File: @openzeppelin/contracts/access/AccessControl.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @dev Contract module that allows children to implement role-based access
@@ -1838,14 +1839,14 @@ abstract contract AccessControl is Context {
 
 // File: @vittominacori/erc20-token/contracts/access/Roles.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 contract Roles is AccessControl {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER");
     bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR");
 
-    constructor () public {
+    constructor () {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _setupRole(MINTER_ROLE, _msgSender());
         _setupRole(OPERATOR_ROLE, _msgSender());
@@ -1864,7 +1865,7 @@ contract Roles is AccessControl {
 
 // File: @vittominacori/erc20-token/contracts/ERC20Base.sol
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.0;
 
 /**
  * @title ERC20Base
@@ -1926,7 +1927,6 @@ contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
         bool transferEnabled,
         bool mintingFinished
     )
-        public
         ERC20Capped(cap)
         ERC1363(name, symbol)
     {
@@ -2022,7 +2022,7 @@ contract ERC20Base is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
 // File: contracts/BaseToken.sol
 
-pragma solidity ^0.6.12;
+pragma solidity ^0.7.1;
 
 /**
  * @title BaseToken
@@ -2032,7 +2032,7 @@ pragma solidity ^0.6.12;
 contract BaseToken is ERC20Base {
 
   string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
-  string private constant _VERSION = "v3.1.0";
+  string private constant _VERSION = "v3.2.0";
 
   constructor (
     string memory name,
@@ -2042,7 +2042,7 @@ contract BaseToken is ERC20Base {
     uint256 initialSupply,
     bool transferEnabled,
     bool mintingFinished
-  ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
+  ) ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
 
   /**
    * @dev Returns the token generator tool.
