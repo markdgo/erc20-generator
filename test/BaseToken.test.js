@@ -13,7 +13,7 @@ contract('BaseToken', function ([owner, anotherAccount, minter, operator, recipi
 
   const _builtOn = {
     generator: 'https://vittominacori.github.io/erc20-generator',
-    version: 'v3.1.0',
+    version: 'v3.2.0',
   };
 
   context('creating valid token', function () {

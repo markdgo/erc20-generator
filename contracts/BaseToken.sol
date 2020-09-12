@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.12;
+pragma solidity ^0.7.1;
 
 import "@vittominacori/erc20-token/contracts/ERC20Base.sol";
 
@@ -12,7 +12,7 @@ import "@vittominacori/erc20-token/contracts/ERC20Base.sol";
 contract BaseToken is ERC20Base {
 
   string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
-  string private constant _VERSION = "v3.1.0";
+  string private constant _VERSION = "v3.2.0";
 
   constructor (
     string memory name,
@@ -22,7 +22,7 @@ contract BaseToken is ERC20Base {
     uint256 initialSupply,
     bool transferEnabled,
     bool mintingFinished
-  ) public payable ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
+  ) ERC20Base(name, symbol, decimals, cap, initialSupply, transferEnabled, mintingFinished) {}
 
   /**
    * @dev Returns the token generator tool.

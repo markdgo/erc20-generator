@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.12;
+pragma solidity ^0.7.1;
 
 import "erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol";
 
@@ -11,7 +11,7 @@ contract ERC1363SpenderMock is IERC1363Spender {
 
     event Approved(address owner, uint256 value, bytes data, uint256 gas);
 
-    constructor(bytes4 retval, bool reverts) public {
+    constructor(bytes4 retval, bool reverts) {
         _retval = retval;
         _reverts = reverts;
     }
