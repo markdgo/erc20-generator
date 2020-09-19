@@ -1,3 +1,5 @@
+/* global ga */
+
 export default {
   methods: {
     isMobile () {
@@ -13,6 +15,13 @@ export default {
         variant: variant,
         solid: true,
       });
+    },
+    gaSend (category, action, label) {
+      try {
+        ga('send', 'event', category, action, label);
+      } catch (e) {
+        console.log('analytics track', { category, action, label });
+      }
     },
   },
 };
