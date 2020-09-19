@@ -1,6 +1,6 @@
 {
   "name": "erc20-generator",
-  "version": "3.2.0-rc",
+  "version": "3.2.0",
   "description": "A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.",
   "files": [
     "contracts",
