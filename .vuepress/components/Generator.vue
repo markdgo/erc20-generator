@@ -420,7 +420,7 @@
                         this.trxHash = tokenContract.transactionHash;
                         this.trxLink = this.network.current.etherscanLink + '/tx/' + this.trxHash;
 
-                        this.gaSend('transaction', 'started', this.trxHash);
+                        this.gaSend('transaction', `trx_${this.network.current.id}`, this.trxHash);
                       } else {
                         this.token.address = tokenContract.address;
                         this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
@@ -431,8 +431,7 @@
                           'success',
                         );
 
-                        this.gaSend('transaction', 'completed', this.trxHash);
-                        this.gaSend('token', 'created', this.token.address);
+                        this.gaSend('token', `token_${this.network.current.id}`, this.token.address);
                       }
                     }
                   },
