@@ -20,7 +20,7 @@ export default {
       try {
         ga('send', 'event', category, action, label);
       } catch (e) {
-        console.log('analytics track', { category, action, label });
+        console.log('event', { category, action, label });
       }
     },
   },

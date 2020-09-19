@@ -45,9 +45,9 @@
                                 </li>
                                 <li><b>ERC1363 Payable Token</b>: <br>the ERC1363 is an ERC20 compatible token that
                                     can make a callback on the receiver contract to notify token transfers or token
-                                    approvals.<br>
+                                    approvals.
                                     <b-link target="_blank" href="https://vittominacori.github.io/erc1363-payable-token">
-                                        Discover more
+                                        Details
                                     </b-link>
                                 </li>
                                 <li><b>Mintable</b>: <br>you will be able to generate tokens by minting them.
@@ -62,6 +62,9 @@
                                 </li>
                                 <li><b>Token Recover</b>: <br>it allows the contract owner to recover any ERC20 token
                                     sent into the contract for error.
+                                    <b-link target="_blank" href="https://vittominacori.github.io/eth-token-recover">
+                                        Details
+                                    </b-link>
                                 </li>
                             </ul>
                         </b-card-text>
@@ -113,7 +116,7 @@
     ],
     data () {
       return {
-        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.0.4/dist/BaseToken.dist.sol',
+        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.2.0/dist/BaseToken.dist.sol',
         loading: true,
         currentNetwork: null,
       };

@@ -7,7 +7,7 @@
                      class="mb-0"
                      fluid>
             <p>
-                <b-img src="https://img.shields.io/badge/version-3.0.4-blue"></b-img>
+                <b-img src="https://img.shields.io/badge/version-3.2.0-blue"></b-img>
                 <b-link href="https://travis-ci.org/github/vittominacori/erc20-generator" target="_blank">
                     <b-img src="https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master"></b-img>
                 </b-link>
