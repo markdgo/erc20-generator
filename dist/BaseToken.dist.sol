@@ -1,5 +1,28 @@
 // SPDX-License-Identifier: MIT
 
+/*
+ * Token was generated for FREE at https://vittominacori.github.io/erc20-generator/
+ *
+ * Author: @vittominacori (https://vittominacori.github.io)
+ *
+ * Smart Contract Source Code: https://github.com/vittominacori/erc20-generator
+ * Smart Contract Test Builds: https://travis-ci.com/github/vittominacori/erc20-generator
+ * Web Site Source Code: https://github.com/vittominacori/erc20-generator/tree/dapp
+ *
+ * Detailed Info: https://medium.com/@vittominacori/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4
+ *
+ * Note: "Contract Source Code Verified (Similar Match)" means that this Token is similar to other tokens deployed
+ *  using the same generator. It is not an issue. It means that you won't need to verify your source code because of
+ *  it is already verified.
+ *
+ * Disclaimer: GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
+ *  The following code is provided under MIT License. Anyone can use it as per their needs.
+ *  The generator's purpose is to make people able to tokenize their ideas without coding or paying for it.
+ *  Source code is well tested and continuously updated to reduce risk of bugs and introduce language optimizations.
+ *  Anyway the purchase of tokens involves a high degree of risk. Before acquiring tokens, it is recommended to
+ *  carefully weighs all the information and risks detailed in Token owner's Conditions.
+ */
+
 // File: @openzeppelin/contracts/GSN/Context.sol
 
 pragma solidity ^0.7.0;
