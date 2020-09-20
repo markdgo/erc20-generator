@@ -8,8 +8,8 @@
                      fluid>
             <p>
                 <b-img src="https://img.shields.io/badge/version-3.2.0-blue"></b-img>
-                <b-link href="https://travis-ci.org/github/vittominacori/erc20-generator" target="_blank">
-                    <b-img src="https://travis-ci.org/vittominacori/erc20-generator.svg?branch=master"></b-img>
+                <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
+                    <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
                 </b-link>
                 <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
                     <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
