@@ -4,18 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master)](https://coveralls.io/github/vittominacori/erc20-generator?branch=master)
 [![MIT licensed](https://img.shields.io/github/license/vittominacori/erc20-generator.svg)](https://github.com/vittominacori/erc20-generator/blob/master/LICENSE)
 
-A simple Smart Contract generator for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
-
-Token has a Role Based Access Control so you can add the `MINTER` permission to users or Smart Contracts.
-
-Token has a `trasferEnabled` property. Nobody can transfer tokens until the property will be enabled or you can define users as `OPERATOR` allowed to transfer also if not enabled.
-
-Token has the ERC1363 behaviors. [ERC1363](https://eips.ethereum.org/EIPS/eip-1363) is an ERC20 compatible token that can make a callback on the receiver contract to notify token transfers or token approvals.
-
-Token extends from [ERC20Base](https://github.com/vittominacori/erc20-token).
-
-DApp source here [https://github.com/vittominacori/erc20-generator/tree/dapp](https://github.com/vittominacori/erc20-generator/tree/dapp).
-
+The most used Smart Contract Generator for ERC20 Token.
 
 ## Try it
 
@@ -126,7 +115,7 @@ Note: it is better to analyze the flattened code to have a bigger overview on th
 The `describe` command shows a summary of the contracts and methods in the files provided
 
 ```bash
-surya describe dist/BaseToken.dist.sol
+npx surya describe dist/StandardERC20.dist.sol
 ```
 
 ### Dependencies
@@ -134,7 +123,7 @@ surya describe dist/BaseToken.dist.sol
 The `dependencies` command outputs the c3-linearization of a given contract's inheirtance graph. Contracts will be listed starting with most-derived, ie. if the same function is defined in more than one contract, the solidity compiler will use the definition in whichever contract is listed first.
 
 ```bash
-surya dependencies BaseToken dist/BaseToken.dist.sol
+npx surya dependencies StandardERC20 dist/StandardERC20.dist.sol
 ```
 ### Generate Report
 
@@ -151,13 +140,6 @@ The `graph` command outputs a DOT-formatted graph of the control flow.
 The `mdreport` command creates a markdown description report with tables comprising information about the system's files, contracts and their functions.
 
 The `sol2uml` generates UML class diagram from Solidity contracts.
-
-
-## Token verification on Etherscan
-
-Use the dist smart contracts [dist/BaseToken.dist.sol](https://github.com/vittominacori/erc20-generator/blob/master/dist/BaseToken.dist.sol)
-
-Solc version is 0.7.1
 
 
 ## License

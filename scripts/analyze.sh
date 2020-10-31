@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-CONTRACT_NAME=BaseToken
+for contract in "SimpleERC20" "StandardERC20" "CommonERC20" "PowerfulERC20" "ServiceReceiver"
+do
+  npx surya inheritance dist/$contract.dist.sol | dot -Tpng > analysis/inheritance-tree/$contract.png
 
-npm run flat
+  npx surya graph dist/$contract.dist.sol | dot -Tpng > analysis/control-flow/$contract.png
 
-surya inheritance dist/$CONTRACT_NAME.dist.sol | dot -Tpng > analysis/inheritance-tree/$CONTRACT_NAME.png
+  npx surya mdreport analysis/description-table/$contract.md dist/$contract.dist.sol
 
-surya graph dist/$CONTRACT_NAME.dist.sol | dot -Tpng > analysis/control-flow/$CONTRACT_NAME.png
-
-surya mdreport analysis/description-table/$CONTRACT_NAME.md dist/$CONTRACT_NAME.dist.sol
-
-sol2uml dist/$CONTRACT_NAME.dist.sol -o analysis/uml/$CONTRACT_NAME.svg
+  npx sol2uml dist/$contract.dist.sol -o analysis/uml/$contract.svg
+done

@@ -4,7 +4,6 @@ module.exports = {
   compileCommand: 'node --max-old-space-size=4096 ../node_modules/.bin/truffle compile --network coverage',
   client: require('ganache-cli'),
   copyPackages: [
-    '@vittominacori/erc20-token',
     'erc-payable-token',
     'eth-token-recover',
     '@openzeppelin/contracts',
