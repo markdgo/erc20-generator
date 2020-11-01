@@ -18,7 +18,7 @@
     },
     computed: {
       page () {
-        return this.$page.frontmatter.component === 'Home' ? 'Generator' : this.$page.frontmatter.component || null;
+        return this.$page.frontmatter.component || null;
       },
     },
   };

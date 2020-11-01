@@ -1,4 +1,32 @@
 body {
   background: #f8f9fa;
   min-height: 100vh;
+
+  .peach-gradient {
+    background: #FFD86F!important;
+    background: -webkit-linear-gradient(50deg,#FFD86F,#FC6262)!important;
+    background: -o-linear-gradient(50deg,#FFD86F,#FC6262)!important;
+    background: linear-gradient(40deg,#FFD86F,#FC6262)!important
+  }
+
+  .purple-gradient {
+    background: #ff6ec4!important;
+    background: -webkit-linear-gradient(50deg,#ff6ec4,#7873f5)!important;
+    background: -o-linear-gradient(50deg,#ff6ec4,#7873f5)!important;
+    background: linear-gradient(40deg,#ff6ec4,#7873f5)!important
+  }
+
+  .blue-gradient {
+    background: #303f9f!important;
+    background: -webkit-linear-gradient(50deg,#303f9f,#3571cd)!important;
+    background: -o-linear-gradient(50deg,#303f9f,#3571cd)!important;
+    background: linear-gradient(40deg,#303f9f,#3571cd)!important;
+  }
+
+  .aqua-gradient {
+    background: #2096ff!important;
+    background: -webkit-linear-gradient(50deg,#2096ff,#05ffa3)!important;
+    background: -o-linear-gradient(50deg,#2096ff,#05ffa3)!important;
+    background: linear-gradient(40deg,#2096ff,#05ffa3)!important
+  }
 }

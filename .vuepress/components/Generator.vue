@@ -1,37 +1,20 @@
 <template>
-    <div>
-        <b-jumbotron bg-variant="dark"
-                     text-variant="white"
-                     header="ERC20 Token Generator"
-                     lead="Create your Token for FREE"
-                     class="mb-0"
-                     fluid>
-            <p>
-                <b-img src="https://img.shields.io/badge/version-3.2.0-blue"></b-img>
-                <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
-                    <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
-                </b-link>
-                <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
-                    <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
-                </b-link>
-            </p>
-            <p>Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.</p>
-            <hr class="my-4">
-            <a class="btn btn-lg btn-outline-warning"
-               href="#token-generator"
-               v-smooth-scroll="{ duration: 1000, offset: -50, updateHistory: false }">
-                Create a Token
-            </a>
-            <b-button to="/docs.html" size="lg" variant="light">
-                Documentation
-            </b-button>
-        </b-jumbotron>
-        <b-row>
+    <b-container fluid>
+        <b-row id="token-generator">
             <b-col lg="10" offset-lg="1" class="mb-3 p-0">
+                <div v-if="loading" class="text-center p-5">
+                    <ui--loader :loading="true"></ui--loader>
+                </div>
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
-                    <b-alert show variant="primary">
-                        NOTE: to use this app we suggest to install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
-                        Use any other wallet at your own risk.
+                    <b-alert show variant="danger" v-if="!metamask.installed">
+                        <h4 class="alert-heading">Alert</h4>
+                        <p>
+                            To use this app please install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
+                        </p>
+                        <hr>
+                        <p class="mb-0">
+                            Use any other wallet at your own risk.
+                        </p>
                     </b-alert>
 
                     <b-card header="Making transaction..."
@@ -39,13 +22,19 @@
                             header-text-variant="white"
                             v-if="makingTransaction || transactionStarted"
                             class="mt-3">
-                        <div v-if="!trxHash">Please wait...</div>
+                        <div v-if="!trx.hash">
+                            <p>Please wait...</p>
+                            <ui--loader :loading="true"></ui--loader>
+                        </div>
                         <div v-else>
                             <b>Well! Transaction done!</b><br>
-                            Transaction id <a :href="trxLink" target="_blank"><span v-html="trxHash"></span></a><br>
+                            Transaction id <a :href="trx.link" target="_blank"><span v-html="trx.hash"></span></a><br>
 
                             Retrieving Token.
-                            <div v-if="!token.address">Please wait...</div>
+                            <div v-if="!token.address">
+                                <p>Please wait...</p>
+                                <ui--loader :loading="true"></ui--loader>
+                            </div>
                             <div v-else>
                                 <b>Your Token</b>
                                 <b-link :href="token.link" target="_blank"><span v-html="token.address"></span></b-link>
@@ -54,14 +43,13 @@
                     </b-card>
 
                     <ValidationObserver
-                            id="token-generator"
                             ref="observer"
                             tag="form"
                             @submit.prevent="generateToken()"
                             v-if="!makingTransaction">
                         <fieldset :disabled="formDisabled">
                             <b-row>
-                                <b-col lg="4">
+                                <b-col lg="8">
                                     <b-card header="Token Details"
                                             header-bg-variant="dark"
                                             header-text-variant="white"
@@ -125,6 +113,7 @@
                                                         name="tokenDecimals"
                                                         placeholder="Your token decimals"
                                                         type="number"
+                                                        :disabled="['SimpleERC20'].includes(tokenType)"
                                                         v-model.trim="token.decimals"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
@@ -174,7 +163,7 @@
                                                         name="tokenInitialBalance"
                                                         placeholder="Your token initial supply"
                                                         type="number"
-                                                        :disabled="finishMinting"
+                                                        :disabled="['SimpleERC20', 'StandardERC20'].includes(tokenType)"
                                                         v-model.trim="token.initialBalance"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
@@ -187,8 +176,78 @@
                                         </ValidationProvider>
                                     </b-card>
                                 </b-col>
+                                <b-col lg="4">
+                                    <b-card header="Token Features"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            class="mt-3">
+                                        <b-form-group
+                                                description="Choose your Token."
+                                                label="Token Type *"
+                                                label-for="tokenType">
+                                            <b-form-select id="tokenType"
+                                                           v-model="tokenType"
+                                                           size="lg"
+                                                           @input="loadToken">
+                                                <option v-for="(n, k) in tokenList" :value="k">
+                                                    {{ n.contractName }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="You will be able to generate tokens by minting them.">
+                                            <b-form-checkbox v-model="token.mintable"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                Mintable
+                                            </b-form-checkbox>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="Your Token can be burnt.">
+                                            <b-form-checkbox v-model="token.burnable"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                Burnable
+                                            </b-form-checkbox>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="The ERC1363 is an ERC20 compatible Token that can make a callback on the receiver contract to notify token transfers or token approvals.">
+                                            <b-form-checkbox v-model="token.erc1363"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                ERC1363
+                                            </b-form-checkbox>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="It allows the contract owner to recover any ERC20 token sent into the contract for error.">
+                                            <b-form-checkbox v-model="token.tokenRecover"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                Token Recover
+                                            </b-form-checkbox>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="Remove the link pointing to this page from your contract.">
+                                            <b-form-checkbox v-model="token.removeCopyright"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                Remove Copyright
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                    </b-card>
+                                </b-col>
                                 <b-col lg="8">
-                                    <b-card header="Advanced"
+                                    <b-card header="Network"
                                             header-bg-variant="dark"
                                             header-text-variant="white"
                                             class="mt-3">
@@ -216,81 +275,42 @@
                                                 </b-alert>
                                             </b-col>
                                         </b-row>
+                                    </b-card>
+                                </b-col>
+                                <b-col lg="4">
+                                    <b-card header="Payment"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            no-body
+                                            class="mt-3">
                                         <b-row>
                                             <b-col lg="12">
-                                                <b-form-group
-                                                        description="Choose to enable transfer during deploy or enable manually later."
-                                                        label-for="enableTransfer">
-                                                    <b-form-checkbox v-model="enableTransfer"
-                                                                     size="lg"
-                                                                     switch>
-                                                        Enable transfer
-                                                    </b-form-checkbox>
-                                                </b-form-group>
-
-                                                <b-alert show variant="warning" v-if="!enableTransfer">
-                                                    <strong>
-                                                        Tokens won't be transferable until you call the
-                                                        <i>enableTransfer</i> function.
-                                                    </strong>
-                                                    <hr>
-                                                    Only people (or smart contracts) with <i>OPERATOR</i> role will be
-                                                    able to transfer tokens.<br>
-                                                    Contract creator will be OPERATOR by default, so he can transfer
-                                                    tokens also when transfer is not enabled.<br>
-                                                    You can also add or remove the OPERATOR role to addresses.<br>
-                                                    This is because, by business choices, you may decide not to enable
-                                                    transfer until a specific time.
-                                                </b-alert>
-                                                <b-alert show variant="info" v-if="enableTransfer">
-                                                    <strong>
-                                                        Everyone will be able to transfer tokens after deploy.
-                                                    </strong>
-                                                    <hr>
-                                                    If you decide not to enable transfer until a specific time,
-                                                    disable this option and call the
-                                                    <i>enableTransfer</i> function manually later.
-                                                </b-alert>
-                                            </b-col>
-                                        </b-row>
-                                        <b-row>
-                                            <b-col lg="12">
-                                                <b-form-group
-                                                        description="Choose to disable minting during deploy or disable manually later."
-                                                        label-for="finishMinting">
-                                                    <b-form-checkbox v-model="finishMinting"
-                                                                     size="lg"
-                                                                     v-on:input="updateInitialBalance"
-                                                                     switch>
-                                                        Disable minting
-                                                    </b-form-checkbox>
-                                                </b-form-group>
-
-                                                <b-alert show variant="warning" v-if="finishMinting">
-                                                    <strong>
-                                                        You won't be able to generate other tokens.
-                                                    </strong>
-                                                    <hr>
-                                                    Your initial supply will be equal to total supply.
-                                                </b-alert>
-                                                <b-alert show variant="info" v-if="!finishMinting">
-                                                    <strong>
-                                                        You will be able to generate tokens up to your total supply.
-                                                    </strong>
-                                                    <hr>
-                                                    You can add or remove the MINTER role to addresses.<br>
-                                                    When you decide to disable minting you must call the
-                                                    <i>finishMinting</i> function manually.
-                                                </b-alert>
+                                                <b-list-group flush class="pt-3 payment-box">
+                                                    <b-list-group-item
+                                                            class="d-flex justify-content-between align-items-center">
+                                                        Token deployment fee:
+                                                        <b-badge variant="success">
+                                                            {{ web3.utils.fromWei(feeAmount, 'ether') }} ETH
+                                                        </b-badge>
+                                                    </b-list-group-item>
+                                                    <b-list-group-item
+                                                            class="d-flex justify-content-between align-items-center">
+                                                        <small class="text-muted">
+                                                            *GAS fee will be added to final amount
+                                                        </small>
+                                                    </b-list-group-item>
+                                                </b-list-group>
                                             </b-col>
                                         </b-row>
                                     </b-card>
 
-                                    <b-row class="mt-3">
-                                        <b-col lg="12" class="text-right">
-                                            <b-button variant="warning" size="lg" type="submit">Create Token</b-button>
-                                        </b-col>
-                                    </b-row>
+                                    <b-button variant="success"
+                                              size="lg"
+                                              block
+                                              type="submit"
+                                              class="mt-3 py-3 px-5 text-uppercase">
+                                        Confirm
+                                    </b-button>
                                 </b-col>
                             </b-row>
                         </fieldset>
@@ -298,39 +318,48 @@
                 </b-card>
             </b-col>
         </b-row>
-    </div>
+    </b-container>
 </template>
 
 <script>
   import dapp from '../mixins/dapp';
-  import utils from '../mixins/utils';
+  import tokenDetails from '../mixins/tokenDetails';
 
   export default {
     name: 'Generator',
     mixins: [
       dapp,
-      utils,
+      tokenDetails,
     ],
     data () {
       return {
         loading: true,
         currentNetwork: null,
-        trxHash: '',
+        tokenType: '',
+        trx: {
+          hash: '',
+          link: '',
+        },
         transactionStarted: false,
         makingTransaction: false,
         formDisabled: false,
+        feeAmount: '0',
         token: {
           name: '',
           symbol: '',
           decimals: 18,
           cap: '',
           initialBalance: '',
+          mintable: false,
+          burnable: false,
+          erc1363: false,
+          tokenRecover: false,
+          removeCopyright: false,
         },
-        enableTransfer: true,
-        finishMinting: false,
       };
     },
     mounted () {
+      this.tokenType = this.getParam('tokenType') || 'SimpleERC20';
       this.currentNetwork = this.getParam('network') || this.network.default;
       this.initDapp();
     },
@@ -339,8 +368,8 @@
         this.network.current = this.network.list[this.currentNetwork];
         try {
           await this.initWeb3(this.currentNetwork, true);
-          this.initToken();
-          this.loading = false;
+          this.initService(this.currentNetwork);
+          await this.loadToken();
         } catch (e) {
           console.log(e); // eslint-disable-line no-console
           this.makeToast(
@@ -350,6 +379,26 @@
           );
           // document.location.href = this.$withBase('/');
         }
+      },
+      async loadToken () {
+        if (!Object.prototype.hasOwnProperty.call(this.tokenList, this.tokenType)) {
+          this.makeToast(
+            'Some errors occurred',
+            'Selected token type does not exist!',
+            'danger',
+          );
+
+          this.tokenType = 'SimpleERC20';
+        }
+
+        this.initToken(this.tokenType);
+
+        this.updateTokenDetails();
+        this.updateInitialBalance();
+
+        this.feeAmount = await this.promisify(this.contracts.service.methods.getPrice(this.tokenType).call);
+
+        this.loading = false;
       },
       async generateToken () {
         this.$refs.observer.validate().then(async (result) => {
@@ -372,71 +421,56 @@
               }
             }
 
-            const name = this.token.name;
-            const symbol = this.token.symbol.toUpperCase();
-            const decimals = new this.web3.BigNumber(this.token.decimals);
-            const cap = new this.web3.BigNumber(this.token.cap).mul(Math.pow(10, this.token.decimals));
-            const initialBalance = new this.web3.BigNumber(this.token.initialBalance).mul(Math.pow(10, this.token.decimals)); // eslint-disable-line max-len
-            const enableTransfer = this.enableTransfer;
-            const finishMinting = this.finishMinting;
-
             try {
-              this.trxHash = '';
+              this.trx.hash = '';
+              this.trx.link = '';
               this.formDisabled = true;
               this.makingTransaction = true;
 
-              if (!this.legacy) {
-                await this.web3Provider.enable();
-              }
+              await this.web3Provider.request({ method: 'eth_requestAccounts' });
 
-              setTimeout(() => {
-                this.contracts.token.new(
-                  name,
-                  symbol,
-                  decimals,
-                  cap,
-                  initialBalance,
-                  enableTransfer,
-                  finishMinting,
+              const tokenContract = new this.web3.eth.Contract(this.contracts.token.abi);
+
+              tokenContract.deploy({
+                data: this.contracts.token.bytecode,
+                arguments: this.getDeployArguments(),
+              })
+                .send(
                   {
-                    from: this.web3.eth.coinbase,
-                    data: this.contracts.token.bytecode,
-                  }, (e, tokenContract) => {
-                    if (e) {
-                      console.log(e); // eslint-disable-line no-console
-                      this.makingTransaction = false;
-                      this.formDisabled = false;
-                      this.makeToast(
-                        'Some error occurred',
-                        e.message,
-                        'danger',
-                      );
-                    } else {
-                      // NOTE: The callback will fire twice!
-                      // Once the contract has the transactionHash property
-                      // set and once its deployed on an address.
-                      if (!tokenContract.address) {
-                        this.transactionStarted = true;
-                        this.trxHash = tokenContract.transactionHash;
-                        this.trxLink = this.network.current.etherscanLink + '/tx/' + this.trxHash;
+                    from: await this.promisify(this.web3.eth.getCoinbase),
+                    value: this.feeAmount,
+                  })
+                .on('error', (error) => {
+                  console.log(error.message); // eslint-disable-line no-console
 
-                        this.gaSend('transaction', `trx_${this.network.current.id}`, this.trxHash);
-                      } else {
-                        this.token.address = tokenContract.address;
-                        this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
-                        this.$forceUpdate();
-                        this.makeToast(
-                          'Well done!',
-                          `Your token has been deployed at ${this.token.address}`,
-                          'success',
-                        );
+                  this.makingTransaction = false;
+                  this.formDisabled = false;
 
-                        this.gaSend('token', `token_${this.network.current.id}`, this.token.address);
-                      }
-                    }
-                  },
-                );
-              }, 500);
+                  this.makeToast(
+                    'Error!',
+                    error.message,
+                    'danger',
+                  );
+                })
+                .on('transactionHash', (transactionHash) => {
+                  this.transactionStarted = true;
+                  this.trx.hash = transactionHash;
+                  this.trx.link = `${this.network.current.etherscanLink}/tx/${this.trx.hash}`;
+
+                  this.gaSend('transaction', `trx_${this.network.current.id}`, this.trx.hash);
+                })
+                .on('receipt', (receipt) => {
+                  this.token.address = receipt.contractAddress;
+                  this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
+                  this.$forceUpdate();
+                  this.makeToast(
+                    'Well done!',
+                    `Your token has been deployed at ${this.token.address}`,
+                    'success',
+                  );
+
+                  this.gaSend('token', `token_${this.network.current.id}`, this.token.address);
+                });
             } catch (e) {
               this.makingTransaction = false;
               this.formDisabled = false;
@@ -457,22 +491,51 @@
           );
         });
       },
-      updateInitialBalance () {
-        this.token.initialBalance = this.finishMinting ? this.token.cap : this.token.initialBalance;
-      },
-      getParam (param) {
-        const vars = {};
-        window.location.href.replace(location.hash, '').replace(
-          /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-          function (m, key, value) { // callback
-            vars[key] = value !== undefined ? value : '';
-          },
-        );
+      updateTokenDetails () {
+        const detail = this.tokenDetails.find((elem) => elem.name === this.tokenType);
 
-        if (param) {
-          return vars[param] ? vars[param] : null;
+        this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
+        this.token.mintable = detail.mintable;
+        this.token.burnable = detail.burnable;
+        this.token.erc1363 = detail.erc1363;
+        this.token.tokenRecover = detail.tokenRecover;
+        this.token.removeCopyright = detail.removeCopyright;
+      },
+      updateInitialBalance () {
+        this.token.initialBalance = ['SimpleERC20', 'StandardERC20'].includes(this.tokenType) ? this.token.cap : this.token.initialBalance;
+      },
+      getDeployArguments () {
+        const name = this.token.name;
+        const symbol = this.token.symbol.toUpperCase();
+        const decimals = this.web3.utils.toBN(this.token.decimals);
+        const cap = this.web3.utils.toBN(this.token.cap).mul(this.web3.utils.toBN(Math.pow(10, this.token.decimals)));
+        const initialBalance = this.web3.utils.toBN(this.token.initialBalance).mul(this.web3.utils.toBN(Math.pow(10, this.token.decimals))); // eslint-disable-line max-len
+
+        const params = [name, symbol];
+
+        switch (this.tokenType) {
+        case 'SimpleERC20':
+          params.push(cap);
+          break;
+        case 'StandardERC20':
+          params.push(decimals);
+          params.push(cap);
+          break;
+        case 'CommonERC20':
+        case 'PowerfulERC20':
+          params.push(decimals);
+          params.push(cap);
+          params.push(initialBalance);
+          break;
+        default:
+          throw new Error(
+            'Invalid Token Type',
+          );
         }
-        return vars;
+
+        params.push(this.contracts.service.options.address);
+
+        return params;
       },
     },
   };

@@ -2,10 +2,8 @@
   "title": "ERC20 Token Generator",
   "name": "erc20-generator",
   "version": "1.0.0",
-  "description": "Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
+  "description": "Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.",
   "scripts": {
-    "lint:vue": "eslint .vuepress --ext .vue,.js",
-    "lint:vue:fix": "eslint .vuepress --ext .vue,.js --fix",
     "lint": "eslint .vuepress",
     "lint:fix": "eslint .vuepress --fix",
     "dev": "vuepress dev",
@@ -23,24 +21,25 @@
     "url": "https://github.com/vittominacori/erc20-generator.git"
   },
   "dependencies": {
-    "web3": "0.20.6"
+    "@saeris/vue-spinners": "^1.0.8",
+    "bootstrap-vue": "^2.18.1",
+    "vee-validate": "^3.4.3",
+    "vue2-smooth-scroll": "^1.5.0",
+    "web3": "^1.3.0"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.5.4",
+    "@vuepress/plugin-google-analytics": "^1.7.1",
     "babel-eslint": "^10.1.0",
-    "bootstrap-vue": "^2.16.0",
-    "eslint": "^7.8.1",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-standard": "^4.0.2",
+    "eslint-plugin-vue": "^7.1.0",
     "node-sass": "^4.14.1",
-    "sass-loader": "^10.0.2",
-    "vee-validate": "^3.3.11",
-    "vue-eslint-parser": "^7.1.0",
-    "vue2-smooth-scroll": "^1.5.0",
-    "vuepress": "^1.5.4"
+    "sass-loader": "^10.0.4",
+    "vue-eslint-parser": "^7.1.1",
+    "vuepress": "^1.7.1"
   }
 }

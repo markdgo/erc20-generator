@@ -1,14 +1,12 @@
 ---
 component: Home
 title: ERC20 Token Generator | Create your Token for FREE
+description: Create an ERC20 Token in less than a minute. The most used Smart Contract Generator for ERC20 Token.
 ---
 
 # ERC20 Token Generator - DAPP
 
-Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.
-
-
-Code created using [VuePress](https://vuepress.vuejs.org/).
+Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
 
 ## Smart Contracts Source
  
@@ -18,6 +16,12 @@ Discover Smart Contracts source [here](https://github.com/vittominacori/erc20-ge
 
 ```bash
 npm install
+```
+
+## Lint
+
+```bash
+npm run lint
 ```
 
 ## Run DEV server

@@ -1,21 +1,54 @@
 <template>
-    <div>
-        <b-row>
-            <b-col lg="10" offset-lg="1" class="mt-4 p-0" v-if="!loading">
-                <b-card :title="$site.title" bg-variant="transparent" border-variant="0">
-                    <p class="card-text">
-                        {{ $site.description }}
-                    </p>
+    <b-container fluid>
+        <b-row id="token-docs">
+            <b-col lg="10" offset-lg="1" class="my-4 p-0">
+                <div v-if="loading" class="text-center p-5">
+                    <ui--loader :loading="true"></ui--loader>
+                </div>
+                <b-card v-if="!loading" :title="$site.title" bg-variant="transparent" border-variant="0">
+                    <b-card bg-variant="light"
+                            header="Token Type"
+                            header-bg-variant="dark"
+                            header-text-variant="white">
+                        <b-row>
+                            <b-col lg="12">
+                                <b-form-group
+                                        description="Choose your Token."
+                                        label="Token Type *"
+                                        label-for="tokenType">
+                                    <b-form-select id="tokenType"
+                                                   v-model="tokenType"
+                                                   size="lg"
+                                                   @input="loadToken">
+                                        <option v-for="(n, k) in tokenList" :value="k">{{ n.contractName }}
+                                        </option>
+                                    </b-form-select>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+                    </b-card>
                     <b-card bg-variant="light"
                             header="Token Details"
                             header-bg-variant="dark"
-                            header-text-variant="white">
+                            header-text-variant="white"
+                            class="mt-3">
+                        <p>
+                            <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${this.version}`" target="_blank">
+                                <b-img :src="`https://img.shields.io/badge/version-${this.version}-blue`"></b-img>
+                            </b-link>
+                            <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
+                                <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
+                            </b-link>
+                            <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
+                                <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
+                            </b-link>
+                        </p>
                         <ul>
                             <li>
                                 Source Code:
                                 <b-link :href="sourceCode"
                                         target="_blank">
-                                    <b>BaseToken.dist.sol</b>
+                                    <b>{{ contracts.token.contractName }}.dist.sol</b>
                                 </b-link>
                             </li>
                             <li>Contract Name: <b>{{ contracts.token.contractName }}</b></li>
@@ -32,78 +65,54 @@
                         </div>
                     </b-card>
                     <b-card bg-variant="light"
-                            header="Token Documentation"
-                            header-bg-variant="dark"
-                            header-text-variant="white"
-                            class="mt-3">
-                        <b-card-text>
-                            Your token will have the following properties: <br><br>
-                            <ul>
-                                <li><b>Detailed ERC20 Token</b>: <br>your token will be fully compliant with ERC20
-                                    definition and compatible with any ERC20 wallet all around the world.
-                                    It will have a name, a symbol and a decimals amount.
-                                </li>
-                                <li><b>ERC1363 Payable Token</b>: <br>the ERC1363 is an ERC20 compatible token that
-                                    can make a callback on the receiver contract to notify token transfers or token
-                                    approvals.
-                                    <b-link target="_blank" href="https://vittominacori.github.io/erc1363-payable-token">
-                                        Details
-                                    </b-link>
-                                </li>
-                                <li><b>Mintable</b>: <br>you will be able to generate tokens by minting them.
-                                    Only people (or smart contract) with <i>MINTER</i> role will be able to do that,
-                                    and you can also add or remove the Minter role to addresses.
-                                </li>
-                                <li><b>Capped</b>: <br>you can’t be able to mint more than the defined token cap.
-                                    This ensure people that you will not generate more tokens than declared.
-                                </li>
-                                <li><b>Burnable</b>: <br>your token can be burnt. It means that you can choose to
-                                    reduce the circulating supply by destroying some of your tokens.
-                                </li>
-                                <li><b>Token Recover</b>: <br>it allows the contract owner to recover any ERC20 token
-                                    sent into the contract for error.
-                                    <b-link target="_blank" href="https://vittominacori.github.io/eth-token-recover">
-                                        Details
-                                    </b-link>
-                                </li>
-                            </ul>
-                        </b-card-text>
-                    </b-card>
-                    <b-card bg-variant="light"
                             header="Methods"
                             header-bg-variant="dark"
                             header-text-variant="white"
                             class="mt-3">
                         <b-card v-for="(method, key) in contracts.token.abi"
-                                :header="method.name || 'constructor'"
-                                :sub-title="`Type: ${method.type}`"
                                 :key="key"
+                                v-if="method.name"
+                                no-body
+                                bg-variant="light"
                                 class="mt-4">
-                            <b-card-text v-if="method.stateMutability">
-                                State Mutability: {{ method.stateMutability }}
-                            </b-card-text>
-                            <b-card-text v-if="method.inputs && method.inputs.length > 0">
-                                <p>Inputs:</p>
-                                <ul>
-                                    <li v-for="(param, key) in method.inputs" :key="key">
-                                        <b>{{ param.type }}</b> {{ param.name }}
-                                    </li>
-                                </ul>
-                            </b-card-text>
-                            <b-card-text v-if="method.outputs && method.outputs.length > 0">
-                                <p>Outputs:</p>
-                                <ul>
-                                    <li v-for="(param, key) in method.outputs" :key="key">
-                                        <b>{{ param.type }}</b> {{ param.name }}
-                                    </li>
-                                </ul>
-                            </b-card-text>
+                            <b-card-header>
+                                <a v-b-toggle
+                                   :href="`#method-${key}`"
+                                   @click.prevent
+                                   class="stretched-link text-reset text-decoration-none">
+                                    {{ method.name }}
+                                </a>
+                            </b-card-header>
+                            <b-collapse :id="`method-${key}`" class="p-4">
+                                <b-card-sub-title>
+                                    Type: {{ method.type }}
+                                </b-card-sub-title>
+                                <b-card-text v-if="method.stateMutability">
+                                    State Mutability: {{ method.stateMutability }}
+                                </b-card-text>
+                                <b-card-text v-if="method.inputs && method.inputs.length > 0">
+                                    <p>Inputs:</p>
+                                    <ul>
+                                        <li v-for="(param, key) in method.inputs" :key="key">
+                                            <b>{{ param.type }}</b> {{ param.name }}
+                                        </li>
+                                    </ul>
+                                </b-card-text>
+                                <b-card-text v-if="method.outputs && method.outputs.length > 0">
+                                    <p>Outputs:</p>
+                                    <ul>
+                                        <li v-for="(param, key) in method.outputs" :key="key">
+                                            <b>{{ param.type }}</b> {{ param.name }}
+                                        </li>
+                                    </ul>
+                                </b-card-text>
+                            </b-collapse>
                         </b-card>
                     </b-card>
                 </b-card>
             </b-col>
         </b-row>
-    </div>
+    </b-container>
 </template>
 
 <script>
@@ -116,22 +125,24 @@
     ],
     data () {
       return {
-        sourceCode: 'https://github.com/vittominacori/erc20-generator/blob/v3.2.0/dist/BaseToken.dist.sol',
+        version: '4.0.0',
         loading: true,
         currentNetwork: null,
+        tokenType: 'SimpleERC20',
       };
     },
+    computed: {
+      sourceCode: function () {
+        return `https://github.com/vittominacori/erc20-generator/blob/v${this.version}/dist/${this.contracts.token.contractName}.dist.sol`;
+      },
+    },
     mounted () {
-      this.currentNetwork = this.network.default;
       this.initDapp();
     },
     methods: {
       async initDapp () {
-        this.network.current = this.network.list[this.currentNetwork];
         try {
-          await this.initWeb3(this.currentNetwork, true);
-          this.initToken();
-          this.loading = false;
+          await this.loadToken();
         } catch (e) {
           console.log(e);
           this.makeToast(
@@ -141,6 +152,11 @@
           );
           // document.location.href = this.$withBase('/');
         }
+      },
+      async loadToken () {
+        this.initToken(this.tokenType);
+
+        this.loading = false;
       },
     },
   };
