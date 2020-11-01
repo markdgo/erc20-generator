@@ -10,6 +10,11 @@
                 <b-button to="/create-token/" size="lg" variant="success" class="my-2 py-3 px-5 text-uppercase">
                     Create your Token
                 </b-button>
+                <a class="btn btn-lg btn-outline-light py-3 px-5 text-uppercase"
+                   href="#pricing"
+                   v-smooth-scroll="{ duration: 1000, offset: 0, updateHistory: false }">
+                    Pricing
+                </a>
             </p>
             <p class="mt-3">
                 Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
