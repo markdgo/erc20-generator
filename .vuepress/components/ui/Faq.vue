@@ -24,11 +24,11 @@
                         Nothing else. No login. No setup. No coding required.
                     </p>
                 </b-card>
-                <b-card bg-variant="light" class="mb-4">
-                    <h6>
-                        DISCLAIMER:<br>
+                <b-alert show variant="warning" class="mb-4">
+                    <h4 class="alert-heading">DISCLAIMER</h4>
+                    <p>
                         GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
-                    </h6>
+                    </p>
                     <p>
                         Generator's code is provided under MIT License. Anyone can use it as per their needs.
                         The generator's purpose is to make people able to tokenize their ideas without coding or
@@ -37,7 +37,7 @@
                         Before acquiring tokens, it is recommended to carefully weighs all the information and risks
                         detailed in Token owner's Conditions.
                     </p>
-                </b-card>
+                </b-alert>
             </b-col>
         </b-row>
         <b-row>
@@ -197,6 +197,82 @@
                             <b-link href="https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas"
                                     class="card-link" target="_blank">
                                 Good explanation of Gas
+                            </b-link>
+                        </b-collapse>
+                    </b-card>
+                </div>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col lg="8" offset-lg="2">
+                <p class="font-weight-light text-white">
+                    About Token Features
+                </p>
+                <div class="accordion mb-3" role="tablist">
+                    <b-card no-body
+                            bg-variant="light"
+                            class="mt-3">
+                        <b-card-header role="tab">
+                            <a v-b-toggle
+                               href="#what-is-erc1363"
+                               @click.prevent
+                               class="btn-block text-reset text-decoration-none">
+                                What is ERC1363 Payable Token?
+                            </a>
+                        </b-card-header>
+                        <b-collapse id="what-is-erc1363" class="p-4" accordion="features-accordion">
+                            <b-card-text>
+                                There is no way to execute code after a ERC-20 transfer or approval (i.e. making a
+                                payment), so to make an action it is required to send another transaction and pay GAS
+                                twice.<br>
+                                ERC1363 makes token payments easier and working without the use of any other listener.
+                                It allows to make a callback after a transfer or approval in a single transaction.<br>
+                                There are many proposed uses of Ethereum smart contracts that can accept ERC-20
+                                payments.<br>
+                                Examples could be:
+                                <ul>
+                                    <li>
+                                        to create a token payable crowdsale
+                                    </li>
+                                    <li>
+                                        selling services for tokens
+                                    </li>
+                                    <li>
+                                        paying invoices
+                                    </li>
+                                    <li>
+                                        making subscriptions
+                                    </li>
+                                </ul>
+                            </b-card-text>
+                            <b-link href="https://eips.ethereum.org/EIPS/eip-1363"
+                                    class="card-link" target="_blank">
+                                Discover ERC1363
+                            </b-link>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body
+                            bg-variant="light"
+                            class="mt-3">
+                        <b-card-header role="tab">
+                            <a v-b-toggle
+                               href="#what-is-token-recover"
+                               @click.prevent
+                               class="btn-block text-reset text-decoration-none">
+                                What is Token Recover?
+                            </a>
+                        </b-card-header>
+                        <b-collapse id="what-is-token-recover" class="p-4" accordion="features-accordion">
+                            <b-card-text>
+                                There are lots of tokens lost forever into Smart Contracts. Each Ethereum contract is a
+                                potential token trap for ERC20 tokens. They can't be recovered so it means money losses
+                                for end users.<br>
+                                TokenRecover allows the contract owner to recover any ERC20 token sent into the
+                                contract for error.
+                            </b-card-text>
+                            <b-link href="https://vittominacori.github.io/eth-token-recover/"
+                                    class="card-link" target="_blank">
+                                Discover Token Recover
                             </b-link>
                         </b-collapse>
                     </b-card>

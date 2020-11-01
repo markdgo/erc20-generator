@@ -69,11 +69,25 @@
                 <p class="font-weight-light">
                     Open to getting in touch with awesome people and projects.
                 </p>
-                <a href="https://vittominacori.github.io/"
-                   target="_blank"
-                   class="btn btn-lg btn-outline-warning my-5 py-3 px-5 text-uppercase">
+
+                <b-button v-b-modal.modal-contact
+                          size="lg"
+                          variant="outline-warning"
+                          class="my-5 py-3 px-5 text-uppercase">
                     Let me know
-                </a>
+                </b-button>
+                <b-modal id="modal-contact"
+                         size="lg"
+                         centered
+                         hide-footer>
+                    <b-embed
+                            type="iframe"
+                            aspect="16by9"
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSefU7E64lPdo4ZVrKS9yjCXzQ0PwEo37SgkwpIPUJ3CiRlrfA/viewform?embedded=true"
+                            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                            allowfullscreen
+                    ></b-embed>
+                </b-modal>
             </b-col>
         </b-row>
         <b-row id="faq" class="purple-gradient mx-0">
