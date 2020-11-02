@@ -24,194 +24,46 @@
                         Nothing else. No login. No setup. No coding required.
                     </p>
                 </b-card>
-                <b-alert show variant="warning" class="mb-4">
-                    <h4 class="alert-heading">DISCLAIMER</h4>
-                    <p>
-                        GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
-                    </p>
-                    <p>
-                        Generator's code is provided under MIT License. Anyone can use it as per their needs.
-                        The generator's purpose is to make people able to tokenize their ideas without coding or
-                        paying for it. Source code is well tested and continuously updated to reduce risk of bugs and
-                        introduce language optimizations. Anyway the purchase of tokens involves a high degree of risk.
-                        Before acquiring tokens, it is recommended to carefully weighs all the information and risks
-                        detailed in Token owner's Conditions.
-                    </p>
-                </b-alert>
             </b-col>
         </b-row>
         <b-row>
             <b-col lg="8" offset-lg="2">
-                <p class="font-weight-light text-white">
-                    About Ethereum Blockchain and Ecosystem
-                </p>
-                <div class="accordion mb-3" role="tablist">
+                <h5 class="font-weight-light text-white">
+                    <a v-b-toggle
+                       href="#about-token-features"
+                       @click.prevent
+                       class="btn-block text-reset text-decoration-none">
+                        <b-icon-caret-down-fill></b-icon-caret-down-fill> Token Features
+                    </a>
+                </h5>
+                <b-collapse id="about-token-features" visible accordion="main-accordion" class="mt-4">
+                    <div class="accordion mb-3" role="tablist">
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
-                               href="#what-is-ethereum"
+                               href="#difference-between-fixed-capped"
                                @click.prevent
                                class="btn-block text-reset text-decoration-none">
-                                What is Ethereum?
+                                What's the difference between Fixed and Capped Supply?
                             </a>
                         </b-card-header>
-                        <b-collapse id="what-is-ethereum" class="p-4" accordion="ethereum-accordion">
+                        <b-collapse id="difference-between-fixed-capped" class="p-4" accordion="features-accordion">
                             <b-card-text>
-                                Ethereum is a decentralized platform that runs smart contracts: applications
-                                that run exactly as programmed without any possibility of downtime, censorship,
-                                fraud or third-party interference.<br>
-                                These apps run on a custom built blockchain, an enormously powerful shared
-                                global infrastructure that can move value around and represent the ownership of
-                                property.<br>
-                                This enables developers to create markets, store registries of debts or
-                                promises, move funds in accordance with instructions given long in the past
-                                (like a will or a futures contract) and many other things that have not been
-                                invented yet, all without a middleman or counterparty risk.
+                                <b>Fixed Supply</b><br>
+                                The entire token supply will be generated during deploy and sent to token owner wallet.
+                                You can't increase or reduce supply later.
                             </b-card-text>
-                            <b-link href="https://www.ethereum.org" class="card-link" target="_blank">
-                                Ethereum official website
-                            </b-link>
+                            <b-card-text>
+                                <b>Capped Supply</b><br>
+                                You can define an initial supply to sent to token owner wallet. You can increase or
+                                reduce supply later by minting or burning tokens.
+                                You won't be able to generate more tokens than the defined supply cap.
+                            </b-card-text>
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
-                        <b-card-header role="tab">
-                            <a v-b-toggle
-                               href="#explore-ethereum"
-                               @click.prevent
-                               class="btn-block text-reset text-decoration-none">
-                                How to explore the Ethereum blockchain?
-                            </a>
-                        </b-card-header>
-                        <b-collapse id="explore-ethereum" class="p-4" accordion="ethereum-accordion">
-                            <b-card-text>
-                                A Block Explorer is basically a search engine that allows users to easily
-                                lookup, confirm and validate transactions that have taken place on the Ethereum
-                                Blockchain.
-                            </b-card-text>
-                            <b-link href="https://etherscan.io" class="card-link" target="_blank">
-                                Etherscan
-                            </b-link>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
-                        <b-card-header role="tab">
-                            <a v-b-toggle
-                               href="#what-is-a-dapp"
-                               @click.prevent
-                               class="btn-block text-reset text-decoration-none">
-                                What is a DApp?
-                            </a>
-                        </b-card-header>
-                        <b-collapse id="what-is-a-dapp" class="p-4" accordion="ethereum-accordion">
-                            <b-card-text>
-                                DApp is an abbreviated form for decentralized application.<br>
-                                A DApp has its backend code running on a decentralized peer-to-peer network.
-                                Contrast this with an app where the backend code is running on centralized
-                                servers.<br>
-                                A DApp can have frontend code and user interfaces written in any language (just
-                                like an app) that can make calls to its backend. Furthermore, its frontend can
-                                be hosted on decentralized storage such as Swarm or IPFS.<br>
-                                For an application to be considered a Dapp (pronounced Dee-app, similar to
-                                Email) it must meet the following criteria:
-                            </b-card-text>
-                            <ul>
-                                <li>
-                                    The application must be completely open-source, it must operate
-                                    autonomously, and with no entity controlling the majority of its tokens. The
-                                    application may adapt its protocol in response to proposed improvements and
-                                    market feedback but all changes must be decided by consensus of its users.
-                                </li>
-                                <li>
-                                    The application's data and records of operation must be cryptographically
-                                    stored in a public, decentralized blockchain in order to avoid any central
-                                    points of failure.
-                                </li>
-                                <li>
-                                    The application must use a cryptographic token (bitcoin or a token native to
-                                    its system) which is necessary for access to the application and any
-                                    contribution of value from (miners / farmers) should be rewarded in the
-                                    application’s tokens.
-                                </li>
-                                <li>
-                                    The application must generate tokens according to a standard crytptographic
-                                    algorithm acting as a proof of the value nodes are contributing to the
-                                    application (Bitcoin uses the Proof of Work Algorithm).
-                                </li>
-                            </ul>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
-                        <b-card-header role="tab">
-                            <a v-b-toggle
-                               href="#what-is-an-erc20-token"
-                               @click.prevent
-                               class="btn-block text-reset text-decoration-none">
-                                What is an ERC20 token?
-                            </a>
-                        </b-card-header>
-                        <b-collapse id="what-is-an-erc20-token" class="p-4" accordion="ethereum-accordion">
-                            <b-card-text>
-                                The Ethereum token standard (ERC20) defines a common list of rules that an
-                                Ethereum token has to implement. Giving developers the ability to program how
-                                new tokens will function within the Ethereum ecosystem. This token protocol
-                                became popular with crowdfunding companies via initial coin offering (ICO).
-                            </b-card-text>
-                            <b-link href="https://eips.ethereum.org/EIPS/eip-20" class="card-link" target="_blank">
-                                ERC20 Technical specification
-                            </b-link>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
-                        <b-card-header role="tab">
-                            <a v-b-toggle
-                               href="#what-is-gas"
-                               @click.prevent
-                               class="btn-block text-reset text-decoration-none">
-                                What is Gas?
-                            </a>
-                        </b-card-header>
-                        <b-collapse id="what-is-gas" class="p-4" accordion="ethereum-accordion">
-                            <b-card-text>
-                                "Gas" is the name for a special unit used in Ethereum. It measures how much
-                                "work" an action or set of actions takes to perform.<br>
-                                Every operation that can be performed by a transaction or contract on the
-                                Ethereum platform costs a certain number of gas, with operations that require
-                                more computational resources costing more gas than operations that require few
-                                computational resources.<br>
-                                The reason gas is important is that it helps to ensure an appropriate fee is
-                                being paid by transactions submitted to the network. By requiring that a
-                                transaction pay for each operation it performs (or causes a contract to
-                                perform), we ensure that network doesn't become bogged down with performing a
-                                lot of intensive work that isn't valuable to anyone.
-                            </b-card-text>
-                            <b-link href="https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas"
-                                    class="card-link" target="_blank">
-                                Good explanation of Gas
-                            </b-link>
-                        </b-collapse>
-                    </b-card>
-                </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="8" offset-lg="2">
-                <p class="font-weight-light text-white">
-                    About Token Features
-                </p>
-                <div class="accordion mb-3" role="tablist">
-                    <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#what-is-erc1363"
@@ -252,8 +104,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#what-is-token-recover"
@@ -277,17 +128,20 @@
                         </b-collapse>
                     </b-card>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="8" offset-lg="2">
-                <p class="font-weight-light text-white">
-                    About Token Generator
-                </p>
-                <div class="accordion mb-3" role="tablist">
+                </b-collapse>
+
+                <h5 class="font-weight-light text-white">
+                    <a v-b-toggle
+                       href="#about-token-behaviours"
+                       @click.prevent
+                       class="btn-block text-reset text-decoration-none">
+                        <b-icon-caret-down-fill></b-icon-caret-down-fill> Token Behaviours
+                    </a>
+                </h5>
+                <b-collapse id="about-token-behaviours" accordion="main-accordion" class="mt-4">
+                    <div class="accordion mb-3" role="tablist">
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#who-will-be-token-owner"
@@ -304,8 +158,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#can-i-use-in-exchange"
@@ -322,8 +175,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#can-i-use-for-ico"
@@ -339,8 +191,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#can-token-receive-eth"
@@ -357,8 +208,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#can-i-verify-source-code"
@@ -375,8 +225,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#can-i-add-logo"
@@ -397,8 +246,7 @@
                         </b-collapse>
                     </b-card>
                     <b-card no-body
-                            bg-variant="light"
-                            class="mt-3">
+                            bg-variant="light">
                         <b-card-header role="tab">
                             <a v-b-toggle
                                href="#will-people-mark-as-scam"
@@ -435,6 +283,187 @@
                         </b-collapse>
                     </b-card>
                 </div>
+                </b-collapse>
+
+                <h5 class="font-weight-light text-white">
+                    <a v-b-toggle
+                       href="#about-ethereum"
+                       @click.prevent
+                       class="btn-block text-reset text-decoration-none">
+                        <b-icon-caret-down-fill></b-icon-caret-down-fill> Ethereum Blockchain and Ecosystem
+                    </a>
+                </h5>
+                <b-collapse id="about-ethereum" accordion="main-accordion" class="mt-4">
+                    <div class="accordion mb-3" role="tablist">
+                        <b-card no-body
+                                bg-variant="light">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#what-is-ethereum"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    What is Ethereum?
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="what-is-ethereum" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text>
+                                    Ethereum is a decentralized platform that runs smart contracts: applications
+                                    that run exactly as programmed without any possibility of downtime, censorship,
+                                    fraud or third-party interference.<br>
+                                    These apps run on a custom built blockchain, an enormously powerful shared
+                                    global infrastructure that can move value around and represent the ownership of
+                                    property.<br>
+                                    This enables developers to create markets, store registries of debts or
+                                    promises, move funds in accordance with instructions given long in the past
+                                    (like a will or a futures contract) and many other things that have not been
+                                    invented yet, all without a middleman or counterparty risk.
+                                </b-card-text>
+                                <b-link href="https://www.ethereum.org" class="card-link" target="_blank">
+                                    Ethereum official website
+                                </b-link>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#explore-ethereum"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    How to explore the Ethereum blockchain?
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="explore-ethereum" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text>
+                                    A Block Explorer is basically a search engine that allows users to easily
+                                    lookup, confirm and validate transactions that have taken place on the Ethereum
+                                    Blockchain.
+                                </b-card-text>
+                                <b-link href="https://etherscan.io" class="card-link" target="_blank">
+                                    Etherscan
+                                </b-link>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#what-is-a-dapp"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    What is a DApp?
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="what-is-a-dapp" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text>
+                                    DApp is an abbreviated form for decentralized application.<br>
+                                    A DApp has its backend code running on a decentralized peer-to-peer network.
+                                    Contrast this with an app where the backend code is running on centralized
+                                    servers.<br>
+                                    A DApp can have frontend code and user interfaces written in any language (just
+                                    like an app) that can make calls to its backend. Furthermore, its frontend can
+                                    be hosted on decentralized storage such as Swarm or IPFS.<br>
+                                    For an application to be considered a Dapp (pronounced Dee-app, similar to
+                                    Email) it must meet the following criteria:
+                                </b-card-text>
+                                <ul>
+                                    <li>
+                                        The application must be completely open-source, it must operate
+                                        autonomously, and with no entity controlling the majority of its tokens. The
+                                        application may adapt its protocol in response to proposed improvements and
+                                        market feedback but all changes must be decided by consensus of its users.
+                                    </li>
+                                    <li>
+                                        The application's data and records of operation must be cryptographically
+                                        stored in a public, decentralized blockchain in order to avoid any central
+                                        points of failure.
+                                    </li>
+                                    <li>
+                                        The application must use a cryptographic token (bitcoin or a token native to
+                                        its system) which is necessary for access to the application and any
+                                        contribution of value from (miners / farmers) should be rewarded in the
+                                        application’s tokens.
+                                    </li>
+                                    <li>
+                                        The application must generate tokens according to a standard crytptographic
+                                        algorithm acting as a proof of the value nodes are contributing to the
+                                        application (Bitcoin uses the Proof of Work Algorithm).
+                                    </li>
+                                </ul>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#what-is-an-erc20-token"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    What is an ERC20 token?
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="what-is-an-erc20-token" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text>
+                                    The Ethereum token standard (ERC20) defines a common list of rules that an
+                                    Ethereum token has to implement. Giving developers the ability to program how
+                                    new tokens will function within the Ethereum ecosystem. This token protocol
+                                    became popular with crowdfunding companies via initial coin offering (ICO).
+                                </b-card-text>
+                                <b-link href="https://eips.ethereum.org/EIPS/eip-20" class="card-link" target="_blank">
+                                    ERC20 Technical specification
+                                </b-link>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#what-is-gas"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    What is GAS?
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="what-is-gas" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text>
+                                    "Gas" is the name for a special unit used in Ethereum. It measures how much
+                                    "work" an action or set of actions takes to perform.<br>
+                                    Every operation that can be performed by a transaction or contract on the
+                                    Ethereum platform costs a certain number of gas, with operations that require
+                                    more computational resources costing more gas than operations that require few
+                                    computational resources.<br>
+                                    The reason gas is important is that it helps to ensure an appropriate fee is
+                                    being paid by transactions submitted to the network. By requiring that a
+                                    transaction pay for each operation it performs (or causes a contract to
+                                    perform), we ensure that network doesn't become bogged down with performing a
+                                    lot of intensive work that isn't valuable to anyone.
+                                </b-card-text>
+                                <b-link href="https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas"
+                                        class="card-link" target="_blank">
+                                    Good explanation of Gas
+                                </b-link>
+                            </b-collapse>
+                        </b-card>
+                    </div>
+                </b-collapse>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col lg="8" offset-lg="2">
+                <b-alert show variant="warning" class="mt-4">
+                    <h4 class="alert-heading">DISCLAIMER</h4>
+                    <p>
+                        GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
+                    </p>
+                    <p>
+                        Generator's code is provided under MIT License. Anyone can use it as per their needs.
+                        The generator's purpose is to make people able to tokenize their ideas without coding or
+                        paying for it. Source code is well tested and continuously updated to reduce risk of bugs and
+                        introduce language optimizations. Anyway the purchase of tokens involves a high degree of risk.
+                        Before acquiring tokens, it is recommended to carefully weighs all the information and risks
+                        detailed in Token owner's Conditions.
+                    </p>
+                </b-alert>
             </b-col>
         </b-row>
     </div>

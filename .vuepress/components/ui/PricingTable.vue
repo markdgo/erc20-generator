@@ -20,7 +20,7 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Capped Supply <ui--checkmark :value="t.capped"></ui--checkmark>
+                            Supply Type <b-badge variant="info">{{ t.supplyType}}</b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -48,7 +48,7 @@
                         </b-list-group-item>
 
                         <b-list-group-item variant="warning"
-                                :to="{ path: 'create-token/', query: { tokenType: t.name }}"
+                                :to="{ path: '/create-token/', query: { tokenType: t.name }}"
                                 class="justify-content-between align-items-center text-center py-3">
                             Create
                         </b-list-group-item>

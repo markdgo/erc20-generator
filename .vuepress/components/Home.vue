@@ -48,7 +48,7 @@
         </b-row>
         <b-row class="bg-dark text-white mx-0">
             <b-col lg="10" offset-lg="1" class="mb-3 text-center">
-                <h2 class="pt-5 mb-4 font-weight-lighter text-light">Ready to create you Token?</h2>
+                <h2 class="pt-5 mb-4 font-weight-lighter text-light">Ready to deploy you Token?</h2>
                 <p class="font-weight-light">
                     Try building your Token in less than a minute. You can try on Test Network before to go live.
                 </p>
@@ -98,7 +98,7 @@
         </b-row>
         <b-row class="bg-light text-dark mx-0">
             <b-col lg="10" offset-lg="1" class="mb-3 text-center">
-                <h2 class="pt-5 mb-4 font-weight-lighter text-dark">Ready to create you Token?</h2>
+                <h2 class="pt-5 mb-4 font-weight-lighter text-dark">Ready to deploy you Token?</h2>
                 <p class="font-weight-light">
                     Try building your Token in less than a minute. You can try on Test Network before to go live.
                 </p>

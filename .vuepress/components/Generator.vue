@@ -60,7 +60,7 @@
                                                 v-slot="{ errors }">
                                             <b-form-group
                                                     description="Choose a name for your token."
-                                                    label="Token name *"
+                                                    label="Token Name *"
                                                     label-for="tokenName">
                                                 <b-form-input
                                                         id="tokenName"
@@ -83,7 +83,7 @@
                                                 v-slot="{ errors }">
                                             <b-form-group
                                                     description="Choose a symbol for your token (usually 3-5 chars)."
-                                                    label="Token symbol *"
+                                                    label="Token Symbol *"
                                                     label-for="tokenSymbol">
                                                 <b-form-input
                                                         id="tokenSymbol"
@@ -101,7 +101,7 @@
                                         </ValidationProvider>
 
                                         <ValidationProvider
-                                                name="token decimals"
+                                                name="token Decimals"
                                                 :rules="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
                                                 v-slot="{ errors }">
                                             <b-form-group
@@ -131,7 +131,7 @@
                                                 v-slot="{ errors }">
                                             <b-form-group
                                                     description="Insert the maximum number of tokens available."
-                                                    label="Total supply *"
+                                                    label="Total Supply *"
                                                     label-for="tokenCap">
                                                 <b-form-input
                                                         id="tokenCap"
@@ -156,7 +156,7 @@
                                                 v-slot="{ errors }">
                                             <b-form-group
                                                     description="Insert the initial number of tokens available. Will be put in your account."
-                                                    label="Initial supply *"
+                                                    label="Initial Supply *"
                                                     label-for="tokenInitialBalance">
                                                 <b-form-input
                                                         id="tokenInitialBalance"
@@ -182,7 +182,7 @@
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
-                                                description="Choose your Token."
+                                                description="Choose your Token Type."
                                                 label="Token Type *"
                                                 label-for="tokenType">
                                             <b-form-select id="tokenType"
@@ -191,6 +191,19 @@
                                                            @input="loadToken">
                                                 <option v-for="(n, k) in tokenList" :value="k">
                                                     {{ n.contractName }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+
+                                        <b-form-group
+                                                description="Your Token Supply Type."
+                                                label-for="supplyType">
+                                            <b-form-select id="supplyType"
+                                                           v-model="token.supplyType"
+                                                           disabled
+                                                           size="lg">
+                                                <option v-for="(n) in ['Fixed', 'Capped']" :value="n">
+                                                    {{ n }}
                                                 </option>
                                             </b-form-select>
                                         </b-form-group>
@@ -350,6 +363,7 @@
           decimals: 18,
           cap: '',
           initialBalance: '',
+          supplyType: 'Fixed',
           mintable: false,
           burnable: false,
           erc1363: false,
@@ -495,6 +509,7 @@
         const detail = this.tokenDetails.find((elem) => elem.name === this.tokenType);
 
         this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
+        this.token.supplyType = detail.supplyType;
         this.token.mintable = detail.mintable;
         this.token.burnable = detail.burnable;
         this.token.erc1363 = detail.erc1363;
