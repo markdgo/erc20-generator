@@ -20,11 +20,11 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Supply Type <b-badge variant="info">{{ t.supplyType}}</b-badge>
+                            Customizable Decimals <ui--checkmark :value="t.customizeDecimals"></ui--checkmark>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Customize Decimals <ui--checkmark :value="t.customizeDecimals"></ui--checkmark>
+                            Supply Type <b-badge variant="info">{{ t.supplyType}}</b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">

@@ -9,13 +9,12 @@
 
         <b-collapse is-nav id="nav_collapse">
             <b-navbar-nav>
-                <b-nav-item to="/create-token/">
-                    <span class="text-white">Create your Token</span>
-                </b-nav-item>
+                <b-nav-item to="/create-token/" :active="page === 'Generator'">Create your Token</b-nav-item>
             </b-navbar-nav>
 
             <b-navbar-nav class="ml-auto">
-                <b-nav-item to="/docs/">Docs</b-nav-item>
+                <b-nav-item to="/" :active="page === 'Home'">Home</b-nav-item>
+                <b-nav-item to="/docs/" :active="page === 'Docs'">Docs</b-nav-item>
                 <b-nav-item target="_blank"
                             href="https://vittominacori.medium.com/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4">
                     About
@@ -33,5 +32,11 @@
 <script>
   export default {
     name: 'Header',
+    props: {
+      page: {
+        type: String,
+        default: null,
+      },
+    },
   };
 </script>

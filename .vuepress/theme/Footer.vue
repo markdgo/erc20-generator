@@ -1,16 +1,6 @@
 <template>
     <b-container fluid="">
         <b-row class="bg-dark text-white">
-            <!--
-            <b-col lg="10" offset-lg="1" class="mt-4 p-0">
-                <b-link href="https://www.friendsfingers.com/?utm_campaign=github&utm_source=erc20-generator"
-                        target="_blank">
-                    <b-img fluid
-                           :src="$withBase('/assets/images/friends-fingers-banner.png')"
-                           alt="FriendsFingers"></b-img>
-                </b-link>
-            </b-col>
-            -->
             <b-col lg="10" offset-lg="1" class="text-center p-0">
                 <ul class="list-inline mt-2">
                     <li class="list-inline-item">

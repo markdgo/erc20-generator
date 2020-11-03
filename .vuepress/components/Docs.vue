@@ -50,12 +50,12 @@
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Supply Type <b-badge variant="info">{{ token.supplyType}}</b-badge>
+                                        Customizable Decimals
+                                        <ui--checkmark :value="token.customizeDecimals"></ui--checkmark>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Customize Decimals
-                                        <ui--checkmark :value="token.customizeDecimals"></ui--checkmark>
+                                        Supply Type <b-badge variant="info">{{ token.supplyType}}</b-badge>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -94,14 +94,17 @@
                                     header-text-variant="white"
                                     class="mt-3">
                                 <p>
-                                    <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${this.version}`" target="_blank">
-                                        <b-img :src="`https://img.shields.io/badge/version-${this.version}-blue`"></b-img>
+                                    <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${token.version}`" target="_blank">
+                                        <b-img :src="`https://img.shields.io/badge/version-${token.version}-blue`"></b-img>
                                     </b-link>
                                     <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
                                         <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
                                     </b-link>
-                                    <b-link href="https://coveralls.io/github/vittominacori/erc20-generator" target="_blank">
+                                    <b-link href="https://coveralls.io/github/vittominacori/erc20-generator?branch=master" target="_blank">
                                         <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
+                                    </b-link>
+                                    <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/LICENSE" target="_blank">
+                                        <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
                                     </b-link>
                                 </p>
                                 <ul>
@@ -212,32 +215,24 @@
     ],
     data () {
       return {
-        version: '4.0.0',
         loading: true,
         currentNetwork: null,
         tokenType: 'SimpleERC20',
-        token: {
-          supplyType: 'Fixed',
-          mintable: false,
-          burnable: false,
-          erc1363: false,
-          tokenRecover: false,
-          removeCopyright: false,
-        },
+        token: {},
       };
     },
     computed: {
       sourceCode: function () {
-        return `https://github.com/vittominacori/erc20-generator/blob/v${this.version}/dist/${this.contracts.token.contractName}.dist.sol`;
+        return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/dist/${this.contracts.token.contractName}.dist.sol`;
       },
       controlFlow: function () {
-        return `https://github.com/vittominacori/erc20-generator/blob/v${this.version}/analysis/control-flow/${this.contracts.token.contractName}.png`;
+        return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/analysis/control-flow/${this.contracts.token.contractName}.png`;
       },
       inheritanceTree: function () {
-        return `https://github.com/vittominacori/erc20-generator/blob/v${this.version}/analysis/inheritance-tree/${this.contracts.token.contractName}.png`;
+        return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/analysis/inheritance-tree/${this.contracts.token.contractName}.png`;
       },
       uml: function () {
-        return `https://github.com/vittominacori/erc20-generator/blob/v${this.version}/analysis/uml/${this.contracts.token.contractName}.svg`;
+        return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/analysis/uml/${this.contracts.token.contractName}.svg`;
       },
     },
     mounted () {

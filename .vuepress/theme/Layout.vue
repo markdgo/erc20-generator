@@ -1,10 +1,10 @@
 <template>
     <div class="page-wrapper">
-        <site-header/>
+        <site-header :page="page"></site-header>
         <transition name="fade" mode="out-in">
             <component v-if="page" :is="page" :key="page"></component>
         </transition>
-        <site-footer/>
+        <site-footer></site-footer>
     </div>
 </template>
 <script>

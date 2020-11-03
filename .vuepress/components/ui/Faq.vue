@@ -257,28 +257,15 @@
                         </b-card-header>
                         <b-collapse id="will-people-mark-as-scam" class="p-4" accordion="erc20-accordion">
                             <b-card-text>
-                                No, your token is not SCAM. It is well tested, it has verified source code, it is used
-                                by thousands of tokens. It will be SCAM if you use as it.<br>
-                                ERC20 Token Generator has been FREE for use and there are about 10.000 tokens built on.
-                                Maybe someone used it to SCAM but it doesn't mean also you will use for it.
-                                Below some links about the project you can share to demonstrate trustability of your
-                                token source code (not of your intentions).<br>
+                                No, your token is not SCAM. It is well tested, it is updated regularly, it has verified
+                                source code, it is used by thousands of tokens. It will be SCAM if you use as it.<br>
+                                ERC20 Token Generator is FREE to use and there are about 10.000 tokens built on.
+                                Maybe someone used it to SCAM but it doesn't mean also you will use for it. YOU DON'T.
+                                Below the link to documentation about the project you can share to demonstrate
+                                trustability of your token source code (not of your intentions).<br>
                             </b-card-text>
-                            <b-link href="https://github.com/vittominacori/erc20-generator"
-                                    class="card-link" target="_blank">
-                                Smart Contracts
-                            </b-link>
-                            <b-link href="https://github.com/vittominacori/erc20-generator/tree/dapp"
-                                    class="card-link" target="_blank">
-                                DAPP
-                            </b-link>
-                            <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator"
-                                    class="card-link" target="_blank">
-                                Tests
-                            </b-link>
-                            <b-link href="https://coveralls.io/github/vittominacori/erc20-generator"
-                                    class="card-link" target="_blank">
-                                Coverage
+                            <b-link to="/docs/" class="card-link">
+                                Documentation
                             </b-link>
                         </b-collapse>
                     </b-card>
