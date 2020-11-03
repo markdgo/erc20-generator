@@ -4,7 +4,7 @@ export default {
       tokenDetails: [
         {
           name: 'SimpleERC20',
-          version: '4.0.0',
+          version: '4.0.1',
           customizeDecimals: false,
           standard: true,
           detailed: true,
@@ -32,7 +32,7 @@ export default {
         },
         {
           name: 'CommonERC20',
-          version: '4.0.0',
+          version: '4.0.1',
           customizeDecimals: true,
           standard: true,
           detailed: true,
@@ -46,7 +46,7 @@ export default {
         },
         {
           name: 'PowerfulERC20',
-          version: '4.0.0',
+          version: '4.0.1',
           customizeDecimals: true,
           standard: true,
           detailed: true,
