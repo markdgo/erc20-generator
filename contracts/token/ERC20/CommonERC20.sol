@@ -10,7 +10,6 @@ import "../../service/ServicePayer.sol";
 
 /**
  * @title CommonERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the CommonERC20
  */
 contract CommonERC20 is ERC20Capped, ERC20Burnable, Ownable, ServicePayer {

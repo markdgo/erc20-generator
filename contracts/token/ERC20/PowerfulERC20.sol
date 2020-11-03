@@ -13,7 +13,6 @@ import "../../service/ServicePayer.sol";
 
 /**
  * @title PowerfulERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the PowerfulERC20
  */
 contract PowerfulERC20 is ERC20Capped, ERC20Burnable, ERC1363, TokenRecover, ServicePayer {

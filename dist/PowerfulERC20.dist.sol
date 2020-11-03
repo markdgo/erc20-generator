@@ -848,7 +848,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363 Interface
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for a Payable Token contract as defined in
  *  https://eips.ethereum.org/EIPS/eip-1363
  */
@@ -939,7 +938,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363Receiver Interface
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support transferAndCall or transferFromAndCall
  *  from ERC1363 token contracts as defined in
  *  https://eips.ethereum.org/EIPS/eip-1363
@@ -975,7 +973,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title IERC1363Spender Interface
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Interface for any contract that wants to support approveAndCall
  *  from ERC1363 token contracts as defined in
  *  https://eips.ethereum.org/EIPS/eip-1363
@@ -1182,7 +1179,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ERC1363
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Implementation of an ERC1363 interface
  */
 contract ERC1363 is ERC20, IERC1363, ERC165 {
@@ -1413,7 +1409,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title TokenRecover
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Allow to recover any ERC20 sent into the contract for error
  */
 contract TokenRecover is Ownable {
@@ -1437,7 +1432,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServiceReceiver
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServiceReceiver
  */
 contract ServiceReceiver is TokenRecover {
@@ -1478,7 +1472,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServicePayer
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServicePayer
  */
 contract ServicePayer {
@@ -1501,7 +1494,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title PowerfulERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the PowerfulERC20
  */
 contract PowerfulERC20 is ERC20Capped, ERC20Burnable, ERC1363, TokenRecover, ServicePayer {

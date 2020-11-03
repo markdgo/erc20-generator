@@ -800,7 +800,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title TokenRecover
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Allow to recover any ERC20 sent into the contract for error
  */
 contract TokenRecover is Ownable {
@@ -824,7 +823,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServiceReceiver
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServiceReceiver
  */
 contract ServiceReceiver is TokenRecover {
@@ -865,7 +863,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServicePayer
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServicePayer
  */
 contract ServicePayer {
@@ -885,7 +882,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title StandardERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the StandardERC20
  */
 contract StandardERC20 is ERC20, ServicePayer {

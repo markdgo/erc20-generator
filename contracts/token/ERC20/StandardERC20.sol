@@ -8,7 +8,6 @@ import "../../service/ServicePayer.sol";
 
 /**
  * @title StandardERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the StandardERC20
  */
 contract StandardERC20 is ERC20, ServicePayer {
