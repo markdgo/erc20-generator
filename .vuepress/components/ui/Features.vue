@@ -50,9 +50,8 @@
                     <p>
                         Deploying SimpleERC20 for FREE, a link pointing to this page will be added to your contract.
                         Your Token will be fully compliant with the ERC20 Standard and you can use it without issues.
-                        <br>
-                        It only is a little credit to advertise ERC20 Token Generator.
-                        Choose StandardERC20, CommonERC20 or PowerfulERC20 to remove.
+                        It is only a little credit to advertise ERC20 Token Generator.
+                        You can remove it by choosing StandardERC20, CommonERC20 or PowerfulERC20.
                     </p>
                 </b-alert>
             </b-col>

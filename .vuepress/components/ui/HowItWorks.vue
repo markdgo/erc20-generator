@@ -3,6 +3,7 @@
         <b-row>
             <b-col lg="10" offset-lg="1" class="text-center">
                 <b-link v-b-modal.modal-tutorial size="lg" class="text-reset">
+                    <h2><b-icon-play></b-icon-play></h2>
                     <small>Watch a Video Tutorial</small>
                 </b-link>
                 <b-modal id="modal-tutorial"
