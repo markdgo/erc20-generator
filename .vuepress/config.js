@@ -1,5 +1,5 @@
 module.exports = {
-  description: 'Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.',
+  description: 'Create an ERC20 Token in less than a minute with the most used Smart Contract Generator for ERC20 Token. No login. No setup. No coding required.',
   base: '/erc20-generator/',
   head: [
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
