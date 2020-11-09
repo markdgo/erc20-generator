@@ -4,7 +4,7 @@ export default {
       tokenDetails: [
         {
           name: 'SimpleERC20',
-          version: '4.0.1',
+          version: '4.0.0',
           customizeDecimals: false,
           standard: true,
           detailed: true,
