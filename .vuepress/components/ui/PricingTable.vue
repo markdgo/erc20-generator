@@ -16,6 +16,10 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
+                            Verified Source Code <ui--checkmark :value="t.verified"></ui--checkmark>
+                        </b-list-group-item>
+
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Detailed <ui--checkmark :value="t.detailed"></ui--checkmark>
                         </b-list-group-item>
 

@@ -8,8 +8,7 @@
                 <b-card v-if="!loading" bg-variant="transparent" border-variant="0">
                     <b-row>
                         <b-col lg="12">
-                            <b-card bg-variant="light"
-                                    header="Token Type"
+                            <b-card header="Token Type"
                                     header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
@@ -43,6 +42,10 @@
                                 <b-list-group flush>
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
                                         ERC20 Compliant <ui--checkmark :value="token.standard"></ui--checkmark>
+                                    </b-list-group-item>
+
+                                    <b-list-group-item class="d-flex justify-content-between align-items-center">
+                                        Verified Source Code <ui--checkmark :value="token.verified"></ui--checkmark>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -88,72 +91,67 @@
                             </b-card>
                         </b-col>
                         <b-col lg="8">
-                            <b-card bg-variant="light"
+                            <b-card no-body
+                                    bg-variant="light"
                                     header="Token Details"
                                     header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
-                                <p>
-                                    <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${token.version}`" target="_blank">
-                                        <b-img :src="`https://img.shields.io/badge/version-${token.version}-blue`"></b-img>
-                                    </b-link>
-                                    <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
-                                        <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
-                                    </b-link>
-                                    <b-link href="https://coveralls.io/github/vittominacori/erc20-generator?branch=master" target="_blank">
-                                        <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
-                                    </b-link>
-                                    <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/LICENSE" target="_blank">
-                                        <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
-                                    </b-link>
-                                </p>
-                                <ul>
-                                    <li>
-                                        Source Code:
-                                        <b-link :href="sourceCode"
-                                                target="_blank">
-                                            <b>{{ contracts.token.contractName }}.dist.sol</b>
+                                <b-list-group flush>
+                                    <b-list-group-item>
+                                        <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${token.version}`" target="_blank">
+                                            <b-img :src="`https://img.shields.io/badge/version-${token.version}-blue`"></b-img>
                                         </b-link>
-                                    </li>
-                                    <li>Contract Name: <b>{{ contracts.token.contractName }}</b></li>
-                                    <li>Compiler: <b>{{ contracts.token.compiler.version }}</b></li>
-                                    <li>Optimization: <b>Yes</b></li>
-                                    <li>Runs (Optimizer): <b>200</b></li>
-                                    <li>Constructor Arguments: <b>your ABI-encoded arguments</b></li>
-                                    <li>
+                                        <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
+                                            <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
+                                        </b-link>
+                                        <b-link href="https://coveralls.io/github/vittominacori/erc20-generator?branch=master" target="_blank">
+                                            <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>
+                                        </b-link>
+                                        <b-link href="https://github.com/vittominacori/erc20-generator/blob/master/LICENSE" target="_blank">
+                                            <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
+                                        </b-link>
+                                    </b-list-group-item>
+                                    <b-list-group-item>Contract Name: <b>{{ contracts.token.contractName }}</b></b-list-group-item>
+                                    <b-list-group-item>Compiler: <b>{{ contracts.token.compiler.version }}</b></b-list-group-item>
+                                    <b-list-group-item>Optimization: <b>Yes</b></b-list-group-item>
+                                    <b-list-group-item>Runs (Optimizer): <b>200</b></b-list-group-item>
+                                    <b-list-group-item>
                                         Control Flow:
                                         <b-link :href="controlFlow"
                                                 target="_blank">
                                             <b>{{ contracts.token.contractName }}.png</b>
                                         </b-link>
-                                    </li>
-                                    <li>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
                                         Inheritance Tree:
                                         <b-link :href="inheritanceTree"
                                                 target="_blank">
                                             <b>{{ contracts.token.contractName }}.png</b>
                                         </b-link>
-                                    </li>
-
-                                    <li>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
                                         UML:
                                         <b-link :href="uml"
                                                 target="_blank">
                                             <b>{{ contracts.token.contractName }}.svg</b>
                                         </b-link>
-                                    </li>
-                                </ul>
-                                <div class="form-group">
-                                    <label><b>ABI</b></label>
-                                    <textarea class="form-control"
-                                              readonly="readonly" rows="5"
-                                              v-model="contracts.token.stringifiedAbi"></textarea>
-                                </div>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
+                                        <div class="form-group">
+                                            <label>ABI:</label>
+                                            <b-form-textarea readonly
+                                                             no-resize
+                                                             rows="3"
+                                                             v-model="contracts.token.stringifiedAbi">
+                                            </b-form-textarea>
+                                        </div>
+                                    </b-list-group-item>
+                                </b-list-group>
                             </b-card>
                         </b-col>
                     </b-row>
-                    <b-card bg-variant="light"
-                            header="Methods"
+                    <b-card header="Methods"
                             header-bg-variant="dark"
                             header-text-variant="white"
                             class="mt-3">
@@ -233,9 +231,6 @@
       };
     },
     computed: {
-      sourceCode: function () {
-        return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/dist/${this.contracts.token.contractName}.dist.sol`;
-      },
       controlFlow: function () {
         return `https://github.com/vittominacori/erc20-generator/blob/v${this.token.version}/analysis/control-flow/${this.contracts.token.contractName}.png`;
       },
