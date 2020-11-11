@@ -106,10 +106,18 @@
                                             <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
                                         </b-link>
                                     </b-list-group-item>
-                                    <b-list-group-item>Contract Name: <b>{{ contracts.token.contractName }}</b></b-list-group-item>
-                                    <b-list-group-item>Compiler: <b>{{ contracts.token.compiler.version }}</b></b-list-group-item>
-                                    <b-list-group-item>Optimization: <b>Yes</b></b-list-group-item>
-                                    <b-list-group-item>Runs (Optimizer): <b>200</b></b-list-group-item>
+                                    <b-list-group-item>
+                                        Contract Name: <b>{{ contracts.token.contractName }}</b>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
+                                        Compiler: <b>{{ contracts.token.compiler.version }}</b>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
+                                        Optimization: <b>Yes</b>
+                                    </b-list-group-item>
+                                    <b-list-group-item>
+                                        Runs (Optimizer): <b>200</b>
+                                    </b-list-group-item>
                                     <b-list-group-item>
                                         Control Flow:
                                         <b-link :href="controlFlow"

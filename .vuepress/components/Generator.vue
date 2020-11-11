@@ -76,7 +76,6 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-
                                         <ValidationProvider
                                                 name="token symbol"
                                                 :rules="{ required: true }"
@@ -99,7 +98,6 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-
                                         <ValidationProvider
                                                 name="token Decimals"
                                                 :rules="{ required: true, numeric: true, min_value: 0, max_value: 36 }"
@@ -113,7 +111,7 @@
                                                         name="tokenDecimals"
                                                         placeholder="Your token decimals"
                                                         type="number"
-                                                        :disabled="['SimpleERC20'].includes(tokenType)"
+                                                        :disabled="!token.customizeDecimals"
                                                         v-model.trim="token.decimals"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
@@ -124,7 +122,6 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-
                                         <ValidationProvider
                                                 name="token max supply"
                                                 :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
@@ -149,7 +146,6 @@
                                                 </small>
                                             </b-form-group>
                                         </ValidationProvider>
-
                                         <ValidationProvider
                                                 name="token initial supply"
                                                 :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
@@ -163,7 +159,7 @@
                                                         name="tokenInitialBalance"
                                                         placeholder="Your token initial supply"
                                                         type="number"
-                                                        :disabled="['SimpleERC20', 'StandardERC20'].includes(tokenType)"
+                                                        :disabled="token.supplyType === 'Fixed'"
                                                         v-model.trim="token.initialBalance"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
@@ -175,91 +171,6 @@
                                             </b-form-group>
                                         </ValidationProvider>
                                     </b-card>
-                                </b-col>
-                                <b-col lg="4">
-                                    <b-card header="Token Features"
-                                            header-bg-variant="dark"
-                                            header-text-variant="white"
-                                            class="mt-3">
-                                        <b-form-group
-                                                description="Choose your Token Type."
-                                                label="Token Type *"
-                                                label-for="tokenType">
-                                            <b-form-select id="tokenType"
-                                                           v-model="tokenType"
-                                                           size="lg"
-                                                           @input="loadToken">
-                                                <option v-for="(n, k) in tokenList" :value="k">
-                                                    {{ n.contractName }}
-                                                </option>
-                                            </b-form-select>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="Your Token Supply Type."
-                                                label-for="supplyType">
-                                            <b-form-select id="supplyType"
-                                                           v-model="token.supplyType"
-                                                           disabled
-                                                           size="lg">
-                                                <option v-for="(n) in ['Fixed', 'Capped']" :value="n">
-                                                    {{ n }}
-                                                </option>
-                                            </b-form-select>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="You will be able to generate tokens by minting them.">
-                                            <b-form-checkbox v-model="token.mintable"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                Mintable
-                                            </b-form-checkbox>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="Your Token can be burnt.">
-                                            <b-form-checkbox v-model="token.burnable"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                Burnable
-                                            </b-form-checkbox>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="The ERC1363 is an ERC20 compatible Token that can make a callback on the receiver contract to notify token transfers or token approvals.">
-                                            <b-form-checkbox v-model="token.erc1363"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                ERC1363
-                                            </b-form-checkbox>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="It allows the contract owner to recover any ERC20 token sent into the contract for error.">
-                                            <b-form-checkbox v-model="token.tokenRecover"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                Token Recover
-                                            </b-form-checkbox>
-                                        </b-form-group>
-
-                                        <b-form-group
-                                                description="Remove the link pointing to this page from your contract.">
-                                            <b-form-checkbox v-model="token.removeCopyright"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                Remove Copyright
-                                            </b-form-checkbox>
-                                        </b-form-group>
-                                    </b-card>
-                                </b-col>
-                                <b-col lg="8">
                                     <b-card header="Network"
                                             header-bg-variant="dark"
                                             header-text-variant="white"
@@ -287,6 +198,91 @@
                                     </b-card>
                                 </b-col>
                                 <b-col lg="4">
+                                    <b-card header="Token Features"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            class="mt-3">
+                                        <b-form-group
+                                                description="Choose your Token Type."
+                                                label="Token Type *"
+                                                label-for="tokenType">
+                                            <b-form-select id="tokenType"
+                                                           v-model="tokenType"
+                                                           size="lg"
+                                                           @input="loadToken">
+                                                <option v-for="(n, k) in tokenList" :value="k">
+                                                    {{ n.contractName }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="Your Token Source Code will be automatically verified on Etherscan.">
+                                            <b-form-checkbox v-model="token.verified"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                Verified Source Code
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="Your Token Supply Type."
+                                                label="Supply Type"
+                                                label-for="supplyType">
+                                            <b-form-select id="supplyType"
+                                                           v-model="token.supplyType"
+                                                           disabled
+                                                           size="sm">
+                                                <option v-for="(n) in ['Fixed', 'Capped']" :value="n">
+                                                    {{ n }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="You will be able to generate tokens by minting them.">
+                                            <b-form-checkbox v-model="token.mintable"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                Mintable
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="Your Token can be burnt.">
+                                            <b-form-checkbox v-model="token.burnable"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                Burnable
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="The ERC1363 is an ERC20 compatible Token that can make a callback on the receiver contract.">
+                                            <b-form-checkbox v-model="token.erc1363"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                ERC1363
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="It allows the contract owner to recover any ERC20 token sent into the contract for error.">
+                                            <b-form-checkbox v-model="token.tokenRecover"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                Token Recover
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="Remove the link pointing to this page from your contract.">
+                                            <b-form-checkbox v-model="token.removeCopyright"
+                                                             size="sm"
+                                                             disabled
+                                                             switch>
+                                                Remove Copyright
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                    </b-card>
                                     <b-card header="Payment"
                                             header-bg-variant="dark"
                                             header-text-variant="white"
@@ -308,7 +304,6 @@
                                             </b-list-group-item>
                                         </b-list-group>
                                     </b-card>
-
                                     <b-button variant="success"
                                               size="lg"
                                               block
@@ -515,7 +510,8 @@
       updateTokenDetails () {
         const detail = this.tokenDetails.find((elem) => elem.name === this.tokenType);
 
-        this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
+        this.token.customizeDecimals = detail.customizeDecimals;
+        this.token.verified = detail.verified;
         this.token.supplyType = detail.supplyType;
         this.token.mintable = detail.mintable;
         this.token.burnable = detail.burnable;
@@ -523,9 +519,11 @@
         this.token.tokenRecover = detail.tokenRecover;
         this.token.removeCopyright = detail.removeCopyright;
         this.token.price = detail.price;
+
+        this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
       },
       updateInitialBalance () {
-        this.token.initialBalance = ['SimpleERC20', 'StandardERC20'].includes(this.tokenType) ? this.token.cap : this.token.initialBalance;
+        this.token.initialBalance = this.token.supplyType === 'Fixed' ? this.token.cap : this.token.initialBalance;
       },
       getDeployArguments () {
         const name = this.token.name;
