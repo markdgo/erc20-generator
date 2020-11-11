@@ -12,26 +12,20 @@
                                     header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
-                                <b-row>
-                                    <b-col lg="12">
-                                        <b-form-group
-                                                description="Choose your Token."
-                                                label="Token Type *"
-                                                label-for="tokenType">
-                                            <b-form-select id="tokenType"
-                                                           v-model="tokenType"
-                                                           size="lg"
-                                                           @input="loadToken">
-                                                <option v-for="(n, k) in tokenList" :value="k">{{ n.contractName }}
-                                                </option>
-                                            </b-form-select>
-                                        </b-form-group>
-                                    </b-col>
-                                </b-row>
+                                <b-form-group
+                                        description="Choose your Token."
+                                        label="Token Type *"
+                                        label-for="tokenType">
+                                    <b-form-select id="tokenType"
+                                                   v-model="tokenType"
+                                                   size="lg"
+                                                   @input="loadToken">
+                                        <option v-for="(n, k) in tokenList" :value="k">{{ n.contractName }}
+                                        </option>
+                                    </b-form-select>
+                                </b-form-group>
                             </b-card>
                         </b-col>
-                    </b-row>
-                    <b-row>
                         <b-col lg="4">
                             <b-card no-body
                                     bg-variant="light"
@@ -150,51 +144,53 @@
                                 </b-list-group>
                             </b-card>
                         </b-col>
+                        <b-col lg="12">
+                            <b-card header="Methods"
+                                    header-bg-variant="dark"
+                                    header-text-variant="white"
+                                    class="mt-3">
+                                <b-card v-for="(method, key) in contracts.token.abi"
+                                        :key="key"
+                                        v-if="method.name"
+                                        no-body
+                                        bg-variant="light"
+                                        class="mt-4">
+                                    <b-card-header>
+                                        <a v-b-toggle
+                                           :href="`#method-${key}`"
+                                           @click.prevent
+                                           class="stretched-link text-reset text-decoration-none">
+                                            {{ method.name }}
+                                        </a>
+                                    </b-card-header>
+                                    <b-collapse :id="`method-${key}`" class="p-4">
+                                        <b-card-sub-title>
+                                            Type: {{ method.type }}
+                                        </b-card-sub-title>
+                                        <b-card-text v-if="method.stateMutability">
+                                            State Mutability: {{ method.stateMutability }}
+                                        </b-card-text>
+                                        <b-card-text v-if="method.inputs && method.inputs.length > 0">
+                                            <p>Inputs:</p>
+                                            <ul>
+                                                <li v-for="(param, key) in method.inputs" :key="key">
+                                                    <b>{{ param.type }}</b> {{ param.name }}
+                                                </li>
+                                            </ul>
+                                        </b-card-text>
+                                        <b-card-text v-if="method.outputs && method.outputs.length > 0">
+                                            <p>Outputs:</p>
+                                            <ul>
+                                                <li v-for="(param, key) in method.outputs" :key="key">
+                                                    <b>{{ param.type }}</b> {{ param.name }}
+                                                </li>
+                                            </ul>
+                                        </b-card-text>
+                                    </b-collapse>
+                                </b-card>
+                            </b-card>
+                        </b-col>
                     </b-row>
-                    <b-card header="Methods"
-                            header-bg-variant="dark"
-                            header-text-variant="white"
-                            class="mt-3">
-                        <b-card v-for="(method, key) in contracts.token.abi"
-                                :key="key"
-                                v-if="method.name"
-                                no-body
-                                bg-variant="light"
-                                class="mt-4">
-                            <b-card-header>
-                                <a v-b-toggle
-                                   :href="`#method-${key}`"
-                                   @click.prevent
-                                   class="stretched-link text-reset text-decoration-none">
-                                    {{ method.name }}
-                                </a>
-                            </b-card-header>
-                            <b-collapse :id="`method-${key}`" class="p-4">
-                                <b-card-sub-title>
-                                    Type: {{ method.type }}
-                                </b-card-sub-title>
-                                <b-card-text v-if="method.stateMutability">
-                                    State Mutability: {{ method.stateMutability }}
-                                </b-card-text>
-                                <b-card-text v-if="method.inputs && method.inputs.length > 0">
-                                    <p>Inputs:</p>
-                                    <ul>
-                                        <li v-for="(param, key) in method.inputs" :key="key">
-                                            <b>{{ param.type }}</b> {{ param.name }}
-                                        </li>
-                                    </ul>
-                                </b-card-text>
-                                <b-card-text v-if="method.outputs && method.outputs.length > 0">
-                                    <p>Outputs:</p>
-                                    <ul>
-                                        <li v-for="(param, key) in method.outputs" :key="key">
-                                            <b>{{ param.type }}</b> {{ param.name }}
-                                        </li>
-                                    </ul>
-                                </b-card-text>
-                            </b-collapse>
-                        </b-card>
-                    </b-card>
                 </b-card>
             </b-col>
         </b-row>
