@@ -4,9 +4,13 @@
             <b-col lg="10" offset-lg="1" class="text-center p-0">
                 <ul class="list-inline mt-2">
                     <li class="list-inline-item">
-                        <small>created by
+                        <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
+                    </li>
+                    <li class="list-inline-item">
+                        <small>
+                            created by
                             <b-link class="text-warning" href="https://vittominacori.github.io/" target="_blank">
-                                @vittominacori
+                                vittominacori
                             </b-link>
                         </small>
                     </li>

@@ -1,7 +1,7 @@
 <template>
     <b-container fluid>
         <b-row id="token-docs">
-            <b-col lg="10" offset-lg="1" class="my-4 p-0">
+            <b-col lg="10" offset-lg="1" class="mb-3 p-0">
                 <div v-if="loading" class="text-center p-5">
                     <ui--loader :loading="true"></ui--loader>
                 </div>

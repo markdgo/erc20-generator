@@ -9,10 +9,7 @@
                     <b-alert show variant="danger" v-if="!metamask.installed">
                         <h4 class="alert-heading">Alert</h4>
                         <p>
-                            To use this app please install <a href="https://metamask.io/" target="_blank">MetaMask</a> extension on Chrome Desktop.
-                        </p>
-                        <hr>
-                        <p class="mb-0">
+                            To use this app please install <a href="https://metamask.io/" target="_blank">MetaMask</a>.
                             Use any other wallet at your own risk.
                         </p>
                     </b-alert>
@@ -115,6 +112,7 @@
                                                         v-model.trim="token.decimals"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
+                                                        min="0"
                                                         step="1">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
@@ -139,6 +137,7 @@
                                                         size="lg"
                                                         v-on:update="updateInitialBalance"
                                                         :class="{'is-invalid': errors.length > 0}"
+                                                        min="1"
                                                         step="1">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
@@ -163,6 +162,7 @@
                                                         v-model.trim="token.initialBalance"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
+                                                        min="0"
                                                         step="1">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
