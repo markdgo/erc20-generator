@@ -24,17 +24,27 @@
                             <ui--loader :loading="true"></ui--loader>
                         </div>
                         <div v-else>
-                            <b>Well! Transaction done!</b><br>
-                            Transaction id <a :href="trx.link" target="_blank"><span v-html="trx.hash"></span></a><br>
-
-                            Retrieving Token.
+                            <b class="text-success">Well! Transaction done!</b><br>
+                            Transaction Hash:
+                            <a :href="trx.link" target="_blank"><span v-html="trx.hash"></span></a><br>
+                            <hr>
                             <div v-if="!token.address">
+                                <b>Retrieving Token.</b>
                                 <p>Please wait...</p>
                                 <ui--loader :loading="true"></ui--loader>
                             </div>
                             <div v-else>
-                                <b>Your Token</b>
-                                <b-link :href="token.link" target="_blank"><span v-html="token.address"></span></b-link>
+                                Your Token address:<br>
+                                <h6>{{ token.address }}</h6>
+                                <hr>
+                                <b-link :href="token.link" target="_blank" class="btn btn-info">
+                                    <b-icon-arrow-up-right-circle-fill></b-icon-arrow-up-right-circle-fill>
+                                    View on Etherscan
+                                </b-link>
+                                <b-link @click="addToMetaMask" class="btn btn-success">
+                                    <b-icon-plus-circle-fill></b-icon-plus-circle-fill>
+                                    Add to MetaMask
+                                </b-link>
                             </div>
                         </div>
                     </b-card>
@@ -557,6 +567,23 @@
         params.push(this.contracts.service.options.address);
 
         return params;
+      },
+      async addToMetaMask () {
+        try {
+          await this.web3Provider.request({
+            method: 'wallet_watchAsset',
+            params: {
+              type: 'ERC20',
+              options: {
+                address: this.token.address,
+                symbol: this.token.symbol,
+                decimals: this.token.decimals,
+              },
+            },
+          });
+        } catch (e) {
+          console.log(e); // eslint-disable-line no-console
+        }
       },
     },
   };
