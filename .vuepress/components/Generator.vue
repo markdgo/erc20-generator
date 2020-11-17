@@ -37,11 +37,11 @@
                                 Your Token address:<br>
                                 <h6>{{ token.address }}</h6>
                                 <hr>
-                                <b-link :href="token.link" target="_blank" class="btn btn-info">
+                                <b-link :href="token.link" target="_blank" class="btn btn-info my-2">
                                     <b-icon-arrow-up-right-circle-fill></b-icon-arrow-up-right-circle-fill>
                                     View on Etherscan
                                 </b-link>
-                                <b-link @click="addToMetaMask" class="btn btn-success">
+                                <b-link @click="addToMetaMask" class="btn btn-success my-2">
                                     <b-icon-plus-circle-fill></b-icon-plus-circle-fill>
                                     Add to MetaMask
                                 </b-link>
