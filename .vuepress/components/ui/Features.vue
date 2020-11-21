@@ -1,20 +1,20 @@
 <template>
     <div class="features-table">
         <b-card-group deck class="mt-5">
-            <b-card class="mb-3" sub-title="Detailed ERC20">
+            <b-card class="mb-3" sub-title="Detailed">
                 <b-card-text>
                     Your Token will be fully compliant with the ERC20 definition and
                     compatible with any ERC20 wallet all around the world.
                     It will have a name, a symbol and a decimals amount.
                 </b-card-text>
             </b-card>
-            <b-card class="mb-3" sub-title="Capped ERC20">
+            <b-card class="mb-3" sub-title="Capped">
                 <b-card-text>
                     You won't be able to generate more tokens than the defined token cap.
                     This ensure people that you will not generate more tokens than declared.
                 </b-card-text>
             </b-card>
-            <b-card class="mb-3" sub-title="Mintable ERC20">
+            <b-card class="mb-3" sub-title="Mintable">
                 <b-card-text>
                     You will be able to generate tokens by minting them.
                     Only token owner will be able to mint.
@@ -23,7 +23,7 @@
             </b-card>
         </b-card-group>
         <b-card-group deck>
-            <b-card class="mb-3" sub-title="Burnable ERC20">
+            <b-card class="mb-3" sub-title="Burnable">
                 <b-card-text>
                     Your Token can be burnt.
                     It means that you can choose to reduce the circulating supply by destroying some of your
@@ -51,11 +51,11 @@
                         Deploying SimpleERC20 for FREE, a link pointing to this page will be added to your contract.
                         Your Token will be fully compliant with the ERC20 Standard and you can use it without issues.
                         It is only a little credit to advertise ERC20 Token Generator.
-                        You can remove it by choosing StandardERC20, CommonERC20 or PowerfulERC20.
+                        You can remove it by choosing StandardERC20, MintableERC20, CommonERC20 or PowerfulERC20.
                     </p>
                 </b-alert>
             </b-col>
-            <b-col lg="6" offset-lg="3">
+            <b-col lg="6" offset-lg="3" class="mt-4">
                 <p class="text-center text-light">
                     Learn more in
                     <a href="#faq"

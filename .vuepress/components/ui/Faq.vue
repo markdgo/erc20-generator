@@ -3,16 +3,16 @@
         <b-row>
             <b-col lg="8" offset-lg="2">
                 <b-card bg-variant="light" class="mb-4">
-                    <h3 class="font-weight-light">The ERC20 Standard</h3>
+                    <h3 class="font-weight-light">ERC20 Token Generator</h3>
+                    <p class="font-weight-light">
+                        Create an ERC20 Token in less than a minute with the most used Smart Contract Generator for
+                        ERC20 Token. No login. No setup. No coding required.
+                    </p>
+                    <hr class="my-4">
+                    <h6 class="font-weight-light">The ERC20 Standard</h6>
                     <p class="font-weight-light">
                         ERC20 provides basic functionality to transfer tokens, as well as allow tokens to be approved so
                         they can be spent by another on-chain third party.
-                    </p>
-                    <hr class="my-4">
-                    <p class="font-weight-light">
-                        <b>ERC20 Token Generator</b> is the most used Smart Contract Generator for ERC20 Token.<br>
-                        It allows to create an ERC20 Token in less than a minute.
-                        No login. No setup. No coding required.
                     </p>
                 </b-card>
             </b-col>
@@ -36,7 +36,7 @@
                                href="#difference-between-fixed-capped"
                                @click.prevent
                                class="btn-block text-reset text-decoration-none">
-                                What's the difference between Fixed and Capped Supply?
+                                What's the difference between Fixed, Capped and Unlimited Supply?
                             </a>
                         </b-card-header>
                         <b-collapse id="difference-between-fixed-capped" class="p-4" accordion="features-accordion">
@@ -47,9 +47,15 @@
                             </b-card-text>
                             <b-card-text>
                                 <b>Capped Supply</b><br>
-                                You can define an initial supply to sent to Token Owner wallet. You can increase or
-                                reduce supply later by minting or burning tokens.
+                                You can define an initial supply to sent to Token Owner's wallet. You can increase or
+                                reduce supply later by minting or burning tokens (if allowed).
                                 You won't be able to generate more tokens than the defined supply cap.
+                            </b-card-text>
+                            <b-card-text>
+                                <b>Unlimited Supply</b><br>
+                                You can define an initial supply to sent to Token Owner's wallet. You can increase or
+                                reduce supply later by minting or burning tokens (if allowed).
+                                You will be able to generate unlimited tokens without an upper limit.
                             </b-card-text>
                         </b-collapse>
                     </b-card>
@@ -66,8 +72,10 @@
                         <b-collapse id="who-can-mint-burn" class="p-4" accordion="features-accordion">
                             <b-card-text>
                                 <b>Mint</b><br>
-                                Only Token Owner will be able to mint new tokens. You won't be able to mint more tokens
-                                than the defined cap. You can transfer token ownership to addresses or Smart Contract.
+                                Only Token Owner will be able to mint new tokens. If you choose CommonERC20 or
+                                PowerfulERC20 you won't be able to mint more tokens than the defined cap. By choosing
+                                MintableERC20 instead, you will be able to generate unlimited tokens.
+                                You can transfer token ownership to addresses or Smart Contract.
                             </b-card-text>
                             <b-card-text>
                                 <b>Burn</b><br>
@@ -159,7 +167,7 @@
                                 this page. You will also have a disclaimer in source code. It is not an issue for you
                                 because of your Token will be fully compliant with ERC20 definition. You can use your
                                 Token in Exchanges, DEX, Uniswap, any ERC20 compatible wallet, etc. You can remove it
-                                by choosing StandardERC20, CommonERC20 or PowerfulERC20.
+                                by choosing StandardERC20, MintableERC20, CommonERC20 or PowerfulERC20.
                             </b-card-text>
                         </b-collapse>
                     </b-card>
@@ -225,7 +233,7 @@
                             <b-card-text>
                                 The initial token supply will be held by the address used to deploy the token (your
                                 MetaMask address). This address will be Token Owner and will be able to generate new
-                                tokens (in case you selected a Mintable ERC20).
+                                tokens (in case you selected a token type with Mintable behaviour).
                             </b-card-text>
                         </b-collapse>
                     </b-card>

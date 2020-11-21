@@ -1,7 +1,7 @@
 <template>
     <div class="pricing-table">
         <b-row>
-            <b-col lg="3" v-for="(t) in tokenDetails">
+            <b-col sm="6" md="4" :offset-md="index === 3 ? 2 : 0" v-for="(t, index) in tokenDetails">
                 <b-card no-body class="mb-3">
                     <b-card-title class="pt-5 font-weight-light text-center">
                         {{ t.name }}
@@ -61,7 +61,7 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col lg="6" offset-lg="3">
+            <b-col lg="6" offset-lg="3" class="mt-4">
                 <p class="text-center text-light">
                     * GAS fee will be added to final amount
                 </p>

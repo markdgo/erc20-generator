@@ -131,8 +131,43 @@
                                             </b-form-group>
                                         </ValidationProvider>
                                         <ValidationProvider
+                                                name="token initial supply"
+                                                :rules="{
+                                                    required: true,
+                                                    numeric: true,
+                                                    min_value: (token.supplyType === 'Fixed' ? 1 : 0),
+                                                    max_value: 1000000000000000
+                                                }"
+                                                v-slot="{ errors }">
+                                            <b-form-group
+                                                    description="Insert the initial number of tokens available. Will be put in your account."
+                                                    label="Initial Supply *"
+                                                    label-for="tokenInitialBalance">
+                                                <b-form-input
+                                                        id="tokenInitialBalance"
+                                                        name="tokenInitialBalance"
+                                                        placeholder="Your token initial supply"
+                                                        type="number"
+                                                        v-model.trim="token.initialBalance"
+                                                        size="lg"
+                                                        v-on:update="updateCap"
+                                                        :class="{'is-invalid': errors.length > 0}"
+                                                        min="0"
+                                                        step="1">
+                                                </b-form-input>
+                                                <small v-show="errors.length > 0" class="text-danger">
+                                                    {{ errors[0] }}
+                                                </small>
+                                            </b-form-group>
+                                        </ValidationProvider>
+                                        <ValidationProvider v-if="token.supplyType !== 'Unlimited'"
                                                 name="token max supply"
-                                                :rules="{ required: true, numeric: true, min_value: 1, max_value: 1000000000000000 }"
+                                                :rules="{
+                                                    required: true,
+                                                    numeric: true,
+                                                    min_value: (token.initialBalance > 0 ? token.initialBalance : 1),
+                                                    max_value: 1000000000000000
+                                                }"
                                                 v-slot="{ errors }">
                                             <b-form-group
                                                     description="Insert the maximum number of tokens available."
@@ -145,34 +180,9 @@
                                                         type="number"
                                                         v-model.trim="token.cap"
                                                         size="lg"
-                                                        v-on:update="updateInitialBalance"
+                                                        :disabled="token.supplyType === 'Fixed'"
                                                         :class="{'is-invalid': errors.length > 0}"
                                                         min="1"
-                                                        step="1">
-                                                </b-form-input>
-                                                <small v-show="errors.length > 0" class="text-danger">
-                                                    {{ errors[0] }}
-                                                </small>
-                                            </b-form-group>
-                                        </ValidationProvider>
-                                        <ValidationProvider
-                                                name="token initial supply"
-                                                :rules="{ required: true, numeric: true, min_value: 0, max_value: token.cap || 0 }"
-                                                v-slot="{ errors }">
-                                            <b-form-group
-                                                    description="Insert the initial number of tokens available. Will be put in your account."
-                                                    label="Initial Supply *"
-                                                    label-for="tokenInitialBalance">
-                                                <b-form-input
-                                                        id="tokenInitialBalance"
-                                                        name="tokenInitialBalance"
-                                                        placeholder="Your token initial supply"
-                                                        type="number"
-                                                        :disabled="token.supplyType === 'Fixed'"
-                                                        v-model.trim="token.initialBalance"
-                                                        size="lg"
-                                                        :class="{'is-invalid': errors.length > 0}"
-                                                        min="0"
                                                         step="1">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
@@ -242,7 +252,7 @@
                                                            v-model="token.supplyType"
                                                            disabled
                                                            size="sm">
-                                                <option v-for="(n) in ['Fixed', 'Capped']" :value="n">
+                                                <option v-for="(n) in ['Fixed', 'Unlimited', 'Capped']" :value="n">
                                                     {{ n }}
                                                 </option>
                                             </b-form-select>
@@ -405,7 +415,7 @@
         this.initToken(this.tokenType);
 
         this.updateTokenDetails();
-        this.updateInitialBalance();
+        this.updateCap();
 
         try {
           this.feeAmount = await this.promisify(this.contracts.service.methods.getPrice(this.tokenType).call);
@@ -532,8 +542,8 @@
 
         this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
       },
-      updateInitialBalance () {
-        this.token.initialBalance = this.token.supplyType === 'Fixed' ? this.token.cap : this.token.initialBalance;
+      updateCap () {
+        this.token.cap = this.token.supplyType === 'Fixed' ? this.token.initialBalance : this.token.cap;
       },
       getDeployArguments () {
         const name = this.token.name;
@@ -546,11 +556,12 @@
 
         switch (this.tokenType) {
         case 'SimpleERC20':
-          params.push(cap);
+          params.push(initialBalance);
           break;
         case 'StandardERC20':
+        case 'MintableERC20':
           params.push(decimals);
-          params.push(cap);
+          params.push(initialBalance);
           break;
         case 'CommonERC20':
         case 'PowerfulERC20':

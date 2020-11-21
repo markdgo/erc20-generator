@@ -3,6 +3,7 @@ import utils from './utils';
 
 import SimpleERC20 from '../abi/token/SimpleERC20.json';
 import StandardERC20 from '../abi/token/StandardERC20.json';
+import MintableERC20 from '../abi/token/MintableERC20.json';
 import CommonERC20 from '../abi/token/CommonERC20.json';
 import PowerfulERC20 from '../abi/token/PowerfulERC20.json';
 
@@ -73,6 +74,7 @@ export default {
       tokenList: {
         SimpleERC20,
         StandardERC20,
+        MintableERC20,
         CommonERC20,
         PowerfulERC20,
       },
