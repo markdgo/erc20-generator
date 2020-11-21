@@ -213,36 +213,37 @@
 <!-- 8 -->
 <g id="node9" class="node">
 <title>8</title>
-<polygon fill="#f2f2f2" stroke="#000000" points="394.1771,-576.1 394.1771,-667.3 710.2573,-667.3 710.2573,-576.1 394.1771,-576.1"/>
-<text text-anchor="middle" x="552.2172" y="-650.7" font-family="Times,serif" font-size="14.00" fill="#000000">ServicePayer</text>
-<polyline fill="none" stroke="#000000" points="394.1771,-642.5 710.2573,-642.5 "/>
-<text text-anchor="middle" x="552.2172" y="-625.9" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
-<polyline fill="none" stroke="#000000" points="394.1771,-617.7 710.2573,-617.7 "/>
-<text text-anchor="start" x="402.1771" y="-601.1" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
-<text text-anchor="start" x="402.1771" y="-584.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(receiver: address, serviceName: string)</text>
+<polygon fill="#f2f2f2" stroke="#000000" points="394.1771,-567.7 394.1771,-675.7 710.2573,-675.7 710.2573,-567.7 394.1771,-567.7"/>
+<text text-anchor="middle" x="552.2172" y="-659.1" font-family="Times,serif" font-size="14.00" fill="#000000">&lt;&lt;Abstract&gt;&gt;</text>
+<text text-anchor="middle" x="552.2172" y="-642.3" font-family="Times,serif" font-size="14.00" fill="#000000">ServicePayer</text>
+<polyline fill="none" stroke="#000000" points="394.1771,-634.1 710.2573,-634.1 "/>
+<text text-anchor="middle" x="552.2172" y="-617.5" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
+<polyline fill="none" stroke="#000000" points="394.1771,-609.3 710.2573,-609.3 "/>
+<text text-anchor="start" x="402.1771" y="-592.7" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
+<text text-anchor="start" x="402.1771" y="-575.9" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(receiver: address, serviceName: string)</text>
 </g>
 <!-- 9 -->
 <g id="node10" class="node">
 <title>9</title>
-<polygon fill="#f2f2f2" stroke="#000000" points="425.9874,-246.3 425.9874,-337.5 1036.447,-337.5 1036.447,-246.3 425.9874,-246.3"/>
-<text text-anchor="middle" x="731.2172" y="-320.9" font-family="Times,serif" font-size="14.00" fill="#000000">StandardERC20</text>
-<polyline fill="none" stroke="#000000" points="425.9874,-312.7 1036.447,-312.7 "/>
-<text text-anchor="middle" x="731.2172" y="-296.1" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
-<polyline fill="none" stroke="#000000" points="425.9874,-287.9 1036.447,-287.9 "/>
-<text text-anchor="start" x="433.9874" y="-271.3" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
-<text text-anchor="start" x="433.9874" y="-254.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(name: string, symbol: string, decimals: uint8, initialBalance: uint256, feeReceiver: address)</text>
+<polygon fill="#f2f2f2" stroke="#000000" points="603.9874,-246.3 603.9874,-337.5 1214.447,-337.5 1214.447,-246.3 603.9874,-246.3"/>
+<text text-anchor="middle" x="909.2172" y="-320.9" font-family="Times,serif" font-size="14.00" fill="#000000">StandardERC20</text>
+<polyline fill="none" stroke="#000000" points="603.9874,-312.7 1214.447,-312.7 "/>
+<text text-anchor="middle" x="909.2172" y="-296.1" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
+<polyline fill="none" stroke="#000000" points="603.9874,-287.9 1214.447,-287.9 "/>
+<text text-anchor="start" x="611.9874" y="-271.3" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
+<text text-anchor="start" x="611.9874" y="-254.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(name: string, symbol: string, decimals: uint8, initialBalance: uint256, feeReceiver: address)</text>
 </g>
 <!-- 9&#45;&gt;4 -->
 <g id="edge9" class="edge">
 <title>9&#45;&gt;4</title>
-<path fill="none" stroke="#000000" d="M761.112,-337.7573C763.4959,-341.414 765.9887,-345.2379 768.5779,-349.2096"/>
-<polygon fill="none" stroke="#000000" points="759.7844,-354.9476 784.9638,-374.3447 777.3763,-343.4792 759.7844,-354.9476"/>
+<path fill="none" stroke="#000000" d="M914.3619,-337.7573C914.6004,-339.8833 914.8453,-342.0658 915.096,-344.301"/>
+<polygon fill="none" stroke="#000000" points="904.6873,-345.7024 918.4666,-374.3447 925.5564,-343.3611 904.6873,-345.7024"/>
 </g>
 <!-- 9&#45;&gt;8 -->
 <g id="edge10" class="edge">
 <title>9&#45;&gt;8</title>
-<path fill="none" stroke="#000000" d="M706.328,-337.7573C676.5798,-392.5671 626.4399,-484.9478 591.4579,-549.4007"/>
-<polygon fill="none" stroke="#000000" points="582.1211,-544.5918 577.0388,-575.9673 600.5778,-554.6093 582.1211,-544.5918"/>
+<path fill="none" stroke="#000000" d="M776.2938,-337.621C756.023,-347.8157 736.2227,-359.8864 719.2172,-374 664.3716,-419.5187 620.2856,-487.5467 591.2121,-540.8004"/>
+<polygon fill="none" stroke="#000000" points="581.8517,-536.041 577.2078,-567.4843 600.4465,-545.7999 581.8517,-536.041"/>
 </g>
 </g>
 </svg>

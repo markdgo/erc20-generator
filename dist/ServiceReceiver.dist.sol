@@ -185,7 +185,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title TokenRecover
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Allow to recover any ERC20 sent into the contract for error
  */
 contract TokenRecover is Ownable {
@@ -209,7 +208,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServiceReceiver
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServiceReceiver
  */
 contract ServiceReceiver is TokenRecover {

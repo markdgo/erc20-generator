@@ -1,40 +1,104 @@
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const { ZERO_ADDRESS } = constants;
 
-function shouldBehaveLikeERC20Mintable (minter, recipient, anotherAccount, initialBalance) {
+function shouldBehaveLikeERC20Mintable (initialBalance, [minter, thirdParty]) {
   describe('mint', function () {
     const initialSupply = new BN(initialBalance);
     const amount = new BN(50);
 
-    it('rejects a null account', async function () {
-      await expectRevert(
-        this.token.mint(ZERO_ADDRESS, amount),
-        'ERC20: mint to the zero address',
-      );
-    });
+    const from = minter;
 
-    describe('for a non null account', function () {
-      beforeEach('minting', async function () {
-        const { logs } = await this.token.mint(recipient, amount);
-        this.logs = logs;
+    context('behaviours', function () {
+      it('rejects a null account', async function () {
+        await expectRevert(
+          this.token.mint(ZERO_ADDRESS, amount, { from: minter }),
+          'ERC20: mint to the zero address',
+        );
       });
 
-      it('increments totalSupply', async function () {
-        const expectedSupply = initialSupply.add(amount);
-        (await this.token.totalSupply()).should.be.bignumber.equal(expectedSupply);
-      });
-
-      it('increments recipient balance', async function () {
-        (await this.token.balanceOf(recipient)).should.be.bignumber.equal(amount);
-      });
-
-      it('emits Transfer event', async function () {
-        const event = expectEvent.inLogs(this.logs, 'Transfer', {
-          from: ZERO_ADDRESS,
-          to: recipient,
+      describe('for a non null account', function () {
+        beforeEach('minting', async function () {
+          const { logs } = await this.token.mint(thirdParty, amount);
+          this.logs = logs;
         });
 
-        event.args.value.should.be.bignumber.equal(amount);
+        it('increments totalSupply', async function () {
+          const expectedSupply = initialSupply.add(amount);
+          (await this.token.totalSupply()).should.be.bignumber.equal(expectedSupply);
+        });
+
+        it('increments thirdParty balance', async function () {
+          (await this.token.balanceOf(thirdParty)).should.be.bignumber.equal(amount);
+        });
+
+        it('emits Transfer event', async function () {
+          const event = expectEvent.inLogs(this.logs, 'Transfer', {
+            from: ZERO_ADDRESS,
+            to: thirdParty,
+          });
+
+          event.args.value.should.be.bignumber.equal(amount);
+        });
+      });
+
+      context('for a zero amount', function () {
+        shouldMint(new BN(0));
+      });
+
+      context('for a non-zero amount', function () {
+        shouldMint(amount);
+      });
+
+      function shouldMint (amount) {
+        beforeEach(async function () {
+          ({ logs: this.logs } = await this.token.mint(thirdParty, amount, { from }));
+        });
+
+        it('mints the requested amount', async function () {
+          (await this.token.balanceOf(thirdParty)).should.be.bignumber.equal(amount);
+        });
+
+        it('emits a transfer event', async function () {
+          expectEvent.inLogs(this.logs, 'Transfer', {
+            from: ZERO_ADDRESS,
+            to: thirdParty,
+            value: amount,
+          });
+        });
+      }
+    });
+
+    context('before finish minting', function () {
+      it('mintingFinished should be false', async function () {
+        (await this.token.mintingFinished()).should.be.equal(false);
+      });
+    });
+
+    context('after finish minting', function () {
+      beforeEach(async function () {
+        ({ logs: this.logs } = await this.token.finishMinting({ from }));
+      });
+
+      it('should emit MintFinished', async function () {
+        expectEvent.inLogs(this.logs, 'MintFinished');
+      });
+
+      it('mintingFinished should be true', async function () {
+        (await this.token.mintingFinished()).should.be.equal(true);
+      });
+
+      it('cannot mint more tokens', async function () {
+        await expectRevert(
+          this.token.mint(thirdParty, 1, { from }),
+          'ERC20Mintable: minting is finished',
+        );
+      });
+
+      it('cannot finish minting again', async function () {
+        await expectRevert(
+          this.token.finishMinting({ from }),
+          'ERC20Mintable: minting is finished',
+        );
       });
     });
   });

@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/CommonERC20.dist.sol | 59b4d223e13aa13533043d5def453196c3058d41 |
+| dist/CommonERC20.dist.sol | c76e09f057e988082b60bfb3b5f32fc21a302d9e |
 
 
 ### Contracts Description Table
@@ -72,14 +72,20 @@
 | └ | _setupDecimals | Internal 🔒 | 🛑  | |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
-| **ERC20Burnable** | Implementation | Context, ERC20 |||
-| └ | burn | Public ❗️ | 🛑  |NO❗️ |
-| └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
-||||||
 | **ERC20Capped** | Implementation | ERC20 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 | └ | cap | Public ❗️ |   |NO❗️ |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
+||||||
+| **ERC20Burnable** | Implementation | Context, ERC20 |||
+| └ | burn | Public ❗️ | 🛑  |NO❗️ |
+| └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
+||||||
+| **ERC20Mintable** | Implementation | ERC20 |||
+| └ | mintingFinished | Public ❗️ |   |NO❗️ |
+| └ | mint | Public ❗️ | 🛑  | canMint |
+| └ | finishMinting | Public ❗️ | 🛑  | canMint |
+| └ | _finishMinting | Internal 🔒 | 🛑  | |
 ||||||
 | **TokenRecover** | Implementation | Ownable |||
 | └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
@@ -94,11 +100,10 @@
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **CommonERC20** | Implementation | ERC20Capped, ERC20Burnable, Ownable, ServicePayer |||
+| **CommonERC20** | Implementation | Ownable, ERC20Capped, ERC20Mintable, ERC20Burnable, ServicePayer |||
 | └ | <Constructor> | Public ❗️ |  💵 | ERC20 ERC20Capped ServicePayer |
-| └ | mintingFinished | Public ❗️ |   |NO❗️ |
-| └ | mint | Public ❗️ | 🛑  | canMint onlyOwner |
-| └ | finishMinting | Public ❗️ | 🛑  | canMint onlyOwner |
+| └ | _mint | Internal 🔒 | 🛑  | onlyOwner |
+| └ | _finishMinting | Internal 🔒 | 🛑  | onlyOwner |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 
 

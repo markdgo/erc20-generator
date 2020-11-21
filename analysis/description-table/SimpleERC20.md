@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/SimpleERC20.dist.sol | f68d0010c9dd62b4de13e6128fef9f65736b7424 |
+| dist/SimpleERC20.dist.sol | 093c4484cc01536ef022dd3c03cbf839524aa7a2 |
 
 
 ### Contracts Description Table
@@ -86,6 +86,7 @@
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
 | **GeneratorCopyright** | Implementation |  |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 | └ | generator | Public ❗️ |   |NO❗️ |
 | └ | version | Public ❗️ |   |NO❗️ |
 ||||||

@@ -1,8 +1,7 @@
-function shouldBehaveLikeGeneratorCopyright () {
+function shouldBehaveLikeGeneratorCopyright (version) {
   describe('should have', function () {
     const _builtOn = {
       generator: 'https://vittominacori.github.io/erc20-generator',
-      version: 'v4.0.0',
     };
 
     it('a generator value', async function () {
@@ -10,7 +9,7 @@ function shouldBehaveLikeGeneratorCopyright () {
     });
 
     it('a version value', async function () {
-      _builtOn.version.should.be.equal(await this.instance.version());
+      version.should.be.equal(await this.instance.version());
     });
   });
 }

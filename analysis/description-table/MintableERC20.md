@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/PowerfulERC20.dist.sol | 13d199389cfad7d21fcdf1a413c054f584059532 |
+| dist/MintableERC20.dist.sol | dfd2ba203dcf74f5af7bca0500593b2f8cfc350c |
 
 
 ### Contracts Description Table
@@ -18,6 +18,12 @@
 | **Context** | Implementation |  |||
 | └ | _msgSender | Internal 🔒 |   | |
 | └ | _msgData | Internal 🔒 |   | |
+||||||
+| **Ownable** | Implementation | Context |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | owner | Public ❗️ |   |NO❗️ |
+| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
+| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
 ||||||
 | **IERC20** | Interface |  |||
 | └ | totalSupply | External ❗️ |   |NO❗️ |
@@ -66,69 +72,14 @@
 | └ | _setupDecimals | Internal 🔒 | 🛑  | |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
-| **ERC20Burnable** | Implementation | Context, ERC20 |||
-| └ | burn | Public ❗️ | 🛑  |NO❗️ |
-| └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
-||||||
-| **ERC20Capped** | Implementation | ERC20 |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | cap | Public ❗️ |   |NO❗️ |
-| └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
-||||||
-| **IERC165** | Interface |  |||
-| └ | supportsInterface | External ❗️ |   |NO❗️ |
-||||||
-| **IERC1363** | Interface | IERC20, IERC165 |||
-| └ | transferAndCall | External ❗️ | 🛑  |NO❗️ |
-| └ | transferAndCall | External ❗️ | 🛑  |NO❗️ |
-| └ | transferFromAndCall | External ❗️ | 🛑  |NO❗️ |
-| └ | transferFromAndCall | External ❗️ | 🛑  |NO❗️ |
-| └ | approveAndCall | External ❗️ | 🛑  |NO❗️ |
-| └ | approveAndCall | External ❗️ | 🛑  |NO❗️ |
-||||||
-| **IERC1363Receiver** | Interface |  |||
-| └ | onTransferReceived | External ❗️ | 🛑  |NO❗️ |
-||||||
-| **IERC1363Spender** | Interface |  |||
-| └ | onApprovalReceived | External ❗️ | 🛑  |NO❗️ |
-||||||
-| **ERC165Checker** | Library |  |||
-| └ | supportsERC165 | Internal 🔒 |   | |
-| └ | supportsInterface | Internal 🔒 |   | |
-| └ | supportsAllInterfaces | Internal 🔒 |   | |
-| └ | _supportsERC165Interface | Private 🔐 |   | |
-| └ | _callERC165SupportsInterface | Private 🔐 |   | |
-||||||
-| **ERC165** | Implementation | IERC165 |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | supportsInterface | Public ❗️ |   |NO❗️ |
-| └ | _registerInterface | Internal 🔒 | 🛑  | |
-||||||
-| **ERC1363** | Implementation | ERC20, IERC1363, ERC165 |||
-| └ | <Constructor> | Public ❗️ | 🛑  | ERC20 |
-| └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | transferFromAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | transferFromAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | approveAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | approveAndCall | Public ❗️ | 🛑  |NO❗️ |
-| └ | _checkAndCallTransfer | Internal 🔒 | 🛑  | |
-| └ | _checkAndCallApprove | Internal 🔒 | 🛑  | |
-||||||
-| **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | owner | Public ❗️ |   |NO❗️ |
-| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
-| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
 | **ERC20Mintable** | Implementation | ERC20 |||
 | └ | mintingFinished | Public ❗️ |   |NO❗️ |
 | └ | mint | Public ❗️ | 🛑  | canMint |
 | └ | finishMinting | Public ❗️ | 🛑  | canMint |
 | └ | _finishMinting | Internal 🔒 | 🛑  | |
+||||||
+| **TokenRecover** | Implementation | Ownable |||
+| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
 ||||||
 | **ServiceReceiver** | Implementation | TokenRecover |||
 | └ | pay | Public ❗️ |  💵 |NO❗️ |
@@ -140,11 +91,10 @@
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **PowerfulERC20** | Implementation | ERC20Capped, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover, ServicePayer |||
-| └ | <Constructor> | Public ❗️ |  💵 | ERC1363 ERC20Capped ServicePayer |
+| **MintableERC20** | Implementation | Ownable, ERC20Mintable, ServicePayer |||
+| └ | <Constructor> | Public ❗️ |  💵 | ERC20 ServicePayer |
 | └ | _mint | Internal 🔒 | 🛑  | onlyOwner |
 | └ | _finishMinting | Internal 🔒 | 🛑  | onlyOwner |
-| └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 
 
 ### Legend

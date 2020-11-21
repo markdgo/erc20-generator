@@ -6,7 +6,6 @@ import "eth-token-recover/contracts/TokenRecover.sol";
 
 /**
  * @title ServiceReceiver
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServiceReceiver
  */
 contract ServiceReceiver is TokenRecover {

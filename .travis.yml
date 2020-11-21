@@ -20,11 +20,11 @@ jobs:
 
     - stage: tests
       name: "Unit tests (using Truffle)"
-      script: npm run test
+      script: npm run truffle:test
 
     - stage: tests
-      name: "Unit tests (using Buidler)"
-      script: npm run buidler:test
+      name: "Unit tests (using Hardhat)"
+      script: npm run hardhat:test
 
     - stage: tests
       name: "Unit tests with coverage report"
@@ -32,5 +32,5 @@ jobs:
 
     - stage: tests
       name: "Unit tests using solc nightly"
-      script: npm run test
+      script: npm run truffle:test
       env: SOLC_NIGHTLY=true

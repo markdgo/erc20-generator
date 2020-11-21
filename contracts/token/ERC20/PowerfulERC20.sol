@@ -9,29 +9,14 @@ import "erc-payable-token/contracts/token/ERC1363/ERC1363.sol";
 
 import "eth-token-recover/contracts/TokenRecover.sol";
 
+import "./behaviours/ERC20Mintable.sol";
 import "../../service/ServicePayer.sol";
 
 /**
  * @title PowerfulERC20
  * @dev Implementation of the PowerfulERC20
  */
-contract PowerfulERC20 is ERC20Capped, ERC20Burnable, ERC1363, TokenRecover, ServicePayer {
-
-    // indicates if minting is finished
-    bool private _mintingFinished = false;
-
-    /**
-     * @dev Emitted during finish minting
-     */
-    event MintFinished();
-
-    /**
-     * @dev Tokens can be minted only before minting finished.
-     */
-    modifier canMint() {
-        require(!_mintingFinished, "PowerfulERC20: minting is finished");
-        _;
-    }
+contract PowerfulERC20 is ERC20Capped, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover, ServicePayer {
 
     constructor (
         string memory name,
@@ -40,41 +25,41 @@ contract PowerfulERC20 is ERC20Capped, ERC20Burnable, ERC1363, TokenRecover, Ser
         uint256 cap,
         uint256 initialBalance,
         address payable feeReceiver
-    ) ERC1363(name, symbol) ERC20Capped(cap) ServicePayer(feeReceiver, "PowerfulERC20") payable {
+    )
+        ERC1363(name, symbol)
+        ERC20Capped(cap)
+        ServicePayer(feeReceiver, "PowerfulERC20")
+        payable
+    {
         _setupDecimals(decimals);
-
         _mint(_msgSender(), initialBalance);
     }
 
     /**
-     * @return if minting is finished or not.
-     */
-    function mintingFinished() public view returns (bool) {
-        return _mintingFinished;
-    }
-
-    /**
      * @dev Function to mint tokens.
-     * @param to The address that will receive the minted tokens
-     * @param value The amount of tokens to mint
+     *
+     * NOTE: restricting access to owner only. See {ERC20Mintable-mint}.
+     *
+     * @param account The address that will receive the minted tokens
+     * @param amount The amount of tokens to mint
      */
-    function mint(address to, uint256 value) public canMint onlyOwner {
-        _mint(to, value);
+    function _mint(address account, uint256 amount) internal override onlyOwner {
+        super._mint(account, amount);
     }
 
     /**
      * @dev Function to stop minting new tokens.
+     *
+     * NOTE: restricting access to owner only. See {ERC20Mintable-finishMinting}.
      */
-    function finishMinting() public canMint onlyOwner {
-        _mintingFinished = true;
-
-        emit MintFinished();
+    function _finishMinting() internal override onlyOwner {
+        super._finishMinting();
     }
 
     /**
-     * @dev See {ERC20-_beforeTokenTransfer}.
+     * @dev See {ERC20-_beforeTokenTransfer}. See {ERC20Capped-_beforeTokenTransfer}.
      */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Capped) {
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Capped) {
         super._beforeTokenTransfer(from, to, amount);
     }
 }

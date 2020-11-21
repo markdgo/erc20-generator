@@ -3,7 +3,7 @@ const { ZERO_ADDRESS } = constants;
 
 const { expect } = require('chai');
 
-function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
+function shouldBehaveLikeERC20Burnable (initialBalance, [burner, thirdParty]) {
   describe('burn', function () {
     describe('when the given amount is not greater than balance of the sender', function () {
       context('for a zero amount', function () {
@@ -16,16 +16,16 @@ function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
 
       function shouldBurn (amount) {
         beforeEach(async function () {
-          ({ logs: this.logs } = await this.token.burn(amount, { from: owner }));
+          ({ logs: this.logs } = await this.token.burn(amount, { from: burner }));
         });
 
         it('burns the requested amount', async function () {
-          expect(await this.token.balanceOf(owner)).to.be.bignumber.equal(initialBalance.sub(amount));
+          expect(await this.token.balanceOf(burner)).to.be.bignumber.equal(initialBalance.sub(amount));
         });
 
         it('emits a transfer event', async function () {
           expectEvent.inLogs(this.logs, 'Transfer', {
-            from: owner,
+            from: burner,
             to: ZERO_ADDRESS,
             value: amount,
           });
@@ -37,7 +37,7 @@ function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
       const amount = initialBalance.addn(1);
 
       it('reverts', async function () {
-        await expectRevert(this.token.burn(amount, { from: owner }),
+        await expectRevert(this.token.burn(amount, { from: burner }),
           'ERC20: burn amount exceeds balance',
         );
       });
@@ -58,22 +58,22 @@ function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
         const originalAllowance = amount.muln(3);
 
         beforeEach(async function () {
-          await this.token.approve(burner, originalAllowance, { from: owner });
-          const { logs } = await this.token.burnFrom(owner, amount, { from: burner });
+          await this.token.approve(thirdParty, originalAllowance, { from: burner });
+          const { logs } = await this.token.burnFrom(burner, amount, { from: thirdParty });
           this.logs = logs;
         });
 
         it('burns the requested amount', async function () {
-          expect(await this.token.balanceOf(owner)).to.be.bignumber.equal(initialBalance.sub(amount));
+          expect(await this.token.balanceOf(burner)).to.be.bignumber.equal(initialBalance.sub(amount));
         });
 
         it('decrements allowance', async function () {
-          expect(await this.token.allowance(owner, burner)).to.be.bignumber.equal(originalAllowance.sub(amount));
+          expect(await this.token.allowance(burner, thirdParty)).to.be.bignumber.equal(originalAllowance.sub(amount));
         });
 
         it('emits a transfer event', async function () {
           expectEvent.inLogs(this.logs, 'Transfer', {
-            from: owner,
+            from: burner,
             to: ZERO_ADDRESS,
             value: amount,
           });
@@ -85,8 +85,8 @@ function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
       const amount = initialBalance.addn(1);
 
       it('reverts', async function () {
-        await this.token.approve(burner, amount, { from: owner });
-        await expectRevert(this.token.burnFrom(owner, amount, { from: burner }),
+        await this.token.approve(thirdParty, amount, { from: burner });
+        await expectRevert(this.token.burnFrom(burner, amount, { from: thirdParty }),
           'ERC20: burn amount exceeds balance',
         );
       });
@@ -96,8 +96,8 @@ function shouldBehaveLikeERC20Burnable (owner, initialBalance, [burner]) {
       const allowance = new BN(100);
 
       it('reverts', async function () {
-        await this.token.approve(burner, allowance, { from: owner });
-        await expectRevert(this.token.burnFrom(owner, allowance.addn(1), { from: burner }),
+        await this.token.approve(thirdParty, allowance, { from: burner });
+        await expectRevert(this.token.burnFrom(burner, allowance.addn(1), { from: thirdParty }),
           'ERC20: burn amount exceeds allowance',
         );
       });

@@ -18,11 +18,14 @@ contract StandardERC20 is ERC20, ServicePayer {
         uint8 decimals,
         uint256 initialBalance,
         address payable feeReceiver
-    ) ERC20(name, symbol) ServicePayer(feeReceiver, "StandardERC20") payable {
+    )
+        ERC20(name, symbol)
+        ServicePayer(feeReceiver, "StandardERC20")
+        payable
+    {
         require(initialBalance > 0, "StandardERC20: supply cannot be zero");
 
         _setupDecimals(decimals);
-
         _mint(_msgSender(), initialBalance);
     }
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for contract in "SimpleERC20" "StandardERC20" "CommonERC20" "PowerfulERC20" "ServiceReceiver"
+for contract in "SimpleERC20" "StandardERC20" "MintableERC20" "CommonERC20" "PowerfulERC20" "ServiceReceiver"
 do
   npx surya inheritance dist/$contract.dist.sol | dot -Tpng > analysis/inheritance-tree/$contract.png
 

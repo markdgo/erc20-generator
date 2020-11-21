@@ -790,50 +790,6 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: @openzeppelin/contracts/token/ERC20/ERC20Burnable.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-
-/**
- * @dev Extension of {ERC20} that allows token holders to destroy both their own
- * tokens and those that they have an allowance for, in a way that can be
- * recognized off-chain (via event analysis).
- */
-abstract contract ERC20Burnable is Context, ERC20 {
-    using SafeMath for uint256;
-
-    /**
-     * @dev Destroys `amount` tokens from the caller.
-     *
-     * See {ERC20-_burn}.
-     */
-    function burn(uint256 amount) public virtual {
-        _burn(_msgSender(), amount);
-    }
-
-    /**
-     * @dev Destroys `amount` tokens from `account`, deducting from the caller's
-     * allowance.
-     *
-     * See {ERC20-_burn} and {ERC20-allowance}.
-     *
-     * Requirements:
-     *
-     * - the caller must have allowance for ``accounts``'s tokens of at least
-     * `amount`.
-     */
-    function burnFrom(address account, uint256 amount) public virtual {
-        uint256 decreasedAllowance = allowance(account, _msgSender()).sub(amount, "ERC20: burn amount exceeds allowance");
-
-        _approve(account, _msgSender(), decreasedAllowance);
-        _burn(account, amount);
-    }
-}
-
 // File: @openzeppelin/contracts/token/ERC20/ERC20Capped.sol
 
 
@@ -878,6 +834,117 @@ abstract contract ERC20Capped is ERC20 {
         if (from == address(0)) { // When minting tokens
             require(totalSupply().add(amount) <= _cap, "ERC20Capped: cap exceeded");
         }
+    }
+}
+
+// File: @openzeppelin/contracts/token/ERC20/ERC20Burnable.sol
+
+
+
+pragma solidity ^0.7.0;
+
+
+
+/**
+ * @dev Extension of {ERC20} that allows token holders to destroy both their own
+ * tokens and those that they have an allowance for, in a way that can be
+ * recognized off-chain (via event analysis).
+ */
+abstract contract ERC20Burnable is Context, ERC20 {
+    using SafeMath for uint256;
+
+    /**
+     * @dev Destroys `amount` tokens from the caller.
+     *
+     * See {ERC20-_burn}.
+     */
+    function burn(uint256 amount) public virtual {
+        _burn(_msgSender(), amount);
+    }
+
+    /**
+     * @dev Destroys `amount` tokens from `account`, deducting from the caller's
+     * allowance.
+     *
+     * See {ERC20-_burn} and {ERC20-allowance}.
+     *
+     * Requirements:
+     *
+     * - the caller must have allowance for ``accounts``'s tokens of at least
+     * `amount`.
+     */
+    function burnFrom(address account, uint256 amount) public virtual {
+        uint256 decreasedAllowance = allowance(account, _msgSender()).sub(amount, "ERC20: burn amount exceeds allowance");
+
+        _approve(account, _msgSender(), decreasedAllowance);
+        _burn(account, amount);
+    }
+}
+
+// File: contracts/token/ERC20/behaviours/ERC20Mintable.sol
+
+
+
+pragma solidity ^0.7.0;
+
+
+/**
+ * @title ERC20Mintable
+ * @dev Implementation of the ERC20Mintable. Extension of {ERC20} that adds a minting behaviour.
+ */
+abstract contract ERC20Mintable is ERC20 {
+
+    // indicates if minting is finished
+    bool private _mintingFinished = false;
+
+    /**
+     * @dev Emitted during finish minting
+     */
+    event MintFinished();
+
+    /**
+     * @dev Tokens can be minted only before minting finished.
+     */
+    modifier canMint() {
+        require(!_mintingFinished, "ERC20Mintable: minting is finished");
+        _;
+    }
+
+    /**
+     * @return if minting is finished or not.
+     */
+    function mintingFinished() public view returns (bool) {
+        return _mintingFinished;
+    }
+
+    /**
+     * @dev Function to mint tokens.
+     *
+     * WARNING: it allows everyone to mint new tokens. Access controls MUST be defined in derived contracts.
+     *
+     * @param account The address that will receive the minted tokens
+     * @param amount The amount of tokens to mint
+     */
+    function mint(address account, uint256 amount) public canMint {
+        _mint(account, amount);
+    }
+
+    /**
+     * @dev Function to stop minting new tokens.
+     *
+     * WARNING: it allows everyone to finish minting. Access controls MUST be defined in derived contracts.
+     */
+    function finishMinting() public canMint {
+        _finishMinting();
+    }
+
+    /**
+     * @dev Function to stop minting new tokens.
+     */
+    function _finishMinting() internal virtual {
+        _mintingFinished = true;
+
+        emit MintFinished();
     }
 }
 
@@ -956,7 +1023,7 @@ pragma solidity ^0.7.0;
  * @title ServicePayer
  * @dev Implementation of the ServicePayer
  */
-contract ServicePayer {
+abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
         ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
@@ -973,27 +1040,12 @@ pragma solidity ^0.7.0;
 
 
 
+
 /**
  * @title CommonERC20
  * @dev Implementation of the CommonERC20
  */
-contract CommonERC20 is ERC20Capped, ERC20Burnable, Ownable, ServicePayer {
-
-    // indicates if minting is finished
-    bool private _mintingFinished = false;
-
-    /**
-     * @dev Emitted during finish minting
-     */
-    event MintFinished();
-
-    /**
-     * @dev Tokens can be minted only before minting finished.
-     */
-    modifier canMint() {
-        require(!_mintingFinished, "CommonERC20: minting is finished");
-        _;
-    }
+contract CommonERC20 is Ownable, ERC20Capped, ERC20Mintable, ERC20Burnable, ServicePayer {
 
     constructor (
         string memory name,
@@ -1002,41 +1054,41 @@ contract CommonERC20 is ERC20Capped, ERC20Burnable, Ownable, ServicePayer {
         uint256 cap,
         uint256 initialBalance,
         address payable feeReceiver
-    ) ERC20(name, symbol) ERC20Capped(cap) ServicePayer(feeReceiver, "CommonERC20") payable {
+    )
+        ERC20(name, symbol)
+        ERC20Capped(cap)
+        ServicePayer(feeReceiver, "CommonERC20")
+        payable
+    {
         _setupDecimals(decimals);
-
         _mint(_msgSender(), initialBalance);
     }
 
     /**
-     * @return if minting is finished or not.
-     */
-    function mintingFinished() public view returns (bool) {
-        return _mintingFinished;
-    }
-
-    /**
      * @dev Function to mint tokens.
-     * @param to The address that will receive the minted tokens
-     * @param value The amount of tokens to mint
+     *
+     * NOTE: restricting access to owner only. See {ERC20Mintable-mint}.
+     *
+     * @param account The address that will receive the minted tokens
+     * @param amount The amount of tokens to mint
      */
-    function mint(address to, uint256 value) public canMint onlyOwner {
-        _mint(to, value);
+    function _mint(address account, uint256 amount) internal override onlyOwner {
+        super._mint(account, amount);
     }
 
     /**
      * @dev Function to stop minting new tokens.
+     *
+     * NOTE: restricting access to owner only. See {ERC20Mintable-finishMinting}.
      */
-    function finishMinting() public canMint onlyOwner {
-        _mintingFinished = true;
-
-        emit MintFinished();
+    function _finishMinting() internal override onlyOwner {
+        super._finishMinting();
     }
 
     /**
-     * @dev See {ERC20-_beforeTokenTransfer}.
+     * @dev See {ERC20-_beforeTokenTransfer}. See {ERC20Capped-_beforeTokenTransfer}.
      */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override(ERC20, ERC20Capped) {
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Capped) {
         super._beforeTokenTransfer(from, to, amount);
     }
 }

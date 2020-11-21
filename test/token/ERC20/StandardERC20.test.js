@@ -5,7 +5,7 @@ const { shouldBehaveLikeERC20 } = require('./behaviours/ERC20.behaviour');
 const StandardERC20 = artifacts.require('StandardERC20');
 const ServiceReceiver = artifacts.require('ServiceReceiver');
 
-contract('StandardERC20', function ([owner, recipient, thirdParty]) {
+contract('StandardERC20', function ([owner, other, thirdParty]) {
   const _name = 'StandardERC20';
   const _symbol = 'ERC20';
   const _decimals = new BN(8);
@@ -83,9 +83,7 @@ contract('StandardERC20', function ([owner, recipient, thirdParty]) {
     });
 
     context('like a ERC20', function () {
-      shouldBehaveLikeERC20(
-        _name, _symbol, _decimals, [owner, recipient, thirdParty], _initialSupply,
-      );
+      shouldBehaveLikeERC20(_name, _symbol, _decimals, _initialSupply, [owner, other, thirdParty]);
     });
   });
 });

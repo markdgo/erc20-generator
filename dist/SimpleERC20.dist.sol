@@ -2,6 +2,26 @@
 
 // SPDX-License-Identifier: MIT
 
+/*
+ * Token has been generated for FREE using https://vittominacori.github.io/erc20-generator/
+ *
+ * Smart Contract Source Code: https://github.com/vittominacori/erc20-generator
+ * Web Site Source Code: https://github.com/vittominacori/erc20-generator/tree/dapp
+ *
+ * Detailed Info: https://vittominacori.medium.com/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4
+ *
+ * NOTE: "Contract Source Code Verified (Similar Match)" means that this Token is similar to other tokens deployed
+ *  using the same generator. It is not an issue. It means that you won't need to verify your source code because of
+ *  it is already verified.
+ *
+ * DISCLAIMER: GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
+ *  The following code is provided under MIT License. Anyone can use it as per their needs.
+ *  The generator's purpose is to make people able to tokenize their ideas without coding or paying for it.
+ *  Source code is well tested and continuously updated to reduce risk of bugs and to introduce language optimizations.
+ *  Anyway the purchase of tokens involves a high degree of risk. Before acquiring tokens, it is recommended to
+ *  carefully weighs all the information and risks detailed in Token owner's Conditions.
+ */
+
 pragma solidity ^0.7.0;
 
 /*
@@ -824,7 +844,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServiceReceiver
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServiceReceiver
  */
 contract ServiceReceiver is TokenRecover {
@@ -865,10 +884,9 @@ pragma solidity ^0.7.0;
 
 /**
  * @title ServicePayer
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the ServicePayer
  */
-contract ServicePayer {
+abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
         ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
@@ -889,7 +907,11 @@ pragma solidity ^0.7.0;
 contract GeneratorCopyright {
 
     string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
-    string private constant _VERSION = "v4.0.0";
+    string private _version;
+
+    constructor (string memory version_) {
+        _version = version_;
+    }
 
     /**
      * @dev Returns the token generator tool.
@@ -901,8 +923,8 @@ contract GeneratorCopyright {
     /**
      * @dev Returns the token generator version.
      */
-    function version() public pure returns (string memory) {
-        return _VERSION;
+    function version() public view returns (string memory) {
+        return _version;
     }
 }
 
@@ -920,14 +942,18 @@ pragma solidity ^0.7.0;
  * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
-contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright {
+contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.1.0") {
 
     constructor (
         string memory name,
         string memory symbol,
         uint256 initialBalance,
         address payable feeReceiver
-    ) ERC20(name, symbol) ServicePayer(feeReceiver, "SimpleERC20") payable {
+    )
+        ERC20(name, symbol)
+        ServicePayer(feeReceiver, "SimpleERC20")
+        payable
+    {
         require(initialBalance > 0, "SimpleERC20: supply cannot be zero");
 
         _mint(_msgSender(), initialBalance);

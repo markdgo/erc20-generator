@@ -1,17 +1,17 @@
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const { ZERO_ADDRESS } = constants;
 
-function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, anotherAccount], initialBalance) {
+function shouldBehaveLikeERC20 (name, symbol, decimals, initialBalance, [owner, other, thirdParty]) {
   it('has a name', async function () {
-    (await this.token.name()).should.be.equal(_name);
+    (await this.token.name()).should.be.equal(name);
   });
 
   it('has a symbol', async function () {
-    (await this.token.symbol()).should.be.equal(_symbol);
+    (await this.token.symbol()).should.be.equal(symbol);
   });
 
   it('has an amount of decimals', async function () {
-    (await this.token.decimals()).should.be.bignumber.equal(_decimals);
+    (await this.token.decimals()).should.be.bignumber.equal(decimals);
   });
 
   describe('total supply', function () {
@@ -23,7 +23,7 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
   describe('balanceOf', function () {
     describe('when the requested account has no tokens', function () {
       it('returns zero', async function () {
-        (await this.token.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(0));
+        (await this.token.balanceOf(other)).should.be.bignumber.equal(new BN(0));
       });
     });
 
@@ -36,7 +36,7 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
 
   describe('transfer', function () {
     describe('when the recipient is not the zero address', function () {
-      const to = recipient;
+      const to = thirdParty;
 
       describe('when the sender does not have enough balance', function () {
         const amount = initialBalance.addn(1);
@@ -86,7 +86,7 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
 
   describe('approve', function () {
     describe('when the spender is not the zero address', function () {
-      const spender = recipient;
+      const spender = thirdParty;
 
       describe('when the sender has enough balance', function () {
         const amount = initialBalance;
@@ -171,10 +171,10 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
   });
 
   describe('transfer from', function () {
-    const spender = recipient;
+    const spender = thirdParty;
 
     describe('when the recipient is not the zero address', function () {
-      const to = anotherAccount;
+      const to = other;
 
       describe('when the spender has enough approved balance', function () {
         beforeEach(async function () {
@@ -269,7 +269,7 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
 
   describe('decrease allowance', function () {
     describe('when the spender is not the zero address', function () {
-      const spender = recipient;
+      const spender = thirdParty;
 
       function shouldDecreaseApproval (amount) {
         describe('when there was no approved amount before', function () {
@@ -348,7 +348,7 @@ function shouldBehaveLikeERC20 (_name, _symbol, _decimals, [owner, recipient, an
     const amount = initialBalance;
 
     describe('when the spender is not the zero address', function () {
-      const spender = recipient;
+      const spender = thirdParty;
 
       describe('when the sender has enough balance', function () {
         it('emits an approval event', async function () {

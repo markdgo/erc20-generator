@@ -7,13 +7,15 @@ const { shouldBehaveLikeGeneratorCopyright } = require('../../utils/GeneratorCop
 const SimpleERC20 = artifacts.require('SimpleERC20');
 const ServiceReceiver = artifacts.require('ServiceReceiver');
 
-contract('SimpleERC20', function ([owner, recipient, thirdParty]) {
+contract('SimpleERC20', function ([owner, other, thirdParty]) {
   const _name = 'SimpleERC20';
   const _symbol = 'ERC20';
   const _decimals = new BN(18);
   const _initialSupply = new BN(100000000);
 
   const fee = 0;
+
+  const version = 'v4.1.0';
 
   beforeEach(async function () {
     this.serviceReceiver = await ServiceReceiver.new({ from: owner });
@@ -81,9 +83,7 @@ contract('SimpleERC20', function ([owner, recipient, thirdParty]) {
     });
 
     context('like a ERC20', function () {
-      shouldBehaveLikeERC20(
-        _name, _symbol, _decimals, [owner, recipient, thirdParty], _initialSupply,
-      );
+      shouldBehaveLikeERC20(_name, _symbol, _decimals, _initialSupply, [owner, other, thirdParty]);
     });
 
     context('like a GeneratorCopyright', function () {
@@ -91,7 +91,7 @@ contract('SimpleERC20', function ([owner, recipient, thirdParty]) {
         this.instance = this.token;
       });
 
-      shouldBehaveLikeGeneratorCopyright();
+      shouldBehaveLikeGeneratorCopyright(version);
     });
   });
 });

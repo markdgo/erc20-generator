@@ -213,27 +213,29 @@
 <!-- 8 -->
 <g id="node9" class="node">
 <title>8</title>
-<polygon fill="#f2f2f2" stroke="#000000" points="1008.8511,-576.1 1008.8511,-667.3 1324.9313,-667.3 1324.9313,-576.1 1008.8511,-576.1"/>
-<text text-anchor="middle" x="1166.8912" y="-650.7" font-family="Times,serif" font-size="14.00" fill="#000000">ServicePayer</text>
-<polyline fill="none" stroke="#000000" points="1008.8511,-642.5 1324.9313,-642.5 "/>
-<text text-anchor="middle" x="1166.8912" y="-625.9" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
-<polyline fill="none" stroke="#000000" points="1008.8511,-617.7 1324.9313,-617.7 "/>
-<text text-anchor="start" x="1016.8511" y="-601.1" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
-<text text-anchor="start" x="1016.8511" y="-584.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(receiver: address, serviceName: string)</text>
+<polygon fill="#f2f2f2" stroke="#000000" points="1008.8511,-567.7 1008.8511,-675.7 1324.9313,-675.7 1324.9313,-567.7 1008.8511,-567.7"/>
+<text text-anchor="middle" x="1166.8912" y="-659.1" font-family="Times,serif" font-size="14.00" fill="#000000">&lt;&lt;Abstract&gt;&gt;</text>
+<text text-anchor="middle" x="1166.8912" y="-642.3" font-family="Times,serif" font-size="14.00" fill="#000000">ServicePayer</text>
+<polyline fill="none" stroke="#000000" points="1008.8511,-634.1 1324.9313,-634.1 "/>
+<text text-anchor="middle" x="1166.8912" y="-617.5" font-family="Times,serif" font-size="14.00" fill="#000000"> </text>
+<polyline fill="none" stroke="#000000" points="1008.8511,-609.3 1324.9313,-609.3 "/>
+<text text-anchor="start" x="1016.8511" y="-592.7" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
+<text text-anchor="start" x="1016.8511" y="-575.9" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(receiver: address, serviceName: string)</text>
 </g>
 <!-- 9 -->
 <g id="node10" class="node">
 <title>9</title>
-<polygon fill="#f2f2f2" stroke="#000000" points="1343.124,-550.9 1343.124,-692.5 1500.6584,-692.5 1500.6584,-550.9 1343.124,-550.9"/>
-<text text-anchor="middle" x="1421.8912" y="-675.9" font-family="Times,serif" font-size="14.00" fill="#000000">GeneratorCopyright</text>
-<polyline fill="none" stroke="#000000" points="1343.124,-667.7 1500.6584,-667.7 "/>
-<text text-anchor="start" x="1351.124" y="-651.1" font-family="Times,serif" font-size="14.00" fill="#000000">Private:</text>
-<text text-anchor="start" x="1351.124" y="-634.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_GENERATOR: string</text>
-<text text-anchor="start" x="1351.124" y="-617.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_VERSION: string</text>
-<polyline fill="none" stroke="#000000" points="1343.124,-609.3 1500.6584,-609.3 "/>
-<text text-anchor="start" x="1351.124" y="-592.7" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
-<text text-anchor="start" x="1351.124" y="-575.9" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;generator(): string</text>
-<text text-anchor="start" x="1351.124" y="-559.1" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;version(): string</text>
+<polygon fill="#f2f2f2" stroke="#000000" points="1342.9988,-542.5 1342.9988,-700.9 1532.7836,-700.9 1532.7836,-542.5 1342.9988,-542.5"/>
+<text text-anchor="middle" x="1437.8912" y="-684.3" font-family="Times,serif" font-size="14.00" fill="#000000">GeneratorCopyright</text>
+<polyline fill="none" stroke="#000000" points="1342.9988,-676.1 1532.7836,-676.1 "/>
+<text text-anchor="start" x="1350.9988" y="-659.5" font-family="Times,serif" font-size="14.00" fill="#000000">Private:</text>
+<text text-anchor="start" x="1350.9988" y="-642.7" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_GENERATOR: string</text>
+<text text-anchor="start" x="1350.9988" y="-625.9" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;_version: string</text>
+<polyline fill="none" stroke="#000000" points="1342.9988,-617.7 1532.7836,-617.7 "/>
+<text text-anchor="start" x="1350.9988" y="-601.1" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
+<text text-anchor="start" x="1350.9988" y="-584.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(version_: string)</text>
+<text text-anchor="start" x="1350.9988" y="-567.5" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;generator(): string</text>
+<text text-anchor="start" x="1350.9988" y="-550.7" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;version(): string</text>
 </g>
 <!-- 10 -->
 <g id="node11" class="node">
@@ -255,14 +257,14 @@
 <!-- 10&#45;&gt;8 -->
 <g id="edge10" class="edge">
 <title>10&#45;&gt;8</title>
-<path fill="none" stroke="#000000" d="M1166.8912,-337.7573C1166.8912,-391.584 1166.8912,-481.6458 1166.8912,-545.9058"/>
-<polygon fill="none" stroke="#000000" points="1156.3913,-545.9672 1166.8912,-575.9673 1177.3913,-545.9673 1156.3913,-545.9672"/>
+<path fill="none" stroke="#000000" d="M1166.8912,-337.7573C1166.8912,-389.2371 1166.8912,-473.8612 1166.8912,-537.3585"/>
+<polygon fill="none" stroke="#000000" points="1156.3913,-537.4711 1166.8912,-567.4712 1177.3913,-537.4712 1156.3913,-537.4711"/>
 </g>
 <!-- 10&#45;&gt;9 -->
 <g id="edge11" class="edge">
 <title>10&#45;&gt;9</title>
-<path fill="none" stroke="#000000" d="M1288.8467,-337.6401C1305.5093,-347.7319 1321.2136,-359.7658 1333.8912,-374 1370.4638,-415.0633 1392.1038,-472.3455 1404.7659,-521.4822"/>
-<polygon fill="none" stroke="#000000" points="1394.5574,-523.941 1411.543,-550.8063 1415.0181,-519.2124 1394.5574,-523.941"/>
+<path fill="none" stroke="#000000" d="M1286.8661,-337.5227C1304.0908,-347.6875 1320.4867,-359.7746 1333.8912,-374 1370.4245,-412.7708 1395.0606,-466.2532 1411.1433,-513.6018"/>
+<polygon fill="none" stroke="#000000" points="1401.2017,-516.9906 1420.19,-542.4797 1421.2413,-510.7126 1401.2017,-516.9906"/>
 </g>
 </g>
 </svg>

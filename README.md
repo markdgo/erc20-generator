@@ -26,44 +26,44 @@ npm install
 Open the Truffle console
 
 ```bash
-npm run console
+npm run truffle:console
 ```
 
 
 #### Compile
 
 ```bash
-npm run compile
+npm run truffle:compile
 ```
 
 
 #### Test
 
 ```bash
-npm run test
+npm run truffle:test
 ```
 
 
-### Usage (using Buidler)
+### Usage (using Hardhat)
 
-Open the Buidler console
+Open the Hardhat console
 
 ```bash
-npm run buidler:console
+npm run hardhat:console
 ```
 
 
 #### Compile
 
 ```bash
-npm run buidler:compile
+npm run hardhat:compile
 ```
 
 
 #### Test
 
 ```bash
-npm run buidler:test
+npm run hardhat:test
 ```
 
 
