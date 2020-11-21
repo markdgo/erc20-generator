@@ -34,16 +34,10 @@
                 <ui--how-it-works></ui--how-it-works>
             </b-col>
         </b-row>
-        <b-row id="features" class="peach-gradient mx-0">
-            <b-col lg="10" offset-lg="1" class="py-5">
-                <h2 class="p-5 font-weight-lighter text-center text-light">Features</h2>
-                <h4 class="text-center font-weight-light text-light">
-                    You will be able to choose between several features.
-                </h4>
-                <p class="text-center font-weight-light text-light">
-                    What are your Token requirements?
-                </p>
-                <ui--features></ui--features>
+        <b-row id="pricing" class="aqua-gradient mx-0">
+            <b-col lg="10" offset-lg="1" class="mb-5">
+                <h2 class="p-5 font-weight-lighter text-center text-light">Pricing</h2>
+                <ui--pricing-table></ui--pricing-table>
             </b-col>
         </b-row>
         <b-row class="bg-dark text-white mx-0">
@@ -57,10 +51,16 @@
                 </b-button>
             </b-col>
         </b-row>
-        <b-row id="pricing" class="aqua-gradient mx-0">
-            <b-col md="12" lg="8" offset-lg="2" class="mb-5">
-                <h2 class="p-5 font-weight-lighter text-center text-light">Pricing</h2>
-                <ui--pricing-table></ui--pricing-table>
+        <b-row id="features" class="peach-gradient mx-0">
+            <b-col lg="10" offset-lg="1" class="py-5">
+                <h2 class="p-5 font-weight-lighter text-center text-light">Features</h2>
+                <h4 class="text-center font-weight-light text-light">
+                    You will be able to choose between several features.
+                </h4>
+                <p class="text-center font-weight-light text-light">
+                    What are your Token requirements?
+                </p>
+                <ui--features></ui--features>
             </b-col>
         </b-row>
         <b-row class="bg-dark text-white mx-0">
