@@ -942,7 +942,7 @@ pragma solidity ^0.7.0;
  * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
-contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.1.0") {
+contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.2.0") {
 
     constructor (
         string memory name,
