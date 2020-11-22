@@ -1,7 +1,7 @@
 <template>
     <div class="pricing-table">
         <b-row>
-            <b-col sm="6" md="4" :offset-md="index === 3 ? 2 : 0" v-for="(t, index) in tokenDetails">
+            <b-col sm="6" md="4" v-for="(t, index) in tokenDetails">
                 <b-card no-body class="mb-3">
                     <b-card-title class="pt-5 font-weight-light text-center">
                         {{ t.name }}
@@ -28,15 +28,19 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
+                            Remove Copyright <ui--checkmark :value="t.removeCopyright"></ui--checkmark>
+                        </b-list-group-item>
+
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Supply Type <b-badge variant="info">{{ t.supplyType}}</b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Mintable <ui--checkmark :value="t.mintable"></ui--checkmark>
+                            Burnable <ui--checkmark :value="t.burnable"></ui--checkmark>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Burnable <ui--checkmark :value="t.burnable"></ui--checkmark>
+                            Mintable <ui--checkmark :value="t.mintable"></ui--checkmark>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -45,10 +49,6 @@
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Token Recover <ui--checkmark :value="t.tokenRecover"></ui--checkmark>
-                        </b-list-group-item>
-
-                        <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Remove Copyright <ui--checkmark :value="t.removeCopyright"></ui--checkmark>
                         </b-list-group-item>
 
                         <b-list-group-item variant="warning"

@@ -72,9 +72,9 @@
                         <b-collapse id="who-can-mint-burn" class="p-4" accordion="features-accordion">
                             <b-card-text>
                                 <b>Mint</b><br>
-                                Only Token Owner will be able to mint new tokens. If you choose CommonERC20 or
-                                PowerfulERC20 you won't be able to mint more tokens than the defined cap. By choosing
-                                MintableERC20 instead, you will be able to generate unlimited tokens.
+                                Only Token Owner will be able to mint new tokens. If you choose a Capped supply you
+                                won't be able to mint more tokens than the defined cap. By choosing
+                                Unlimited supply instead, you will be able to generate unlimited tokens.
                                 You can transfer token ownership to addresses or Smart Contract.
                             </b-card-text>
                             <b-card-text>
@@ -167,7 +167,7 @@
                                 this page. You will also have a disclaimer in source code. It is not an issue for you
                                 because of your Token will be fully compliant with ERC20 definition. You can use your
                                 Token in Exchanges, DEX, Uniswap, any ERC20 compatible wallet, etc. You can remove it
-                                by choosing StandardERC20, MintableERC20, CommonERC20 or PowerfulERC20.
+                                by choosing a token type with remove Copyright feature.
                             </b-card-text>
                         </b-collapse>
                     </b-card>

@@ -220,12 +220,12 @@
                                             </b-form-checkbox>
                                         </b-form-group>
                                         <b-form-group
-                                                description="You will be able to generate tokens by minting them.">
-                                            <b-form-checkbox v-model="token.mintable"
+                                                description="Remove the link pointing to this page from your contract.">
+                                            <b-form-checkbox v-model="token.removeCopyright"
                                                              size="lg"
                                                              disabled
                                                              switch>
-                                                Mintable
+                                                Remove Copyright
                                             </b-form-checkbox>
                                         </b-form-group>
                                         <b-form-group
@@ -235,6 +235,15 @@
                                                              disabled
                                                              switch>
                                                 Burnable
+                                            </b-form-checkbox>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="You will be able to generate tokens by minting them.">
+                                            <b-form-checkbox v-model="token.mintable"
+                                                             size="lg"
+                                                             disabled
+                                                             switch>
+                                                Mintable
                                             </b-form-checkbox>
                                         </b-form-group>
                                         <b-form-group
@@ -253,15 +262,6 @@
                                                              disabled
                                                              switch>
                                                 Token Recover
-                                            </b-form-checkbox>
-                                        </b-form-group>
-                                        <b-form-group
-                                                description="Remove the link pointing to this page from your contract.">
-                                            <b-form-checkbox v-model="token.removeCopyright"
-                                                             size="lg"
-                                                             disabled
-                                                             switch>
-                                                Remove Copyright
                                             </b-form-checkbox>
                                         </b-form-group>
                                     </b-card>
@@ -566,6 +566,7 @@
           params.push(initialBalance);
           break;
         case 'StandardERC20':
+        case 'BurnableERC20':
         case 'MintableERC20':
           params.push(decimals);
           params.push(initialBalance);

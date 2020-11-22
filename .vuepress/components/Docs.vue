@@ -52,15 +52,19 @@
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
+                                        Remove Copyright <ui--checkmark :value="token.removeCopyright"></ui--checkmark>
+                                    </b-list-group-item>
+
+                                    <b-list-group-item class="d-flex justify-content-between align-items-center">
                                         Supply Type <b-badge variant="info">{{ token.supplyType}}</b-badge>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Mintable <ui--checkmark :value="token.mintable"></ui--checkmark>
+                                        Burnable <ui--checkmark :value="token.burnable"></ui--checkmark>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Burnable <ui--checkmark :value="token.burnable"></ui--checkmark>
+                                        Mintable <ui--checkmark :value="token.mintable"></ui--checkmark>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -69,10 +73,6 @@
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
                                         Token Recover <ui--checkmark :value="token.tokenRecover"></ui--checkmark>
-                                    </b-list-group-item>
-
-                                    <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Remove Copyright <ui--checkmark :value="token.removeCopyright"></ui--checkmark>
                                     </b-list-group-item>
 
                                     <b-list-group-item
