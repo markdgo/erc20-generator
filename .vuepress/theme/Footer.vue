@@ -1,11 +1,12 @@
 <template>
     <b-container fluid="">
         <b-row class="bg-dark text-white">
-            <b-col lg="10" offset-lg="1" class="text-center p-0">
+            <b-col lg="10" offset-lg="1" class="text-center pt-4">
                 <ul class="list-inline mt-2">
                     <li class="list-inline-item">
-                        <b-img src="https://img.shields.io/github/license/vittominacori/erc20-generator.svg"></b-img>
+                        <small>ERC20 Token Generator | MIT License</small>
                     </li>
+                    <li class="list-inline-item"></li>
                     <li class="list-inline-item">
                         <small>
                             created by

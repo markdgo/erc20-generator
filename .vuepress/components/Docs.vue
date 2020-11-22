@@ -96,8 +96,8 @@
                                         <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${token.version}`" target="_blank">
                                             <b-img :src="`https://img.shields.io/badge/version-${token.version}-blue`"></b-img>
                                         </b-link>
-                                        <b-link href="https://travis-ci.com/github/vittominacori/erc20-generator" target="_blank">
-                                            <b-img src="https://travis-ci.com/vittominacori/erc20-generator.svg?branch=master"></b-img>
+                                        <b-link href="https://github.com/vittominacori/erc20-generator/actions" target="_blank">
+                                            <b-img src="https://github.com/vittominacori/erc20-generator/workflows/CI/badge.svg?branch=master"></b-img>
                                         </b-link>
                                         <b-link href="https://coveralls.io/github/vittominacori/erc20-generator?branch=master" target="_blank">
                                             <b-img src="https://coveralls.io/repos/github/vittominacori/erc20-generator/badge.svg?branch=master"></b-img>

@@ -267,6 +267,24 @@
                                     </b-card>
                                 </b-col>
                                 <b-col md="12" lg="4">
+                                    <b-card header="Token Type"
+                                            header-bg-variant="dark"
+                                            header-text-variant="white"
+                                            class="mt-3">
+                                        <b-form-group
+                                                description="Choose your Token Type."
+                                                label="Token Type *"
+                                                label-for="tokenType">
+                                            <b-form-select id="tokenType"
+                                                           v-model="tokenType"
+                                                           size="lg"
+                                                           @input="loadToken">
+                                                <option v-for="(n, k) in tokenList" :value="k">
+                                                    {{ n.contractName }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+                                    </b-card>
                                     <b-card header="Network"
                                             header-bg-variant="dark"
                                             header-text-variant="white"
@@ -291,24 +309,6 @@
                                             <hr>
                                             To deploy on Main Network you must select Main Ethereum Network.
                                         </b-alert>
-                                    </b-card>
-                                    <b-card header="Token Type"
-                                            header-bg-variant="dark"
-                                            header-text-variant="white"
-                                            class="mt-3">
-                                        <b-form-group
-                                                description="Choose your Token Type."
-                                                label="Token Type *"
-                                                label-for="tokenType">
-                                            <b-form-select id="tokenType"
-                                                           v-model="tokenType"
-                                                           size="lg"
-                                                           @input="loadToken">
-                                                <option v-for="(n, k) in tokenList" :value="k">
-                                                    {{ n.contractName }}
-                                                </option>
-                                            </b-form-select>
-                                        </b-form-group>
                                     </b-card>
                                     <b-card header="Payment"
                                             header-bg-variant="dark"
