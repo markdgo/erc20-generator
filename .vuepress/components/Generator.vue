@@ -513,7 +513,7 @@
                   this.$forceUpdate();
                   this.makeToast(
                     'Well done!',
-                    `Your token has been deployed at ${this.token.address}`,
+                    'Your token has been deployed!',
                     'success',
                   );
 
