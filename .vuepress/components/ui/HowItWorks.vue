@@ -2,10 +2,14 @@
     <div class="how-it-works-table">
         <b-row>
             <b-col lg="10" offset-lg="1" class="text-center">
-                <b-link v-b-modal.modal-tutorial size="lg" class="text-reset">
-                    <h2><b-icon-play></b-icon-play></h2>
-                    <small>Watch a Video Tutorial</small>
+                <b-link v-b-modal.modal-tutorial size="lg">
+                    <h2 class="btn btn-outline-info">
+                        <b-icon-play-fill></b-icon-play-fill>
+                    </h2>
                 </b-link>
+                <div>
+                    <small>Watch a Video Tutorial</small>
+                </div>
                 <b-modal id="modal-tutorial"
                          size="lg"
                          ok-only
