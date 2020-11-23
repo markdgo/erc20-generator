@@ -29,4 +29,14 @@ body {
     background: -o-linear-gradient(50deg,#2096ff,#05ffa3)!important;
     background: linear-gradient(40deg,#2096ff,#05ffa3)!important
   }
+
+  .footer {
+    .list-group-item {
+      background: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
