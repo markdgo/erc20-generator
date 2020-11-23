@@ -1,7 +1,7 @@
 <template>
     <div class="faq-table">
         <b-row>
-            <b-col lg="8" offset-lg="2">
+            <b-col>
                 <b-card bg-variant="light" class="mb-4">
                     <h3 class="font-weight-light">ERC20 Token Generator</h3>
                     <p class="font-weight-light">
@@ -18,7 +18,7 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col lg="8" offset-lg="2">
+            <b-col>
                 <h5 class="font-weight-light text-white">
                     <a v-b-toggle
                        href="#about-token-features"
@@ -558,7 +558,7 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col lg="8" offset-lg="2">
+            <b-col>
                 <b-alert show variant="warning" class="mt-4">
                     <h4 class="alert-heading">DISCLAIMER</h4>
                     <p>

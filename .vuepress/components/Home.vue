@@ -35,7 +35,7 @@
             </b-col>
         </b-row>
         <b-row id="pricing" class="aqua-gradient mx-0">
-            <b-col lg="10" offset-lg="1" class="mb-5">
+            <b-col lg="12" xl="8" offset-xl="2" class="mb-5">
                 <h2 class="p-5 font-weight-lighter text-center text-light">Pricing</h2>
                 <ui--pricing-table></ui--pricing-table>
             </b-col>
@@ -52,7 +52,7 @@
             </b-col>
         </b-row>
         <b-row id="features" class="peach-gradient mx-0">
-            <b-col lg="10" offset-lg="1" class="py-5">
+            <b-col lg="12" xl="8" offset-xl="2" class="py-5">
                 <h2 class="p-5 font-weight-lighter text-center text-light">Features</h2>
                 <h4 class="text-center font-weight-light text-light">
                     You will be able to choose between several features.
@@ -91,7 +91,7 @@
             </b-col>
         </b-row>
         <b-row id="faq" class="purple-gradient mx-0">
-            <b-col lg="12" class="py-5">
+            <b-col lg="12" xl="8" offset-xl="2" class="py-5">
                 <h2 class="p-5 font-weight-lighter text-center text-light">FAQ</h2>
                 <ui--faq></ui--faq>
             </b-col>
