@@ -530,7 +530,7 @@
                                    href="#what-is-gas"
                                    @click.prevent
                                    class="btn-block text-reset text-decoration-none">
-                                    What is GAS?
+                                    What is GAS and how to set Gas price?
                                 </a>
                             </b-card-header>
                             <b-collapse id="what-is-gas" class="p-4" accordion="ethereum-accordion">
@@ -545,11 +545,20 @@
                                     being paid by transactions submitted to the network. By requiring that a
                                     transaction pay for each operation it performs (or causes a contract to
                                     perform), we ensure that network doesn't become bogged down with performing a
-                                    lot of intensive work that isn't valuable to anyone.
+                                    lot of intensive work that isn't valuable to anyone.<br>
+                                    Use the links below to discover more about Gas and Gas Price.
                                 </b-card-text>
                                 <b-link href="https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas"
                                         class="card-link" target="_blank">
                                     Good explanation of Gas
+                                </b-link>
+                                <b-link href="https://etherscan.io/gastracker"
+                                        class="card-link" target="_blank">
+                                    Etherscan Gas tracker
+                                </b-link>
+                                <b-link href="https://ethgasstation.info"
+                                        class="card-link" target="_blank">
+                                    ETH Gas Station
                                 </b-link>
                             </b-collapse>
                         </b-card>
@@ -562,16 +571,20 @@
                 <b-alert show variant="warning" class="mt-4">
                     <h4 class="alert-heading">DISCLAIMER</h4>
                     <p>
-                        GENERATOR'S AUTHOR IS FREE OF ANY LIABILITY REGARDING THE TOKEN AND THE USE THAT IS MADE OF IT.
+                        ERC20 Token Generator and its author are free of any liability regarding Tokens built using this
+                        software and the use that is made of them. Tokens built on ERC20 Token Generator, their
+                        projects, their teams, their use of Token (as well as anything related to Token) are in no way
+                        connected to ERC20 Token Generator or its author.
                     </p>
-                    <p>
-                        Generator's code is provided under MIT License. Anyone can use it as per their needs.
-                        The generator's purpose is to make people able to tokenize their ideas without coding or
-                        paying for it. Source code is well tested and continuously updated to reduce risk of bugs and
-                        introduce language optimizations. Anyway the purchase of tokens involves a high degree of risk.
-                        Before acquiring tokens, it is recommended to carefully weighs all the information and risks
-                        detailed in Token owner's Conditions.
-                    </p>
+                    <hr>
+                    <small>
+                        ERC20 Token Generator's code is provided under MIT License. Anyone can use it as per their
+                        needs. The generator's purpose is to make people able to tokenize their ideas without coding or
+                        paying large amounts for it. Source code is well tested and continuously updated to reduce risk
+                        of bugs and introduce language optimizations. Anyway the purchase of tokens involves a high
+                        degree of risk. Before acquiring tokens, it is recommended to carefully weighs all the
+                        information and risks detailed in Token owner's Conditions.
+                    </small>
                 </b-alert>
             </b-col>
         </b-row>

@@ -9,7 +9,7 @@
                     <b-row>
                         <b-col lg="12">
                             <b-card header="Token Type"
-                                    header-bg-variant="dark"
+                                    header-bg-variant="info"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-form-group
@@ -30,7 +30,7 @@
                             <b-card no-body
                                     bg-variant="light"
                                     header="Token Features"
-                                    header-bg-variant="dark"
+                                    header-bg-variant="info"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-list-group flush>
@@ -88,7 +88,7 @@
                             <b-card no-body
                                     bg-variant="light"
                                     header="Token Details"
-                                    header-bg-variant="dark"
+                                    header-bg-variant="info"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-list-group flush>
@@ -154,7 +154,7 @@
                         </b-col>
                         <b-col lg="12">
                             <b-card header="Methods"
-                                    header-bg-variant="dark"
+                                    header-bg-variant="info"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-card v-for="(method, key) in contracts.token.abi"

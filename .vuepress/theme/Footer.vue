@@ -29,6 +29,9 @@
                             <b-list-group-item v-b-modal.modal-terms>
                                 <small>Terms and Conditions</small>
                             </b-list-group-item>
+                            <b-list-group-item v-b-modal.modal-disclaimer>
+                                <small>Disclaimer</small>
+                            </b-list-group-item>
                         </b-list-group>
                     </b-col>
                 </b-row>
@@ -85,6 +88,30 @@
                     allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
                     allowfullscreen
             ></b-embed>
+        </b-modal>
+        <b-modal id="modal-disclaimer"
+                 title="Disclaimer"
+                 size="lg"
+                 centered
+                 hide-footer>
+            <b-alert show variant="warning">
+                <h4 class="alert-heading">DISCLAIMER</h4>
+                <p>
+                    ERC20 Token Generator and its author are free of any liability regarding Tokens built using this
+                    software and the use that is made of them. Tokens built on ERC20 Token Generator, their
+                    projects, their teams, their use of Token (as well as anything related to Token) are in no way
+                    connected to ERC20 Token Generator or its author.
+                </p>
+                <hr>
+                <small>
+                    ERC20 Token Generator's code is provided under MIT License. Anyone can use it as per their
+                    needs. The generator's purpose is to make people able to tokenize their ideas without coding or
+                    paying large amounts for it. Source code is well tested and continuously updated to reduce risk
+                    of bugs and introduce language optimizations. Anyway the purchase of tokens involves a high
+                    degree of risk. Before acquiring tokens, it is recommended to carefully weighs all the
+                    information and risks detailed in Token owner's Conditions.
+                </small>
+            </b-alert>
         </b-modal>
     </b-container>
 </template>

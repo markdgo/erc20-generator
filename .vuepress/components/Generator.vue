@@ -15,7 +15,7 @@
                     </b-alert>
 
                     <b-card header="Making transaction..."
-                            header-bg-variant="info"
+                            header-bg-variant="success"
                             header-text-variant="white"
                             v-if="makingTransaction || transactionStarted"
                             class="mt-3">
@@ -63,7 +63,7 @@
                             <b-row>
                                 <b-col md="6" lg="4">
                                     <b-card header="Token Details"
-                                            header-bg-variant="dark"
+                                            header-bg-variant="info"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <ValidationProvider
@@ -199,7 +199,7 @@
                                 </b-col>
                                 <b-col md="6" lg="4">
                                     <b-card header="Token Features"
-                                            header-bg-variant="dark"
+                                            header-bg-variant="info"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
@@ -272,8 +272,8 @@
                                     </b-card>
                                 </b-col>
                                 <b-col md="12" lg="4">
-                                    <b-card header="Token Type"
-                                            header-bg-variant="dark"
+                                    <b-card header="Token Type and Network"
+                                            header-bg-variant="info"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
@@ -282,25 +282,20 @@
                                                 label-for="tokenType">
                                             <b-form-select id="tokenType"
                                                            v-model="tokenType"
-                                                           size="lg"
+                                                           size="sm"
                                                            @input="loadToken">
                                                 <option v-for="(n, k) in tokenList" :value="k">
                                                     {{ n.contractName }}
                                                 </option>
                                             </b-form-select>
                                         </b-form-group>
-                                    </b-card>
-                                    <b-card header="Network"
-                                            header-bg-variant="dark"
-                                            header-text-variant="white"
-                                            class="mt-3">
                                         <b-form-group
                                                 description="Choose your Network."
                                                 label="Network *"
                                                 label-for="network">
                                             <b-form-select id="network"
                                                            v-model="currentNetwork"
-                                                           size="lg"
+                                                           size="sm"
                                                            @input="initDapp">
                                                 <option v-for="(n, k) in network.list" :value="k">{{ n.name }}
                                                 </option>
@@ -315,24 +310,67 @@
                                             To deploy on Main Network you must select Main Ethereum Network.
                                         </b-alert>
                                     </b-card>
+                                    <b-card header="Agreement"
+                                            header-bg-variant="info"
+                                            header-text-variant="white"
+                                            class="mt-3">
+                                        <ValidationProvider
+                                                name="Token Agreement"
+                                                :rules="{ required: true }"
+                                                v-slot="{ errors }">
+                                            <b-form-group label-for="tokenAgreement">
+                                                <b-form-checkbox
+                                                        id="tokenAgreement"
+                                                        name="tokenAgreement"
+                                                        v-model="agreement"
+                                                        value="accepted"
+                                                        unchecked-value=""
+                                                        size="sm"
+                                                        :class="{'is-invalid': errors.length > 0}">
+                                                    <small>
+                                                        I confirm that I have read, understood and agreed to
+                                                        ERC20 Token Generator's
+                                                        <u v-b-modal.modal-terms>Terms and Conditions</u>,
+                                                        <u v-b-modal.modal-terms>Privacy Policy</u> and
+                                                        <u v-b-modal.modal-disclaimer>Disclaimer</u>.
+                                                        You are also confirming that your Token is in no way connected
+                                                        to ERC20 Token Generator or its author.
+                                                    </small>
+                                                </b-form-checkbox>
+                                                <small v-show="errors.length > 0" class="text-danger">
+                                                    {{ errors[0] }}
+                                                </small>
+                                            </b-form-group>
+                                        </ValidationProvider>
+                                    </b-card>
                                     <b-card header="Payment"
-                                            header-bg-variant="dark"
+                                            header-bg-variant="success"
                                             header-text-variant="white"
                                             no-body
                                             class="mt-3">
                                         <b-list-group flush class="payment-box">
-                                            <b-list-group-item variant="success"
-                                                               class="d-flex justify-content-between align-items-center">
+                                            <b-list-group-item class="d-flex justify-content-between">
                                                 Token deployment fee:
                                                 <b-badge variant="success">
                                                     {{ web3.utils.fromWei(feeAmount, 'ether') }} ETH
                                                 </b-badge>
                                             </b-list-group-item>
-                                            <b-list-group-item
-                                                    class="d-flex justify-content-between align-items-center">
-                                                <small class="text-muted">
-                                                    *GAS fee will be added to final amount
-                                                </small>
+                                            <b-list-group-item class="d-flex justify-content-between">
+                                                <span>
+                                                    Gas fee:
+                                                    <b-icon-info-circle v-b-popover.v-warning.hover.top="
+                                                        'It depends on Gas Limit and on current Gas price average. ' +
+                                                        'MetaMask will suggest both. ' +
+                                                        'Do not decrease Gas Limit to avoid transaction to fail. ' +
+                                                        'If you want, you can decrease Gas Price but your ' +
+                                                        'transaction could remain pending for minutes/hours. ' +
+                                                        'Read how to calculate right value in our FAQ. ' +
+                                                        'Failed transaction can\'t be refunded.'">
+                                                        </b-icon-info-circle>
+                                                </span>
+                                                <b-badge variant="info">
+                                                    Variable
+                                                </b-badge>
                                             </b-list-group-item>
                                         </b-list-group>
                                     </b-card>
@@ -376,6 +414,7 @@
         makingTransaction: false,
         formDisabled: false,
         feeAmount: '0',
+        agreement: '',
         token: {
           name: '',
           symbol: '',
