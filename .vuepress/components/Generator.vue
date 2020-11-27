@@ -15,7 +15,7 @@
                     </b-alert>
 
                     <b-card header="Making transaction..."
-                            header-bg-variant="success"
+                            header-bg-variant="info"
                             header-text-variant="white"
                             v-if="makingTransaction || transactionStarted"
                             class="mt-3">
@@ -37,13 +37,17 @@
                                 Your Token address:<br>
                                 <h6>{{ token.address }}</h6>
                                 <hr>
-                                <b-link :href="token.link" target="_blank" class="btn btn-info my-2">
+                                <b-link :href="token.link" target="_blank" class="btn btn-primary my-2">
                                     <b-icon-arrow-up-right-circle-fill></b-icon-arrow-up-right-circle-fill>
                                     View on Etherscan
                                 </b-link>
                                 <b-link @click="addToMetaMask" class="btn btn-success my-2">
                                     <b-icon-plus-circle-fill></b-icon-plus-circle-fill>
                                     Add to MetaMask
+                                </b-link>
+                                <b-link :href="token.widget" target="_blank" class="btn btn-dark my-2">
+                                    <b-icon-gear-fill></b-icon-gear-fill>
+                                    Create Widget
                                 </b-link>
                                 <div class="text-right">
                                     <b-link v-b-modal.modal-feedback class="text-info">
@@ -330,11 +334,7 @@
                                                     <small>
                                                         I confirm that I have read, understood and agreed to
                                                         ERC20 Token Generator's
-                                                        <u v-b-modal.modal-terms>Terms and Conditions</u>,
-                                                        <u v-b-modal.modal-terms>Privacy Policy</u> and
-                                                        <u v-b-modal.modal-disclaimer>Disclaimer</u>.
-                                                        You are also confirming that your Token is in no way connected
-                                                        to ERC20 Token Generator or its author.
+                                                        <u v-b-modal.modal-terms>Terms of Use</u>.
                                                     </small>
                                                 </b-form-checkbox>
                                                 <small v-show="errors.length > 0" class="text-danger">
@@ -343,21 +343,29 @@
                                             </b-form-group>
                                         </ValidationProvider>
                                     </b-card>
-                                    <b-card header="Payment"
+                                    <b-card header="Transaction"
                                             header-bg-variant="success"
                                             header-text-variant="white"
                                             no-body
                                             class="mt-3">
                                         <b-list-group flush class="payment-box">
                                             <b-list-group-item class="d-flex justify-content-between">
-                                                Token deployment fee:
+                                                <span>
+                                                    Commission Fee:
+                                                    <b-icon-info-circle v-b-popover.v-warning.hover.top="
+                                                        'Commission will be transferred directly to us through the ' +
+                                                        'Ethereum network as part of your payment. ' +
+                                                        'Commission will support ERC20 Token Generator to keep it ' +
+                                                        'safe, running and constantly updated.'">
+                                                        </b-icon-info-circle>
+                                                </span>
                                                 <b-badge variant="success">
                                                     {{ web3.utils.fromWei(feeAmount, 'ether') }} ETH
                                                 </b-badge>
                                             </b-list-group-item>
                                             <b-list-group-item class="d-flex justify-content-between">
                                                 <span>
-                                                    Gas fee:
+                                                    Gas Fee:
                                                     <b-icon-info-circle v-b-popover.v-warning.hover.top="
                                                         'It depends on Gas Limit and on current Gas price average. ' +
                                                         'MetaMask will suggest both. ' +
@@ -549,6 +557,7 @@
                 .on('receipt', (receipt) => {
                   this.token.address = receipt.contractAddress;
                   this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
+                  this.token.widget = `https://vittominacori.github.io/watch-token/create.html?address=${this.token.address}&network=${this.currentNetwork}`;
                   this.$forceUpdate();
                   this.makeToast(
                     'Well done!',
