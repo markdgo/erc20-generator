@@ -8,7 +8,7 @@
             <hr class="my-5">
             <p>
                 <b-button to="/create-token/" size="lg" variant="success" class="my-2 py-3 px-5 text-uppercase">
-                    Create your Token
+                    Create ERC20 Token
                 </b-button>
                 <a class="btn btn-lg btn-outline-light py-3 px-5 text-uppercase"
                    href="#pricing"
@@ -42,12 +42,12 @@
         </b-row>
         <b-row class="bg-dark text-white mx-0">
             <b-col lg="10" offset-lg="1" class="mb-3 text-center">
-                <h2 class="pt-5 mb-4 font-weight-lighter text-light">Ready to deploy your Token?</h2>
+                <h2 class="pt-5 mb-4 font-weight-lighter text-light">Ready to deploy your ERC20 Token?</h2>
                 <p class="font-weight-light">
-                    Try building your Token in less than a minute. You can try on Test Network before to go live.
+                    Try building your ERC20 Token in less than a minute. You can try on Test Network before to go live.
                 </p>
                 <b-button to="/create-token/" size="lg" variant="success" class="my-5 py-3 px-5 text-uppercase">
-                    Create your Token
+                    Create ERC20 Token
                 </b-button>
             </b-col>
         </b-row>
@@ -98,12 +98,12 @@
         </b-row>
         <b-row class="bg-light text-dark mx-0">
             <b-col lg="10" offset-lg="1" class="mb-3 text-center">
-                <h2 class="pt-5 mb-4 font-weight-lighter text-dark">Ready to deploy your Token?</h2>
+                <h2 class="pt-5 mb-4 font-weight-lighter text-dark">Ready to deploy your ERC20 Token?</h2>
                 <p class="font-weight-light">
-                    Try building your Token in less than a minute. You can try on Test Network before to go live.
+                    Try building your ERC20 Token in less than a minute. You can try on Test Network before to go live.
                 </p>
                 <b-button to="/create-token/" size="lg" variant="success" class="my-5 py-3 px-5 text-uppercase">
-                    Create your Token
+                    Create ERC20 Token
                 </b-button>
             </b-col>
         </b-row>

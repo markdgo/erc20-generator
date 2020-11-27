@@ -8,7 +8,7 @@ module.exports = {
     ['meta', { property: 'og:image', content: 'https://vittominacori.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
     ['meta', { property: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { property: 'twitter:image', content: 'https://vittominacori.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
-    ['meta', { property: 'twitter:title', content: 'ERC20 Token Generator | Create your Token for FREE' }],
+    ['meta', { property: 'twitter:title', content: 'ERC20 Token Generator | Create ERC20 Token for FREE' }],
     ['script', { src: '/assets/js/web3.min.js' }],
     ['script',
       {

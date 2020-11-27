@@ -5,8 +5,8 @@
                 <b-row>
                     <b-col lg="4">
                         <b-list-group flush>
-                            <b-list-group-item to="/create-token/" class="text-light">
-                                Create your Token
+                            <b-list-group-item to="/" class="text-light">
+                                ERC20 Token Generator
                             </b-list-group-item>
                             <b-list-group-item to="/docs/" class="text-light">
                                 Documentation
@@ -15,14 +15,19 @@
                     </b-col>
                     <b-col lg="4">
                         <b-list-group flush>
-                            <b-list-group-item to="/" class="text-light">ERC20 Token Generator</b-list-group-item>
-                            <b-list-group-item v-b-modal.modal-feedback class="text-warning">
-                                Leave a Feedback
+                            <b-list-group-item to="/create-token/" class="text-light">
+                                Create ERC20 Token
+                            </b-list-group-item>
+                            <b-list-group-item href="/watch-token/" target="_blank" class="text-light">
+                                Create ERC20 Widget
                             </b-list-group-item>
                         </b-list-group>
                     </b-col>
                     <b-col lg="4">
                         <b-list-group flush>
+                            <b-list-group-item v-b-modal.modal-feedback class="text-warning">
+                                <small>Leave a Feedback</small>
+                            </b-list-group-item>
                             <b-list-group-item v-b-modal.modal-terms>
                                 <small>Terms of Use</small>
                             </b-list-group-item>

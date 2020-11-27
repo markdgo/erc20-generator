@@ -332,7 +332,7 @@
                                                         size="sm"
                                                         :class="{'is-invalid': errors.length > 0}">
                                                     <small>
-                                                        I confirm that I have read, understood and agreed to
+                                                        I have read, understood and agreed to
                                                         ERC20 Token Generator's
                                                         <u v-b-modal.modal-terms>Terms of Use</u>.
                                                     </small>
@@ -561,7 +561,7 @@
                   this.$forceUpdate();
                   this.makeToast(
                     'Well done!',
-                    'Your token has been deployed!',
+                    'Your Token has been deployed!',
                     'success',
                   );
 
