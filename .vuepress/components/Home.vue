@@ -2,9 +2,13 @@
     <div>
         <b-jumbotron text-variant="white"
                      header="ERC20 Token Generator"
-                     lead="The most used Smart Contract Generator for ERC20 Token"
                      class="mb-0 blue-gradient"
                      fluid>
+            <template #lead>
+                Create an ERC20 Token in less than a minute with the most used Smart Contract Generator for ERC20 Token.
+                <br>
+                No login. No setup. No coding required.
+            </template>
             <hr class="my-5">
             <p>
                 <b-button to="/create-token/" size="lg" variant="success" class="my-2 py-3 px-5 text-uppercase">
@@ -16,9 +20,6 @@
                     Pricing
                 </a>
             </p>
-            <p class="mt-3">
-                Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
-            </p>
         </b-jumbotron>
         <b-row id="how-it-works" class="mx-0">
             <b-col lg="8" offset-lg="2" class="mb-3">
@@ -27,6 +28,8 @@
                     Create an ERC20 Token in less than a minute.
                 </h4>
                 <p class="text-center font-weight-light">
+                    Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
+                    <br>
                     No login.
                     No setup.
                     No coding required.
@@ -74,7 +77,7 @@
                           size="lg"
                           variant="outline-warning"
                           class="my-5 py-3 px-5 text-uppercase">
-                    Let me know
+                    Let us know
                 </b-button>
                 <b-modal id="modal-contact"
                          size="lg"
