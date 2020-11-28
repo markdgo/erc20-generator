@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BurnableERC20.dist.sol | c59d500b194d9bca0f0df39298ae666ebda73713 |
+| dist/BurnableERC20.dist.sol | 3c532f58918464bbffaa81e3d704d40ecfc5a7a5 |
 
 
 ### Contracts Description Table
@@ -36,15 +36,6 @@
 | └ | div | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
-||||||
-| **Address** | Library |  |||
-| └ | isContract | Internal 🔒 |   | |
-| └ | sendValue | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | _functionCallWithValue | Private 🔐 | 🛑  | |
 ||||||
 | **ERC20** | Implementation | Context, IERC20 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |

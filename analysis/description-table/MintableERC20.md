@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/MintableERC20.dist.sol | dfd2ba203dcf74f5af7bca0500593b2f8cfc350c |
+| dist/MintableERC20.dist.sol | 1e475c88b97190d39652001169d5268a06026f4d |
 
 
 ### Contracts Description Table
@@ -42,15 +42,6 @@
 | └ | div | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
-||||||
-| **Address** | Library |  |||
-| └ | isContract | Internal 🔒 |   | |
-| └ | sendValue | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | _functionCallWithValue | Private 🔐 | 🛑  | |
 ||||||
 | **ERC20** | Implementation | Context, IERC20 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |

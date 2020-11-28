@@ -267,156 +267,11 @@ library SafeMath {
     }
 }
 
-// File: @openzeppelin/contracts/utils/Address.sol
-
-
-
-pragma solidity ^0.7.0;
-
-/**
- * @dev Collection of functions related to the address type
- */
-library Address {
-    /**
-     * @dev Returns true if `account` is a contract.
-     *
-     * [IMPORTANT]
-     * ====
-     * It is unsafe to assume that an address for which this function returns
-     * false is an externally-owned account (EOA) and not a contract.
-     *
-     * Among others, `isContract` will return false for the following
-     * types of addresses:
-     *
-     *  - an externally-owned account
-     *  - a contract in construction
-     *  - an address where a contract will be created
-     *  - an address where a contract lived, but was destroyed
-     * ====
-     */
-    function isContract(address account) internal view returns (bool) {
-        // According to EIP-1052, 0x0 is the value returned for not-yet created accounts
-        // and 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 is returned
-        // for accounts without code, i.e. `keccak256('')`
-        bytes32 codehash;
-        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-        // solhint-disable-next-line no-inline-assembly
-        assembly { codehash := extcodehash(account) }
-        return (codehash != accountHash && codehash != 0x0);
-    }
-
-    /**
-     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
-     * `recipient`, forwarding all available gas and reverting on errors.
-     *
-     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
-     * of certain opcodes, possibly making contracts go over the 2300 gas limit
-     * imposed by `transfer`, making them unable to receive funds via
-     * `transfer`. {sendValue} removes this limitation.
-     *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
-     *
-     * IMPORTANT: because control is transferred to `recipient`, care must be
-     * taken to not create reentrancy vulnerabilities. Consider using
-     * {ReentrancyGuard} or the
-     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
-     */
-    function sendValue(address payable recipient, uint256 amount) internal {
-        require(address(this).balance >= amount, "Address: insufficient balance");
-
-        // solhint-disable-next-line avoid-low-level-calls, avoid-call-value
-        (bool success, ) = recipient.call{ value: amount }("");
-        require(success, "Address: unable to send value, recipient may have reverted");
-    }
-
-    /**
-     * @dev Performs a Solidity function call using a low level `call`. A
-     * plain`call` is an unsafe replacement for a function call: use this
-     * function instead.
-     *
-     * If `target` reverts with a revert reason, it is bubbled up by this
-     * function (like regular Solidity function calls).
-     *
-     * Returns the raw returned data. To convert to the expected return value,
-     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
-     *
-     * Requirements:
-     *
-     * - `target` must be a contract.
-     * - calling `target` with `data` must not revert.
-     *
-     * _Available since v3.1._
-     */
-    function functionCall(address target, bytes memory data) internal returns (bytes memory) {
-      return functionCall(target, data, "Address: low-level call failed");
-    }
-
-    /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
-     * `errorMessage` as a fallback revert reason when `target` reverts.
-     *
-     * _Available since v3.1._
-     */
-    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
-        return _functionCallWithValue(target, data, 0, errorMessage);
-    }
-
-    /**
-     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
-     * but also transferring `value` wei to `target`.
-     *
-     * Requirements:
-     *
-     * - the calling contract must have an ETH balance of at least `value`.
-     * - the called Solidity function must be `payable`.
-     *
-     * _Available since v3.1._
-     */
-    function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
-        return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
-    }
-
-    /**
-     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
-     * with `errorMessage` as a fallback revert reason when `target` reverts.
-     *
-     * _Available since v3.1._
-     */
-    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
-        require(address(this).balance >= value, "Address: insufficient balance for call");
-        return _functionCallWithValue(target, data, value, errorMessage);
-    }
-
-    function _functionCallWithValue(address target, bytes memory data, uint256 weiValue, string memory errorMessage) private returns (bytes memory) {
-        require(isContract(target), "Address: call to non-contract");
-
-        // solhint-disable-next-line avoid-low-level-calls
-        (bool success, bytes memory returndata) = target.call{ value: weiValue }(data);
-        if (success) {
-            return returndata;
-        } else {
-            // Look for revert reason and bubble it up if present
-            if (returndata.length > 0) {
-                // The easiest way to bubble the revert reason is using memory via assembly
-
-                // solhint-disable-next-line no-inline-assembly
-                assembly {
-                    let returndata_size := mload(returndata)
-                    revert(add(32, returndata), returndata_size)
-                }
-            } else {
-                revert(errorMessage);
-            }
-        }
-    }
-}
-
 // File: @openzeppelin/contracts/token/ERC20/ERC20.sol
 
 
 
 pragma solidity ^0.7.0;
-
 
 
 
@@ -447,7 +302,6 @@ pragma solidity ^0.7.0;
  */
 contract ERC20 is Context, IERC20 {
     using SafeMath for uint256;
-    using Address for address;
 
     mapping (address => uint256) private _balances;
 
@@ -556,9 +410,10 @@ contract ERC20 is Context, IERC20 {
      * @dev See {IERC20-transferFrom}.
      *
      * Emits an {Approval} event indicating the updated allowance. This is not
-     * required by the EIP. See the note at the beginning of {ERC20};
+     * required by the EIP. See the note at the beginning of {ERC20}.
      *
      * Requirements:
+     *
      * - `sender` and `recipient` cannot be the zero address.
      * - `sender` must have a balance of at least `amount`.
      * - the caller must have allowance for ``sender``'s tokens of at least
@@ -636,7 +491,7 @@ contract ERC20 is Context, IERC20 {
      *
      * Emits a {Transfer} event with `from` set to the zero address.
      *
-     * Requirements
+     * Requirements:
      *
      * - `to` cannot be the zero address.
      */
@@ -656,7 +511,7 @@ contract ERC20 is Context, IERC20 {
      *
      * Emits a {Transfer} event with `to` set to the zero address.
      *
-     * Requirements
+     * Requirements:
      *
      * - `account` cannot be the zero address.
      * - `account` must have at least `amount` tokens.
@@ -870,39 +725,39 @@ interface IERC1363 is IERC20, IERC165 {
 
     /**
      * @notice Transfer tokens from `msg.sender` to another address and then call `onTransferReceived` on receiver
-     * @param to address The address which you want to transfer to
-     * @param value uint256 The amount of tokens to be transferred
+     * @param recipient address The address which you want to transfer to
+     * @param amount uint256 The amount of tokens to be transferred
      * @return true unless throwing
      */
-    function transferAndCall(address to, uint256 value) external returns (bool);
+    function transferAndCall(address recipient, uint256 amount) external returns (bool);
 
     /**
      * @notice Transfer tokens from `msg.sender` to another address and then call `onTransferReceived` on receiver
-     * @param to address The address which you want to transfer to
-     * @param value uint256 The amount of tokens to be transferred
-     * @param data bytes Additional data with no specified format, sent in call to `to`
+     * @param recipient address The address which you want to transfer to
+     * @param amount uint256 The amount of tokens to be transferred
+     * @param data bytes Additional data with no specified format, sent in call to `recipient`
      * @return true unless throwing
      */
-    function transferAndCall(address to, uint256 value, bytes calldata data) external returns (bool);
+    function transferAndCall(address recipient, uint256 amount, bytes calldata data) external returns (bool);
 
     /**
      * @notice Transfer tokens from one address to another and then call `onTransferReceived` on receiver
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     * @param value uint256 The amount of tokens to be transferred
+     * @param sender address The address which you want to send tokens from
+     * @param recipient address The address which you want to transfer to
+     * @param amount uint256 The amount of tokens to be transferred
      * @return true unless throwing
      */
-    function transferFromAndCall(address from, address to, uint256 value) external returns (bool);
+    function transferFromAndCall(address sender, address recipient, uint256 amount) external returns (bool);
 
     /**
      * @notice Transfer tokens from one address to another and then call `onTransferReceived` on receiver
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     * @param value uint256 The amount of tokens to be transferred
-     * @param data bytes Additional data with no specified format, sent in call to `to`
+     * @param sender address The address which you want to send tokens from
+     * @param recipient address The address which you want to transfer to
+     * @param amount uint256 The amount of tokens to be transferred
+     * @param data bytes Additional data with no specified format, sent in call to `recipient`
      * @return true unless throwing
      */
-    function transferFromAndCall(address from, address to, uint256 value, bytes calldata data) external returns (bool);
+    function transferFromAndCall(address sender, address recipient, uint256 amount, bytes calldata data) external returns (bool);
 
     /**
      * @notice Approve the passed address to spend the specified amount of tokens on behalf of msg.sender
@@ -912,9 +767,9 @@ interface IERC1363 is IERC20, IERC165 {
      * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
      * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
      * @param spender address The address which will spend the funds
-     * @param value uint256 The amount of tokens to be spent
+     * @param amount uint256 The amount of tokens to be spent
      */
-    function approveAndCall(address spender, uint256 value) external returns (bool);
+    function approveAndCall(address spender, uint256 amount) external returns (bool);
 
     /**
      * @notice Approve the passed address to spend the specified amount of tokens on behalf of msg.sender
@@ -924,10 +779,10 @@ interface IERC1363 is IERC20, IERC165 {
      * race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards:
      * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
      * @param spender address The address which will spend the funds
-     * @param value uint256 The amount of tokens to be spent
+     * @param amount uint256 The amount of tokens to be spent
      * @param data bytes Additional data with no specified format, sent in call to `spender`
      */
-    function approveAndCall(address spender, uint256 value, bytes calldata data) external returns (bool);
+    function approveAndCall(address spender, uint256 amount, bytes calldata data) external returns (bool);
 }
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol
@@ -956,13 +811,12 @@ interface IERC1363Receiver {
      * transaction being reverted.
      * Note: the token contract address is always the message sender.
      * @param operator address The address which called `transferAndCall` or `transferFromAndCall` function
-     * @param from address The address which are token transferred from
-     * @param value uint256 The amount of tokens transferred
+     * @param sender address The address which are token transferred from
+     * @param amount uint256 The amount of tokens transferred
      * @param data bytes Additional data with no specified format
-     * @return `bytes4(keccak256("onTransferReceived(address,address,uint256,bytes)"))`
-     *  unless throwing
+     * @return `bytes4(keccak256("onTransferReceived(address,address,uint256,bytes)"))` unless throwing
      */
-    function onTransferReceived(address operator, address from, uint256 value, bytes calldata data) external returns (bytes4);
+    function onTransferReceived(address operator, address sender, uint256 amount, bytes calldata data) external returns (bytes4);
 }
 
 // File: erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol
@@ -990,13 +844,180 @@ interface IERC1363Spender {
      * approval. Return of other than the magic value MUST result in the
      * transaction being reverted.
      * Note: the token contract address is always the message sender.
-     * @param owner address The address which called `approveAndCall` function
-     * @param value uint256 The amount of tokens to be spent
+     * @param sender address The address which called `approveAndCall` function
+     * @param amount uint256 The amount of tokens to be spent
      * @param data bytes Additional data with no specified format
-     * @return `bytes4(keccak256("onApprovalReceived(address,uint256,bytes)"))`
-     *  unless throwing
+     * @return `bytes4(keccak256("onApprovalReceived(address,uint256,bytes)"))` unless throwing
      */
-    function onApprovalReceived(address owner, uint256 value, bytes calldata data) external returns (bytes4);
+    function onApprovalReceived(address sender, uint256 amount, bytes calldata data) external returns (bytes4);
+}
+
+// File: @openzeppelin/contracts/utils/Address.sol
+
+
+
+pragma solidity ^0.7.0;
+
+/**
+ * @dev Collection of functions related to the address type
+ */
+library Address {
+    /**
+     * @dev Returns true if `account` is a contract.
+     *
+     * [IMPORTANT]
+     * ====
+     * It is unsafe to assume that an address for which this function returns
+     * false is an externally-owned account (EOA) and not a contract.
+     *
+     * Among others, `isContract` will return false for the following
+     * types of addresses:
+     *
+     *  - an externally-owned account
+     *  - a contract in construction
+     *  - an address where a contract will be created
+     *  - an address where a contract lived, but was destroyed
+     * ====
+     */
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        // solhint-disable-next-line no-inline-assembly
+        assembly { size := extcodesize(account) }
+        return size > 0;
+    }
+
+    /**
+     * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
+     * `recipient`, forwarding all available gas and reverting on errors.
+     *
+     * https://eips.ethereum.org/EIPS/eip-1884[EIP1884] increases the gas cost
+     * of certain opcodes, possibly making contracts go over the 2300 gas limit
+     * imposed by `transfer`, making them unable to receive funds via
+     * `transfer`. {sendValue} removes this limitation.
+     *
+     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     *
+     * IMPORTANT: because control is transferred to `recipient`, care must be
+     * taken to not create reentrancy vulnerabilities. Consider using
+     * {ReentrancyGuard} or the
+     * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
+     */
+    function sendValue(address payable recipient, uint256 amount) internal {
+        require(address(this).balance >= amount, "Address: insufficient balance");
+
+        // solhint-disable-next-line avoid-low-level-calls, avoid-call-value
+        (bool success, ) = recipient.call{ value: amount }("");
+        require(success, "Address: unable to send value, recipient may have reverted");
+    }
+
+    /**
+     * @dev Performs a Solidity function call using a low level `call`. A
+     * plain`call` is an unsafe replacement for a function call: use this
+     * function instead.
+     *
+     * If `target` reverts with a revert reason, it is bubbled up by this
+     * function (like regular Solidity function calls).
+     *
+     * Returns the raw returned data. To convert to the expected return value,
+     * use https://solidity.readthedocs.io/en/latest/units-and-global-variables.html?highlight=abi.decode#abi-encoding-and-decoding-functions[`abi.decode`].
+     *
+     * Requirements:
+     *
+     * - `target` must be a contract.
+     * - calling `target` with `data` must not revert.
+     *
+     * _Available since v3.1._
+     */
+    function functionCall(address target, bytes memory data) internal returns (bytes memory) {
+      return functionCall(target, data, "Address: low-level call failed");
+    }
+
+    /**
+     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`], but with
+     * `errorMessage` as a fallback revert reason when `target` reverts.
+     *
+     * _Available since v3.1._
+     */
+    function functionCall(address target, bytes memory data, string memory errorMessage) internal returns (bytes memory) {
+        return functionCallWithValue(target, data, 0, errorMessage);
+    }
+
+    /**
+     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * but also transferring `value` wei to `target`.
+     *
+     * Requirements:
+     *
+     * - the calling contract must have an ETH balance of at least `value`.
+     * - the called Solidity function must be `payable`.
+     *
+     * _Available since v3.1._
+     */
+    function functionCallWithValue(address target, bytes memory data, uint256 value) internal returns (bytes memory) {
+        return functionCallWithValue(target, data, value, "Address: low-level call with value failed");
+    }
+
+    /**
+     * @dev Same as {xref-Address-functionCallWithValue-address-bytes-uint256-}[`functionCallWithValue`], but
+     * with `errorMessage` as a fallback revert reason when `target` reverts.
+     *
+     * _Available since v3.1._
+     */
+    function functionCallWithValue(address target, bytes memory data, uint256 value, string memory errorMessage) internal returns (bytes memory) {
+        require(address(this).balance >= value, "Address: insufficient balance for call");
+        require(isContract(target), "Address: call to non-contract");
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success, bytes memory returndata) = target.call{ value: value }(data);
+        return _verifyCallResult(success, returndata, errorMessage);
+    }
+
+    /**
+     * @dev Same as {xref-Address-functionCall-address-bytes-}[`functionCall`],
+     * but performing a static call.
+     *
+     * _Available since v3.3._
+     */
+    function functionStaticCall(address target, bytes memory data) internal view returns (bytes memory) {
+        return functionStaticCall(target, data, "Address: low-level static call failed");
+    }
+
+    /**
+     * @dev Same as {xref-Address-functionCall-address-bytes-string-}[`functionCall`],
+     * but performing a static call.
+     *
+     * _Available since v3.3._
+     */
+    function functionStaticCall(address target, bytes memory data, string memory errorMessage) internal view returns (bytes memory) {
+        require(isContract(target), "Address: static call to non-contract");
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success, bytes memory returndata) = target.staticcall(data);
+        return _verifyCallResult(success, returndata, errorMessage);
+    }
+
+    function _verifyCallResult(bool success, bytes memory returndata, string memory errorMessage) private pure returns(bytes memory) {
+        if (success) {
+            return returndata;
+        } else {
+            // Look for revert reason and bubble it up if present
+            if (returndata.length > 0) {
+                // The easiest way to bubble the revert reason is using memory via assembly
+
+                // solhint-disable-next-line no-inline-assembly
+                assembly {
+                    let returndata_size := mload(returndata)
+                    revert(add(32, returndata), returndata_size)
+                }
+            } else {
+                revert(errorMessage);
+            }
+        }
+    }
 }
 
 // File: @openzeppelin/contracts/introspection/ERC165Checker.sol
@@ -1222,90 +1243,90 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
 
     /**
      * @dev Transfer tokens to a specified address and then execute a callback on recipient.
-     * @param to The address to transfer to.
-     * @param value The amount to be transferred.
+     * @param recipient The address to transfer to.
+     * @param amount The amount to be transferred.
      * @return A boolean that indicates if the operation was successful.
      */
-    function transferAndCall(address to, uint256 value) public override returns (bool) {
-        return transferAndCall(to, value, "");
+    function transferAndCall(address recipient, uint256 amount) public virtual override returns (bool) {
+        return transferAndCall(recipient, amount, "");
     }
 
     /**
      * @dev Transfer tokens to a specified address and then execute a callback on recipient.
-     * @param to The address to transfer to
-     * @param value The amount to be transferred
+     * @param recipient The address to transfer to
+     * @param amount The amount to be transferred
      * @param data Additional data with no specified format
      * @return A boolean that indicates if the operation was successful.
      */
-    function transferAndCall(address to, uint256 value, bytes memory data) public override returns (bool) {
-        transfer(to, value);
-        require(_checkAndCallTransfer(_msgSender(), to, value, data), "ERC1363: _checkAndCallTransfer reverts");
+    function transferAndCall(address recipient, uint256 amount, bytes memory data) public virtual override returns (bool) {
+        transfer(recipient, amount);
+        require(_checkAndCallTransfer(_msgSender(), recipient, amount, data), "ERC1363: _checkAndCallTransfer reverts");
         return true;
     }
 
     /**
      * @dev Transfer tokens from one address to another and then execute a callback on recipient.
-     * @param from The address which you want to send tokens from
-     * @param to The address which you want to transfer to
-     * @param value The amount of tokens to be transferred
+     * @param sender The address which you want to send tokens from
+     * @param recipient The address which you want to transfer to
+     * @param amount The amount of tokens to be transferred
      * @return A boolean that indicates if the operation was successful.
      */
-    function transferFromAndCall(address from, address to, uint256 value) public override returns (bool) {
-        return transferFromAndCall(from, to, value, "");
+    function transferFromAndCall(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
+        return transferFromAndCall(sender, recipient, amount, "");
     }
 
     /**
      * @dev Transfer tokens from one address to another and then execute a callback on recipient.
-     * @param from The address which you want to send tokens from
-     * @param to The address which you want to transfer to
-     * @param value The amount of tokens to be transferred
+     * @param sender The address which you want to send tokens from
+     * @param recipient The address which you want to transfer to
+     * @param amount The amount of tokens to be transferred
      * @param data Additional data with no specified format
      * @return A boolean that indicates if the operation was successful.
      */
-    function transferFromAndCall(address from, address to, uint256 value, bytes memory data) public override returns (bool) {
-        transferFrom(from, to, value);
-        require(_checkAndCallTransfer(from, to, value, data), "ERC1363: _checkAndCallTransfer reverts");
+    function transferFromAndCall(address sender, address recipient, uint256 amount, bytes memory data) public virtual override returns (bool) {
+        transferFrom(sender, recipient, amount);
+        require(_checkAndCallTransfer(sender, recipient, amount, data), "ERC1363: _checkAndCallTransfer reverts");
         return true;
     }
 
     /**
      * @dev Approve spender to transfer tokens and then execute a callback on recipient.
      * @param spender The address allowed to transfer to
-     * @param value The amount allowed to be transferred
+     * @param amount The amount allowed to be transferred
      * @return A boolean that indicates if the operation was successful.
      */
-    function approveAndCall(address spender, uint256 value) public override returns (bool) {
-        return approveAndCall(spender, value, "");
+    function approveAndCall(address spender, uint256 amount) public virtual override returns (bool) {
+        return approveAndCall(spender, amount, "");
     }
 
     /**
      * @dev Approve spender to transfer tokens and then execute a callback on recipient.
      * @param spender The address allowed to transfer to.
-     * @param value The amount allowed to be transferred.
+     * @param amount The amount allowed to be transferred.
      * @param data Additional data with no specified format.
      * @return A boolean that indicates if the operation was successful.
      */
-    function approveAndCall(address spender, uint256 value, bytes memory data) public override returns (bool) {
-        approve(spender, value);
-        require(_checkAndCallApprove(spender, value, data), "ERC1363: _checkAndCallApprove reverts");
+    function approveAndCall(address spender, uint256 amount, bytes memory data) public virtual override returns (bool) {
+        approve(spender, amount);
+        require(_checkAndCallApprove(spender, amount, data), "ERC1363: _checkAndCallApprove reverts");
         return true;
     }
 
     /**
      * @dev Internal function to invoke `onTransferReceived` on a target address
      *  The call is not executed if the target address is not a contract
-     * @param from address Representing the previous owner of the given token value
-     * @param to address Target address that will receive the tokens
-     * @param value uint256 The amount mount of tokens to be transferred
+     * @param sender address Representing the previous owner of the given token value
+     * @param recipient address Target address that will receive the tokens
+     * @param amount uint256 The amount mount of tokens to be transferred
      * @param data bytes Optional data to send along with the call
      * @return whether the call correctly returned the expected magic value
      */
-    function _checkAndCallTransfer(address from, address to, uint256 value, bytes memory data) internal returns (bool) {
-        if (!to.isContract()) {
+    function _checkAndCallTransfer(address sender, address recipient, uint256 amount, bytes memory data) internal virtual returns (bool) {
+        if (!recipient.isContract()) {
             return false;
         }
-        bytes4 retval = IERC1363Receiver(to).onTransferReceived(
-            _msgSender(), from, value, data
+        bytes4 retval = IERC1363Receiver(recipient).onTransferReceived(
+            _msgSender(), sender, amount, data
         );
         return (retval == _ERC1363_RECEIVED);
     }
@@ -1314,16 +1335,16 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
      * @dev Internal function to invoke `onApprovalReceived` on a target address
      *  The call is not executed if the target address is not a contract
      * @param spender address The address which will spend the funds
-     * @param value uint256 The amount of tokens to be spent
+     * @param amount uint256 The amount of tokens to be spent
      * @param data bytes Optional data to send along with the call
      * @return whether the call correctly returned the expected magic value
      */
-    function _checkAndCallApprove(address spender, uint256 value, bytes memory data) internal returns (bool) {
+    function _checkAndCallApprove(address spender, uint256 amount, bytes memory data) internal virtual returns (bool) {
         if (!spender.isContract()) {
             return false;
         }
         bytes4 retval = IERC1363Spender(spender).onApprovalReceived(
-            _msgSender(), value, data
+            _msgSender(), amount, data
         );
         return (retval == _ERC1363_APPROVED);
     }

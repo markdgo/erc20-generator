@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/PowerfulERC20.dist.sol | 13d199389cfad7d21fcdf1a413c054f584059532 |
+| dist/PowerfulERC20.dist.sol | 8eb61bdefaf6c2a82e0611b8eaa3be95621b4992 |
 
 
 ### Contracts Description Table
@@ -36,15 +36,6 @@
 | └ | div | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
-||||||
-| **Address** | Library |  |||
-| └ | isContract | Internal 🔒 |   | |
-| └ | sendValue | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCall | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
-| └ | _functionCallWithValue | Private 🔐 | 🛑  | |
 ||||||
 | **ERC20** | Implementation | Context, IERC20 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
@@ -91,6 +82,17 @@
 ||||||
 | **IERC1363Spender** | Interface |  |||
 | └ | onApprovalReceived | External ❗️ | 🛑  |NO❗️ |
+||||||
+| **Address** | Library |  |||
+| └ | isContract | Internal 🔒 |   | |
+| └ | sendValue | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | functionStaticCall | Internal 🔒 |   | |
+| └ | functionStaticCall | Internal 🔒 |   | |
+| └ | _verifyCallResult | Private 🔐 |   | |
 ||||||
 | **ERC165Checker** | Library |  |||
 | └ | supportsERC165 | Internal 🔒 |   | |
