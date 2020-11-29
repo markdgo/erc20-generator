@@ -15,7 +15,7 @@ contract('SimpleERC20', function ([owner, other, thirdParty]) {
 
   const fee = 0;
 
-  const version = 'v4.2.0';
+  const version = 'v4.3.0';
 
   beforeEach(async function () {
     this.serviceReceiver = await ServiceReceiver.new({ from: owner });
