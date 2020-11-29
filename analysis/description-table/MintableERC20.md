@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/MintableERC20.dist.sol | 1e475c88b97190d39652001169d5268a06026f4d |
+| dist/MintableERC20.dist.sol | 859d61a38e517772d3c4e17c1a590d72d8a2f9a3 |
 
 
 ### Contracts Description Table
@@ -82,7 +82,7 @@
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **MintableERC20** | Implementation | Ownable, ERC20Mintable, ServicePayer |||
+| **MintableERC20** | Implementation | ERC20Mintable, Ownable, ServicePayer |||
 | └ | <Constructor> | Public ❗️ |  💵 | ERC20 ServicePayer |
 | └ | _mint | Internal 🔒 | 🛑  | onlyOwner |
 | └ | _finishMinting | Internal 🔒 | 🛑  | onlyOwner |

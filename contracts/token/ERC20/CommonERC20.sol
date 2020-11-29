@@ -13,7 +13,7 @@ import "../../service/ServicePayer.sol";
  * @title CommonERC20
  * @dev Implementation of the CommonERC20
  */
-contract CommonERC20 is Ownable, ERC20Capped, ERC20Mintable, ERC20Burnable, ServicePayer {
+contract CommonERC20 is ERC20Capped, ERC20Mintable, ERC20Burnable, Ownable, ServicePayer {
 
     constructor (
         string memory name,

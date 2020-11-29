@@ -237,13 +237,13 @@
 <text text-anchor="start" x="46.8103" y="-42.3" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;&#160;constructor(name: string, symbol: string, decimals: uint8, initialBalance: uint256, feeReceiver: address)</text>
 </g>
 <!-- 9&#45;&gt;1 -->
-<g id="edge9" class="edge">
+<g id="edge10" class="edge">
 <title>9&#45;&gt;1</title>
 <path fill="none" stroke="#000000" d="M344.0401,-175.8295C344.0401,-282.4078 344.0401,-485.7724 344.0401,-621.1875"/>
 <polygon fill="none" stroke="#000000" points="333.5402,-621.5172 344.0401,-651.5172 354.5402,-621.5173 333.5402,-621.5172"/>
 </g>
 <!-- 9&#45;&gt;5 -->
-<g id="edge10" class="edge">
+<g id="edge9" class="edge">
 <title>9&#45;&gt;5</title>
 <path fill="none" stroke="#000000" d="M395.8515,-175.7089C406.4873,-190.2445 418.0238,-206.0111 429.7157,-221.9899"/>
 <polygon fill="none" stroke="#000000" points="421.2934,-228.2608 447.4826,-246.2714 438.241,-215.8601 421.2934,-228.2608"/>

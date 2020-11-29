@@ -10,13 +10,14 @@ import "erc-payable-token/contracts/token/ERC1363/ERC1363.sol";
 import "eth-token-recover/contracts/TokenRecover.sol";
 
 import "./behaviours/ERC20Mintable.sol";
+import "../../access/Roles.sol";
 import "../../service/ServicePayer.sol";
 
 /**
  * @title PowerfulERC20
  * @dev Implementation of the PowerfulERC20
  */
-contract PowerfulERC20 is ERC20Capped, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover, ServicePayer {
+contract PowerfulERC20 is ERC20Capped, ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover, Roles, ServicePayer {
 
     constructor (
         string memory name,
@@ -38,12 +39,12 @@ contract PowerfulERC20 is ERC20Capped, ERC20Mintable, ERC20Burnable, ERC1363, To
     /**
      * @dev Function to mint tokens.
      *
-     * NOTE: restricting access to owner only. See {ERC20Mintable-mint}.
+     * NOTE: restricting access to addresses with MINTER role. See {ERC20Mintable-mint}.
      *
      * @param account The address that will receive the minted tokens
      * @param amount The amount of tokens to mint
      */
-    function _mint(address account, uint256 amount) internal override onlyOwner {
+    function _mint(address account, uint256 amount) internal override onlyMinter {
         super._mint(account, amount);
     }
 

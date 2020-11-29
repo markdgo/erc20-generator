@@ -3,6 +3,7 @@ const { BN, ether, expectRevert } = require('@openzeppelin/test-helpers');
 const { shouldBehaveLikeTokenRecover } = require('eth-token-recover/test/TokenRecover.behaviour');
 const { shouldBehaveLikeERC1363 } = require('erc-payable-token/test/token/ERC1363/ERC1363.behaviour');
 
+const { shouldBehaveLikeRoles } = require('../../access/behaviours/Roles.behaviour');
 const { shouldBehaveLikeERC20 } = require('./behaviours/ERC20.behaviour');
 const { shouldBehaveLikeERC20Burnable } = require('./behaviours/ERC20Burnable.behaviour');
 const { shouldBehaveLikeERC20Capped } = require('./behaviours/ERC20Capped.behaviour');
@@ -152,7 +153,7 @@ contract('PowerfulERC20', function ([owner, other, thirdParty]) {
 
           await expectRevert(
             this.token.mint(thirdParty, amount, { from }),
-            'Ownable: caller is not the owner',
+            'Roles: caller does not have the MINTER role',
           );
         });
 
@@ -163,6 +164,14 @@ contract('PowerfulERC20', function ([owner, other, thirdParty]) {
           );
         });
       });
+    });
+
+    context('like a Roles', function () {
+      beforeEach(async function () {
+        this.contract = this.token;
+      });
+
+      shouldBehaveLikeRoles([owner, other, thirdParty]);
     });
 
     context('like a TokenRecover', function () {

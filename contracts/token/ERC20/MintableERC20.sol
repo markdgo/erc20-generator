@@ -11,7 +11,7 @@ import "../../service/ServicePayer.sol";
  * @title MintableERC20
  * @dev Implementation of the MintableERC20
  */
-contract MintableERC20 is Ownable, ERC20Mintable, ServicePayer {
+contract MintableERC20 is ERC20Mintable, Ownable, ServicePayer {
 
     constructor (
         string memory name,
