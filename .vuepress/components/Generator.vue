@@ -213,8 +213,21 @@
                                             <b-form-select id="supplyType"
                                                            v-model="token.supplyType"
                                                            disabled
-                                                           size="lg">
+                                                           size="sm">
                                                 <option v-for="(n) in ['Fixed', 'Unlimited', 'Capped']" :value="n">
+                                                    {{ n }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+                                        <b-form-group
+                                                description="Your Token Access Type."
+                                                label="Access Type"
+                                                label-for="accessType">
+                                            <b-form-select id="accessType"
+                                                           v-model="token.accessType"
+                                                           disabled
+                                                           size="sm">
+                                                <option v-for="(n) in ['None', 'Ownable', 'Role Based']" :value="n">
                                                     {{ n }}
                                                 </option>
                                             </b-form-select>
@@ -222,7 +235,7 @@
                                         <b-form-group
                                                 description="Your Token Source Code will be automatically verified on Etherscan.">
                                             <b-form-checkbox v-model="token.verified"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 Verified Source Code
@@ -231,7 +244,7 @@
                                         <b-form-group
                                                 description="Remove the link pointing to this page from your contract.">
                                             <b-form-checkbox v-model="token.removeCopyright"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 Remove Copyright
@@ -240,7 +253,7 @@
                                         <b-form-group
                                                 description="Your Token can be burnt.">
                                             <b-form-checkbox v-model="token.burnable"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 Burnable
@@ -249,7 +262,7 @@
                                         <b-form-group
                                                 description="You will be able to generate tokens by minting them.">
                                             <b-form-checkbox v-model="token.mintable"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 Mintable
@@ -258,7 +271,7 @@
                                         <b-form-group
                                                 description="The ERC1363 is an ERC20 compatible Token that can make a callback on the receiver contract.">
                                             <b-form-checkbox v-model="token.erc1363"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 ERC1363
@@ -267,7 +280,7 @@
                                         <b-form-group
                                                 description="It allows the contract owner to recover any ERC20 token sent into the contract for error.">
                                             <b-form-checkbox v-model="token.tokenRecover"
-                                                             size="lg"
+                                                             size="sm"
                                                              disabled
                                                              switch>
                                                 Token Recover
@@ -331,11 +344,11 @@
                                                         unchecked-value=""
                                                         size="sm"
                                                         :class="{'is-invalid': errors.length > 0}">
-                                                    <small>
+                                                    <p>
                                                         I have read, understood and agreed to
                                                         ERC20 Token Generator's
                                                         <u v-b-modal.modal-terms>Terms of Use</u>.
-                                                    </small>
+                                                    </p>
                                                 </b-form-checkbox>
                                                 <small v-show="errors.length > 0" class="text-danger">
                                                     {{ errors[0] }}
@@ -430,6 +443,7 @@
           cap: '',
           initialBalance: '',
           supplyType: 'Fixed',
+          accessType: 'None',
           mintable: false,
           burnable: false,
           erc1363: false,
@@ -593,6 +607,7 @@
         this.token.customizeDecimals = detail.customizeDecimals;
         this.token.verified = detail.verified;
         this.token.supplyType = detail.supplyType;
+        this.token.accessType = detail.accessType;
         this.token.mintable = detail.mintable;
         this.token.burnable = detail.burnable;
         this.token.erc1363 = detail.erc1363;

@@ -60,6 +60,10 @@
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
+                                        Access Type <b-badge variant="dark">{{ token.accessType}}</b-badge>
+                                    </b-list-group-item>
+
+                                    <b-list-group-item class="d-flex justify-content-between align-items-center">
                                         Burnable <ui--checkmark :value="token.burnable"></ui--checkmark>
                                     </b-list-group-item>
 
@@ -144,7 +148,7 @@
                                             <label>ABI:</label>
                                             <b-form-textarea readonly
                                                              no-resize
-                                                             rows="3"
+                                                             rows="5"
                                                              v-model="contracts.token.stringifiedAbi">
                                             </b-form-textarea>
                                         </div>

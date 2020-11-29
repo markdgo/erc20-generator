@@ -30,6 +30,20 @@
                     tokens.
                 </b-card-text>
             </b-card>
+            <b-card class="mb-3" sub-title="Ownable Access">
+                <b-card-text>
+                    Your Token will have an Owner.
+                    Token owner will be able to mint new tokens or to call the finish minting function.
+                </b-card-text>
+            </b-card>
+            <b-card class="mb-3" sub-title="Role Based Access">
+                <b-card-text>
+                    Your Token will have Roles.
+                    You can add or remove ADMIN or MINTER role to addresses. Your token will be Ownable too.
+                </b-card-text>
+            </b-card>
+        </b-card-group>
+        <b-card-group deck>
             <b-card class="mb-3" sub-title="ERC1363 Payable Token">
                 <b-card-text>
                     The ERC1363 is an ERC20 compatible Token that can make a

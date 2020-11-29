@@ -36,6 +36,10 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
+                            Access Type <b-badge variant="dark">{{ t.accessType}}</b-badge>
+                        </b-list-group-item>
+
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Burnable <ui--checkmark :value="t.burnable"></ui--checkmark>
                         </b-list-group-item>
 
