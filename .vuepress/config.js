@@ -3,6 +3,7 @@ module.exports = {
   base: '/erc20-generator/',
   head: [
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:url', content: 'https://vittominacori.github.io/erc20-generator' }],
     ['meta', { property: 'og:image', content: 'https://vittominacori.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
