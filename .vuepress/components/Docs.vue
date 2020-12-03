@@ -1,6 +1,16 @@
 <template>
-    <b-container fluid>
-        <b-row id="token-docs">
+    <div>
+        <b-jumbotron text-variant="white"
+                     header="ERC20 Token Documentation"
+                     class="mb-0 peach-gradient"
+                     fluid>
+            <template #lead>
+                ERC20 Token Generator Documentation.
+                <br>
+                Discover more details about different ERC20 Token Types, ABI, source code and analysis report.
+            </template>
+        </b-jumbotron>
+        <b-row id="token-docs" class="mx-0">
             <b-col lg="10" offset-lg="1" class="mb-3 p-0">
                 <div v-if="loading" class="text-center p-5">
                     <ui--loader :loading="true"></ui--loader>
@@ -9,7 +19,7 @@
                     <b-row>
                         <b-col lg="12">
                             <b-card header="Token Type"
-                                    header-bg-variant="info"
+                                    header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-form-group
@@ -30,7 +40,7 @@
                             <b-card no-body
                                     bg-variant="light"
                                     header="Token Features"
-                                    header-bg-variant="info"
+                                    header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-list-group flush>
@@ -92,12 +102,13 @@
                             <b-card no-body
                                     bg-variant="light"
                                     header="Token Details"
-                                    header-bg-variant="info"
+                                    header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-list-group flush>
                                     <b-list-group-item>
-                                        <b-link :href="`https://github.com/vittominacori/erc20-generator/tree/v${token.version}`" target="_blank">
+                                        <b-link :href="`https://github.com/vittominacori/erc20-generator/blob/v${token.version}/dist/${contracts.token.contractName}.dist.sol`"
+                                                target="_blank">
                                             <b-img :src="`https://img.shields.io/badge/version-${token.version}-blue`"></b-img>
                                         </b-link>
                                         <b-link href="https://github.com/vittominacori/erc20-generator/actions" target="_blank">
@@ -158,7 +169,7 @@
                         </b-col>
                         <b-col lg="12">
                             <b-card header="Methods"
-                                    header-bg-variant="info"
+                                    header-bg-variant="dark"
                                     header-text-variant="white"
                                     class="mt-3">
                                 <b-card v-for="(method, key) in contracts.token.abi"
@@ -217,7 +228,7 @@
                 </b-button>
             </b-col>
         </b-row>
-    </b-container>
+    </div>
 </template>
 
 <script>

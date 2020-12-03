@@ -1,6 +1,16 @@
 <template>
-    <b-container fluid>
-        <b-row id="token-generator">
+    <div>
+        <b-jumbotron text-variant="white"
+                     header="Create your ERC20 Token"
+                     class="mb-0 aqua-gradient"
+                     fluid>
+            <template #lead>
+                Easily deploy Smart Contract for a Standard, Capped, Mintable, Burnable, Payable ERC20 Token.
+                <br>
+                No login. No setup. No coding required.
+            </template>
+        </b-jumbotron>
+        <b-row id="token-generator" class="mx-0">
             <b-col lg="12" xl="10" offset-xl="1" class="mb-3 p-0">
                 <div v-if="loading" class="text-center p-5">
                     <ui--loader :loading="true"></ui--loader>
@@ -67,7 +77,7 @@
                             <b-row>
                                 <b-col md="6" lg="4">
                                     <b-card header="Token Details"
-                                            header-bg-variant="info"
+                                            header-bg-variant="dark"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <ValidationProvider
@@ -105,9 +115,10 @@
                                                         name="tokenSymbol"
                                                         placeholder="Your token symbol"
                                                         v-model.trim="token.symbol"
+                                                        @update="token.symbol = token.symbol.toUpperCase()"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
-                                                        maxlength="5">
+                                                        maxlength="10">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
                                                     {{ errors[0] }}
@@ -203,7 +214,7 @@
                                 </b-col>
                                 <b-col md="6" lg="4">
                                     <b-card header="Token Features"
-                                            header-bg-variant="info"
+                                            header-bg-variant="dark"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
@@ -290,7 +301,7 @@
                                 </b-col>
                                 <b-col md="12" lg="4">
                                     <b-card header="Token Type and Network"
-                                            header-bg-variant="info"
+                                            header-bg-variant="dark"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
@@ -328,7 +339,7 @@
                                         </b-alert>
                                     </b-card>
                                     <b-card header="Agreement"
-                                            header-bg-variant="info"
+                                            header-bg-variant="dark"
                                             header-text-variant="white"
                                             class="mt-3">
                                         <ValidationProvider
@@ -357,7 +368,7 @@
                                         </ValidationProvider>
                                     </b-card>
                                     <b-card header="Transaction"
-                                            header-bg-variant="success"
+                                            header-bg-variant="info"
                                             header-text-variant="white"
                                             no-body
                                             class="mt-3">
@@ -409,7 +420,7 @@
                 </b-card>
             </b-col>
         </b-row>
-    </b-container>
+    </div>
 </template>
 
 <script>
@@ -622,7 +633,7 @@
       },
       getDeployArguments () {
         const name = this.token.name;
-        const symbol = this.token.symbol.toUpperCase();
+        const symbol = this.token.symbol;
         const decimals = this.web3.utils.toBN(this.token.decimals);
         const cap = this.web3.utils.toBN(this.token.cap).mul(this.web3.utils.toBN(Math.pow(10, this.token.decimals)));
         const initialBalance = this.web3.utils.toBN(this.token.initialBalance).mul(this.web3.utils.toBN(Math.pow(10, this.token.decimals))); // eslint-disable-line max-len
