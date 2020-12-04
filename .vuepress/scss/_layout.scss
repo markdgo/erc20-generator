@@ -39,4 +39,10 @@ body {
       }
     }
   }
+
+  @media (max-width: 576px) {
+    .jumbotron .display-3 {
+      font-size: 2.5rem;
+    }
+  }
 }
