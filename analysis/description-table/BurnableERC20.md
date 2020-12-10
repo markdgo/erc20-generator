@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BurnableERC20.dist.sol | 3c532f58918464bbffaa81e3d704d40ecfc5a7a5 |
+| dist/BurnableERC20.dist.sol | 9fca9e9c2f5da16ae271ee5ee454f760bf4f3508 |
 
 
 ### Contracts Description Table

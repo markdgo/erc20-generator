@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/CommonERC20.dist.sol | f52f0190bd496fd7e7bcc21de58635462feb8ff0 |
+| dist/UnlimitedERC20.dist.sol | 67bd99b2a73f802977781b5693d92469a91cdc89 |
 
 
 ### Contracts Description Table
@@ -63,11 +63,6 @@
 | └ | _setupDecimals | Internal 🔒 | 🛑  | |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
-| **ERC20Capped** | Implementation | ERC20 |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | cap | Public ❗️ |   |NO❗️ |
-| └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
-||||||
 | **ERC20Burnable** | Implementation | Context, ERC20 |||
 | └ | burn | Public ❗️ | 🛑  |NO❗️ |
 | └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
@@ -77,6 +72,55 @@
 | └ | mint | Public ❗️ | 🛑  | canMint |
 | └ | finishMinting | Public ❗️ | 🛑  | canMint |
 | └ | _finishMinting | Internal 🔒 | 🛑  | |
+||||||
+| **EnumerableSet** | Library |  |||
+| └ | _add | Private 🔐 | 🛑  | |
+| └ | _remove | Private 🔐 | 🛑  | |
+| └ | _contains | Private 🔐 |   | |
+| └ | _length | Private 🔐 |   | |
+| └ | _at | Private 🔐 |   | |
+| └ | add | Internal 🔒 | 🛑  | |
+| └ | remove | Internal 🔒 | 🛑  | |
+| └ | contains | Internal 🔒 |   | |
+| └ | length | Internal 🔒 |   | |
+| └ | at | Internal 🔒 |   | |
+| └ | add | Internal 🔒 | 🛑  | |
+| └ | remove | Internal 🔒 | 🛑  | |
+| └ | contains | Internal 🔒 |   | |
+| └ | length | Internal 🔒 |   | |
+| └ | at | Internal 🔒 |   | |
+| └ | add | Internal 🔒 | 🛑  | |
+| └ | remove | Internal 🔒 | 🛑  | |
+| └ | contains | Internal 🔒 |   | |
+| └ | length | Internal 🔒 |   | |
+| └ | at | Internal 🔒 |   | |
+||||||
+| **Address** | Library |  |||
+| └ | isContract | Internal 🔒 |   | |
+| └ | sendValue | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCall | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | functionCallWithValue | Internal 🔒 | 🛑  | |
+| └ | functionStaticCall | Internal 🔒 |   | |
+| └ | functionStaticCall | Internal 🔒 |   | |
+| └ | _verifyCallResult | Private 🔐 |   | |
+||||||
+| **AccessControl** | Implementation | Context |||
+| └ | hasRole | Public ❗️ |   |NO❗️ |
+| └ | getRoleMemberCount | Public ❗️ |   |NO❗️ |
+| └ | getRoleMember | Public ❗️ |   |NO❗️ |
+| └ | getRoleAdmin | Public ❗️ |   |NO❗️ |
+| └ | grantRole | Public ❗️ | 🛑  |NO❗️ |
+| └ | revokeRole | Public ❗️ | 🛑  |NO❗️ |
+| └ | renounceRole | Public ❗️ | 🛑  |NO❗️ |
+| └ | _setupRole | Internal 🔒 | 🛑  | |
+| └ | _setRoleAdmin | Internal 🔒 | 🛑  | |
+| └ | _grantRole | Private 🔐 | 🛑  | |
+| └ | _revokeRole | Private 🔐 | 🛑  | |
+||||||
+| **Roles** | Implementation | AccessControl |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 ||||||
 | **TokenRecover** | Implementation | Ownable |||
 | └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
@@ -91,11 +135,10 @@
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **CommonERC20** | Implementation | ERC20Capped, ERC20Mintable, ERC20Burnable, Ownable, ServicePayer |||
-| └ | <Constructor> | Public ❗️ |  💵 | ERC20 ERC20Capped ServicePayer |
-| └ | _mint | Internal 🔒 | 🛑  | onlyOwner |
+| **UnlimitedERC20** | Implementation | ERC20Mintable, ERC20Burnable, Ownable, Roles, ServicePayer |||
+| └ | <Constructor> | Public ❗️ |  💵 | ERC20 ServicePayer |
+| └ | _mint | Internal 🔒 | 🛑  | onlyMinter |
 | └ | _finishMinting | Internal 🔒 | 🛑  | onlyOwner |
-| └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 
 
 ### Legend

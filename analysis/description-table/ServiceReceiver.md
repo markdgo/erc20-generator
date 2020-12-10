@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/ServiceReceiver.dist.sol | 8c5361d2b60ca65da2f68453abdea38aad783542 |
+| dist/ServiceReceiver.dist.sol | c2520a454b1b24edba4d42a96628dd934f1d1d94 |
 
 
 ### Contracts Description Table

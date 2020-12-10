@@ -1,5 +1,3 @@
-// File: @openzeppelin/contracts/GSN/Context.sol
-
 // SPDX-License-Identifier: MIT
 
 /*
@@ -21,6 +19,10 @@
  *  Anyway the purchase of tokens involves a high degree of risk. Before acquiring tokens, it is recommended to
  *  carefully weighs all the information and risks detailed in Token owner's Conditions.
  */
+
+// File: @openzeppelin/contracts/GSN/Context.sol
+
+
 
 pragma solidity ^0.7.0;
 
@@ -797,7 +799,7 @@ pragma solidity ^0.7.0;
  * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
-contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.3.0") {
+contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.4.0") {
 
     constructor (
         string memory name,
