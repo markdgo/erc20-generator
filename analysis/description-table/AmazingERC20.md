@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/UnlimitedERC20.dist.sol | 0ac5dfb704682ed6b116b1c97d2183c06a66e4a1 |
+| dist/AmazingERC20.dist.sol | c2640fc20d017216a15c3639725656604c3aee53 |
 
 
 ### Contracts Description Table
@@ -18,12 +18,6 @@
 | **Context** | Implementation |  |||
 | └ | _msgSender | Internal 🔒 |   | |
 | └ | _msgData | Internal 🔒 |   | |
-||||||
-| **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | owner | Public ❗️ |   |NO❗️ |
-| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
-| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
 ||||||
 | **IERC20** | Interface |  |||
 | └ | totalSupply | External ❗️ |   |NO❗️ |
@@ -67,33 +61,22 @@
 | └ | burn | Public ❗️ | 🛑  |NO❗️ |
 | └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
 ||||||
-| **ERC20Mintable** | Implementation | ERC20 |||
-| └ | mintingFinished | Public ❗️ |   |NO❗️ |
-| └ | mint | Public ❗️ | 🛑  | canMint |
-| └ | finishMinting | Public ❗️ | 🛑  | canMint |
-| └ | _finishMinting | Internal 🔒 | 🛑  | |
+| **IERC165** | Interface |  |||
+| └ | supportsInterface | External ❗️ |   |NO❗️ |
 ||||||
-| **EnumerableSet** | Library |  |||
-| └ | _add | Private 🔐 | 🛑  | |
-| └ | _remove | Private 🔐 | 🛑  | |
-| └ | _contains | Private 🔐 |   | |
-| └ | _length | Private 🔐 |   | |
-| └ | _at | Private 🔐 |   | |
-| └ | add | Internal 🔒 | 🛑  | |
-| └ | remove | Internal 🔒 | 🛑  | |
-| └ | contains | Internal 🔒 |   | |
-| └ | length | Internal 🔒 |   | |
-| └ | at | Internal 🔒 |   | |
-| └ | add | Internal 🔒 | 🛑  | |
-| └ | remove | Internal 🔒 | 🛑  | |
-| └ | contains | Internal 🔒 |   | |
-| └ | length | Internal 🔒 |   | |
-| └ | at | Internal 🔒 |   | |
-| └ | add | Internal 🔒 | 🛑  | |
-| └ | remove | Internal 🔒 | 🛑  | |
-| └ | contains | Internal 🔒 |   | |
-| └ | length | Internal 🔒 |   | |
-| └ | at | Internal 🔒 |   | |
+| **IERC1363** | Interface | IERC20, IERC165 |||
+| └ | transferAndCall | External ❗️ | 🛑  |NO❗️ |
+| └ | transferAndCall | External ❗️ | 🛑  |NO❗️ |
+| └ | transferFromAndCall | External ❗️ | 🛑  |NO❗️ |
+| └ | transferFromAndCall | External ❗️ | 🛑  |NO❗️ |
+| └ | approveAndCall | External ❗️ | 🛑  |NO❗️ |
+| └ | approveAndCall | External ❗️ | 🛑  |NO❗️ |
+||||||
+| **IERC1363Receiver** | Interface |  |||
+| └ | onTransferReceived | External ❗️ | 🛑  |NO❗️ |
+||||||
+| **IERC1363Spender** | Interface |  |||
+| └ | onApprovalReceived | External ❗️ | 🛑  |NO❗️ |
 ||||||
 | **Address** | Library |  |||
 | └ | isContract | Internal 🔒 |   | |
@@ -106,21 +89,40 @@
 | └ | functionStaticCall | Internal 🔒 |   | |
 | └ | _verifyCallResult | Private 🔐 |   | |
 ||||||
-| **AccessControl** | Implementation | Context |||
-| └ | hasRole | Public ❗️ |   |NO❗️ |
-| └ | getRoleMemberCount | Public ❗️ |   |NO❗️ |
-| └ | getRoleMember | Public ❗️ |   |NO❗️ |
-| └ | getRoleAdmin | Public ❗️ |   |NO❗️ |
-| └ | grantRole | Public ❗️ | 🛑  |NO❗️ |
-| └ | revokeRole | Public ❗️ | 🛑  |NO❗️ |
-| └ | renounceRole | Public ❗️ | 🛑  |NO❗️ |
-| └ | _setupRole | Internal 🔒 | 🛑  | |
-| └ | _setRoleAdmin | Internal 🔒 | 🛑  | |
-| └ | _grantRole | Private 🔐 | 🛑  | |
-| └ | _revokeRole | Private 🔐 | 🛑  | |
+| **ERC165Checker** | Library |  |||
+| └ | supportsERC165 | Internal 🔒 |   | |
+| └ | supportsInterface | Internal 🔒 |   | |
+| └ | supportsAllInterfaces | Internal 🔒 |   | |
+| └ | _supportsERC165Interface | Private 🔐 |   | |
+| └ | _callERC165SupportsInterface | Private 🔐 |   | |
 ||||||
-| **Roles** | Implementation | AccessControl |||
+| **ERC165** | Implementation | IERC165 |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | supportsInterface | Public ❗️ |   |NO❗️ |
+| └ | _registerInterface | Internal 🔒 | 🛑  | |
+||||||
+| **ERC1363** | Implementation | ERC20, IERC1363, ERC165 |||
+| └ | <Constructor> | Public ❗️ | 🛑  | ERC20 |
+| └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | transferAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | transferFromAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | transferFromAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | approveAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | approveAndCall | Public ❗️ | 🛑  |NO❗️ |
+| └ | _checkAndCallTransfer | Internal 🔒 | 🛑  | |
+| └ | _checkAndCallApprove | Internal 🔒 | 🛑  | |
+||||||
+| **ERC20Mintable** | Implementation | ERC20 |||
+| └ | mintingFinished | Public ❗️ |   |NO❗️ |
+| └ | mint | Public ❗️ | 🛑  | canMint |
+| └ | finishMinting | Public ❗️ | 🛑  | canMint |
+| └ | _finishMinting | Internal 🔒 | 🛑  | |
+||||||
+| **Ownable** | Implementation | Context |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | owner | Public ❗️ |   |NO❗️ |
+| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
+| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
 ||||||
 | **TokenRecover** | Implementation | Ownable |||
 | └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
@@ -135,9 +137,9 @@
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **UnlimitedERC20** | Implementation | ERC20Mintable, ERC20Burnable, Ownable, Roles, ServicePayer |||
-| └ | <Constructor> | Public ❗️ |  💵 | ERC20 ServicePayer |
-| └ | _mint | Internal 🔒 | 🛑  | onlyMinter |
+| **AmazingERC20** | Implementation | ERC20Mintable, ERC20Burnable, ERC1363, TokenRecover, ServicePayer |||
+| └ | <Constructor> | Public ❗️ |  💵 | ERC1363 ServicePayer |
+| └ | _mint | Internal 🔒 | 🛑  | onlyOwner |
 | └ | _finishMinting | Internal 🔒 | 🛑  | onlyOwner |
 
 
