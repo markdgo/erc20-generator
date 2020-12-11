@@ -10,12 +10,14 @@
                 </p>
             </b-col>
         </b-row>
-        <carousel :perPageCustom="[[0, 1], [576, 2], [992, 3], [1536, 4]]"
-                  :navigationEnabled="true"
-                  :loop="true"
-                  paginationColor="#343a40"
-                  paginationActiveColor="#f8f9fa">
-            <slide v-for="(t, index) in tokenDetails">
+        <component v-if="carousel"
+                   :is="carousel"
+                   :perPageCustom="[[0, 1], [576, 2], [992, 3], [1536, 4]]"
+                   paginationColor="#343a40"
+                   paginationActiveColor="#f8f9fa">
+            <component v-if="slide"
+                       :is="slide"
+                       v-for="(t, index) in tokenDetails">
                 <b-card no-body class="mb-3 mx-3">
                     <b-card-title class="pt-5 font-weight-light text-center">
                         {{ t.name }}
@@ -82,8 +84,8 @@
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
-            </slide>
-        </carousel>
+            </component>
+        </component>
         <b-row>
             <b-col lg="6" offset-lg="3" class="mt-4">
                 <p class="text-center text-light">
@@ -95,18 +97,26 @@
 </template>
 
 <script>
-  import { Carousel, Slide } from 'vue-carousel';
-
   import tokenDetails from '../../mixins/tokenDetails';
 
   export default {
     name: 'PricingTable',
-    components: {
-      Carousel,
-      Slide,
-    },
     mixins: [
       tokenDetails,
     ],
+    data () {
+      return {
+        carousel: null,
+        slide: null,
+      };
+    },
+    mounted () {
+      import('vue-carousel').then(module => {
+        this.carousel = module.Carousel;
+        this.slide = module.Slide;
+      }).catch((e) => {
+        console.log(e); // eslint-disable-line no-console
+      });
+    },
   };
 </script>
