@@ -1,8 +1,22 @@
 <template>
     <div class="pricing-table">
-        <b-row>
-            <b-col sm="6" md="4" v-for="(t, index) in tokenDetails">
-                <b-card no-body class="mb-3">
+        <b-row class="mb-5">
+            <b-col lg="10" offset-lg="1">
+                <h4 class="text-center font-weight-light text-light">
+                    Choose between {{ tokenDetails.length }} different Token types.
+                </h4>
+                <p class="text-center font-weight-light text-light">
+                    What are your Token requirements?
+                </p>
+            </b-col>
+        </b-row>
+        <carousel :perPageCustom="[[0, 1], [576, 2], [992, 3], [1536, 4]]"
+                  :navigationEnabled="true"
+                  :loop="true"
+                  paginationColor="#343a40"
+                  paginationActiveColor="#f8f9fa">
+            <slide v-for="(t, index) in tokenDetails">
+                <b-card no-body class="mb-3 mx-3">
                     <b-card-title class="pt-5 font-weight-light text-center">
                         {{ t.name }}
                     </b-card-title>
@@ -32,11 +46,17 @@
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Supply Type <b-badge variant="info">{{ t.supplyType}}</b-badge>
+                            Supply Type
+                            <b-badge :variant="t.supplyType === 'Capped' ? 'success' : (t.supplyType === 'Unlimited' ? 'info' : 'dark')">
+                                {{ t.supplyType}}
+                            </b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
-                            Access Type <b-badge variant="dark">{{ t.accessType}}</b-badge>
+                            Access Type
+                            <b-badge :variant="t.accessType === 'Role Based' ? 'success' : (t.accessType === 'Ownable' ? 'info' : 'dark')">
+                                {{ t.accessType}}
+                            </b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
@@ -56,14 +76,14 @@
                         </b-list-group-item>
 
                         <b-list-group-item variant="warning"
-                                :to="{ path: '/create-token/', query: { tokenType: t.name }}"
-                                class="justify-content-between align-items-center text-center py-3">
+                                           :to="{ path: '/create-token/', query: { tokenType: t.name }}"
+                                           class="justify-content-between align-items-center text-center py-3">
                             Create
                         </b-list-group-item>
                     </b-list-group>
                 </b-card>
-            </b-col>
-        </b-row>
+            </slide>
+        </carousel>
         <b-row>
             <b-col lg="6" offset-lg="3" class="mt-4">
                 <p class="text-center text-light">
@@ -75,10 +95,16 @@
 </template>
 
 <script>
+  import { Carousel, Slide } from 'vue-carousel';
+
   import tokenDetails from '../../mixins/tokenDetails';
 
   export default {
     name: 'PricingTable',
+    components: {
+      Carousel,
+      Slide,
+    },
     mixins: [
       tokenDetails,
     ],

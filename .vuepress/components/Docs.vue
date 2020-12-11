@@ -66,11 +66,17 @@
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Supply Type <b-badge variant="info">{{ token.supplyType}}</b-badge>
+                                        Supply Type
+                                        <b-badge :variant="token.supplyType === 'Capped' ? 'success' : (token.supplyType === 'Unlimited' ? 'info' : 'dark')">
+                                            {{ token.supplyType}}
+                                        </b-badge>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">
-                                        Access Type <b-badge variant="dark">{{ token.accessType}}</b-badge>
+                                        Access Type
+                                        <b-badge :variant="token.accessType === 'Role Based' ? 'success' : (token.accessType === 'Ownable' ? 'info' : 'dark')">
+                                            {{ token.accessType}}
+                                        </b-badge>
                                     </b-list-group-item>
 
                                     <b-list-group-item class="d-flex justify-content-between align-items-center">

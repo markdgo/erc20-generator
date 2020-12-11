@@ -1,6 +1,16 @@
 <template>
     <div class="features-table">
-        <b-card-group deck class="mt-5">
+        <b-row class="mb-5">
+            <b-col lg="10" offset-lg="1">
+                <h4 class="text-center font-weight-light text-light">
+                    You will be able to choose between several features.
+                </h4>
+                <p class="text-center font-weight-light text-light">
+                    What are your Token requirements?
+                </p>
+            </b-col>
+        </b-row>
+        <b-card-group deck>
             <b-card class="mb-3" sub-title="Detailed">
                 <b-card-text>
                     Your Token will be fully compliant with the ERC20 definition and

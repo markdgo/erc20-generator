@@ -6,6 +6,8 @@ import StandardERC20 from '../abi/token/StandardERC20.json';
 import BurnableERC20 from '../abi/token/BurnableERC20.json';
 import MintableERC20 from '../abi/token/MintableERC20.json';
 import CommonERC20 from '../abi/token/CommonERC20.json';
+import UnlimitedERC20 from '../abi/token/UnlimitedERC20.json';
+import AmazingERC20 from '../abi/token/AmazingERC20.json';
 import PowerfulERC20 from '../abi/token/PowerfulERC20.json';
 
 import ServiceReceiverArtifact from '../abi/service/ServiceReceiver.json';
@@ -78,6 +80,8 @@ export default {
         BurnableERC20,
         MintableERC20,
         CommonERC20,
+        UnlimitedERC20,
+        AmazingERC20,
         PowerfulERC20,
       },
       contracts: {

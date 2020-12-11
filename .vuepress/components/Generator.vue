@@ -647,6 +647,8 @@
         case 'StandardERC20':
         case 'BurnableERC20':
         case 'MintableERC20':
+        case 'UnlimitedERC20':
+        case 'AmazingERC20':
           params.push(decimals);
           params.push(initialBalance);
           break;
