@@ -95,7 +95,7 @@
                                                         v-model.trim="token.name"
                                                         size="lg"
                                                         :class="{'is-invalid': errors.length > 0}"
-                                                        maxlength="20">
+                                                        maxlength="30">
                                                 </b-form-input>
                                                 <small v-show="errors.length > 0" class="text-danger">
                                                     {{ errors[0] }}
@@ -506,7 +506,7 @@
         } catch (e) {
           console.log(e.message); // eslint-disable-line no-console
 
-          if (this.currentNetwork !== 'mainnet') {
+          if (this.currentNetwork === 'mainnet') {
             this.makeToast(
               'Warning',
               'We are having an issue with Current Network Provider. Please switch Network or try again later.',
@@ -516,6 +516,14 @@
           } else {
             this.feeAmount = this.web3.utils.toWei(`${this.token.price}`, 'ether');
           }
+        }
+
+        if (this.currentNetwork === 'mainnet') {
+          this.gaSend('ViewContent', this.tokenType, '');
+          this.fbtrack('ViewContent', {
+            content_ids: [this.tokenType],
+            content_type: 'product'
+          });
         }
 
         this.loading = false;
@@ -547,6 +555,14 @@
               this.formDisabled = true;
               this.makingTransaction = true;
 
+              if (this.currentNetwork === 'mainnet') {
+                this.gaSend('AddToCart', this.tokenType, '');
+                this.fbtrack('AddToCart', {
+                  content_ids: [this.tokenType],
+                  content_type: 'product'
+                });
+              }
+
               await this.web3Provider.request({ method: 'eth_requestAccounts' });
 
               const tokenContract = new this.web3.eth.Contract(this.contracts.token.abi);
@@ -577,7 +593,10 @@
                   this.trx.hash = transactionHash;
                   this.trx.link = `${this.network.current.etherscanLink}/tx/${this.trx.hash}`;
 
-                  this.gaSend('transaction', `trx_${this.network.current.id}`, this.trx.hash);
+                  if (this.currentNetwork === 'mainnet') {
+                    this.gaSend('InitiateCheckout', this.tokenType, this.trx.hash);
+                    this.fbtrack('InitiateCheckout');
+                  }
                 })
                 .on('receipt', (receipt) => {
                   this.token.address = receipt.contractAddress;
@@ -590,7 +609,15 @@
                     'success',
                   );
 
-                  this.gaSend('token', `token_${this.network.current.id}`, this.token.address);
+                  if (this.currentNetwork === 'mainnet') {
+                    this.gaSend('Purchase', this.tokenType, this.token.address);
+                    this.fbtrack('Purchase', {
+                      value: this.web3.utils.fromWei(this.feeAmount, 'ether'),
+                      currency: 'EUR', // should be ETH
+                      content_ids: [this.tokenType],
+                      content_type: 'product'
+                    });
+                  }
                 });
             } catch (e) {
               this.makingTransaction = false;

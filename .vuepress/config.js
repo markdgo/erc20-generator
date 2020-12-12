@@ -19,12 +19,12 @@ module.exports = {
     ],
   ],
   plugins: [
-    [
-      '@vuepress/google-analytics',
-      {
-        ga: 'UA-115756440-2',
-      },
-    ],
+    ['@vuepress/google-analytics', {
+      ga: 'UA-115756440-2',
+    }],
+    ['vuepress-plugin-facebook-pixel', {
+      pixelId: '373489733749849',
+    }],
   ],
   defaultNetwork: 'mainnet',
   infuraProjectId: '12ca5f4d25964a428951747cf4cd5660',

@@ -41,6 +41,7 @@
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.0",
     "vue-eslint-parser": "^7.2.0",
-    "vuepress": "^1.7.1"
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-facebook-pixel": "^1.0.0"
   }
 }

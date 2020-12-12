@@ -1,4 +1,4 @@
-/* global ga */
+/* global ga, fbq */
 
 export default {
   methods: {
@@ -45,7 +45,14 @@ export default {
       try {
         ga('send', 'event', category, action, label);
       } catch (e) {
-        console.log('event', { category, action, label });
+        console.log('ga send', { category, action, label });
+      }
+    },
+    fbtrack (eventName, eventParams) {
+      try {
+        fbq('track', eventName, (eventParams || {}));
+      } catch (e) {
+        console.log('fb track', { eventName: eventName, eventParams: (eventParams || {}) });
       }
     },
   },
