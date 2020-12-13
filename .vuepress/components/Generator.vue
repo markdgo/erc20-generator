@@ -521,8 +521,8 @@
         if (this.currentNetwork === 'mainnet') {
           this.gaSend('ViewContent', this.tokenType, '');
           this.fbtrack('ViewContent', {
-            content_ids: [this.tokenType],
-            content_type: 'product'
+            content_ids: [this.tokenType], // eslint-disable-line camelcase
+            content_type: 'product', // eslint-disable-line camelcase
           });
         }
 
@@ -558,8 +558,8 @@
               if (this.currentNetwork === 'mainnet') {
                 this.gaSend('AddToCart', this.tokenType, '');
                 this.fbtrack('AddToCart', {
-                  content_ids: [this.tokenType],
-                  content_type: 'product'
+                  content_ids: [this.tokenType], // eslint-disable-line camelcase
+                  content_type: 'product', // eslint-disable-line camelcase
                 });
               }
 
@@ -614,8 +614,8 @@
                     this.fbtrack('Purchase', {
                       value: this.web3.utils.fromWei(this.feeAmount, 'ether'),
                       currency: 'EUR', // should be ETH
-                      content_ids: [this.tokenType],
-                      content_type: 'product'
+                      content_ids: [this.tokenType], // eslint-disable-line camelcase
+                      content_type: 'product', // eslint-disable-line camelcase
                     });
                   }
                 });
