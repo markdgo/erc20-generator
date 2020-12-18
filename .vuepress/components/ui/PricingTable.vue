@@ -24,7 +24,8 @@
                     </b-card-title>
                     <p class="card-price text-center">
                         <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <span itemprop="price">{{ t.price }}</span> <small class="term" itemprop="priceCurrency">ETH</small>
+                            <span itemprop="price">{{ t.price }}</span>
+                            <small class="term" itemprop="priceCurrency">ETH</small>
                         </span>
                     </p>
 
