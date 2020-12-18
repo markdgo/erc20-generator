@@ -18,12 +18,14 @@
             <component v-if="slide"
                        :is="slide"
                        v-for="(t, index) in tokenDetails">
-                <b-card no-body class="mb-3 mx-3">
-                    <b-card-title class="pt-5 font-weight-light text-center">
+                <b-card no-body class="mb-3 mx-3" itemscope itemtype="http://schema.org/Product">
+                    <b-card-title class="pt-5 font-weight-light text-center" itemprop="name">
                         {{ t.name }}
                     </b-card-title>
                     <p class="card-price text-center">
-                        {{ t.price }} <small class="term">ETH</small>
+                        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                            <span itemprop="price">{{ t.price }}</span> <small class="term" itemprop="priceCurrency">ETH</small>
+                        </span>
                     </p>
 
                     <b-list-group flush>
@@ -79,7 +81,8 @@
 
                         <b-list-group-item variant="warning"
                                            :to="{ path: '/create-token/', query: { tokenType: t.name }}"
-                                           class="justify-content-between align-items-center text-center py-3">
+                                           class="justify-content-between align-items-center text-center py-3"
+                                           itemprop="url">
                             Create
                         </b-list-group-item>
                     </b-list-group>
