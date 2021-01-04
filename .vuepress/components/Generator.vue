@@ -34,18 +34,20 @@
                             <ui--loader :loading="true"></ui--loader>
                         </div>
                         <div v-else>
-                            <b class="text-success">Well! Transaction done!</b><br>
+                            <h6 class="text-success">Well! Transaction done!</h6>
                             Transaction Hash:
                             <a :href="trx.link" target="_blank"><span v-html="trx.hash"></span></a><br>
                             <hr>
                             <div v-if="!token.address">
-                                <b>Retrieving Token.</b>
+                                <h6>Retrieving Token.</h6>
                                 <p>Please wait...</p>
                                 <ui--loader :loading="true"></ui--loader>
                             </div>
                             <div v-else>
-                                Your Token address:<br>
-                                <h6>{{ token.address }}</h6>
+                                <h6 class="text-info">Your Token:</h6>
+                                <h5>{{ token.name }} ({{ token.symbol }})</h5>
+                                <h6>Address: {{ token.address }}</h6>
+                                <small class="text-muted">Supply: {{ token.initialBalance }} {{ token.symbol }}</small>
                                 <hr>
                                 <b-link :href="token.link" target="_blank" class="btn btn-primary my-2">
                                     <b-icon-arrow-up-right-circle-fill></b-icon-arrow-up-right-circle-fill>
@@ -567,15 +569,20 @@
 
               const tokenContract = new this.web3.eth.Contract(this.contracts.token.abi);
 
-              tokenContract.deploy({
+              const deployOptions = {
                 data: this.contracts.token.bytecode,
                 arguments: this.getDeployArguments(),
-              })
-                .send(
-                  {
-                    from: await this.promisify(this.web3.eth.getCoinbase),
-                    value: this.feeAmount,
-                  })
+              };
+
+              const sendOptions = {
+                from: await this.promisify(this.web3.eth.getCoinbase),
+                value: this.feeAmount,
+              };
+
+              sendOptions.gas = await this.estimateDeployGas(tokenContract, deployOptions, sendOptions);
+
+              tokenContract.deploy(deployOptions)
+                .send(sendOptions)
                 .on('error', (error) => {
                   console.log(error.message); // eslint-disable-line no-console
 
@@ -652,6 +659,7 @@
         this.token.tokenRecover = detail.tokenRecover;
         this.token.removeCopyright = detail.removeCopyright;
         this.token.price = detail.price;
+        this.token.gas = this.web3.utils.toBN(detail.gas);
 
         this.token.decimals = detail.customizeDecimals ? this.token.decimals : 18;
       },
@@ -694,6 +702,17 @@
         params.push(this.contracts.service.options.address);
 
         return params;
+      },
+      async estimateDeployGas (tokenContract, deployOptions, sendOptions) {
+        try {
+          const gas = await this.promisify(tokenContract.deploy(deployOptions).estimateGas, sendOptions);
+
+          return this.web3.utils.toBN(gas).muln(1.3); // add 30% tolerance
+        } catch (e) {
+          console.log(e); // eslint-disable-line no-console
+
+          return this.token.gas;
+        }
       },
       async addToMetaMask () {
         try {
