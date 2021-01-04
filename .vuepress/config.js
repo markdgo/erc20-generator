@@ -1,3 +1,5 @@
+const vars = require('./.env.json');
+
 module.exports = {
   description: 'Create an ERC20 Token in less than a minute with the most used Smart Contract Generator for ERC20 Token. No login. No setup. No coding required.',
   base: '/erc20-generator/',
@@ -18,12 +20,13 @@ module.exports = {
   ],
   plugins: [
     ['@vuepress/google-analytics', {
-      ga: 'UA-115756440-2',
+      ga: vars.gaId,
     }],
     ['vuepress-plugin-facebook-pixel', {
-      pixelId: '373489733749849',
+      pixelId: vars.fbPixelId,
     }],
   ],
-  defaultNetwork: 'mainnet',
-  infuraProjectId: '12ca5f4d25964a428951747cf4cd5660',
+  defaultNetwork: vars.defaultNetwork,
+  infuraProjectId: vars.infuraProjectId,
+  serviceReceiver: vars.serviceReceiver
 };

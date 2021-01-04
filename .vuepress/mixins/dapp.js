@@ -67,13 +67,7 @@ export default {
           },
         },
       },
-      serviceReceiver: {
-        mainnet: '0xDeC5C11d8B9fC565A9D9fFEFB8Eb536456A5CC85',
-        ropsten: '0xc0Ca9eA7a29937A6D3d2404c976B0014c66445B8',
-        rinkeby: '0xC4d5b191aC9B3F360F346cEF532Fd4875D124A49',
-        kovan: '0xC8c94d2569b3e68f6a6d35395Dc0860b947949d4',
-        goerli: '0x324DFBec712B84D6c7d55Ee95FD375D3C727299c',
-      },
+      serviceReceiver: config.serviceReceiver,
       tokenList: {
         SimpleERC20,
         StandardERC20,
