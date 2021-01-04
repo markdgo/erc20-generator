@@ -28,5 +28,5 @@ module.exports = {
   ],
   defaultNetwork: vars.defaultNetwork,
   infuraProjectId: vars.infuraProjectId,
-  serviceReceiver: vars.serviceReceiver
+  serviceReceiver: vars.serviceReceiver,
 };
