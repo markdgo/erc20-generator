@@ -1352,7 +1352,7 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
 
 // File: contracts/token/ERC20/behaviours/ERC20Mintable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.7.0;
 
@@ -1960,7 +1960,7 @@ contract Roles is AccessControl {
 
 // File: @openzeppelin/contracts/access/Ownable.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.7.0;
 
@@ -2030,7 +2030,7 @@ abstract contract Ownable is Context {
 
 // File: eth-token-recover/contracts/TokenRecover.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.7.0;
 
@@ -2055,7 +2055,7 @@ contract TokenRecover is Ownable {
 
 // File: contracts/service/ServiceReceiver.sol
 
-// SPDX-License-Identifier: MIT
+
 
 pragma solidity ^0.7.0;
 
