@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{328:function(t,e,n){
+(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{332:function(t,e,n){
 /*!
  * vue-carousel v0.18.0-alpha
  * (c) 2019 todd.beauchamp@ssense.com
