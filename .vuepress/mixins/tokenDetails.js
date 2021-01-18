@@ -33,7 +33,7 @@ export default {
           erc1363: false,
           tokenRecover: false,
           removeCopyright: true,
-          price: 0.07,
+          price: 0.15,
           gas: 1113949,
         },
         {
@@ -50,7 +50,7 @@ export default {
           erc1363: false,
           tokenRecover: false,
           removeCopyright: true,
-          price: 0.13,
+          price: 0.20,
           gas: 1320960,
         },
         {
@@ -67,7 +67,7 @@ export default {
           erc1363: false,
           tokenRecover: false,
           removeCopyright: true,
-          price: 0.16,
+          price: 0.25,
           gas: 1623484,
         },
         {
@@ -84,7 +84,7 @@ export default {
           erc1363: false,
           tokenRecover: false,
           removeCopyright: true,
-          price: 0.25,
+          price: 0.35,
           gas: 1909651,
         },
         {
@@ -101,7 +101,7 @@ export default {
           erc1363: false,
           tokenRecover: false,
           removeCopyright: true,
-          price: 0.30,
+          price: 0.45,
           gas: 2606071,
         },
         {
@@ -118,7 +118,7 @@ export default {
           erc1363: true,
           tokenRecover: true,
           removeCopyright: true,
-          price: 0.40,
+          price: 0.85,
           gas: 2655189,
         },
         {
@@ -135,7 +135,7 @@ export default {
           erc1363: true,
           tokenRecover: true,
           removeCopyright: true,
-          price: 0.50,
+          price: 0.95,
           gas: 3516237,
         },
       ],
