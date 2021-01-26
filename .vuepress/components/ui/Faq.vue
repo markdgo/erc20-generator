@@ -373,15 +373,15 @@
                                    @click.prevent
                                    class="btn-block text-reset text-decoration-none">
                                     <span itemprop="name">
-                                        Can I use my token in Exchanges?
+                                        Can I use my token in Exchanges or with DeFi protocols?
                                     </span>
                                 </a>
                             </b-card-header>
                             <b-collapse id="can-i-use-in-exchange" class="p-4" accordion="erc20-accordion">
                                 <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                     <span itemprop="text">
-                                        Yes, you can use your Token in Exchanges, Dex, Uniswap. It is a ERC20 compliant
-                                        so you can use for any purpose where ERC20 applies.
+                                        Yes, you can use your Token in Exchanges, Dex, or DeFi protocols like Uniswap.
+                                        It is a ERC20 compliant so you can use for any purpose where ERC20 applies.
                                     </span>
                                 </b-card-text>
                             </b-collapse>
@@ -402,7 +402,9 @@
                             <b-collapse id="can-i-use-for-ico" class="p-4" accordion="erc20-accordion">
                                 <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                     <span itemprop="text">
-                                        Yes, you can use Token for ICO or Crowdsales.
+                                        Yes, you can use Token for ICO or Crowdsales.<br>
+                                        Note: you need to develop an ICO or Crowdsale Smart Contract; Token address
+                                        can't receive ETH.
                                     </span>
                                 </b-card-text>
                             </b-collapse>
