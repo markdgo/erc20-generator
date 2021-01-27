@@ -681,12 +681,12 @@
           break;
         case 'StandardERC20':
         case 'BurnableERC20':
-        case 'MintableERC20':
         case 'UnlimitedERC20':
         case 'AmazingERC20':
           params.push(decimals);
           params.push(initialBalance);
           break;
+        case 'MintableERC20':
         case 'CommonERC20':
         case 'PowerfulERC20':
           params.push(decimals);

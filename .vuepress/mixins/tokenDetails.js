@@ -34,7 +34,7 @@ export default {
           tokenRecover: false,
           removeCopyright: true,
           price: 0.15,
-          gas: 1113949,
+          gas: 1123801,
         },
         {
           name: 'BurnableERC20',
@@ -51,16 +51,16 @@ export default {
           tokenRecover: false,
           removeCopyright: true,
           price: 0.20,
-          gas: 1320960,
+          gas: 1330812,
         },
         {
           name: 'MintableERC20',
-          version: '4.1.0',
+          version: '4.5.0',
           standard: true,
           verified: true,
           detailed: true,
           customizeDecimals: true,
-          supplyType: 'Unlimited',
+          supplyType: 'Capped',
           accessType: 'Ownable',
           mintable: true,
           burnable: false,
@@ -68,7 +68,7 @@ export default {
           tokenRecover: false,
           removeCopyright: true,
           price: 0.25,
-          gas: 1623484,
+          gas: 1502638,
         },
         {
           name: 'CommonERC20',
@@ -85,7 +85,7 @@ export default {
           tokenRecover: false,
           removeCopyright: true,
           price: 0.35,
-          gas: 1909651,
+          gas: 1919665,
         },
         {
           name: 'UnlimitedERC20',
@@ -102,7 +102,7 @@ export default {
           tokenRecover: false,
           removeCopyright: true,
           price: 0.45,
-          gas: 2606071,
+          gas: 2615887,
         },
         {
           name: 'AmazingERC20',
@@ -119,7 +119,7 @@ export default {
           tokenRecover: true,
           removeCopyright: true,
           price: 0.85,
-          gas: 2655189,
+          gas: 2665131,
         },
         {
           name: 'PowerfulERC20',
@@ -136,7 +136,7 @@ export default {
           tokenRecover: true,
           removeCopyright: true,
           price: 0.95,
-          gas: 3516237,
+          gas: 3525945,
         },
       ],
     };

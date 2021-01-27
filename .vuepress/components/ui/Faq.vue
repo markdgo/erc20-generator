@@ -52,11 +52,11 @@
                                         wallet. You can't increase or reduce supply later.<br><br>
                                         <b>Capped Supply</b><br>
                                         You can define an initial supply to sent to Token Owner's wallet. You can
-                                        increaseor reduce supply later by minting or burning tokens (if allowed).
+                                        increase or reduce supply later by minting or burning tokens (if allowed).
                                         You won't be able to generate more tokens than the defined supply cap.<br><br>
                                         <b>Unlimited Supply</b><br>
                                         You can define an initial supply to sent to Token Owner's wallet. You can
-                                        increaseor reduce supply later by minting or burning tokens (if allowed).
+                                        increase or reduce supply later by minting or burning tokens (if allowed).
                                         You will be able to generate unlimited tokens without an upper limit.
                                     </span>
                                 </b-card-text>
