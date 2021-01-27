@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/AmazingERC20.dist.sol | c2640fc20d017216a15c3639725656604c3aee53 |
+| dist/AmazingERC20.dist.sol | 063ab83b6c0d9436680dad2315228ed5a4ac0991 |
 
 
 ### Contracts Description Table
@@ -112,12 +112,6 @@
 | └ | _checkAndCallTransfer | Internal 🔒 | 🛑  | |
 | └ | _checkAndCallApprove | Internal 🔒 | 🛑  | |
 ||||||
-| **ERC20Mintable** | Implementation | ERC20 |||
-| └ | mintingFinished | Public ❗️ |   |NO❗️ |
-| └ | mint | Public ❗️ | 🛑  | canMint |
-| └ | finishMinting | Public ❗️ | 🛑  | canMint |
-| └ | _finishMinting | Internal 🔒 | 🛑  | |
-||||||
 | **Ownable** | Implementation | Context |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 | └ | owner | Public ❗️ |   |NO❗️ |
@@ -127,12 +121,14 @@
 | **TokenRecover** | Implementation | Ownable |||
 | └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
 ||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **ERC20Mintable** | Implementation | ERC20 |||
+| └ | mintingFinished | Public ❗️ |   |NO❗️ |
+| └ | mint | Public ❗️ | 🛑  | canMint |
+| └ | finishMinting | Public ❗️ | 🛑  | canMint |
+| └ | _finishMinting | Internal 🔒 | 🛑  | |
+||||||
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |

@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/SimpleERC20.dist.sol | deb59eba6081091979a0a6c060773d80df9c9f83 |
+| dist/SimpleERC20.dist.sol | da7b2530fccfbe46620e13ee682bc9393cff3bce |
 
 
 ### Contracts Description Table
@@ -57,21 +57,8 @@
 | └ | _setupDecimals | Internal 🔒 | 🛑  | |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
-| **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | owner | Public ❗️ |   |NO❗️ |
-| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
-| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |

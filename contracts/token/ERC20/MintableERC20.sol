@@ -3,6 +3,7 @@
 pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20Capped.sol";
 
 import "./behaviours/ERC20Mintable.sol";
 import "../../service/ServicePayer.sol";
@@ -11,16 +12,18 @@ import "../../service/ServicePayer.sol";
  * @title MintableERC20
  * @dev Implementation of the MintableERC20
  */
-contract MintableERC20 is ERC20Mintable, Ownable, ServicePayer {
+contract MintableERC20 is ERC20Capped, ERC20Mintable, Ownable, ServicePayer {
 
     constructor (
         string memory name,
         string memory symbol,
         uint8 decimals,
+        uint256 cap,
         uint256 initialBalance,
         address payable feeReceiver
     )
         ERC20(name, symbol)
+        ERC20Capped(cap)
         ServicePayer(feeReceiver, "MintableERC20")
         payable
     {
@@ -47,5 +50,12 @@ contract MintableERC20 is ERC20Mintable, Ownable, ServicePayer {
      */
     function _finishMinting() internal override onlyOwner {
         super._finishMinting();
+    }
+
+    /**
+     * @dev See {ERC20-_beforeTokenTransfer}. See {ERC20Capped-_beforeTokenTransfer}.
+     */
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Capped) {
+        super._beforeTokenTransfer(from, to, amount);
     }
 }

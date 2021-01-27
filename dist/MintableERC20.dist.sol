@@ -2,6 +2,8 @@
 
 // File: @openzeppelin/contracts/GSN/Context.sol
 
+
+
 pragma solidity ^0.7.0;
 
 /*
@@ -645,6 +647,53 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
+// File: @openzeppelin/contracts/token/ERC20/ERC20Capped.sol
+
+
+
+pragma solidity ^0.7.0;
+
+
+/**
+ * @dev Extension of {ERC20} that adds a cap to the supply of tokens.
+ */
+abstract contract ERC20Capped is ERC20 {
+    using SafeMath for uint256;
+
+    uint256 private _cap;
+
+    /**
+     * @dev Sets the value of the `cap`. This value is immutable, it can only be
+     * set once during construction.
+     */
+    constructor (uint256 cap_) {
+        require(cap_ > 0, "ERC20Capped: cap is 0");
+        _cap = cap_;
+    }
+
+    /**
+     * @dev Returns the cap on the token's total supply.
+     */
+    function cap() public view returns (uint256) {
+        return _cap;
+    }
+
+    /**
+     * @dev See {ERC20-_beforeTokenTransfer}.
+     *
+     * Requirements:
+     *
+     * - minted tokens must not cause the total supply to go over the cap.
+     */
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override {
+        super._beforeTokenTransfer(from, to, amount);
+
+        if (from == address(0)) { // When minting tokens
+            require(totalSupply().add(amount) <= _cap, "ERC20Capped: cap exceeded");
+        }
+    }
+}
+
 // File: contracts/token/ERC20/behaviours/ERC20Mintable.sol
 
 
@@ -712,76 +761,15 @@ abstract contract ERC20Mintable is ERC20 {
     }
 }
 
-// File: eth-token-recover/contracts/TokenRecover.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-
-/**
- * @title TokenRecover
- * @dev Allow to recover any ERC20 sent into the contract for error
- */
-contract TokenRecover is Ownable {
-
-    /**
-     * @dev Remember that only owner can call so be careful when use on contracts generated from other contracts.
-     * @param tokenAddress The token contract address
-     * @param tokenAmount Number of tokens to be sent
-     */
-    function recoverERC20(address tokenAddress, uint256 tokenAmount) public onlyOwner {
-        IERC20(tokenAddress).transfer(owner(), tokenAmount);
-    }
-}
-
-// File: contracts/service/ServiceReceiver.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-/**
- * @title ServiceReceiver
- * @dev Implementation of the ServiceReceiver
- */
-contract ServiceReceiver is TokenRecover {
-
-    mapping (bytes32 => uint256) private _prices;
-
-    event Created(string serviceName, address indexed serviceAddress);
-
-    function pay(string memory serviceName) public payable {
-        require(msg.value == _prices[_toBytes32(serviceName)], "ServiceReceiver: incorrect price");
-
-        emit Created(serviceName, _msgSender());
-    }
-
-    function getPrice(string memory serviceName) public view returns (uint256) {
-        return _prices[_toBytes32(serviceName)];
-    }
-
-    function setPrice(string memory serviceName, uint256 amount) public onlyOwner {
-        _prices[_toBytes32(serviceName)] = amount;
-    }
-
-    function withdraw(uint256 amount) public onlyOwner {
-        payable(owner()).transfer(amount);
-    }
-
-    function _toBytes32(string memory serviceName) private pure returns (bytes32) {
-        return keccak256(abi.encode(serviceName));
-    }
-}
-
 // File: contracts/service/ServicePayer.sol
 
 
 
 pragma solidity ^0.7.0;
 
+interface IPayable {
+    function pay(string memory serviceName) external payable;
+}
 
 /**
  * @title ServicePayer
@@ -790,7 +778,7 @@ pragma solidity ^0.7.0;
 abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
-        ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
+        IPayable(receiver).pay{value: msg.value}(serviceName);
     }
 }
 
@@ -803,20 +791,23 @@ pragma solidity ^0.7.0;
 
 
 
+
 /**
  * @title MintableERC20
  * @dev Implementation of the MintableERC20
  */
-contract MintableERC20 is ERC20Mintable, Ownable, ServicePayer {
+contract MintableERC20 is ERC20Capped, ERC20Mintable, Ownable, ServicePayer {
 
     constructor (
         string memory name,
         string memory symbol,
         uint8 decimals,
+        uint256 cap,
         uint256 initialBalance,
         address payable feeReceiver
     )
         ERC20(name, symbol)
+        ERC20Capped(cap)
         ServicePayer(feeReceiver, "MintableERC20")
         payable
     {
@@ -843,5 +834,12 @@ contract MintableERC20 is ERC20Mintable, Ownable, ServicePayer {
      */
     function _finishMinting() internal override onlyOwner {
         super._finishMinting();
+    }
+
+    /**
+     * @dev See {ERC20-_beforeTokenTransfer}. See {ERC20Capped-_beforeTokenTransfer}.
+     */
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Capped) {
+        super._beforeTokenTransfer(from, to, amount);
     }
 }

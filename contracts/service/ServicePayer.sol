@@ -2,7 +2,9 @@
 
 pragma solidity ^0.7.0;
 
-import "./ServiceReceiver.sol";
+interface IPayable {
+    function pay(string memory serviceName) external payable;
+}
 
 /**
  * @title ServicePayer
@@ -11,6 +13,6 @@ import "./ServiceReceiver.sol";
 abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
-        ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
+        IPayable(receiver).pay{value: msg.value}(serviceName);
     }
 }

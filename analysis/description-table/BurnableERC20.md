@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/BurnableERC20.dist.sol | 9fca9e9c2f5da16ae271ee5ee454f760bf4f3508 |
+| dist/BurnableERC20.dist.sol | 7f0c4197a506ac6e79836feda3c197fbf945937b |
 
 
 ### Contracts Description Table
@@ -61,21 +61,8 @@
 | └ | burn | Public ❗️ | 🛑  |NO❗️ |
 | └ | burnFrom | Public ❗️ | 🛑  |NO❗️ |
 ||||||
-| **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | owner | Public ❗️ |   |NO❗️ |
-| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
-| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |

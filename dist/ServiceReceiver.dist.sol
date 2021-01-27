@@ -2,6 +2,8 @@
 
 // File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
+
+
 pragma solidity ^0.7.0;
 
 /**
@@ -185,7 +187,6 @@ pragma solidity ^0.7.0;
 
 /**
  * @title TokenRecover
- * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Allow to recover any ERC20 sent into the contract for error
  */
 contract TokenRecover is Ownable {

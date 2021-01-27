@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/UnlimitedERC20.dist.sol | 0ac5dfb704682ed6b116b1c97d2183c06a66e4a1 |
+| dist/UnlimitedERC20.dist.sol | 8d9c2cc6e342de56d0008da69ebaa7eb8517ab22 |
 
 
 ### Contracts Description Table
@@ -122,15 +122,8 @@
 | **Roles** | Implementation | AccessControl |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 ||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |

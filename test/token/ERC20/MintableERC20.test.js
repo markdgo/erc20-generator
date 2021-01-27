@@ -3,6 +3,7 @@ const { BN, ether, expectRevert } = require('@openzeppelin/test-helpers');
 const { shouldBehaveLikeOwnable } = require('eth-token-recover/test/access/Ownable.behavior');
 
 const { shouldBehaveLikeERC20 } = require('./behaviours/ERC20.behaviour');
+const { shouldBehaveLikeERC20Capped } = require('./behaviours/ERC20Capped.behaviour');
 const { shouldBehaveLikeERC20Mintable } = require('./behaviours/ERC20Mintable.behaviour');
 
 const MintableERC20 = artifacts.require('MintableERC20');
@@ -12,6 +13,7 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
   const _name = 'MintableERC20';
   const _symbol = 'ERC20';
   const _decimals = new BN(8);
+  const _cap = new BN(200000000);
   const _initialSupply = new BN(100000000);
 
   const fee = ether('0.1');
@@ -22,6 +24,26 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
   });
 
   context('creating valid token', function () {
+    describe('as a ERC20Capped', function () {
+      it('requires a non-zero cap', async function () {
+        await expectRevert(
+          MintableERC20.new(
+            _name,
+            _symbol,
+            _decimals,
+            0,
+            _initialSupply,
+            this.serviceReceiver.address,
+            {
+              from: owner,
+              value: fee,
+            },
+          ),
+          'ERC20Capped: cap is 0',
+        );
+      });
+    });
+
     describe('as a MintableERC20', function () {
       describe('without initial supply', function () {
         beforeEach(async function () {
@@ -29,6 +51,7 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
             _name,
             _symbol,
             _decimals,
+            _cap,
             0,
             this.serviceReceiver.address,
             {
@@ -55,6 +78,7 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
             _name,
             _symbol,
             _decimals,
+            _cap,
             _initialSupply,
             this.serviceReceiver.address,
             {
@@ -83,7 +107,8 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
         _name,
         _symbol,
         _decimals,
-        _initialSupply,
+        _cap,
+        0,
         this.serviceReceiver.address,
         {
           from: owner,
@@ -93,11 +118,20 @@ contract('MintableERC20', function ([owner, other, thirdParty]) {
     });
 
     context('like a ERC20', function () {
+      beforeEach(async function () {
+        // NOTE: mint initial supply to test behaviour
+        await this.token.mint(owner, _initialSupply, { from: owner });
+      });
+
       shouldBehaveLikeERC20(_name, _symbol, _decimals, _initialSupply, [owner, other, thirdParty]);
     });
 
+    context('like a ERC20Capped', function () {
+      shouldBehaveLikeERC20Capped(_cap, [owner, other]);
+    });
+
     context('like a ERC20Mintable', function () {
-      shouldBehaveLikeERC20Mintable(_initialSupply, [owner, thirdParty]);
+      shouldBehaveLikeERC20Mintable(0, [owner, thirdParty]);
     });
 
     context('like a MintableERC20', function () {

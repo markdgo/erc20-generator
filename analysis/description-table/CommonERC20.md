@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/CommonERC20.dist.sol | f52f0190bd496fd7e7bcc21de58635462feb8ff0 |
+| dist/CommonERC20.dist.sol | 89d70f8b6f5bffdfa7919799be58515c6e8724d8 |
 
 
 ### Contracts Description Table
@@ -78,15 +78,8 @@
 | └ | finishMinting | Public ❗️ | 🛑  | canMint |
 | └ | _finishMinting | Internal 🔒 | 🛑  | |
 ||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |

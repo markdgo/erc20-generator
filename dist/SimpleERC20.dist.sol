@@ -3,11 +3,6 @@
 /*
  * Token has been generated for FREE using https://vittominacori.github.io/erc20-generator/
  *
- * Smart Contract Source Code: https://github.com/vittominacori/erc20-generator
- * Web Site Source Code: https://github.com/vittominacori/erc20-generator/tree/dapp
- *
- * Detailed Info: https://vittominacori.medium.com/create-an-erc20-token-in-less-than-a-minute-2a8751c4d6f4
- *
  * NOTE: "Contract Source Code Verified (Similar Match)" means that this Token is similar to other tokens deployed
  *  using the same generator. It is not an issue. It means that you won't need to verify your source code because of
  *  it is already verified.
@@ -597,147 +592,15 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: @openzeppelin/contracts/access/Ownable.sol
-
-
-
-pragma solidity ^0.7.0;
-
-/**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
- *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
- *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
- */
-abstract contract Ownable is Context {
-    address private _owner;
-
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-    /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
-     */
-    constructor () {
-        address msgSender = _msgSender();
-        _owner = msgSender;
-        emit OwnershipTransferred(address(0), msgSender);
-    }
-
-    /**
-     * @dev Returns the address of the current owner.
-     */
-    function owner() public view returns (address) {
-        return _owner;
-    }
-
-    /**
-     * @dev Throws if called by any account other than the owner.
-     */
-    modifier onlyOwner() {
-        require(_owner == _msgSender(), "Ownable: caller is not the owner");
-        _;
-    }
-
-    /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
-     *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
-     */
-    function renounceOwnership() public virtual onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
-
-    /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
-     */
-    function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
-    }
-}
-
-// File: eth-token-recover/contracts/TokenRecover.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-
-/**
- * @title TokenRecover
- * @author Vittorio Minacori (https://github.com/vittominacori)
- * @dev Allow to recover any ERC20 sent into the contract for error
- */
-contract TokenRecover is Ownable {
-
-    /**
-     * @dev Remember that only owner can call so be careful when use on contracts generated from other contracts.
-     * @param tokenAddress The token contract address
-     * @param tokenAmount Number of tokens to be sent
-     */
-    function recoverERC20(address tokenAddress, uint256 tokenAmount) public onlyOwner {
-        IERC20(tokenAddress).transfer(owner(), tokenAmount);
-    }
-}
-
-// File: contracts/service/ServiceReceiver.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-/**
- * @title ServiceReceiver
- * @dev Implementation of the ServiceReceiver
- */
-contract ServiceReceiver is TokenRecover {
-
-    mapping (bytes32 => uint256) private _prices;
-
-    event Created(string serviceName, address indexed serviceAddress);
-
-    function pay(string memory serviceName) public payable {
-        require(msg.value == _prices[_toBytes32(serviceName)], "ServiceReceiver: incorrect price");
-
-        emit Created(serviceName, _msgSender());
-    }
-
-    function getPrice(string memory serviceName) public view returns (uint256) {
-        return _prices[_toBytes32(serviceName)];
-    }
-
-    function setPrice(string memory serviceName, uint256 amount) public onlyOwner {
-        _prices[_toBytes32(serviceName)] = amount;
-    }
-
-    function withdraw(uint256 amount) public onlyOwner {
-        payable(owner()).transfer(amount);
-    }
-
-    function _toBytes32(string memory serviceName) private pure returns (bytes32) {
-        return keccak256(abi.encode(serviceName));
-    }
-}
-
 // File: contracts/service/ServicePayer.sol
 
 
 
 pragma solidity ^0.7.0;
 
+interface IPayable {
+    function pay(string memory serviceName) external payable;
+}
 
 /**
  * @title ServicePayer
@@ -746,7 +609,7 @@ pragma solidity ^0.7.0;
 abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
-        ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
+        IPayable(receiver).pay{value: msg.value}(serviceName);
     }
 }
 
@@ -799,7 +662,7 @@ pragma solidity ^0.7.0;
  * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
-contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.4.0") {
+contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.5.0") {
 
     constructor (
         string memory name,

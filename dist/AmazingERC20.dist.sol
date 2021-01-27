@@ -1305,73 +1305,6 @@ contract ERC1363 is ERC20, IERC1363, ERC165 {
     }
 }
 
-// File: contracts/token/ERC20/behaviours/ERC20Mintable.sol
-
-
-
-pragma solidity ^0.7.0;
-
-
-/**
- * @title ERC20Mintable
- * @dev Implementation of the ERC20Mintable. Extension of {ERC20} that adds a minting behaviour.
- */
-abstract contract ERC20Mintable is ERC20 {
-
-    // indicates if minting is finished
-    bool private _mintingFinished = false;
-
-    /**
-     * @dev Emitted during finish minting
-     */
-    event MintFinished();
-
-    /**
-     * @dev Tokens can be minted only before minting finished.
-     */
-    modifier canMint() {
-        require(!_mintingFinished, "ERC20Mintable: minting is finished");
-        _;
-    }
-
-    /**
-     * @return if minting is finished or not.
-     */
-    function mintingFinished() public view returns (bool) {
-        return _mintingFinished;
-    }
-
-    /**
-     * @dev Function to mint tokens.
-     *
-     * WARNING: it allows everyone to mint new tokens. Access controls MUST be defined in derived contracts.
-     *
-     * @param account The address that will receive the minted tokens
-     * @param amount The amount of tokens to mint
-     */
-    function mint(address account, uint256 amount) public canMint {
-        _mint(account, amount);
-    }
-
-    /**
-     * @dev Function to stop minting new tokens.
-     *
-     * WARNING: it allows everyone to finish minting. Access controls MUST be defined in derived contracts.
-     */
-    function finishMinting() public canMint {
-        _finishMinting();
-    }
-
-    /**
-     * @dev Function to stop minting new tokens.
-     */
-    function _finishMinting() internal virtual {
-        _mintingFinished = true;
-
-        emit MintFinished();
-    }
-}
-
 // File: @openzeppelin/contracts/access/Ownable.sol
 
 
@@ -1466,7 +1399,7 @@ contract TokenRecover is Ownable {
     }
 }
 
-// File: contracts/service/ServiceReceiver.sol
+// File: contracts/token/ERC20/behaviours/ERC20Mintable.sol
 
 
 
@@ -1474,35 +1407,62 @@ pragma solidity ^0.7.0;
 
 
 /**
- * @title ServiceReceiver
- * @dev Implementation of the ServiceReceiver
+ * @title ERC20Mintable
+ * @dev Implementation of the ERC20Mintable. Extension of {ERC20} that adds a minting behaviour.
  */
-contract ServiceReceiver is TokenRecover {
+abstract contract ERC20Mintable is ERC20 {
 
-    mapping (bytes32 => uint256) private _prices;
+    // indicates if minting is finished
+    bool private _mintingFinished = false;
 
-    event Created(string serviceName, address indexed serviceAddress);
+    /**
+     * @dev Emitted during finish minting
+     */
+    event MintFinished();
 
-    function pay(string memory serviceName) public payable {
-        require(msg.value == _prices[_toBytes32(serviceName)], "ServiceReceiver: incorrect price");
-
-        emit Created(serviceName, _msgSender());
+    /**
+     * @dev Tokens can be minted only before minting finished.
+     */
+    modifier canMint() {
+        require(!_mintingFinished, "ERC20Mintable: minting is finished");
+        _;
     }
 
-    function getPrice(string memory serviceName) public view returns (uint256) {
-        return _prices[_toBytes32(serviceName)];
+    /**
+     * @return if minting is finished or not.
+     */
+    function mintingFinished() public view returns (bool) {
+        return _mintingFinished;
     }
 
-    function setPrice(string memory serviceName, uint256 amount) public onlyOwner {
-        _prices[_toBytes32(serviceName)] = amount;
+    /**
+     * @dev Function to mint tokens.
+     *
+     * WARNING: it allows everyone to mint new tokens. Access controls MUST be defined in derived contracts.
+     *
+     * @param account The address that will receive the minted tokens
+     * @param amount The amount of tokens to mint
+     */
+    function mint(address account, uint256 amount) public canMint {
+        _mint(account, amount);
     }
 
-    function withdraw(uint256 amount) public onlyOwner {
-        payable(owner()).transfer(amount);
+    /**
+     * @dev Function to stop minting new tokens.
+     *
+     * WARNING: it allows everyone to finish minting. Access controls MUST be defined in derived contracts.
+     */
+    function finishMinting() public canMint {
+        _finishMinting();
     }
 
-    function _toBytes32(string memory serviceName) private pure returns (bytes32) {
-        return keccak256(abi.encode(serviceName));
+    /**
+     * @dev Function to stop minting new tokens.
+     */
+    function _finishMinting() internal virtual {
+        _mintingFinished = true;
+
+        emit MintFinished();
     }
 }
 
@@ -1512,6 +1472,9 @@ contract ServiceReceiver is TokenRecover {
 
 pragma solidity ^0.7.0;
 
+interface IPayable {
+    function pay(string memory serviceName) external payable;
+}
 
 /**
  * @title ServicePayer
@@ -1520,7 +1483,7 @@ pragma solidity ^0.7.0;
 abstract contract ServicePayer {
 
     constructor (address payable receiver, string memory serviceName) payable {
-        ServiceReceiver(receiver).pay{value: msg.value}(serviceName);
+        IPayable(receiver).pay{value: msg.value}(serviceName);
     }
 }
 
@@ -1529,6 +1492,7 @@ abstract contract ServicePayer {
 
 
 pragma solidity ^0.7.0;
+
 
 
 

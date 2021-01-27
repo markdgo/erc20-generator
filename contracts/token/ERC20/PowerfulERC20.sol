@@ -7,6 +7,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20Capped.sol";
 
 import "erc-payable-token/contracts/token/ERC1363/ERC1363.sol";
 
+import "eth-token-recover/contracts/TokenRecover.sol";
+
 import "./behaviours/ERC20Mintable.sol";
 import "../../access/Roles.sol";
 import "../../service/ServicePayer.sol";

@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/PowerfulERC20.dist.sol | 645c5c43dcb240b2f8fa2348fed0c3779c0010a4 |
+| dist/PowerfulERC20.dist.sol | 45ac8742a81576ecd15bc215d94a79165a76ae7e |
 
 
 ### Contracts Description Table
@@ -117,6 +117,15 @@
 | └ | _checkAndCallTransfer | Internal 🔒 | 🛑  | |
 | └ | _checkAndCallApprove | Internal 🔒 | 🛑  | |
 ||||||
+| **Ownable** | Implementation | Context |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | owner | Public ❗️ |   |NO❗️ |
+| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
+| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
+||||||
+| **TokenRecover** | Implementation | Ownable |||
+| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
+||||||
 | **ERC20Mintable** | Implementation | ERC20 |||
 | └ | mintingFinished | Public ❗️ |   |NO❗️ |
 | └ | mint | Public ❗️ | 🛑  | canMint |
@@ -161,21 +170,8 @@
 | **Roles** | Implementation | AccessControl |||
 | └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
 ||||||
-| **Ownable** | Implementation | Context |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | owner | Public ❗️ |   |NO❗️ |
-| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
-| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **TokenRecover** | Implementation | Ownable |||
-| └ | recoverERC20 | Public ❗️ | 🛑  | onlyOwner |
-||||||
-| **ServiceReceiver** | Implementation | TokenRecover |||
-| └ | pay | Public ❗️ |  💵 |NO❗️ |
-| └ | getPrice | Public ❗️ |   |NO❗️ |
-| └ | setPrice | Public ❗️ | 🛑  | onlyOwner |
-| └ | withdraw | Public ❗️ | 🛑  | onlyOwner |
-| └ | _toBytes32 | Private 🔐 |   | |
+| **IPayable** | Interface |  |||
+| └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
