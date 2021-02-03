@@ -608,7 +608,7 @@
                 .on('receipt', (receipt) => {
                   this.token.address = receipt.contractAddress;
                   this.token.link = this.network.current.etherscanLink + '/token/' + this.token.address;
-                  this.token.widget = `https://vittominacori.github.io/watch-token/create.html?address=${this.token.address}&network=${this.currentNetwork}`;
+                  this.token.widget = `https://vittominacori.github.io/watch-token/create/?address=${this.token.address}&network=${this.currentNetwork}`;
                   this.$forceUpdate();
                   this.makeToast(
                     'Well done!',
@@ -722,7 +722,7 @@
               type: 'ERC20',
               options: {
                 address: this.token.address,
-                symbol: this.token.symbol,
+                symbol: this.token.symbol.substr(0, 5),
                 decimals: this.token.decimals,
               },
             },
