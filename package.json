@@ -66,7 +66,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^5.0.0",
     "ganache-cli": "^6.12.2",
-    "hardhat": "^2.0.8",
+    "hardhat": "2.0.8",
     "lite-server": "^2.6.1",
     "sol2uml": "^1.1.25",
     "solhint": "^3.3.2",
