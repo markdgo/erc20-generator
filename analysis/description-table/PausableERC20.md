@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/SimpleERC20.dist.sol | a0e5b10a82862e1caaf39a595118f05ab053443a |
+| dist/PausableERC20.dist.sol | 41dc017120ab2df17dc50366e119f91c519a35ac |
 
 
 ### Contracts Description Table
@@ -18,6 +18,12 @@
 | **Context** | Implementation |  |||
 | └ | _msgSender | Internal 🔒 |   | |
 | └ | _msgData | Internal 🔒 |   | |
+||||||
+| **Ownable** | Implementation | Context |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | owner | Public ❗️ |   |NO❗️ |
+| └ | renounceOwnership | Public ❗️ | 🛑  | onlyOwner |
+| └ | transferOwnership | Public ❗️ | 🛑  | onlyOwner |
 ||||||
 | **IERC20** | Interface |  |||
 | └ | totalSupply | External ❗️ |   |NO❗️ |
@@ -57,19 +63,25 @@
 | └ | _setupDecimals | Internal 🔒 | 🛑  | |
 | └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
 ||||||
+| **Pausable** | Implementation | Context |||
+| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
+| └ | paused | Public ❗️ |   |NO❗️ |
+| └ | _pause | Internal 🔒 | 🛑  | whenNotPaused |
+| └ | _unpause | Internal 🔒 | 🛑  | whenPaused |
+||||||
+| **ERC20Pausable** | Implementation | ERC20, Pausable |||
+| └ | _beforeTokenTransfer | Internal 🔒 | 🛑  | |
+||||||
 | **IPayable** | Interface |  |||
 | └ | pay | External ❗️ |  💵 |NO❗️ |
 ||||||
 | **ServicePayer** | Implementation |  |||
 | └ | <Constructor> | Public ❗️ |  💵 |NO❗️ |
 ||||||
-| **GeneratorCopyright** | Implementation |  |||
-| └ | <Constructor> | Public ❗️ | 🛑  |NO❗️ |
-| └ | generator | Public ❗️ |   |NO❗️ |
-| └ | version | Public ❗️ |   |NO❗️ |
-||||||
-| **SimpleERC20** | Implementation | ERC20, ServicePayer, GeneratorCopyright |||
+| **PausableERC20** | Implementation | ERC20Pausable, Ownable, ServicePayer |||
 | └ | <Constructor> | Public ❗️ |  💵 | ERC20 ServicePayer |
+| └ | pause | External ❗️ | 🛑  | onlyOwner |
+| └ | unpause | External ❗️ | 🛑  | onlyOwner |
 
 
 ### Legend
