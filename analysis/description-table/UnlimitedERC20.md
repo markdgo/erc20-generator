@@ -5,7 +5,7 @@
 
 |  File Name  |  SHA-1 Hash  |
 |-------------|--------------|
-| dist/UnlimitedERC20.dist.sol | 8d9c2cc6e342de56d0008da69ebaa7eb8517ab22 |
+| dist/UnlimitedERC20.dist.sol | 16723249d27742520cde99e1a718a5a35965e88f |
 
 
 ### Contracts Description Table
@@ -34,13 +34,18 @@
 | └ | transferFrom | External ❗️ | 🛑  |NO❗️ |
 ||||||
 | **SafeMath** | Library |  |||
+| └ | tryAdd | Internal 🔒 |   | |
+| └ | trySub | Internal 🔒 |   | |
+| └ | tryMul | Internal 🔒 |   | |
+| └ | tryDiv | Internal 🔒 |   | |
+| └ | tryMod | Internal 🔒 |   | |
 | └ | add | Internal 🔒 |   | |
-| └ | sub | Internal 🔒 |   | |
 | └ | sub | Internal 🔒 |   | |
 | └ | mul | Internal 🔒 |   | |
 | └ | div | Internal 🔒 |   | |
-| └ | div | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
+| └ | sub | Internal 🔒 |   | |
+| └ | div | Internal 🔒 |   | |
 | └ | mod | Internal 🔒 |   | |
 ||||||
 | **ERC20** | Implementation | Context, IERC20 |||
@@ -104,6 +109,8 @@
 | └ | functionCallWithValue | Internal 🔒 | 🛑  | |
 | └ | functionStaticCall | Internal 🔒 |   | |
 | └ | functionStaticCall | Internal 🔒 |   | |
+| └ | functionDelegateCall | Internal 🔒 | 🛑  | |
+| └ | functionDelegateCall | Internal 🔒 | 🛑  | |
 | └ | _verifyCallResult | Private 🔐 |   | |
 ||||||
 | **AccessControl** | Implementation | Context |||
