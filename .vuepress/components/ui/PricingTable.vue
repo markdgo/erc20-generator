@@ -52,15 +52,22 @@
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Supply Type
-                            <b-badge :variant="t.supplyType === 'Capped' ? 'success' : (t.supplyType === 'Unlimited' ? 'info' : 'dark')">
-                                {{ t.supplyType}}
+                            <b-badge :variant="t.supplyType === 'Capped' ? 'success' : (t.supplyType === 'Unlimited' ? 'info' : 'warning')">
+                                {{ t.supplyType }}
                             </b-badge>
                         </b-list-group-item>
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Access Type
-                            <b-badge :variant="t.accessType === 'Role Based' ? 'success' : (t.accessType === 'Ownable' ? 'info' : 'dark')">
-                                {{ t.accessType}}
+                            <b-badge :variant="t.accessType === 'Role Based' ? 'success' : (t.accessType === 'Ownable' ? 'info' : 'warning')">
+                                {{ t.accessType }}
+                            </b-badge>
+                        </b-list-group-item>
+
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">
+                            Transfer Type
+                            <b-badge :variant="t.transferType === 'Always Enabled' ? 'success' : 'warning'">
+                                {{ t.transferType }}
                             </b-badge>
                         </b-list-group-item>
 

@@ -67,6 +67,34 @@
                                 itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                             <b-card-header role="tab">
                                 <a v-b-toggle
+                                   href="#difference-between-enabled-pausable"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                      <span itemprop="name">
+                                          What's the difference between Always Enabled or Pausable Transfer?
+                                      </span>
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="difference-between-enabled-pausable"
+                                        class="p-4"
+                                        accordion="features-accordion">
+                                <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                    <span itemprop="text">
+                                        <b>Always Enabled</b><br>
+                                        Everyone can always transfer his own tokens. Transfer can't be stopped.<br><br>
+                                        <b>Pausable</b><br>
+                                        Token owner can stop token transfers. Useful for scenarios such as preventing
+                                        trades until the end of an evaluation period, or having an emergency switch for
+                                        freezing all token transfers in the event of a large bug.
+                                    </span>
+                                </b-card-text>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light"
+                                itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
                                    href="#difference-between-access"
                                    @click.prevent
                                    class="btn-block text-reset text-decoration-none">
@@ -123,6 +151,32 @@
                                         Everyone will be able to burn tokens he held. A third party can burn tokens from
                                         other addresses only after an approval. Nobody, not even the Token Owner, will
                                         be able to burn tokens from other addresses without approval.
+                                    </span>
+                                </b-card-text>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light"
+                                itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#who-can-pause"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    <span itemprop="name">
+                                        Who can pause transfers?
+                                    </span>
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="who-can-pause" class="p-4" accordion="features-accordion">
+                                <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                    <span itemprop="text">
+                                        If you choose a Pausable token, only token owner will be able to pause and
+                                        unpause token transfers.<br>
+                                        Note that Pausable is a powerful feature to add emergency stop to smart
+                                        contracts. It is a privileged role, so users need to trust the project team.
+                                        The project should clearly document what privileged roles they have and under
+                                        what circumstances they use them.
                                     </span>
                                 </b-card-text>
                             </b-collapse>
@@ -705,6 +759,39 @@
                                 <b-link href="https://ethgasstation.info"
                                         class="card-link" target="_blank">
                                     ETH Gas Station
+                                </b-link>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body
+                                bg-variant="light"
+                                itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                            <b-card-header role="tab">
+                                <a v-b-toggle
+                                   href="#what-is-multisig"
+                                   @click.prevent
+                                   class="btn-block text-reset text-decoration-none">
+                                    <span itemprop="name">
+                                        What is a Multisig Wallet?
+                                    </span>
+                                </a>
+                            </b-card-header>
+                            <b-collapse id="what-is-multisig" class="p-4" accordion="ethereum-accordion">
+                                <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                                    <span itemprop="text">
+                                        If such an account (wallet) with privileges is lost or were to fall in the
+                                        hands of a malicious user, they could wreak havoc in your system.
+                                        A good option for securing owner accounts is to use a special contract, such as
+                                        a multisig, instead of a regular externally owned account.<br>
+                                        Multisig is a smart contract wallet running on Ethereum that requires a minimum
+                                        number of people to approve a transaction before it can occur.
+                                        If for example you have 3 main stakeholders in your business, you are able to
+                                        set up the wallet to require approval from all 3 people before the transaction
+                                        is sent. This assures that no single person could compromise the funds.
+                                    </span>
+                                </b-card-text>
+                                <b-link href="https://gnosis-safe.io/"
+                                        class="card-link" target="_blank">
+                                    Gnosis Safe Multisig
                                 </b-link>
                             </b-collapse>
                         </b-card>

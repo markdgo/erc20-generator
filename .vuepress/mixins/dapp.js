@@ -5,6 +5,7 @@ import SimpleERC20 from '../abi/token/SimpleERC20.json';
 import StandardERC20 from '../abi/token/StandardERC20.json';
 import BurnableERC20 from '../abi/token/BurnableERC20.json';
 import MintableERC20 from '../abi/token/MintableERC20.json';
+import PausableERC20 from '../abi/token/PausableERC20.json';
 import CommonERC20 from '../abi/token/CommonERC20.json';
 import UnlimitedERC20 from '../abi/token/UnlimitedERC20.json';
 import AmazingERC20 from '../abi/token/AmazingERC20.json';
@@ -73,6 +74,7 @@ export default {
         StandardERC20,
         BurnableERC20,
         MintableERC20,
+        PausableERC20,
         CommonERC20,
         UnlimitedERC20,
         AmazingERC20,

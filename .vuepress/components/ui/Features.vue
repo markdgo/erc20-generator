@@ -18,10 +18,11 @@
                     It will have a name, a symbol and a decimals amount.
                 </b-card-text>
             </b-card>
-            <b-card class="mb-3" sub-title="Capped">
+            <b-card class="mb-3" sub-title="Burnable">
                 <b-card-text>
-                    You won't be able to generate more tokens than the defined token cap.
-                    This ensure people that you will not generate more tokens than declared.
+                    Your Token can be burnt.
+                    It means that you can choose to reduce the circulating supply by destroying some of your
+                    tokens.
                 </b-card-text>
             </b-card>
             <b-card class="mb-3" sub-title="Mintable">
@@ -33,11 +34,10 @@
             </b-card>
         </b-card-group>
         <b-card-group deck>
-            <b-card class="mb-3" sub-title="Burnable">
+            <b-card class="mb-3" sub-title="Pausable">
                 <b-card-text>
-                    Your Token can be burnt.
-                    It means that you can choose to reduce the circulating supply by destroying some of your
-                    tokens.
+                    Your Token transfer can be paused.
+                    Useful to prevent trades until a period or freezing all token transfers.
                 </b-card-text>
             </b-card>
             <b-card class="mb-3" sub-title="Ownable Access">
@@ -54,6 +54,12 @@
             </b-card>
         </b-card-group>
         <b-card-group deck>
+            <b-card class="mb-3" sub-title="Capped">
+                <b-card-text>
+                    You won't be able to generate more tokens than the defined token cap.
+                    This ensure people that you will not generate more tokens than declared.
+                </b-card-text>
+            </b-card>
             <b-card class="mb-3" sub-title="ERC1363 Payable Token">
                 <b-card-text>
                     The ERC1363 is an ERC20 compatible Token that can make a

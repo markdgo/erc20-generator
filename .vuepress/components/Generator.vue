@@ -220,7 +220,7 @@
                                             header-text-variant="white"
                                             class="mt-3">
                                         <b-form-group
-                                                description="Your Token Supply Type."
+                                                :description="['Fixed', 'Unlimited', 'Capped'].join(', ')"
                                                 label="Supply Type"
                                                 label-for="supplyType">
                                             <b-form-select id="supplyType"
@@ -233,7 +233,7 @@
                                             </b-form-select>
                                         </b-form-group>
                                         <b-form-group
-                                                description="Your Token Access Type."
+                                                :description="['None', 'Ownable', 'Role Based'].join(', ')"
                                                 label="Access Type"
                                                 label-for="accessType">
                                             <b-form-select id="accessType"
@@ -241,6 +241,19 @@
                                                            disabled
                                                            size="sm">
                                                 <option v-for="(n) in ['None', 'Ownable', 'Role Based']" :value="n">
+                                                    {{ n }}
+                                                </option>
+                                            </b-form-select>
+                                        </b-form-group>
+                                        <b-form-group
+                                                :description="['Always Enabled', 'Pausable'].join(', ')"
+                                                label="Transfer Type"
+                                                label-for="transferType">
+                                            <b-form-select id="transferType"
+                                                           v-model="token.transferType"
+                                                           disabled
+                                                           size="sm">
+                                                <option v-for="(n) in ['Always Enabled', 'Pausable']" :value="n">
                                                     {{ n }}
                                                 </option>
                                             </b-form-select>
@@ -263,8 +276,7 @@
                                                 Remove Copyright
                                             </b-form-checkbox>
                                         </b-form-group>
-                                        <b-form-group
-                                                description="Your Token can be burnt.">
+                                        <b-form-group>
                                             <b-form-checkbox v-model="token.burnable"
                                                              size="sm"
                                                              disabled
@@ -272,8 +284,7 @@
                                                 Burnable
                                             </b-form-checkbox>
                                         </b-form-group>
-                                        <b-form-group
-                                                description="You will be able to generate tokens by minting them.">
+                                        <b-form-group>
                                             <b-form-checkbox v-model="token.mintable"
                                                              size="sm"
                                                              disabled
@@ -281,8 +292,7 @@
                                                 Mintable
                                             </b-form-checkbox>
                                         </b-form-group>
-                                        <b-form-group
-                                                description="The ERC1363 is an ERC20 compatible Token that can make a callback on the receiver contract.">
+                                        <b-form-group>
                                             <b-form-checkbox v-model="token.erc1363"
                                                              size="sm"
                                                              disabled
@@ -290,8 +300,7 @@
                                                 ERC1363
                                             </b-form-checkbox>
                                         </b-form-group>
-                                        <b-form-group
-                                                description="It allows the contract owner to recover any ERC20 token sent into the contract for error.">
+                                        <b-form-group>
                                             <b-form-checkbox v-model="token.tokenRecover"
                                                              size="sm"
                                                              disabled
@@ -457,6 +466,7 @@
           initialBalance: '',
           supplyType: 'Fixed',
           accessType: 'None',
+          transferType: 'Always Enabled',
           mintable: false,
           burnable: false,
           erc1363: false,
@@ -653,6 +663,7 @@
         this.token.verified = detail.verified;
         this.token.supplyType = detail.supplyType;
         this.token.accessType = detail.accessType;
+        this.token.transferType = detail.transferType;
         this.token.mintable = detail.mintable;
         this.token.burnable = detail.burnable;
         this.token.erc1363 = detail.erc1363;
@@ -681,6 +692,7 @@
           break;
         case 'StandardERC20':
         case 'BurnableERC20':
+        case 'PausableERC20':
         case 'UnlimitedERC20':
         case 'AmazingERC20':
           params.push(decimals);
