@@ -71,7 +71,7 @@
                                    @click.prevent
                                    class="btn-block text-reset text-decoration-none">
                                       <span itemprop="name">
-                                          What's the difference between Always Enabled or Pausable Transfer?
+                                          What's the difference between Unstoppable or Pausable Transfer?
                                       </span>
                                 </a>
                             </b-card-header>
@@ -80,7 +80,7 @@
                                         accordion="features-accordion">
                                 <b-card-text itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                     <span itemprop="text">
-                                        <b>Always Enabled</b><br>
+                                        <b>Unstoppable</b><br>
                                         Everyone can always transfer his own tokens. Transfer can't be stopped.<br><br>
                                         <b>Pausable</b><br>
                                         Token owner can stop token transfers. Useful for scenarios such as preventing

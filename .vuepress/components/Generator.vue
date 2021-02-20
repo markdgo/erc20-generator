@@ -246,14 +246,14 @@
                                             </b-form-select>
                                         </b-form-group>
                                         <b-form-group
-                                                :description="['Always Enabled', 'Pausable'].join(', ')"
+                                                :description="['Unstoppable', 'Pausable'].join(', ')"
                                                 label="Transfer Type"
                                                 label-for="transferType">
                                             <b-form-select id="transferType"
                                                            v-model="token.transferType"
                                                            disabled
                                                            size="sm">
-                                                <option v-for="(n) in ['Always Enabled', 'Pausable']" :value="n">
+                                                <option v-for="(n) in ['Unstoppable', 'Pausable']" :value="n">
                                                     {{ n }}
                                                 </option>
                                             </b-form-select>
@@ -466,7 +466,7 @@
           initialBalance: '',
           supplyType: 'Fixed',
           accessType: 'None',
-          transferType: 'Always Enabled',
+          transferType: 'Unstoppable',
           mintable: false,
           burnable: false,
           erc1363: false,

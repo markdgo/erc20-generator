@@ -22,8 +22,12 @@
                     <b-card-title class="pt-5 font-weight-light text-center" itemprop="name">
                         {{ t.name }}
                     </b-card-title>
+
                     <p class="card-price text-center">
-                        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <b-badge variant="danger" v-if="t.originalPrice !== t.price">
+                            <s>{{ t.originalPrice }} <small>ETH</small></s>
+                        </b-badge>
+                        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="align-middle">
                             <span itemprop="price">{{ t.price }}</span>
                             <small class="term" itemprop="priceCurrency">ETH</small>
                         </span>
@@ -66,7 +70,7 @@
 
                         <b-list-group-item class="d-flex justify-content-between align-items-center">
                             Transfer Type
-                            <b-badge :variant="t.transferType === 'Always Enabled' ? 'success' : 'warning'">
+                            <b-badge :variant="t.transferType === 'Unstoppable' ? 'success' : 'warning'">
                                 {{ t.transferType }}
                             </b-badge>
                         </b-list-group-item>

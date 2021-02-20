@@ -188,10 +188,10 @@
                                         <div>
                                             Transfer Type<br>
                                             <small class="text-muted">
-                                                Choose between Always Enabled or Pausable.
+                                                Choose between Unstoppable or Pausable.
                                             </small>
                                         </div>
-                                        <b-badge :variant="token.transferType === 'Always Enabled' ? 'success' : 'warning'">
+                                        <b-badge :variant="token.transferType === 'Unstoppable' ? 'success' : 'warning'">
                                           {{ token.transferType }}
                                         </b-badge>
                                     </b-list-group-item>
