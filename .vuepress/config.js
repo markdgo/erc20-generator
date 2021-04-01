@@ -7,9 +7,9 @@ module.exports = {
     ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:image', content: 'https://vittominacori.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
+    ['meta', { property: 'og:image', content: 'https://heri16.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
     ['meta', { property: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { property: 'twitter:image', content: 'https://vittominacori.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
+    ['meta', { property: 'twitter:image', content: 'https://heri16.github.io/erc20-generator/assets/images/erc20-token-generator.png' }], // eslint-disable-line max-len
     ['script', { src: '/assets/js/web3.min.js' }],
     ['script',
       {

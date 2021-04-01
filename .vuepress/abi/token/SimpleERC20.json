@@ -330,7 +330,7 @@
     "version": "0.7.4+commit.3f05b770.Emscripten.clang"
   },
   "devdoc": {
-    "author": "ERC20 Generator (https://vittominacori.github.io/erc20-generator)",
+    "author": "ERC20 Generator (https://heri16.github.io/erc20-generator)",
     "details": "Implementation of the SimpleERC20",
     "kind": "dev",
     "methods": {

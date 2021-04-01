@@ -250,7 +250,7 @@
                                         contract for error.
                                     </span>
                                 </b-card-text>
-                                <b-link href="https://vittominacori.github.io/eth-token-recover/"
+                                <b-link href="https://heri16.github.io/eth-token-recover/"
                                         class="card-link" target="_blank">
                                     Discover Token Recover
                                 </b-link>

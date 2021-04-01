@@ -13,5 +13,5 @@ meta:
     - property: og:description
       content: ERC20 Token Generator Documentation. Discover more details about different ERC20 Token Types, ABI, source code and analysis report.
     - property: og:url
-      content: https://vittominacori.github.io/erc20-generator/docs/
+      content: https://heri16.github.io/erc20-generator/docs/
 ---
