@@ -1,5 +1,9 @@
 {
   "server": {
-    "baseDir": ["./src", "./build/contracts"]
+    "baseDir": [
+      "./web-console",
+      "./build/contracts",
+      "./node_modules/web3/dist"
+    ]
   }
 }
