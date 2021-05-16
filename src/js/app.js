@@ -1,35 +1,39 @@
 App = {
+  hasPrivacyMode: false,
   web3Provider: null,
   contracts: {},
-
   init: function () {
     return App.initWeb3();
   },
-
   initWeb3: function () {
     // Initialize web3 and set the provider to the testRPC.
-    if (typeof web3 !== 'undefined') {
+    if (typeof ethereum !== 'undefined') {
+      console.log('injected web3');
+      App.web3Provider = ethereum;
+      App.hasPrivacyMode = true;
+    } else if (typeof web3 !== 'undefined') {
+      console.log('injected web3 (legacy)');
       App.web3Provider = web3.currentProvider;
-      web3 = new Web3(web3.currentProvider);
     } else {
       // set the provider you want from Web3.providers
+      console.log('provided web3');
       App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
-      web3 = new Web3(App.web3Provider);
     }
+
+    web3 = new Web3(App.web3Provider);
 
     return App.initContract();
   },
-
   initContract: function () {
-    $.getJSON('BaseToken.json', function (data) {
-      // Get the necessary contract artifact file and instantiate it with truffle-contract.
-      App.contracts.BaseToken = TruffleContract(data);
+    if (App.hasPrivacyMode) {
+      App.web3Provider.enable();
+    }
 
-      // Set the provider for our contract.
-      App.contracts.BaseToken.setProvider(App.web3Provider);
+    $.getJSON('ERC20Token.json', function (data) {
+      App.contracts.ERC20Token = TruffleContract(data);
+      App.contracts.ERC20Token.setProvider(App.web3Provider);
     });
   },
-
 };
 
 $(function () {

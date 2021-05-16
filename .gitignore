@@ -1,5 +1,9 @@
-# Project settings
-.idea/
+*.swp
+*.swo
+
+# Logs
+logs
+*.log
 
 # Runtime data
 pids
@@ -13,7 +17,8 @@ coverage
 coverage.json
 coverageEnv
 
-package-lock.json
+# node-waf configuration
+.lock-wscript
 
 # Dependency directory
 node_modules
@@ -25,7 +30,20 @@ npm-debug.log
 .env
 
 # truffle build directory
-build/
+/build
 
-# lol macs
-.DS_Store/
+# Buidler files
+/artifacts
+/cache
+
+# macOS
+.DS_Store
+
+# truffle
+.node-xmlhttprequest-*
+
+# npm package
+package-lock.json
+
+# IntelliJ IDE
+.idea

@@ -1,23 +1,28 @@
 {
   "name": "erc20-generator",
-  "version": "1.0.0",
-  "description": "A simple Smart Contract for a Standard, Mintable, Burnable, Payable ERC20 Token with Minter Role.",
+  "version": "2.4.3",
+  "description": "A simple Smart Contract for a Standard, Capped, Mintable, Burnable ERC20 Token.",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "dev": "lite-server",
-    "test": "scripts/test.sh",
+    "console": "truffle develop",
+    "compile": "truffle compile --all",
+    "coverage": "scripts/coverage.sh",
+    "test": "npm run compile && scripts/test.sh",
+    "buidler:compile": "buidler compile",
+    "buidler:console": "buidler console",
+    "buidler:test": "buidler test",
+    "clean": "rm -rf coverage",
+    "profile": "npm run clean && npm run coverage && open coverage/index.html",
+    "lint": "npm run lint:js && npm run lint:sol",
+    "lint:fix": "npm run lint:js:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
-    "lint:sol": "solium -d contracts",
-    "lint:sol:fix": "solium -d contracts --fix",
-    "lint": "npm run lint:js && npm run lint:sol",
-    "lint:fix": "npm run lint:js:fix && npm run lint:sol:fix",
-    "console": "truffle console",
-    "coverage": "scripts/coverage.sh",
-    "version": "scripts/version.js"
+    "lint:sol": "solhint --max-warnings 0 \"contracts/**/*.sol\"",
+    "flat": "scripts/flat.sh"
   },
   "repository": {
     "type": "git",
@@ -27,8 +32,8 @@
   "bugs": {
     "url": "https://github.com/vittominacori/erc20-generator/issues"
   },
-  "author": "@vittominacori",
-  "authors": [
+  "author": "Vittorio Minacori",
+  "contributors": [
     {
       "name": "Vittorio Minacori",
       "url": "https://github.com/vittominacori"
@@ -36,36 +41,32 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@nomiclabs/buidler": "^1.0.2",
+    "@nomiclabs/buidler-truffle5": "^1.0.2",
+    "@nomiclabs/buidler-web3": "^1.0.2",
+    "@openzeppelin/test-helpers": "^0.5.4",
     "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.2",
-    "coveralls": "^3.0.2",
-    "dotenv": "^6.1.0",
-    "erc-payable-token": "^1.0.0",
-    "eslint": "^5.6.1",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eth-token-recover": "^1.0.1",
-    "ethereumjs-abi": "^0.6.5",
-    "ethereumjs-util": "^6.0.0",
-    "ethereumjs-wallet": "^0.6.2",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-mocha-no-only": "^1.1.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "ethereumjs-util": "^6.2.0",
     "ethjs-abi": "^0.2.1",
-    "ganache-cli": "6.1.0",
-    "lite-server": "^2.4.0",
-    "log4js": "^3.0.6",
-    "openzeppelin-solidity": "^1.12.0",
-    "prompt-sync": "^4.1.6",
-    "solidity-coverage": "^0.5.11",
-    "solium": "^1.1.8",
-    "truffle": "^4.1.14",
-    "truffle-contract": "^3.0.6",
-    "truffle-hdwallet-provider": "0.0.3",
-    "truffle-wallet-provider": "0.0.5",
-    "web3": "^0.20.6",
-    "web3-eth-abi": "^1.0.0-beta.36",
-    "web3-utils": "^1.0.0-beta.36"
+    "ganache-cli": "^6.7.0",
+    "ganache-cli-coverage": "https://github.com/frangio/ganache-cli/releases/download/v6.4.1-coverage/ganache-cli-coverage-6.4.1.tgz",
+    "lite-server": "^2.5.4",
+    "pify": "^4.0.1",
+    "solhint": "^2.3.0",
+    "solidity-coverage": "github:rotcivegaf/solidity-coverage#5875f5b7bc74d447f3312c9c0e9fc7814b482477",
+    "truffle": "^5.1.5",
+    "truffle-flattener": "1.2.11",
+    "web3": "^1.2.4"
+  },
+  "dependencies": {
+    "ico-maker": "2.4.1"
   }
 }

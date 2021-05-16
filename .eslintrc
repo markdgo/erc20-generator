@@ -4,6 +4,7 @@
     "plugin:promise/recommended"
   ],
   "plugins": [
+    "mocha-no-only",
     "promise"
   ],
   "env": {
@@ -25,7 +26,7 @@
 
     // Code style
     "camelcase": ["error", {"properties": "always"}],
-    "comma-dangle": ["warn", "always-multiline"],
+    "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": ["error", {"before": false, "after": true}],
     "dot-notation": ["error", {"allowKeywords": true, "allowPattern": ""}],
     "eol-last": ["error", "always"],
@@ -49,7 +50,9 @@
     "semi": ["error", "always"],
     "space-before-function-paren": ["error", "always"],
 
+    "mocha-no-only/mocha-no-only": ["error"],
+
     "promise/always-return": "off",
-    "promise/avoid-new": "off",
+    "promise/avoid-new": "off"
   }
 }
