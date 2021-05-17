@@ -1,21 +1,23 @@
 <template>
     <div class="page-wrapper">
-        <b-container>
-            <transition name="fade" mode="out-in">
-                <component v-if="page" :is="page" :key="page"></component>
-            </transition>
-            <site-footer />
-        </b-container>
+        <site-header :page="page"></site-header>
+        <transition name="fade" mode="out-in">
+            <component v-if="page" :is="page" :key="page"></component>
+        </transition>
+        <site-footer></site-footer>
     </div>
 </template>
 <script>
+  import SiteHeader from './Header.vue';
   import SiteFooter from './Footer.vue';
+
   export default {
     components: {
+      SiteHeader,
       SiteFooter,
     },
     computed: {
-      page() {
+      page () {
         return this.$page.frontmatter.component || null;
       },
     },
