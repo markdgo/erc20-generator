@@ -38,17 +38,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vittominacori/erc20-generator.git"
+    "url": "https://github.com/hikecoder/erc20-generator.git"
   },
-  "homepage": "https://vittominacori.github.io/erc20-generator",
+  "homepage": "https://hikecoder.github.io/erc20-generator",
   "bugs": {
-    "url": "https://github.com/vittominacori/erc20-generator/issues"
+    "url": "https://github.com/hikecoder/erc20-generator/issues"
   },
   "author": "Vittorio Minacori",
   "contributors": [
     {
       "name": "Vittorio Minacori",
-      "url": "https://github.com/vittominacori"
+      "url": "https://github.com/hikecoder"
     }
   ],
   "license": "MIT",

@@ -4,12 +4,12 @@ pragma solidity ^0.7.0;
 
 /**
  * @title GeneratorCopyright
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
+ * @author ERC20 Generator (https://hikecoder.github.io/erc20-generator)
  * @dev Implementation of the GeneratorCopyright
  */
 contract GeneratorCopyright {
 
-    string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
+    string private constant _GENERATOR = "https://hikecoder.github.io/erc20-generator";
     string private _version;
 
     constructor (string memory version_) {

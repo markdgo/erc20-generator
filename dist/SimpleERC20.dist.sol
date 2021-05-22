@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 /*
- * Token has been generated for FREE using https://vittominacori.github.io/erc20-generator/
+ * Token has been generated for FREE using https://hikecoder.github.io/erc20-generator/
  *
  * NOTE: "Contract Source Code Verified (Similar Match)" means that this Token is similar to other tokens deployed
  *  using the same generator. It is not an issue. It means that you won't need to verify your source code because of
@@ -676,12 +676,12 @@ pragma solidity ^0.7.0;
 
 /**
  * @title GeneratorCopyright
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
+ * @author ERC20 Generator (https://hikecoder.github.io/erc20-generator)
  * @dev Implementation of the GeneratorCopyright
  */
 contract GeneratorCopyright {
 
-    string private constant _GENERATOR = "https://vittominacori.github.io/erc20-generator";
+    string private constant _GENERATOR = "https://hikecoder.github.io/erc20-generator";
     string private _version;
 
     constructor (string memory version_) {
@@ -714,7 +714,7 @@ pragma solidity ^0.7.0;
 
 /**
  * @title SimpleERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
+ * @author ERC20 Generator (https://hikecoder.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
 contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.6.0") {

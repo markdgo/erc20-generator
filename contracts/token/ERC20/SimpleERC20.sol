@@ -9,7 +9,7 @@ import "../../utils/GeneratorCopyright.sol";
 
 /**
  * @title SimpleERC20
- * @author ERC20 Generator (https://vittominacori.github.io/erc20-generator)
+ * @author ERC20 Generator (https://hikecoder.github.io/erc20-generator)
  * @dev Implementation of the SimpleERC20
  */
 contract SimpleERC20 is ERC20, ServicePayer, GeneratorCopyright("v4.6.0") {
