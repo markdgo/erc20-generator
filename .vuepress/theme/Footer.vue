@@ -45,7 +45,7 @@
                         <small>
                             created by
                             <b-link class="text-warning" href="https://heri16.github.io/" target="_blank">
-                                vittominacori
+                                hikecoder
                             </b-link>
                         </small>
                     </b-list-group-item>
