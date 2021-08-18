@@ -2,7 +2,7 @@
 
 ## Try it
 
-[https://hikecoder.github.io/erc20-generator](https://hikecoder.github.io/erc20-generator)
+[https://barttpro.github.io/erc20-generator](https://barttpro.github.io/erc20-generator)
 
 
 ## Development
