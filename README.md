@@ -2,7 +2,7 @@
 
 ## Try it
 
-[https://barttpro.github.io/erc20-generator](https://barttpro.github.io/erc20-generator)
+[https://defipro.github.io/erc20-generator](https://defipro.github.io/erc20-generator)
 
 
 ## Development
